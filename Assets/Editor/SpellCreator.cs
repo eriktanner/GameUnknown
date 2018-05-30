@@ -1,0 +1,80 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+
+public class SpellCreator : EditorWindow {
+
+	[MenuItem("Spell Maker/Spell Creator")]
+
+    static void Init()
+    {
+        SpellCreator spellWindow = (SpellCreator)CreateInstance(typeof(SpellCreator));
+        spellWindow.Show();
+    }
+
+    Spell tempSpell = null;
+    SpellManager spellManager = null;
+
+    void OnGUI()
+    {
+        if (spellManager == null)
+        {
+            spellManager = GameObject.Find("SpellManager").GetComponent<SpellManager>();
+        }
+
+        if (tempSpell)
+        {
+            tempSpell.name = EditorGUILayout.TextField("Spell Name", tempSpell.name);
+            tempSpell.prefab = (GameObject) EditorGUILayout.ObjectField("Spell Prefab", tempSpell.prefab, typeof(GameObject), false);          
+            tempSpell.collisionParticle = (GameObject) EditorGUILayout.ObjectField("Collision Effect", tempSpell.collisionParticle, typeof(GameObject), false);
+            tempSpell.icon = (Texture2D) EditorGUILayout.ObjectField("Spell Icon", tempSpell.icon, typeof(Texture2D), false);
+            tempSpell.cooldown = EditorGUILayout.FloatField("Cooldown", tempSpell.cooldown);
+            tempSpell.damage = EditorGUILayout.FloatField("Damage", tempSpell.damage);
+            tempSpell.manaCost = EditorGUILayout.FloatField("Mana Cost", tempSpell.manaCost);
+            tempSpell.maxRange = EditorGUILayout.FloatField("Max Range", tempSpell.maxRange);
+            tempSpell.projectileRadius = EditorGUILayout.FloatField("Projectile Radius", tempSpell.projectileRadius);
+            tempSpell.projectileSpeed = EditorGUILayout.FloatField("Projectile Speed", tempSpell.projectileSpeed);
+            tempSpell.castTime = EditorGUILayout.FloatField("Cast Time", tempSpell.castTime);
+
+        }
+
+        EditorGUILayout.Space();
+
+        if (tempSpell == null)
+        {
+            if (GUILayout.Button("Create Spell"))
+                tempSpell = CreateInstance<Spell>();
+        } else
+        {
+            if (GUILayout.Button("Create Scriptable Object"))
+            {
+                AssetDatabase.CreateAsset(tempSpell, "Assets/Resources/Spells/" + tempSpell.name + ".asset");
+                AssetDatabase.SaveAssets();
+                spellManager.spellList.Add(tempSpell);
+                Selection.activeObject = tempSpell;
+                tempSpell = null;
+            }
+
+            if (GUILayout.Button("Reset"))
+                Reset();
+
+        }
+        
+    }
+
+    void Reset()
+    {
+        if (!tempSpell)
+            return;
+
+        tempSpell.name = "";
+        tempSpell.prefab = null;
+        tempSpell.collisionParticle = null;
+        tempSpell.icon = null;
+        tempSpell.damage = 0.0f;
+        tempSpell.projectileSpeed = 0.0f;
+
+    }
+
+}

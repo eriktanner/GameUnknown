@@ -25,9 +25,7 @@ public class SetAnimator : MonoBehaviour {
 
     void LateUpdate()
     {
-        m_Animator.SetFloat("InputX", horizontalMovement);
-        m_Animator.SetFloat("InputZ", verticalMovement);
-        print("Here");
-        print("InputX: " + m_Animator.GetFloat("inputX"));
+        //m_Animator.SetFloat("InputX", horizontalMovement);
+        //m_Animator.SetFloat("InputZ", verticalMovement);
     }
 }

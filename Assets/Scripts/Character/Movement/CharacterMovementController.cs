@@ -7,19 +7,27 @@ public class CharacterMovementController : MonoBehaviour {
     const float FORWARD_TO_BACKWARD_RATIO = 0.5f;
 
     public float inputDelay = 0.1f;
-    public float forwardVelocity = 6.0f, rotateVelocity = 2.2f;
-    public float leftRightVelocity = 4.0f, jumpVelocity = 50.0f;
+    public float forwardVelocity = 5.0f, rotateVelocity = 2.2f;
+    public float leftRightVelocity = 4.0f, jumpVelocity = 4.0f;
+    public float dashVelocity = 8.0f, dashCooldownTime = 12.0f;
+
+
+    float lockedForwardInput = 0, lockedLeftRightInput = 0;
+    Vector3 transformForwardOnLastLock = Vector3.zero, transformRightOnLastLock = Vector3.zero;
 
     Rigidbody rigidBody;
     CapsuleCollider charCollider;
+    Animator animator;
     float currentX = 0.0f;
     float forwardInput, leftRightInput;
     float sensitivity = 1.0f; //Get From Settings
-    bool mouseDown, jump;
+    bool mouseHold, mouseDown, rightMouseDown, jump, dash;
+
 
 
     void Start ()
     {
+
         if (GetComponent<Rigidbody>())
             rigidBody = GetComponent<Rigidbody>();
         else Debug.LogError("Character needs a rigid body");
@@ -28,6 +36,12 @@ public class CharacterMovementController : MonoBehaviour {
             charCollider = GetComponent<CapsuleCollider>();
         else Debug.LogError("Character needs a collider");
 
+        if (GetComponent<Animator>())
+            animator = GetComponent<Animator>();
+        else Debug.LogError("Character needs a animator");
+
+
+
         forwardInput = leftRightInput = 0;
     }
 
@@ -35,14 +49,18 @@ public class CharacterMovementController : MonoBehaviour {
     {
         forwardInput = Input.GetAxis("Vertical");
         leftRightInput = Input.GetAxis("Horizontal");
-        mouseDown = Input.GetButton("Fire1");
+        mouseDown = Input.GetButtonDown("Fire1");
+        mouseHold = Input.GetButton("Fire1");
+        rightMouseDown = Input.GetButtonDown("Fire2");
         jump = Input.GetButtonDown("Jump");
+        dash = Input.GetButtonDown("Dash");
         currentX += Input.GetAxis("Mouse X");
     }
 
 
     void Update () {
         GetInput();
+        rightMouseDownReverseLocks();
     }
     
     void FixedUpdate()
@@ -51,30 +69,39 @@ public class CharacterMovementController : MonoBehaviour {
         MoveLeftRight();
         Turn();
         Jump();
+        mouseDownLock();
+        Dash();
     }
+
+
+
+
 
     void MoveForward()
     {
-        float forwardInputToUse = isGrounded() ? forwardInput : forwardInputOnLastJump;
-        
+        float forwardInputToUse = isGrounded() ? forwardInput : lockedForwardInput;
+        animator.SetFloat("InputZ", forwardInputToUse);
+
         if (Mathf.Abs(forwardInputToUse) > inputDelay)
         {
-            Vector3 transformForwardToUse = isGrounded() ? transform.forward : transformForwardOnLastJump;
-            float forwardVelocityToUse = forwardInputToUse > 0 ? forwardVelocity : forwardVelocity * FORWARD_TO_BACKWARD_RATIO; 
+            Vector3 transformForwardToUse = isGrounded() ? transform.forward : transformForwardOnLastLock;
+            float forwardVelocityToUse = forwardInputToUse > 0 ? forwardVelocity : forwardVelocity * FORWARD_TO_BACKWARD_RATIO;
             rigidBody.MovePosition(rigidBody.position + transformForwardToUse * forwardVelocityToUse * forwardInputToUse * Time.fixedDeltaTime);
-            //rigidBody.AddForce(transformToUse.forward * forwardVelocity * forwardInputToUse * .01f, ForceMode.VelocityChange);
-        } 
+        }
     }
+     
+
+
 
     void MoveLeftRight()
     {
-        float leftRightInputToUse = isGrounded() ? leftRightInput : leftRightInputOnLastJump;
+        float leftRightInputToUse = isGrounded() && !mouseHold ? leftRightInput : lockedLeftRightInput;
+        animator.SetFloat("InputX", leftRightInputToUse);
 
         if (Mathf.Abs(leftRightInputToUse) > inputDelay)
         {
-            Vector3 transformRightToUse = isGrounded() ? transform.right : transformRightOnLastJump;
+            Vector3 transformRightToUse = isGrounded() ? transform.right : transformRightOnLastLock;
             rigidBody.MovePosition(rigidBody.position + transformRightToUse * leftRightVelocity * leftRightInputToUse * Time.fixedDeltaTime);
-            //rigidBody.AddForce(transform.right * leftRightVelocity * turnInput * .01f, ForceMode.VelocityChange);
         }
     }
 
@@ -85,38 +112,69 @@ public class CharacterMovementController : MonoBehaviour {
     }
 
 
-    //Jump Player Transform Attributes
-    float forwardInputOnLastJump = 0, leftRightInputOnLastJump = 0;
-    Vector3 transformForwardOnLastJump = Vector3.zero, transformRightOnLastJump = Vector3.zero;
-
+ 
+    
     void Jump()
     {
         if (jump && isGrounded())
         {
-            rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0 , rigidBody.velocity.z);
+            //rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0 , rigidBody.velocity.z);
             rigidBody.AddForce(transform.up * jumpVelocity, ForceMode.Impulse);
+            animator.Play("Jump");
 
             //Records player transform on jump
-            forwardInputOnLastJump = forwardInput;
-            transformForwardOnLastJump = transform.forward;
-            leftRightInputOnLastJump = leftRightInput;
-            transformRightOnLastJump = transform.right;
+            if (!mouseHold) //if no mouse click save input else use last mouseDownLock input info
+            {
+                lockedForwardInput = forwardInput;
+                lockedLeftRightInput = leftRightInput;
+            }
+            transformForwardOnLastLock = transform.forward;
+            transformRightOnLastLock = transform.right;
         }
     }
 
-    //Works okay but is not perfect, okay for now
-    bool isGrounded()
+    /*Saves player transform position and forward/leftright inputs upon mouse being held*/
+    void mouseDownLock()
     {
-        //get the radius of the players capsule collider, and make it a tiny bit smaller than that
-        float radius = charCollider.radius * 0.9f;
-        print("myradius - " + radius);
-        //get the position (assuming its right at the bottom) and move it up by almost the whole radius
-        Vector3 pos = transform.position - Vector3.up * .185f;// + Vector3.up * (radius * 0.9f);8
-        print("x: " + transform.position.x + " y: " + transform.position.y);
-        //returns true if the sphere touches something on that layer
-        bool isGrounded = Physics.CheckSphere(pos, radius);
-
-        return isGrounded;
+        if (mouseDown)
+        {
+            lockedForwardInput = forwardInput;
+            lockedLeftRightInput = leftRightInput;
+            transformForwardOnLastLock = transform.forward;
+            transformRightOnLastLock = transform.right;
+        }
     }
 
+
+    /*Reverse lock info to have player move in reverse direction respect to when user clicked rightMouseDown*/
+    void rightMouseDownReverseLocks()
+    {;
+        if (rightMouseDown)
+        {
+            lockedForwardInput = -lockedForwardInput;
+            lockedLeftRightInput = -lockedLeftRightInput;
+            transformForwardOnLastLock = -transformForwardOnLastLock;
+            transformRightOnLastLock = -transformRightOnLastLock;
+        }
+    }
+
+    /*Tells us if player is currently on a hard surface*/
+    bool isGrounded()
+    {
+        float radius = charCollider.radius * 0.5f;
+        Vector3 pos = transform.position + Vector3.up * (radius * 0.9f);
+        LayerMask ignorePlayerMask = ~(1 << 8);
+        return Physics.CheckSphere(pos, radius, ignorePlayerMask);
+    }
+
+    float dashNextAllowedTimeStamp = -100;
+    void Dash ()
+    {
+        if (dash && dashNextAllowedTimeStamp <= Time.time)
+        {
+            dashNextAllowedTimeStamp = Time.time + dashCooldownTime;
+            rigidBody.velocity = new Vector3(rigidBody.velocity.x/2, rigidBody.velocity.y, rigidBody.velocity.z/2);
+            rigidBody.AddForce(transform.forward * dashVelocity, ForceMode.Impulse);
+        }
+    }
 }

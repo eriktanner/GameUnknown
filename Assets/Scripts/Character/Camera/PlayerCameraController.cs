@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCameraController : MonoBehaviour {
 
-    const float MIN_CLAMP_ANGLE = -15.0f, MAX_CLAMP_ANGLE = 70.0f;
+    const float MIN_CLAMP_ANGLE = -40f, MAX_CLAMP_ANGLE = 70.0f;
     const float SMOOTH_SPEED_IN = .999f, SMOOTH_SPEED_OUT = 1.02f;
 
     public Transform lookAtTransform, camTransform;

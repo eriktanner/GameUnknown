@@ -51,12 +51,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Character\Actions\Spells.cs" />
+     <Compile Include="Assets\Resources\PyroParticles\Demo\DemoScript.cs" />
+     <Compile Include="Assets\Resources\PyroParticles\Demo\DemoScriptEditor.cs" />
+     <Compile Include="Assets\Resources\PyroParticles\Prefab\Script\FireBaseScript.cs" />
+     <Compile Include="Assets\Resources\PyroParticles\Prefab\Script\FireCollisionForwardScript.cs" />
+     <Compile Include="Assets\Resources\PyroParticles\Prefab\Script\FireConstantBaseScript.cs" />
+     <Compile Include="Assets\Resources\PyroParticles\Prefab\Script\FireLightScript.cs" />
+     <Compile Include="Assets\Resources\PyroParticles\Prefab\Script\FireProjectileScript.cs" />
+     <Compile Include="Assets\Resources\PyroParticles\Prefab\Script\MeteorSwarmScript.cs" />
+     <Compile Include="Assets\Resources\PyroParticles\Prefab\Script\SingleLineAttribute.cs" />
+     <Compile Include="Assets\Resources\SFBayStudios\SFB Magic Spells &amp; Particles\Scripts\SFB_LightAutoOff.cs" />
+     <Compile Include="Assets\Resources\SFBayStudios\SFB Magic Spells &amp; Particles\Scripts\SFB_LightAutoOn.cs" />
+     <Compile Include="Assets\Resources\SFBayStudios\SFB Magic Spells &amp; Particles\Scripts\SFB_LightColorChange.cs" />
+     <Compile Include="Assets\Resources\SFBayStudios\SFB Magic Spells &amp; Particles\Scripts\SFB_LightFlicker.cs" />
+     <Compile Include="Assets\Resources\SFBayStudios\SFB Magic Spells &amp; Particles\Scripts\SFB_MoveOverTime.cs" />
+     <Compile Include="Assets\Resources\SFBayStudios\SFB Magic Spells &amp; Particles\Scripts\SFB_ParticleGrowOverTime.cs" />
+     <Compile Include="Assets\Resources\SFBayStudios\SFB Magic Spells &amp; Particles\Scripts\SFB_ParticleTrailRotation.cs" />
      <Compile Include="Assets\Scripts\Character\Animations\SetAnimator.cs" />
      <Compile Include="Assets\Scripts\Character\Camera\PlayerCameraController.cs" />
      <Compile Include="Assets\Scripts\Character\Movement\CharacterMovementController.cs" />
+     <Compile Include="Assets\Scripts\Character\Spells\CastSpell.cs" />
+     <Compile Include="Assets\Scripts\Character\Spells\Spell.cs" />
+     <Compile Include="Assets\Scripts\Character\Spells\SpellCollision.cs" />
+     <Compile Include="Assets\Scripts\Character\Spells\SpellManager.cs" />
      <Compile Include="Assets\Scripts\MyLog.cs" />
      <Compile Include="Assets\Scripts\TextTemplate1.cs" />
+     <Compile Include="Assets\Scripts\UI\CastBar.cs" />
+     <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
+     <Compile Include="Assets\Scripts\UI\ManaBar.cs" />
      <Compile Include="Assets\UnityChan\Actions\FireSpells.cs" />
      <Compile Include="Assets\UnityChan\Scripts\CameraController.cs" />
      <Compile Include="Assets\UnityChan\Scripts\FaceUpdate.cs" />
@@ -66,11 +88,13 @@
      <Compile Include="Assets\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" />
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
+     <None Include="Assets\Resources\PyroParticles\Prefab\Materials\AdditiveTintable.shader" />
      <None Include="Assets\UnityChan\license.txt" />
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku_ds.shader" />
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye_blend.shader" />
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hair_ds.shader" />
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_akarami_blend.shader" />
+     <None Include="Assets\Resources\PyroParticles\Readme.txt" />
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hair.shader" />
      <None Include="Assets\UnityChan\Stage\Shader\AlphaMask.shader" />
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eyelash_blend.shader" />
