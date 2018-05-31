@@ -1869,17 +1869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da2e6de0eee3760488ba1b204b3ea1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugGui: {fileID: 0}
-  defaultGuiPosition: {x: 0.01, y: 0.98, z: 0}
-  defaultGuiScale: {x: 0.5, y: 0.5, z: 1}
-  normal: {r: 0, g: 1, b: 0, a: 1}
-  warning: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  error: {r: 1, g: 0, b: 0, a: 1}
-  maxMessages: 30
-  lineSpacing: 0.02
-  draggable: 1
-  visible: 1
-  pixelCorrect: 0
 --- !u!1 &1706690623
 GameObject:
   m_ObjectHideFlags: 0

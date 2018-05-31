@@ -233,9 +233,6 @@
  <Reference Include="Unity.Locator">
  <HintPath>D:/Programs/Unity/Editor/Data/Managed/Unity.Locator.dll</HintPath>
  </Reference>
- <Reference Include="Assembly-CSharp-firstpass">
- <HintPath>D:/Users/Public/Documents/Unity Projects/Fantasia/Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

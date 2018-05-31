@@ -11,8 +11,8 @@ public class NetworkPlayerSetup : NetworkBehaviour {
 
     void Start()
     {
-        //CameraManager cameraManager = GameObject.Find("Managers/CameraManager").GetComponent<CameraManager>();
-        //cameraManager.findPlayerCam();
+        cameraManager = GameObject.Find("Managers/CameraManager").GetComponent<CameraManager>();
+        
 
         if (!isLocalPlayer)
         {
@@ -22,8 +22,21 @@ public class NetworkPlayerSetup : NetworkBehaviour {
         {
             sceneCamera = GameObject.Find("Cameras/SkyCam").GetComponent<Camera>();
             if (sceneCamera)
+            {
                 sceneCamera.enabled = false;
+                cameraManager.SetCursorToLockAndInvisible();
+            }
         }
+
+        RegisterPlayer();
+    }
+
+    /*Assigns all player/enemy ids, later register to some kind of dictionary*/
+    void RegisterPlayer()
+    {
+        string id = "Player " + GetComponent<NetworkIdentity>().netId;
+        gameObject.name = id;
+
     }
 
     /*Disables all remote player components*/
@@ -45,6 +58,9 @@ public class NetworkPlayerSetup : NetworkBehaviour {
     void OnDisable()
     {
         if (sceneCamera)
+        {
             sceneCamera.enabled = true;
+            cameraManager.SetCursorToFreeAndVisible();
+        }
     }
 }

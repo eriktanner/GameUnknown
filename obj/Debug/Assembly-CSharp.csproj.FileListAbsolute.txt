@@ -166,4 +166,3 @@ D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\UnityEngine.Spa
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp.dll
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp.pdb
-D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb

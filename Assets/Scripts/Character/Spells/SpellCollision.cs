@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 
-public class SpellCollision : MonoBehaviour
+public class SpellCollision : NetworkBehaviour
 {
 
     Spell spell;
@@ -37,6 +38,7 @@ public class SpellCollision : MonoBehaviour
         }
     }
 
+    [Client]
     void collisionDamagePlayer(Collision collision)
     {
         if (collision.gameObject.tag == "Enemy")
@@ -48,8 +50,17 @@ public class SpellCollision : MonoBehaviour
                 enemyHealthBar.takeDamage(spell.damage);
                 enemyHealthBar.regenerateHealth();
             }
+
+            CmdNotifyServerPlayerHitBySpell(collision.gameObject.name);
         }
         
         Debug.Log("We Hit: " + collision.gameObject.tag);
+    }
+
+
+    [Command]
+    void CmdNotifyServerPlayerHitBySpell(string id)
+    {
+        Debug.Log("Server Notified: " + id + " was hit by a spell");
     }
 }

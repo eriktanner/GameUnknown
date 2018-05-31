@@ -16,7 +16,6 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 30afa8783a8bbee2e465ec9ce1efaee2 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 30afa8783a8bbee2e465ec9ce1efaee2 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 607d64d2c4bc76ac9876e6f7b9cc7edf UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-7a5bbf983df94a6d58f62c96ca3e03e4 Assembly-CSharp-firstpass.dll:.DebugConsole
 858d61d9ded55edfc17c0d9d7b918bbb Assembly-CSharp.dll:.SFB_ParticleTrailRotation
 e79639aca152a01a366800e2cc73ca58 Assembly-CSharp.dll:.ManaBar
 7a85ac6da0f41c725300888bfe035ca5 Assembly-CSharp.dll:.NetworkPlayerSetup
@@ -169,7 +168,7 @@ ca334323ba1d3878e6ec0f63c13d4e27 Assembly-CSharp.dll:.SFB_LightAutoOn
 ce0cf5a45003ec50f7e5664216d1f95c Assembly-CSharp.dll:.CastBar
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SetAnimator
 a6333fe17f3ba5399bffd336348da6c8 Assembly-CSharp.dll:.FaceUpdate
-aed15574a80a76739d0fffef283545b6 Assembly-CSharp.dll:.CastSpell
+ae784dc8b9f031443c8b00100dd05e3e Assembly-CSharp.dll:.CastSpell
 0f20bc2a69b52dda1e765c4ebcbc4f53 Assembly-CSharp.dll:.HealthBar
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.FireSpells
 00a151844dbacabd8a6d3807a4d0f53d Assembly-CSharp.dll:.UnityChanControlScriptWithRgidBody
@@ -178,4 +177,5 @@ aed15574a80a76739d0fffef283545b6 Assembly-CSharp.dll:.CastSpell
 1dd5afbe72b78672a791f893fdff3e5f Assembly-CSharp.dll:DigitalRuby.PyroParticles.FireConstantBaseScript
 3bd51ce799ce5be0ab7bda1988ae6eee Assembly-CSharp.dll:.PlayerCameraController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SceneLoader
-8f7f5ef1fd8d939ce9089fcd9408b6a2 Assembly-CSharp.dll:.Spell
+fd2f487588649455d2388ca7858457aa Assembly-CSharp.dll:.Spell
+ad5b873671a463c5331d8dd994748f03 Assembly-CSharp.dll:.SpellNetworkInfo

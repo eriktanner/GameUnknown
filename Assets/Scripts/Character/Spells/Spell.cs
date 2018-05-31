@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spell : ScriptableObject {
 
     public string spellName = "";
+    public string shotBy = "";
     public GameObject prefab = null;
     public GameObject collisionParticle = null;
     public Texture2D icon = null;

@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\Character\Spells\Spell.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellCollision.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellManager.cs" />
+     <Compile Include="Assets\Scripts\Character\Spells\SpellNetworkInfo.cs" />
      <Compile Include="Assets\Scripts\Network\NetworkPlayerSetup.cs" />
      <Compile Include="Assets\Scripts\UI\CastBar.cs" />
      <Compile Include="Assets\Scripts\UI\EnemyHealthBar.cs" />
@@ -278,9 +279,6 @@
  </Reference>
  <Reference Include="Unity.Locator">
  <HintPath>D:/Programs/Unity/Editor/Data/Managed/Unity.Locator.dll</HintPath>
- </Reference>
- <Reference Include="Assembly-CSharp-firstpass">
- <HintPath>D:/Users/Public/Documents/Unity Projects/Fantasia/Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

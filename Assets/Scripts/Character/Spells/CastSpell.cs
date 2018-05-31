@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CastSpell : MonoBehaviour
 {
     public List<Spell> spellList = new List<Spell>(3);
+    public Transform castSpawn;
 
-    Vector3 firePosition;
     CastBar castBar;
     ManaBar manaBar;
     SpellManager spellManager;
@@ -27,6 +28,8 @@ public class CastSpell : MonoBehaviour
         if (GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>() != null)
             spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
 
+
+
         addToSpellList("Fireball", 0);
         addToSpellList("Pain", 1);
         addToSpellList("Arcane Missile", 2);
@@ -34,7 +37,6 @@ public class CastSpell : MonoBehaviour
 
     void Update()
     {
-        firePosition = transform.Find("Character1_Reference/FirePosition").position; //may want to reference from editor for effeciency
         GetInput();
         CancelCast();
         cam = Camera.main; //To be cached, needed for networking building
@@ -99,10 +101,12 @@ public class CastSpell : MonoBehaviour
             offset = new Vector3(-.04f, .06f, 0);
         else offset = new Vector3(-.03f, .05f, 0);
 
-        firePositionToAim = camFoundHit ? camHit.point - firePosition : camRay.direction + offset;
+        firePositionToAim = camFoundHit ? camHit.point - castSpawn.position : camRay.direction + offset;
 
         Quaternion rotationToTarget = Quaternion.LookRotation(firePositionToAim);
-        GameObject spellObject = spellManager.createSpellInWorld(spell, firePosition, rotationToTarget);
+        spell.shotBy = gameObject.name;
+
+        GameObject spellObject = spellManager.createSpellInWorld(spell, castSpawn.position, rotationToTarget);
 
         
 

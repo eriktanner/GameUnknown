@@ -17,7 +17,7 @@ public class CameraManager : MonoBehaviour {
 
     public void findPlayerCam ()
     {
-        playerCam = GameObject.Find("OurPlayer/Character1_Reference/PlayerCam").GetComponent<Camera>();
+        //playerCam = GameObject.Find("OurPlayer/Character1_Reference/PlayerCam").GetComponent<Camera>();
     }
 
     public void SetActiveMainCamera(string camToSetActive)
@@ -48,7 +48,7 @@ public class CameraManager : MonoBehaviour {
         Cursor.visible = false;
     }
 
-    public void SetCursorToConfinedAndVisible()
+    public void SetCursorToFreeAndVisible()
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;

@@ -14,13 +14,9 @@ public class PlayerCameraController : MonoBehaviour {
     float currentX = 0.0f, currentY = 0.0f;
     float sensitivity; //Get From Settings
     Vector3 offset;
-
-    //CameraManager cameraManager;
+    
 
     void Start() {
-        //cameraManager = GameObject.Find("Managers/CameraManager").GetComponent<CameraManager>();
-        //cameraManager.findPlayerCam();
-
         camTransform = transform;
         if (lookAtTransform == null)
             lookAtTransform = camTransform;

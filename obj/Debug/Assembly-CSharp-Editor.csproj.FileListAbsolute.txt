@@ -198,4 +198,3 @@ D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp-Edit
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp-Editor.dll
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp-Editor.pdb
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Assembly-CSharp.pdb
-D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb

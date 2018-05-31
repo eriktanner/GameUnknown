@@ -25,6 +25,7 @@ public class SpellManager : MonoBehaviour {
         SphereCollider sphereCollider = spellObject.AddComponent<SphereCollider>();
         sphereCollider.radius = spell.projectileRadius;
         spellObject.AddComponent<SpellCollision>();
+        spellObject.AddComponent<SpellNetworkInfo>().spellShotBy = spell.shotBy;
 
         spellObject.transform.parent = GameObject.Find("Managers/SpellManager").transform;
         return spellObject;
