@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterMovementController : MonoBehaviour {
-    
+
     const float FORWARD_TO_BACKWARD_RATIO = 0.5f;
 
     public float inputDelay = 0.1f;
@@ -25,9 +25,8 @@ public class CharacterMovementController : MonoBehaviour {
 
 
 
-    void Start ()
+    void Start()
     {
-
         if (GetComponent<Rigidbody>())
             rigidBody = GetComponent<Rigidbody>();
         else Debug.LogError("Character needs a rigid body");
@@ -39,8 +38,6 @@ public class CharacterMovementController : MonoBehaviour {
         if (GetComponent<Animator>())
             animator = GetComponent<Animator>();
         else Debug.LogError("Character needs a animator");
-
-
 
         forwardInput = leftRightInput = 0;
     }
@@ -58,22 +55,18 @@ public class CharacterMovementController : MonoBehaviour {
     }
 
 
-    void Update () {
+    void Update() {
         GetInput();
-        rightMouseDownReverseLocks();
     }
-    
+
     void FixedUpdate()
     {
         MoveForward();
         MoveLeftRight();
         Turn();
         Jump();
-        mouseDownLock();
         Dash();
     }
-
-
 
 
 
@@ -81,7 +74,7 @@ public class CharacterMovementController : MonoBehaviour {
     {
         float forwardInputToUse = isGrounded() ? forwardInput : lockedForwardInput;
         animator.SetFloat("InputZ", forwardInputToUse);
-
+        
         if (Mathf.Abs(forwardInputToUse) > inputDelay)
         {
             Vector3 transformForwardToUse = isGrounded() ? transform.forward : transformForwardOnLastLock;
@@ -89,13 +82,10 @@ public class CharacterMovementController : MonoBehaviour {
             rigidBody.MovePosition(rigidBody.position + transformForwardToUse * forwardVelocityToUse * forwardInputToUse * Time.fixedDeltaTime);
         }
     }
-     
-
-
 
     void MoveLeftRight()
     {
-        float leftRightInputToUse = isGrounded() && !mouseHold ? leftRightInput : lockedLeftRightInput;
+        float leftRightInputToUse = isGrounded() ? leftRightInput : lockedLeftRightInput;
         animator.SetFloat("InputX", leftRightInputToUse);
 
         if (Mathf.Abs(leftRightInputToUse) > inputDelay)
@@ -112,59 +102,32 @@ public class CharacterMovementController : MonoBehaviour {
     }
 
 
- 
-    
+
     void Jump()
     {
         if (jump && isGrounded())
         {
-            //rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0 , rigidBody.velocity.z);
+            rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0 , rigidBody.velocity.z);
             rigidBody.AddForce(transform.up * jumpVelocity, ForceMode.Impulse);
             animator.Play("Jump");
 
-            //Records player transform on jump
-            if (!mouseHold) //if no mouse click save input else use last mouseDownLock input info
-            {
-                lockedForwardInput = forwardInput;
-                lockedLeftRightInput = leftRightInput;
-            }
-            transformForwardOnLastLock = transform.forward;
-            transformRightOnLastLock = transform.right;
-        }
-    }
-
-    /*Saves player transform position and forward/leftright inputs upon mouse being held*/
-    void mouseDownLock()
-    {
-        if (mouseDown)
-        {
             lockedForwardInput = forwardInput;
             lockedLeftRightInput = leftRightInput;
             transformForwardOnLastLock = transform.forward;
             transformRightOnLastLock = transform.right;
+            
         }
     }
 
 
-    /*Reverse lock info to have player move in reverse direction respect to when user clicked rightMouseDown*/
-    void rightMouseDownReverseLocks()
-    {;
-        if (rightMouseDown)
-        {
-            lockedForwardInput = -lockedForwardInput;
-            lockedLeftRightInput = -lockedLeftRightInput;
-            transformForwardOnLastLock = -transformForwardOnLastLock;
-            transformRightOnLastLock = -transformRightOnLastLock;
-        }
-    }
-
+    
     /*Tells us if player is currently on a hard surface*/
     bool isGrounded()
     {
-        float radius = charCollider.radius * 0.5f;
-        Vector3 pos = transform.position + Vector3.up * (radius * 0.9f);
+        float radius = charCollider.radius * .4f;
+        Vector3 pos = transform.position + Vector3.up * (radius * 0.3f);
         LayerMask ignorePlayerMask = ~(1 << 8);
-        return Physics.CheckSphere(pos, radius, ignorePlayerMask);
+        return Physics.CheckSphere(pos, radius, ignorePlayerMask);  
     }
 
     float dashNextAllowedTimeStamp = -100;

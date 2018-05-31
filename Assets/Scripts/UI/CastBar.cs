@@ -7,7 +7,8 @@ public class CastBar : MonoBehaviour {
 
     public Slider castBarSlider = null;  //reference for slider
     public Text castText;   //reference for text
-    private Coroutine fillBarRoutine;
+    private Coroutine castBarRoutine;
+
 
     void Start()
     {
@@ -15,7 +16,18 @@ public class CastBar : MonoBehaviour {
         //castBarSlider.gameObject.SetActive(false);
     }
 
+    void Update()
+    {
+        if (Input.GetButtonDown("CancelCast"))
+        {
+            if (castBarRoutine != null)
+            {
+                StopCoroutine(castBarRoutine);
+                castBarSlider.gameObject.SetActive(false);
+            }
+        }
 
+    }
 
     /*Displays the UI for a spell being casted*/
     public void CastSpellUI(Spell spell)
@@ -23,7 +35,7 @@ public class CastBar : MonoBehaviour {
         castBarSlider.value = 0;
 
         castBarSlider.gameObject.SetActive(true);
-        fillBarRoutine = StartCoroutine(FillBar(spell));
+        castBarRoutine = StartCoroutine(FillBar(spell));
         //castBarSlider.gameObject.SetActive(false);
     }
 

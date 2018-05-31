@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SpellCollision : MonoBehaviour {
+public class SpellCollision : MonoBehaviour
+{
 
     Spell spell;
     SpellManager spellManager;
@@ -38,9 +39,14 @@ public class SpellCollision : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            print("Collided With Enemy");
-        }
-        print("Collision Occured");
-    }
 
+            EnemyHealthBar enemyHealthBar = collision.gameObject.GetComponent<EnemyHealthBar>();
+            if (enemyHealthBar)
+            {
+                enemyHealthBar.takeDamage(spell.damage);
+                enemyHealthBar.regenerateHealth();
+            }
+        }
+
+    }
 }

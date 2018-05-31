@@ -9,7 +9,7 @@ public class HealthBar : MonoBehaviour {
     public Text healthText;   //reference for text
 
     float currentHealth, totalHealth = 100;
-    float HealthRegenerationWaitTime = 3.0f;
+    float HealthRegenerationWaitTime = 5.0f;
     float regenerationRate = 0.05f;
 
     private Coroutine regenerateHealthRoutine;

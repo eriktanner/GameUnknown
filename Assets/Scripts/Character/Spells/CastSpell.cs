@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class CastSpell : MonoBehaviour
 {
-    Vector3 firePosition;
-    //Spell spell;
-
     public List<Spell> spellList = new List<Spell>(3);
 
-    bool spellLock = false;
-    Camera cam;
-
+    Vector3 firePosition;
     CastBar castBar;
     ManaBar manaBar;
     SpellManager spellManager;
+    Camera cam;
+    Coroutine castRoutine;
+
+    bool spellLock = false;
+    bool cancelCast = false;
+
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class CastSpell : MonoBehaviour
     {
         firePosition = transform.Find("Character1_Reference/FirePosition").position; //may want to reference from editor for effeciency
         GetInput();
+        CancelCast();
     }
 
     void GetInput()
@@ -48,6 +50,7 @@ public class CastSpell : MonoBehaviour
         {
             FireSpell(spellList[2]);
         }
+        cancelCast = Input.GetButtonDown("CancelCast");
     }
 
     bool shootSpell = false;
@@ -62,7 +65,7 @@ public class CastSpell : MonoBehaviour
             return;
         }
 
-        StartCoroutine(CastAndFire(spell));
+        castRoutine = StartCoroutine(CastAndFire(spell));
     }
 
     /*This waits the cast time and then fires the spell, we may want to get rid of the pin point accuracy*/
@@ -87,12 +90,27 @@ public class CastSpell : MonoBehaviour
             camFoundHit = true;
         }
 
-        firePositionToAim = camFoundHit ? camHit.point - firePosition : camRay.direction + new Vector3(-.05f, .05f, 0);
+        Vector3 offset = Vector3.zero;
+        if (spell.maxRange <= 30)
+            offset = new Vector3(-.04f, .06f, 0);
+        else offset = new Vector3(-.03f, .05f, 0);
+
+        firePositionToAim = camFoundHit ? camHit.point - firePosition : camRay.direction + offset;
 
         Quaternion rotationToTarget = Quaternion.LookRotation(firePositionToAim);
         GameObject spellObject = spellManager.createSpellInWorld(spell, firePosition, rotationToTarget);
         spellManager.DestroySpell(spellObject, spell.maxRange / spell.projectileSpeed);
         spellLock = false;
+    }
+
+    void CancelCast()
+    {
+        if (cancelCast && castRoutine != null)
+        {
+            spellLock = false;
+            StopCoroutine(castRoutine);
+        }
+
     }
 
 

@@ -113,7 +113,6 @@ D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Boo.Lang.Patter
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Boo.Lang.Useful.dll
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Unity.CecilTools.dll
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Unity.Cecil.Pdb.dll
-D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Assembly-CSharp.pdb
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\UnityEngine.xml
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\UnityEditor.xml
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\UnityEngine.AIModule.xml
@@ -198,3 +197,4 @@ D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp-Edit
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp-Editor.csproj.CopyComplete
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp-Editor.dll
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp-Editor.pdb
+D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Assembly-CSharp.pdb
