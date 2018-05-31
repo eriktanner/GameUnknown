@@ -67,11 +67,11 @@ public class CharacterMovementController : MonoBehaviour {
         float forwardInputToUse = isGrounded() ? forwardInput : lockedForwardInput;
         if (animator) animator.SetFloat("InputZ", forwardInputToUse);
         
-        if (Mathf.Abs(forwardInputToUse) > inputDelay)
+        if (Mathf.Abs(forwardInput) > inputDelay)
         {
             Vector3 transformForwardToUse = isGrounded() ? transform.forward : transformForwardOnLastLock;
             float forwardVelocityToUse = forwardInputToUse > 0 ? forwardVelocity : forwardVelocity * FORWARD_TO_BACKWARD_RATIO;
-            rigidBody.MovePosition(rigidBody.position + transformForwardToUse * forwardVelocityToUse * forwardInputToUse * Time.fixedDeltaTime);
+            rigidBody.MovePosition(rigidBody.position + transform.forward * forwardVelocityToUse * forwardInputToUse * Time.fixedDeltaTime);
         }
     }
 
@@ -80,10 +80,10 @@ public class CharacterMovementController : MonoBehaviour {
         float leftRightInputToUse = isGrounded() ? leftRightInput : lockedLeftRightInput;
         if (animator) animator.SetFloat("InputX", leftRightInputToUse);
 
-        if (Mathf.Abs(leftRightInputToUse) > inputDelay)
+        if (Mathf.Abs(leftRightInput) > inputDelay)
         {
             Vector3 transformRightToUse = isGrounded() ? transform.right : transformRightOnLastLock;
-            rigidBody.MovePosition(rigidBody.position + transformRightToUse * leftRightVelocity * leftRightInputToUse * Time.fixedDeltaTime);
+            rigidBody.MovePosition(rigidBody.position + transform.right * leftRightVelocity * leftRightInputToUse * Time.fixedDeltaTime);
         }
     }
 

@@ -15,17 +15,20 @@ public class PlayerCameraController : MonoBehaviour {
     float sensitivity; //Get From Settings
     Vector3 offset;
 
-
+    //CameraManager cameraManager;
 
     void Start() {
+        //cameraManager = GameObject.Find("Managers/CameraManager").GetComponent<CameraManager>();
+        //cameraManager.findPlayerCam();
+
         camTransform = transform;
+        if (lookAtTransform == null)
+            lookAtTransform = camTransform;
         maxDistance = 2.5f;
         distance = maxDistance;
         sensitivity = .5f;
         offset = new Vector3(0, 0, -maxDistance);
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     void Update() {

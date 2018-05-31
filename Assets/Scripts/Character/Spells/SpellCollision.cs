@@ -8,6 +8,7 @@ public class SpellCollision : MonoBehaviour
 
     Spell spell;
     SpellManager spellManager;
+    
 
     void Start()
     {
@@ -48,6 +49,7 @@ public class SpellCollision : MonoBehaviour
                 enemyHealthBar.regenerateHealth();
             }
         }
-
+        
+        Debug.Log("We Hit: " + collision.gameObject.tag);
     }
 }

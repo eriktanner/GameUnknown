@@ -19,10 +19,13 @@ public class CastSpell : MonoBehaviour
 
     void Start()
     {
-        cam = Camera.main;
-        castBar = GameObject.Find("Canvas/CastBar").GetComponent<CastBar>();
-        manaBar = GameObject.Find("Canvas/ManaBar").GetComponent<ManaBar>();
-        spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
+        //cam = Camera.main; **We will want to cache this upon entering game
+        if (GameObject.Find("Canvas/CastBar").GetComponent<CastBar>() != null)
+            castBar = GameObject.Find("Canvas/CastBar").GetComponent<CastBar>();
+        if (GameObject.Find("Canvas/ManaBar").GetComponent<ManaBar>() != null)
+            manaBar = GameObject.Find("Canvas/ManaBar").GetComponent<ManaBar>();
+        if (GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>() != null)
+            spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
 
         addToSpellList("Fireball", 0);
         addToSpellList("Pain", 1);
@@ -34,6 +37,7 @@ public class CastSpell : MonoBehaviour
         firePosition = transform.Find("Character1_Reference/FirePosition").position; //may want to reference from editor for effeciency
         GetInput();
         CancelCast();
+        cam = Camera.main; //To be cached, needed for networking building
     }
 
     void GetInput()
