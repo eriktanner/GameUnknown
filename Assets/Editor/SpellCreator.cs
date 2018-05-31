@@ -20,12 +20,13 @@ public class SpellCreator : EditorWindow {
     {
         if (spellManager == null)
         {
-            spellManager = GameObject.Find("SpellManager").GetComponent<SpellManager>();
+            spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
         }
 
         if (tempSpell)
         {
-            tempSpell.name = EditorGUILayout.TextField("Spell Name", tempSpell.name);
+            tempSpell.spellName = EditorGUILayout.TextField("Spell Name", tempSpell.spellName);
+            tempSpell.name = tempSpell.spellName;
             tempSpell.prefab = (GameObject) EditorGUILayout.ObjectField("Spell Prefab", tempSpell.prefab, typeof(GameObject), false);          
             tempSpell.collisionParticle = (GameObject) EditorGUILayout.ObjectField("Collision Effect", tempSpell.collisionParticle, typeof(GameObject), false);
             tempSpell.icon = (Texture2D) EditorGUILayout.ObjectField("Spell Icon", tempSpell.icon, typeof(Texture2D), false);
@@ -49,7 +50,7 @@ public class SpellCreator : EditorWindow {
         {
             if (GUILayout.Button("Create Scriptable Object"))
             {
-                AssetDatabase.CreateAsset(tempSpell, "Assets/Resources/Spells/" + tempSpell.name + ".asset");
+                AssetDatabase.CreateAsset(tempSpell, "Assets/Resources/Spells/" + tempSpell.spellName + ".asset");
                 AssetDatabase.SaveAssets();
                 spellManager.spellList.Add(tempSpell);
                 Selection.activeObject = tempSpell;
@@ -68,7 +69,7 @@ public class SpellCreator : EditorWindow {
         if (!tempSpell)
             return;
 
-        tempSpell.name = "";
+        tempSpell.spellName = "";
         tempSpell.prefab = null;
         tempSpell.collisionParticle = null;
         tempSpell.icon = null;

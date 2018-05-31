@@ -26,7 +26,7 @@ public class SpellManager : MonoBehaviour {
         sphereCollider.radius = spell.projectileRadius;
         spellObject.AddComponent<SpellCollision>();
 
-        spellObject.transform.parent = GameObject.Find("SpellManager").transform;
+        spellObject.transform.parent = GameObject.Find("Managers/SpellManager").transform;
         return spellObject;
     }
 
@@ -42,7 +42,7 @@ public class SpellManager : MonoBehaviour {
     /*We want to emit pain collision particle even if it doesnt hit so that player can see range of spell*/
     IEnumerator destroyPain(GameObject spellObject, float waitTime)
     {
-        Spell spell = (Spell) Resources.Load("Spells/" + spellObject.name, typeof(Spell));
+        Spell spell = getSpellFromName(spellObject.name);
         yield return new WaitForSeconds(waitTime);
 
         if (spell != null && spellObject != null)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spell : ScriptableObject {
 
-    public string name = "";
+    public string spellName = "";
     public GameObject prefab = null;
     public GameObject collisionParticle = null;
     public Texture2D icon = null;

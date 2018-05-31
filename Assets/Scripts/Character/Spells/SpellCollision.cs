@@ -11,8 +11,8 @@ public class SpellCollision : MonoBehaviour
 
     void Start()
     {
-        spell = (Spell) Resources.Load("Spells/" + gameObject.name, typeof(Spell));
-        spellManager = GameObject.Find("SpellManager").GetComponent<SpellManager>();
+        spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
+        spell = spellManager.getSpellFromName(gameObject.name);
         Physics.IgnoreLayerCollision(8, 10); //Ignore's collision between player and spell
 
     }
@@ -32,6 +32,7 @@ public class SpellCollision : MonoBehaviour
         {
             GameObject collisionParticles = Instantiate(spell.collisionParticle, collision.contacts[0].point, Quaternion.identity);
             Destroy(collisionParticles, 1.5f); //Depending on what we hit were going to want to adjust destory time
+            collisionParticles.transform.parent = GameObject.Find("Managers/SpellManager").transform;
         }
     }
 

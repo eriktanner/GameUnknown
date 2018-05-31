@@ -22,7 +22,7 @@ public class CastSpell : MonoBehaviour
         cam = Camera.main;
         castBar = GameObject.Find("Canvas/CastBar").GetComponent<CastBar>();
         manaBar = GameObject.Find("Canvas/ManaBar").GetComponent<ManaBar>();
-        spellManager = GameObject.Find("SpellManager").GetComponent<SpellManager>();
+        spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
 
         addToSpellList("Fireball", 0);
         addToSpellList("Pain", 1);
@@ -99,6 +99,9 @@ public class CastSpell : MonoBehaviour
 
         Quaternion rotationToTarget = Quaternion.LookRotation(firePositionToAim);
         GameObject spellObject = spellManager.createSpellInWorld(spell, firePosition, rotationToTarget);
+
+        
+
         spellManager.DestroySpell(spellObject, spell.maxRange / spell.projectileSpeed);
         spellLock = false;
     }
@@ -128,7 +131,7 @@ public class CastSpell : MonoBehaviour
         bool spellAlreadyExists = false;
         for (int i = 0; i < spellList.Count; i++)
         {
-            if (spellList[i] != null && spellName.Equals(spellList[i].name))
+            if (spellList[i] != null && spellName.Equals(spellList[i].spellName))
             {
                 spellAlreadyExists = true;
             }
@@ -145,7 +148,7 @@ public class CastSpell : MonoBehaviour
     {
         for (int i = 0; i < spellList.Count; i++)
         {
-            if (spellList[i] != null && spellName.Equals(spellList[i].name))
+            if (spellList[i] != null && spellName.Equals(spellList[i].spellName))
             {
                 spellList.RemoveAt(i);
             }

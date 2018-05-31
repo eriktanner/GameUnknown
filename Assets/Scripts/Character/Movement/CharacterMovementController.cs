@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+
+[RequireComponent((typeof(Rigidbody)))]
+[RequireComponent((typeof(CapsuleCollider)))]
 public class CharacterMovementController : MonoBehaviour {
 
     const float FORWARD_TO_BACKWARD_RATIO = 0.5f;
@@ -27,18 +28,9 @@ public class CharacterMovementController : MonoBehaviour {
 
     void Start()
     {
-        if (GetComponent<Rigidbody>())
-            rigidBody = GetComponent<Rigidbody>();
-        else Debug.LogError("Character needs a rigid body");
-
-        if (GetComponent<Collider>())
-            charCollider = GetComponent<CapsuleCollider>();
-        else Debug.LogError("Character needs a collider");
-
-        if (GetComponent<Animator>())
-            animator = GetComponent<Animator>();
-        else Debug.LogError("Character needs a animator");
-
+        rigidBody = GetComponent<Rigidbody>();
+        charCollider = GetComponent<CapsuleCollider>();
+        animator = GetComponent<Animator>();
         forwardInput = leftRightInput = 0;
     }
 
@@ -73,7 +65,7 @@ public class CharacterMovementController : MonoBehaviour {
     void MoveForward()
     {
         float forwardInputToUse = isGrounded() ? forwardInput : lockedForwardInput;
-        animator.SetFloat("InputZ", forwardInputToUse);
+        if (animator) animator.SetFloat("InputZ", forwardInputToUse);
         
         if (Mathf.Abs(forwardInputToUse) > inputDelay)
         {
@@ -86,7 +78,7 @@ public class CharacterMovementController : MonoBehaviour {
     void MoveLeftRight()
     {
         float leftRightInputToUse = isGrounded() ? leftRightInput : lockedLeftRightInput;
-        animator.SetFloat("InputX", leftRightInputToUse);
+        if (animator) animator.SetFloat("InputX", leftRightInputToUse);
 
         if (Mathf.Abs(leftRightInputToUse) > inputDelay)
         {
@@ -109,7 +101,7 @@ public class CharacterMovementController : MonoBehaviour {
         {
             rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0 , rigidBody.velocity.z);
             rigidBody.AddForce(transform.up * jumpVelocity, ForceMode.Impulse);
-            animator.Play("Jump");
+            if (animator) animator.Play("Jump");
 
             lockedForwardInput = forwardInput;
             lockedLeftRightInput = leftRightInput;
