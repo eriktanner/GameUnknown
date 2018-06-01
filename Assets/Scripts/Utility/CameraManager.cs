@@ -14,14 +14,10 @@ public class CameraManager : MonoBehaviour {
 
 
 
-
-
     void Start()
     {
         sceneCam = GameObject.Find("Cameras/SkyCam").GetComponent<Camera>();
         SetSceneCamActive(true);
-        //SetActiveMainCamera("SkyCam");
-        //SetCursorToConfinedAndVisible();
     }
 
     public void SetSceneCamActive(bool isActive)

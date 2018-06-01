@@ -19,6 +19,7 @@ public class OurNetworkManager : NetworkManager {
         if (spellManager) RegisterSpellPrefabs();
     }
 
+    /*Prefabs that are spawned during runtime over the network need to be registed with the NetworkManager before use*/
     void RegisterSpellPrefabs()
     {
         for (int i = 0; i < spellManager.spellList.Count; i++)

@@ -54,6 +54,13 @@ public class SpellCollision : NetworkBehaviour
 
     }
 
+    /*Emitting graphic particles and destroy will occur locally(does not need to be handled by server)*/
+    //IMPORTANT - To come back to, we would like to run the least amount over the server, but do we need have the graphics server authenticated?
+    void emitCollisionGraphics()
+    {
+
+    }
+
 
 
 
