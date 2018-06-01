@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class SpellController : NetworkBehaviour
+
+/*Detects collision of spells, call initSpellCollision to init needed info*/
+public class SpellCollision : NetworkBehaviour
 {
 
     Spell spell;
     SpellManager spellManager;
 
-    public string shotBy;
+    SpellDestruction spellDestruction;
+    string shotBy;
 
 
 
@@ -17,7 +20,16 @@ public class SpellController : NetworkBehaviour
     {
         spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
         spell = spellManager.getSpellFromName(gameObject.name);
+    }
 
+
+
+    /*Creates new SpellCollision Component, then attaches it to the passed in GameObject*/
+    public static void AddSpellCollision(GameObject attachTo, string shotByIn, SpellDestruction spellDestructionIn)
+    {
+        SpellCollision spellCollisionComponent = attachTo.AddComponent<SpellCollision>();
+        spellCollisionComponent.shotBy = shotByIn;
+        spellCollisionComponent.spellDestruction = spellDestructionIn;
     }
 
     /*Plays destroy sequence of a spell OnCollision*/
@@ -29,7 +41,7 @@ public class SpellController : NetworkBehaviour
         //Debug.Log("Collision With: " + collision.gameObject.name + ", Tag: " + collision.gameObject.tag);
         GameObject collisionGameObject = collision.gameObject;
 
-        if (collisionGameObject.name != shotBy)
+        if (!collisionGameObject.name.Equals(shotBy))
         {
             
             if (collisionGameObject.tag == "Player")
@@ -68,6 +80,8 @@ public class SpellController : NetworkBehaviour
 
         //Debug.Log("CommandDestroySpell");
         NetworkServer.Destroy(gameObject);
+
+
 
         if (spell.collisionParticle)
         {

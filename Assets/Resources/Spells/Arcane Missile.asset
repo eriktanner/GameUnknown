@@ -11,7 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a981b1bfa8397a948a90dcebf804b09c, type: 3}
   m_Name: Arcane Missile
   m_EditorClassIdentifier: 
-  name: Arcane Missile
+  spellName: 
+  shotBy: 
   prefab: {fileID: 100014, guid: 220386b6dd022417d9d9a64ffbb1bc6e, type: 2}
   collisionParticle: {fileID: 0}
   icon: {fileID: 0}
@@ -20,5 +21,5 @@ MonoBehaviour:
   manaCost: 15
   maxRange: 30
   projectileRadius: 0.3
-  projectileSpeed: 11
+  projectileSpeed: 12
   castTime: 1.5

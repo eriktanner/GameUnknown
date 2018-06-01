@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
+[RequireComponent((typeof(SpellDestruction)))]
 public class CastSpell : NetworkBehaviour
 {
     public List<Spell> spellList = new List<Spell>(3);
     public Transform castSpawn;
+    public SpellDestruction spellDestruction;
 
     CastBar castBar;
     ManaBar manaBar;
@@ -105,7 +107,6 @@ public class CastSpell : NetworkBehaviour
         firePositionToAim = camFoundHit ? camHit.point - castSpawn.position : camRay.direction + offset;
 
         Quaternion rotationToTarget = Quaternion.LookRotation(firePositionToAim);
-        spell.shotBy = gameObject.name;
 
         CmdFireSpell(spell.name, rotationToTarget);
         
@@ -117,8 +118,8 @@ public class CastSpell : NetworkBehaviour
     void CmdFireSpell(string spellName, Quaternion rotationToTarget)
     {
         Spell spell = spellManager.getSpellFromName(spellName);
-        GameObject spellObject = spellManager.createSpellInWorld(spell, castSpawn.position, rotationToTarget, gameObject.name);
-        spellManager.DestroySpell(spellObject, spell.maxRange / spell.projectileSpeed);
+        GameObject spellObject = createSpellInWorld(spell, castSpawn.position, rotationToTarget);
+        spellDestruction.destroySpellOnServer(spellObject, spell.maxRange / spell.projectileSpeed);
         NetworkServer.Spawn(spellObject);
     }
 
@@ -138,6 +139,27 @@ public class CastSpell : NetworkBehaviour
 
 
     /*SpellList Functionality*/
+
+    /*Creates the spell in the world and fires it.
+     Adds RigidBody, SphereCollider, and SpellCollision to spell*/
+    public GameObject createSpellInWorld(Spell spell, Vector3 position, Quaternion rotation)
+    {
+        GameObject spellObject = Instantiate(spell.prefab, position, rotation);
+        spellObject.name = spell.name;
+        spellObject.tag = "Spell";
+        spellObject.layer = 10;
+        Rigidbody rigidBody = spellObject.AddComponent<Rigidbody>();
+        rigidBody.mass = 0;
+        rigidBody.useGravity = false;
+        rigidBody.velocity = spellObject.transform.forward * spell.projectileSpeed;
+        rigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        SphereCollider sphereCollider = spellObject.AddComponent<SphereCollider>();
+        sphereCollider.radius = spell.projectileRadius;
+        SpellCollision.AddSpellCollision(spellObject, gameObject.name, spellDestruction);
+
+        spellObject.transform.parent = GameObject.Find("Managers/SpellManager").transform; //To remove we dont want a find in a network function
+        return spellObject;
+    }
 
     /*Given a spell and index, adds to player's spellList*/
     void addToSpellList(string spellName, int index)

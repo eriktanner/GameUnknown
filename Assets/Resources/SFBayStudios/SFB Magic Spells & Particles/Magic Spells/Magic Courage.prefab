@@ -18835,7 +18835,7 @@ MonoBehaviour:
   m_VelocityThreshold: 0.0001
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
+  m_InterpolateMovement: 0.5
 --- !u!114 &114658686825527638
 MonoBehaviour:
   m_ObjectHideFlags: 1

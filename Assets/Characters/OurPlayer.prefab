@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 114015491287944662}
   - component: {fileID: 114124330181891788}
   - component: {fileID: 114838500078889756}
+  - component: {fileID: 114462466476174060}
   m_Layer: 8
   m_Name: OurPlayer
   m_TagString: Player
@@ -5445,7 +5446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0.1
+  m_SendInterval: 0.06666667
   m_SyncRotationAxis: 2
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
@@ -5467,6 +5468,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellList: []
   castSpawn: {fileID: 4431486795845504}
+  spellDestruction: {fileID: 114462466476174060}
+--- !u!114 &114462466476174060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1096529572963302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a29312a71e6d6c45b9fd6896f947e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114493332049907336
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -28,6 +28,11 @@ public class CameraManager : MonoBehaviour {
     {
         sceneCam.enabled = isActive;
         sceneCanRotate = isActive;
+
+        if (isActive == true)
+            SetCursorToFreeAndVisible();
+        else SetCursorToLockAndInvisible();
+
     }
 
 

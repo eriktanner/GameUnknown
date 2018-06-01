@@ -113,11 +113,12 @@ public class CharacterMovementController : MonoBehaviour {
 
 
     
-    /*Tells us if player is currently on a hard surface*/
+    /*Tells us if player is currently on a hard surface - THIS NEEDS TO BE FIXED
+     This messes up escpecially on the client I don't know why*/
     bool isGrounded()
     {
         float radius = charCollider.radius * .4f;
-        Vector3 pos = transform.position + Vector3.up * (radius * 0.3f);
+        Vector3 pos = transform.position + Vector3.up * (radius * 0.2f);
         LayerMask ignorePlayerMask = ~(1 << 8);
         return Physics.CheckSphere(pos, radius, ignorePlayerMask);  
     }
