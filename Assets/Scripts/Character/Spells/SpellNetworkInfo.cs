@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellNetworkInfo : MonoBehaviour {
+public class SpellNetworkInfo  {
 
-    public string spellShotBy;
+    public string shotBy;
 
 }

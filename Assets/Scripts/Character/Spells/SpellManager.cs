@@ -13,21 +13,23 @@ public class SpellManager : MonoBehaviour {
         return (Spell) Resources.Load("Spells/" + spellName, typeof(Spell));
     }
 
-    public GameObject createSpellInWorld(Spell spell, Vector3 position, Quaternion rotation)
+    public GameObject createSpellInWorld(Spell spell, Vector3 position, Quaternion rotation, string shotBy)
     {
         GameObject spellObject = Instantiate(spell.prefab, position, rotation);
         spellObject.name = spell.name;
+        spellObject.tag = "Spell";
         spellObject.layer = 10;
         Rigidbody rigidBody = spellObject.AddComponent<Rigidbody>();
+        //rigidBody.mass = 0;
         rigidBody.useGravity = false;
         rigidBody.velocity = spellObject.transform.forward * spell.projectileSpeed;
         rigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         SphereCollider sphereCollider = spellObject.AddComponent<SphereCollider>();
         sphereCollider.radius = spell.projectileRadius;
-        spellObject.AddComponent<SpellCollision>();
-        spellObject.AddComponent<SpellNetworkInfo>().spellShotBy = spell.shotBy;
+        spellObject.AddComponent<SpellController>();
+        spellObject.GetComponent<SpellController>().shotBy = shotBy;
 
-        spellObject.transform.parent = GameObject.Find("Managers/SpellManager").transform;
+        spellObject.transform.parent = GameObject.Find("Managers/SpellManager").transform; //To remove we dont want a find in a network function
         return spellObject;
     }
 

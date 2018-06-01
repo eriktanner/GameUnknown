@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fire
-  - SpellCollider
   - Ground
   - Enemy
+  - Spell
   layers:
   - Default
   - TransparentFX

@@ -18,15 +18,7 @@ public class NetworkPlayerSetup : NetworkBehaviour {
         {
             DisableRemoteComponents();
             AssignRemoteLayersAndTags();
-        } else
-        {
-            sceneCamera = GameObject.Find("Cameras/SkyCam").GetComponent<Camera>();
-            if (sceneCamera)
-            {
-                sceneCamera.enabled = false;
-                cameraManager.SetCursorToLockAndInvisible();
-            }
-        }
+        } 
 
         RegisterPlayer();
     }
@@ -51,8 +43,8 @@ public class NetworkPlayerSetup : NetworkBehaviour {
 
     void AssignRemoteLayersAndTags()
     {
-        gameObject.layer = LayerMask.NameToLayer("Enemy");
-        gameObject.tag = "Enemy";
+        gameObject.layer = LayerMask.NameToLayer("Player");
+        gameObject.tag = "Player";
     }
 
     void OnDisable()

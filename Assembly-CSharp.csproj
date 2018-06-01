@@ -70,10 +70,12 @@
      <Compile Include="Assets\Scripts\Character\Movement\CharacterMovementController.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\CastSpell.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\Spell.cs" />
-     <Compile Include="Assets\Scripts\Character\Spells\SpellCollision.cs" />
+     <Compile Include="Assets\Scripts\Character\Spells\SpellController.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellManager.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellNetworkInfo.cs" />
      <Compile Include="Assets\Scripts\Network\NetworkPlayerSetup.cs" />
+     <Compile Include="Assets\Scripts\Network\NetworkSpellCollision.cs" />
+     <Compile Include="Assets\Scripts\Network\OurNetworkManager.cs" />
      <Compile Include="Assets\Scripts\UI\CastBar.cs" />
      <Compile Include="Assets\Scripts\UI\EnemyHealthBar.cs" />
      <Compile Include="Assets\Scripts\UI\HealthBar.cs" />

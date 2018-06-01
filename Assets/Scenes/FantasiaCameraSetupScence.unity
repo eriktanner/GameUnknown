@@ -973,6 +973,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a657db9ad979e95428104a7ee41a8b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneCam: {fileID: 0}
+  sceneRotationRadius: 24
+  sceneCamRotationRate: 3
 --- !u!1 &486944096
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,6 +1086,8 @@ GameObject:
   - component: {fileID: 538890943}
   - component: {fileID: 538890942}
   - component: {fileID: 538890946}
+  - component: {fileID: 538890948}
+  - component: {fileID: 538890947}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Enemy
@@ -1171,6 +1176,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarSlider: {fileID: 0}
   healthText: {fileID: 0}
+--- !u!114 &538890947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538890941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2138992918706478c48df7f21abd9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &538890948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538890941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!1 &585693822
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,7 +1272,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 585693822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -822479833, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: c4540a9417b72ff48a97e1ea1473afc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_NetworkPort: 7777
@@ -1242,7 +1290,8 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 1
   m_OfflineScene: 
   m_OnlineScene: 
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 0}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:

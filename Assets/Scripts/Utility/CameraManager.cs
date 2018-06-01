@@ -4,42 +4,55 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
 
-    Camera skyCam;
     Camera playerCam;
+
+    [SerializeField] Camera sceneCam;
+    [SerializeField] float sceneRotationRadius = 24.0f;
+    [SerializeField] float sceneCamRotationRate = 3.0f;
+    bool sceneCanRotate;
+    float sceneCamRotation;
+
+
+
 
 
     void Start()
     {
-        //skyCam = GameObject.Find("Cameras/SkyCam").GetComponent<Camera>();
+        sceneCam = GameObject.Find("Cameras/SkyCam").GetComponent<Camera>();
+        SetSceneCamActive(true);
         //SetActiveMainCamera("SkyCam");
         //SetCursorToConfinedAndVisible();
     }
 
-    public void findPlayerCam ()
+    public void SetSceneCamActive(bool isActive)
     {
-        //playerCam = GameObject.Find("OurPlayer/Character1_Reference/PlayerCam").GetComponent<Camera>();
+        sceneCam.enabled = isActive;
+        sceneCanRotate = isActive;
     }
 
-    public void SetActiveMainCamera(string camToSetActive)
+
+    void Update()
     {
-        if (camToSetActive.Equals(skyCam.gameObject.name)) {
-            if (skyCam == null)
-            {
-                Debug.LogWarning("SkyCam is NULL");
-                return;
-            }
-            playerCam.enabled = false;
-            skyCam.enabled = true;
-        } else if (camToSetActive.Equals(playerCam.gameObject.name)) {
-            if (playerCam == null)
-            {
-                Debug.LogWarning("PlayerCamera IS NULL");
-                return;
-            }
-            playerCam.enabled = true;
-            skyCam.enabled = false;
-        }
+        rotateSceneCam();
+
     }
+    
+    void rotateSceneCam()
+    {
+        if (!sceneCanRotate)
+            return;
+        
+        sceneCamRotation += sceneCamRotationRate * Time.deltaTime;
+        if (sceneCamRotation >= 360)
+            sceneCamRotation = -360;
+
+        sceneCam.transform.position = Vector3.zero;
+        sceneCam.transform.rotation = Quaternion.Euler(0, sceneCamRotation, 0);
+        sceneCam.transform.Translate(0, sceneRotationRadius, -sceneRotationRadius);
+        sceneCam.transform.LookAt(Vector3.zero);
+    }
+
+
 
 
     public void SetCursorToLockAndInvisible()

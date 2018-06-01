@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 
-public class CastSpell : MonoBehaviour
+public class CastSpell : NetworkBehaviour
 {
     public List<Spell> spellList = new List<Spell>(3);
     public Transform castSpawn;
@@ -106,13 +107,21 @@ public class CastSpell : MonoBehaviour
         Quaternion rotationToTarget = Quaternion.LookRotation(firePositionToAim);
         spell.shotBy = gameObject.name;
 
-        GameObject spellObject = spellManager.createSpellInWorld(spell, castSpawn.position, rotationToTarget);
-
+        CmdFireSpell(spell.name, rotationToTarget);
         
-
-        spellManager.DestroySpell(spellObject, spell.maxRange / spell.projectileSpeed);
         spellLock = false;
     }
+
+
+    [Command]
+    void CmdFireSpell(string spellName, Quaternion rotationToTarget)
+    {
+        Spell spell = spellManager.getSpellFromName(spellName);
+        GameObject spellObject = spellManager.createSpellInWorld(spell, castSpawn.position, rotationToTarget, gameObject.name);
+        spellManager.DestroySpell(spellObject, spell.maxRange / spell.projectileSpeed);
+        NetworkServer.Spawn(spellObject);
+    }
+
 
     void CancelCast()
     {
