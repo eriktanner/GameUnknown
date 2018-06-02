@@ -718,12 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f1dc76c8d1b2044e97e728e3b619f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 5d249b8dc57fe9e4dabc22c67ba94ef7, type: 2}
-  - {fileID: 11400000, guid: cde667bc69812d94f8f638313f6801be, type: 2}
-  - {fileID: 11400000, guid: 930ea9c98a76bbb4e82f0bf8d977f628, type: 2}
+  spellList: []
 --- !u!4 &310098901
 Transform:
   m_ObjectHideFlags: 0
@@ -1278,8 +1273,7 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 1
   m_OfflineScene: 
   m_OnlineScene: 
-  m_SpawnPrefabs:
-  - {fileID: 0}
+  m_SpawnPrefabs: []
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:

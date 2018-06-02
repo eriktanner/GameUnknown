@@ -6,8 +6,7 @@ public class NetworkPlayerSetup : NetworkBehaviour {
     
     public Behaviour[] componentsToDisable;
     CameraManager cameraManager;
-
-    Camera sceneCamera;
+    
 
     void Start()
     {
@@ -46,13 +45,5 @@ public class NetworkPlayerSetup : NetworkBehaviour {
         gameObject.layer = LayerMask.NameToLayer("Player");
         gameObject.tag = "Player";
     }
-
-    void OnDisable()
-    {
-        if (sceneCamera)
-        {
-            sceneCamera.enabled = true;
-            cameraManager.SetCursorToFreeAndVisible();
-        }
-    }
+    
 }

@@ -62,8 +62,8 @@ public class CastSpell : NetworkBehaviour
         }
         cancelCast = Input.GetButtonDown("CancelCast");
     }
+    
 
-    bool shootSpell = false;
     void FireSpell(Spell spell)
     {
         if (!spell || spellLock)
