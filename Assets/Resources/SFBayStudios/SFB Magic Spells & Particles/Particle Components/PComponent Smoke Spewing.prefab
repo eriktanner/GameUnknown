@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114775644176757194}
   m_Layer: 0
   m_Name: PComponent Smoke Spewing
   m_TagString: Untagged
@@ -4521,35 +4520,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114775644176757194
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 184
-    i1: 204
-    i2: 218
-    i3: 233
-    i4: 96
-    i5: 195
-    i6: 100
-    i7: 231
-    i8: 74
-    i9: 122
-    i10: 188
-    i11: 180
-    i12: 148
-    i13: 232
-    i14: 163
-    i15: 135
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

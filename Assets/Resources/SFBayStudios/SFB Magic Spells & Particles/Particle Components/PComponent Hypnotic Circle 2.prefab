@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114144264738084924}
   m_Layer: 0
   m_Name: PComponent Hypnotic Circle 2
   m_TagString: Untagged
@@ -4575,35 +4574,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114144264738084924
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 13
-    i1: 211
-    i2: 165
-    i3: 48
-    i4: 160
-    i5: 96
-    i6: 228
-    i7: 123
-    i8: 59
-    i9: 211
-    i10: 73
-    i11: 240
-    i12: 28
-    i13: 105
-    i14: 31
-    i15: 198
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

@@ -44,8 +44,6 @@ GameObject:
   - component: {fileID: 400004}
   - component: {fileID: 19800004}
   - component: {fileID: 19900004}
-  - component: {fileID: 114632234749857356}
-  - component: {fileID: 114002485059623908}
   m_Layer: 0
   m_Name: Magic Spirit Beam
   m_TagString: Untagged
@@ -13915,27 +13913,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100004}
   m_IsPrefabParent: 1
---- !u!114 &114002485059623908
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 0
-  m_RotationSyncCompression: 2
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 0.5
 --- !u!114 &114153789541196222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13982,38 +13959,6 @@ MonoBehaviour:
   minTime: 0.05
   maxTime: 0.1
   everyFrame: 0
---- !u!114 &114632234749857356
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 32
-    i1: 189
-    i2: 87
-    i3: 1
-    i4: 237
-    i5: 72
-    i6: 116
-    i7: 102
-    i8: 136
-    i9: 136
-    i10: 221
-    i11: 10
-    i12: 228
-    i13: 226
-    i14: 64
-    i15: 31
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &114732298399851124
 MonoBehaviour:
   m_ObjectHideFlags: 1

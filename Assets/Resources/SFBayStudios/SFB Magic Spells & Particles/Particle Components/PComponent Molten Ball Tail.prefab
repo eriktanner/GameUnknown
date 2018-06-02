@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114712486644257540}
   m_Layer: 0
   m_Name: PComponent Molten Ball Tail
   m_TagString: Untagged
@@ -4566,35 +4565,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114712486644257540
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 227
-    i1: 30
-    i2: 59
-    i3: 180
-    i4: 137
-    i5: 220
-    i6: 68
-    i7: 206
-    i8: 138
-    i9: 12
-    i10: 231
-    i11: 148
-    i12: 70
-    i13: 253
-    i14: 201
-    i15: 95
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

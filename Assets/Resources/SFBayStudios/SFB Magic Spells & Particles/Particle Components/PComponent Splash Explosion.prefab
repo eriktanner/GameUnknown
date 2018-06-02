@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114213815768008174}
   m_Layer: 0
   m_Name: PComponent Splash Explosion
   m_TagString: Untagged
@@ -4671,35 +4670,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114213815768008174
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 80
-    i1: 76
-    i2: 229
-    i3: 249
-    i4: 215
-    i5: 3
-    i6: 244
-    i7: 164
-    i8: 187
-    i9: 201
-    i10: 112
-    i11: 129
-    i12: 108
-    i13: 168
-    i14: 93
-    i15: 143
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

@@ -44,8 +44,6 @@ GameObject:
   - component: {fileID: 400004}
   - component: {fileID: 19800004}
   - component: {fileID: 19900004}
-  - component: {fileID: 114902341638621196}
-  - component: {fileID: 114216056874822092}
   m_Layer: 0
   m_Name: Magic FIre Beam
   m_TagString: Untagged
@@ -13861,59 +13859,6 @@ MonoBehaviour:
   fadeLimit: 1
   fadePassed: 0
   fadeSpeed: 1
---- !u!114 &114216056874822092
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 2
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 0.5
---- !u!114 &114902341638621196
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 202
-    i1: 194
-    i2: 187
-    i3: 146
-    i4: 121
-    i5: 119
-    i6: 212
-    i7: 113
-    i8: 56
-    i9: 110
-    i10: 213
-    i11: 246
-    i12: 203
-    i13: 0
-    i14: 160
-    i15: 109
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &114980230584427442
 MonoBehaviour:
   m_ObjectHideFlags: 1

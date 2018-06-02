@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114660525881656546}
   m_Layer: 0
   m_Name: PComponent Closing Circle
   m_TagString: Untagged
@@ -4566,35 +4565,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114660525881656546
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 94
-    i1: 211
-    i2: 30
-    i3: 11
-    i4: 0
-    i5: 24
-    i6: 132
-    i7: 195
-    i8: 58
-    i9: 39
-    i10: 134
-    i11: 141
-    i12: 174
-    i13: 94
-    i14: 255
-    i15: 255
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

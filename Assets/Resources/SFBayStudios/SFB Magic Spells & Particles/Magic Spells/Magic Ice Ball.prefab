@@ -78,8 +78,6 @@ GameObject:
   - component: {fileID: 400008}
   - component: {fileID: 19800006}
   - component: {fileID: 19900006}
-  - component: {fileID: 114057776720532888}
-  - component: {fileID: 114384643539439858}
   m_Layer: 0
   m_Name: Magic Ice Ball
   m_TagString: Untagged
@@ -18176,59 +18174,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100008}
   m_IsPrefabParent: 1
---- !u!114 &114057776720532888
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 106
-    i1: 43
-    i2: 254
-    i3: 242
-    i4: 121
-    i5: 159
-    i6: 36
-    i7: 27
-    i8: 72
-    i9: 6
-    i10: 34
-    i11: 109
-    i12: 103
-    i13: 120
-    i14: 154
-    i15: 120
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &114384643539439858
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 2
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 0.5
 --- !u!114 &114427847960436752
 MonoBehaviour:
   m_ObjectHideFlags: 1

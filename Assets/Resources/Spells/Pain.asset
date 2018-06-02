@@ -11,7 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a981b1bfa8397a948a90dcebf804b09c, type: 3}
   m_Name: Pain
   m_EditorClassIdentifier: 
-  name: Pain
+  spellName: 
+  shotBy: 
   prefab: {fileID: 1774912816483602, guid: e89f1a44afdf3614898d214a113d6e5f, type: 2}
   collisionParticle: {fileID: 100004, guid: 826d765a5a4554af48a035aa441da3ec, type: 2}
   icon: {fileID: 0}
@@ -19,6 +20,6 @@ MonoBehaviour:
   damage: 10
   manaCost: 2
   maxRange: 20
-  projectileRadius: 0.2
+  projectileRadius: 1.5
   projectileSpeed: 60
   castTime: 0.5

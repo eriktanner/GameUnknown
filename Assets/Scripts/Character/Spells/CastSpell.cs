@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 [RequireComponent((typeof(CallThruLocalPlayer)))]
 public class CastSpell : NetworkBehaviour
 {
-    public List<Spell> spellList = new List<Spell>(3);
+    public Spell[] spellList = new Spell[3];
     public Transform castSpawn;
     public SpellDestruction spellDestruction;
 
@@ -50,15 +50,18 @@ public class CastSpell : NetworkBehaviour
     {
         if (Input.GetButtonDown("Spell1"))
         {
-            FireSpell(spellList[0]);
+            if (spellList[0])
+                FireSpell(spellList[0]);
         }
         if (Input.GetButtonDown("Spell2"))
         {
-            FireSpell(spellList[1]);
+            if (spellList[1])
+                FireSpell(spellList[1]);
         }
         if (Input.GetButtonDown("Spell3"))
         {
-            FireSpell(spellList[2]);
+            if (spellList[2])
+                FireSpell(spellList[2]);
         }
         cancelCast = Input.GetButtonDown("CancelCast");
     }
@@ -152,19 +155,14 @@ public class CastSpell : NetworkBehaviour
     public GameObject createSpellInWorld(Spell spell, Vector3 position, Quaternion rotation)
     {
         GameObject spellObject = Instantiate(spell.prefab, position, rotation);
+        SpellCollision.AddSpellCollision(spellObject,spell.projectileRadius, gameObject.name, spellDestruction);
+        spellObject.AddComponent<SpellMovement>();
+
         spellObject.name = spell.name;
         spellObject.tag = "Spell";
         spellObject.layer = 10;
-        Rigidbody rigidBody = spellObject.AddComponent<Rigidbody>();
-        rigidBody.mass = 0;
-        rigidBody.useGravity = false;
-        rigidBody.velocity = spellObject.transform.forward * spell.projectileSpeed;
-        rigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-        SphereCollider sphereCollider = spellObject.AddComponent<SphereCollider>();
-        sphereCollider.radius = spell.projectileRadius;
-        SpellCollision.AddSpellCollision(spellObject, gameObject.name, spellDestruction);
-
-        spellObject.transform.parent = GameObject.Find("Managers/SpellManager").transform; //To remove we dont want a find in a network function
+        
+        spellObject.transform.parent = spellManager.SpellManagerTransform;
         return spellObject;
     }
 
@@ -175,7 +173,7 @@ public class CastSpell : NetworkBehaviour
             return;
 
         bool spellAlreadyExists = false;
-        for (int i = 0; i < spellList.Count; i++)
+        for (int i = 0; i < spellList.Length; i++)
         {
             if (spellList[i] != null && spellName.Equals(spellList[i].spellName))
             {
@@ -185,18 +183,18 @@ public class CastSpell : NetworkBehaviour
 
         if (!spellAlreadyExists)
         {
-            spellList.Insert(index, spellManager.getSpellFromName(spellName));
+            spellList[index] = spellManager.getSpellFromName(spellName);
         }
     }
 
     /*Given a spell, removes from player's spellList*/
     void removeFromSpellList(string spellName)
     {
-        for (int i = 0; i < spellList.Count; i++)
+        for (int i = 0; i < spellList.Length; i++)
         {
             if (spellList[i] != null && spellName.Equals(spellList[i].spellName))
             {
-                spellList.RemoveAt(i);
+                spellList[i] = null;
             }
         }
     }
@@ -204,9 +202,9 @@ public class CastSpell : NetworkBehaviour
     /*Removes spell from spellList's index*/
     void removeFromSpellList(int index)
     {
-        if (index < 0 || index > 3 || index > spellList.Count - 1)
+        if (index < 0 || index > 3 || index > spellList.Length - 1)
             return;
-        spellList.RemoveAt(index);
+        spellList[index] = null;
     }
 
 }

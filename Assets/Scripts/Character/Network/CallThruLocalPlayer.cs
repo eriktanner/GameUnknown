@@ -27,7 +27,12 @@ public class CallThruLocalPlayer : NetworkBehaviour
     void RpcDestroySpellOnCollision(string spellName, Vector3 position)
     {
         Spell spell = spellManager.getSpellFromName(spellName);
-        Destroy(GameObject.Find("Managers/SpellManager/" + spellName));
+        GameObject spellInWorldToDestroy = spellManager.getObjectFromSpellName(spellName);
+
+        if (spellInWorldToDestroy == null)
+            return;
+
+        Destroy(spellInWorldToDestroy);
         if (spell.collisionParticle)
         {
             GameObject collisionParticles = Instantiate(spell.collisionParticle, position, Quaternion.identity);
@@ -46,7 +51,7 @@ public class CallThruLocalPlayer : NetworkBehaviour
             enemyHealthBar.regenerateHealth();
         }*/
 
-        Debug.Log("Server Notified We Hit: " + playerName);
+        //Debug.Log("Server Notified We Hit: " + playerName);
 
     }
 

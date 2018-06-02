@@ -11,7 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a981b1bfa8397a948a90dcebf804b09c, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  name: FireBall
+  spellName: 
+  shotBy: 
   prefab: {fileID: 100008, guid: 305a87c2136134cf7aa00ab1225c5289, type: 2}
   collisionParticle: {fileID: 100000, guid: c17f7da048ca646b6af33275801eab88, type: 2}
   icon: {fileID: 0}
@@ -19,6 +20,6 @@ MonoBehaviour:
   damage: 20
   manaCost: 4
   maxRange: 60
-  projectileRadius: 0.2
+  projectileRadius: 0.17
   projectileSpeed: 40
   castTime: 0.9

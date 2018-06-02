@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114583184429204224}
   m_Layer: 0
   m_Name: PComponent Tall Rays Dark
   m_TagString: Untagged
@@ -4593,35 +4592,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114583184429204224
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 236
-    i1: 230
-    i2: 115
-    i3: 45
-    i4: 255
-    i5: 32
-    i6: 148
-    i7: 200
-    i8: 152
-    i9: 55
-    i10: 229
-    i11: 242
-    i12: 164
-    i13: 152
-    i14: 21
-    i15: 218
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

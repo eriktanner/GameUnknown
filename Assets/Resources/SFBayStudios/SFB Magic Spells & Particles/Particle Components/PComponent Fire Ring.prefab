@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114949457164908556}
   m_Layer: 0
   m_Name: PComponent Fire Ring
   m_TagString: Untagged
@@ -4650,35 +4649,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114949457164908556
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 28
-    i1: 70
-    i2: 151
-    i3: 159
-    i4: 101
-    i5: 190
-    i6: 164
-    i7: 145
-    i8: 8
-    i9: 40
-    i10: 219
-    i11: 100
-    i12: 250
-    i13: 126
-    i14: 157
-    i15: 183
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114957282084469640}
   m_Layer: 0
   m_Name: PComponent Pulsing Disc Horizontal
   m_TagString: Untagged
@@ -4548,35 +4547,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114957282084469640
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 140
-    i1: 142
-    i2: 64
-    i3: 73
-    i4: 41
-    i5: 89
-    i6: 116
-    i7: 192
-    i8: 169
-    i9: 241
-    i10: 252
-    i11: 215
-    i12: 185
-    i13: 231
-    i14: 231
-    i15: 246
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

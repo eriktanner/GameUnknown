@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - component: {fileID: 400000}
   - component: {fileID: 9600000}
-  - component: {fileID: 114088060253913720}
   m_Layer: 0
   m_Name: PComopnent Light Tail
   m_TagString: Untagged
@@ -141,35 +140,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114088060253913720
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 175
-    i1: 217
-    i2: 104
-    i3: 113
-    i4: 64
-    i5: 121
-    i6: 196
-    i7: 155
-    i8: 201
-    i9: 105
-    i10: 147
-    i11: 253
-    i12: 222
-    i13: 131
-    i14: 71
-    i15: 217
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

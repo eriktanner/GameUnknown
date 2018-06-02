@@ -27,8 +27,6 @@ GameObject:
   - component: {fileID: 400002}
   - component: {fileID: 19800002}
   - component: {fileID: 19900002}
-  - component: {fileID: 114157949235721326}
-  - component: {fileID: 114318853948357772}
   m_Layer: 0
   m_Name: Magic First Aid
   m_TagString: Untagged
@@ -9400,59 +9398,6 @@ MonoBehaviour:
   done: 0
   maxTime: 0
   timePassed: 0
---- !u!114 &114157949235721326
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 136
-    i1: 59
-    i2: 0
-    i3: 121
-    i4: 41
-    i5: 65
-    i6: 52
-    i7: 91
-    i8: 219
-    i9: 25
-    i10: 209
-    i11: 106
-    i12: 254
-    i13: 93
-    i14: 34
-    i15: 107
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &114318853948357772
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 2
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 0.5
 --- !u!114 &114359960165502766
 MonoBehaviour:
   m_ObjectHideFlags: 1

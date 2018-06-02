@@ -113,8 +113,6 @@ GameObject:
   - component: {fileID: 19800012}
   - component: {fileID: 19900012}
   - component: {fileID: 114294075183725334}
-  - component: {fileID: 114380159596560564}
-  - component: {fileID: 114547303804777384}
   m_Layer: 0
   m_Name: Magic Fire Explosion
   m_TagString: Untagged
@@ -32604,59 +32602,6 @@ MonoBehaviour:
   minTime: 0.1
   maxTime: 0.25
   everyFrame: 1
---- !u!114 &114380159596560564
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 160
-    i1: 138
-    i2: 152
-    i3: 97
-    i4: 133
-    i5: 55
-    i6: 164
-    i7: 188
-    i8: 203
-    i9: 153
-    i10: 237
-    i11: 176
-    i12: 157
-    i13: 216
-    i14: 199
-    i15: 108
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &114547303804777384
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 2
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 0.5
 --- !u!114 &114626218694380366
 MonoBehaviour:
   m_ObjectHideFlags: 1

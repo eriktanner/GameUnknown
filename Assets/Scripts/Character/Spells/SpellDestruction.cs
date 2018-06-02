@@ -89,31 +89,14 @@ public class SpellDestruction : NetworkBehaviour
         }
 
     }
-
+    
     void spawnAndDestroyParticles(string spellName, Vector3 position, float waitTime)
     {
         Spell spell = spellManager.getSpellFromName(spellName);
 
         GameObject collisionParticles = Instantiate(spell.collisionParticle, position, Quaternion.identity);
         Destroy(collisionParticles, waitTime);
-
     }
     
     
-
-    [Command] /*Orders server to display collision particles and handle their destruction*/
-    void CmdSpawnAndDestroyParticles(string spellName, Vector3 position, float waitTime)
-    {
-        Spell spell = spellManager.getSpellFromName(spellName);
-
-        GameObject collisionParticles = Instantiate(spell.collisionParticle, position, Quaternion.identity);
-        NetworkServer.Spawn(collisionParticles);
-        waitAndDestroy(collisionParticles, waitTime, defaultDestroy);
-    }
-
-    [Command] /*Tell Server to destroy a game object (use for spells and particles)*/
-    void CmdDestroySpellOrParticle(GameObject spellObject)
-    {
-        NetworkServer.Destroy(spellObject);
-    }
 }

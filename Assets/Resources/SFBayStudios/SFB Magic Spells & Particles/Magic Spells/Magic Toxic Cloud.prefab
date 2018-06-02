@@ -45,8 +45,6 @@ GameObject:
   - component: {fileID: 400004}
   - component: {fileID: 19800002}
   - component: {fileID: 19900002}
-  - component: {fileID: 114150581557578576}
-  - component: {fileID: 114341704712653984}
   m_Layer: 0
   m_Name: Magic Toxic Cloud
   m_TagString: Untagged
@@ -9328,59 +9326,6 @@ MonoBehaviour:
   done: 0
   maxTime: 0
   timePassed: 0
---- !u!114 &114150581557578576
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 117
-    i1: 3
-    i2: 15
-    i3: 118
-    i4: 12
-    i5: 2
-    i6: 180
-    i7: 39
-    i8: 251
-    i9: 27
-    i10: 129
-    i11: 90
-    i12: 205
-    i13: 5
-    i14: 219
-    i15: 157
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &114341704712653984
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 2
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 0.5
 --- !u!114 &114877941538205548
 MonoBehaviour:
   m_ObjectHideFlags: 1

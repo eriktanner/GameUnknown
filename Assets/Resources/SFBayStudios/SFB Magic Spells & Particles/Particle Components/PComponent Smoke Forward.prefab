@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114031715134402952}
   m_Layer: 0
   m_Name: PComponent Smoke Forward
   m_TagString: Untagged
@@ -4611,35 +4610,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114031715134402952
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 161
-    i1: 21
-    i2: 62
-    i3: 117
-    i4: 244
-    i5: 36
-    i6: 244
-    i7: 231
-    i8: 153
-    i9: 50
-    i10: 152
-    i11: 39
-    i12: 140
-    i13: 137
-    i14: 26
-    i15: 23
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

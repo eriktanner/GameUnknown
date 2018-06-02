@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114177351314643466}
   m_Layer: 0
   m_Name: PComponent Smoke Circle
   m_TagString: Untagged
@@ -4575,35 +4574,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114177351314643466
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 213
-    i1: 95
-    i2: 85
-    i3: 46
-    i4: 44
-    i5: 89
-    i6: 196
-    i7: 95
-    i8: 202
-    i9: 45
-    i10: 175
-    i11: 158
-    i12: 115
-    i13: 233
-    i14: 42
-    i15: 234
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

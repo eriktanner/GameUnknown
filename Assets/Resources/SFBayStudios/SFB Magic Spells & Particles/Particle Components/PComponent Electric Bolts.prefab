@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114618221283236244}
   m_Layer: 0
   m_Name: PComponent Electric Bolts
   m_TagString: Untagged
@@ -4635,35 +4634,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114618221283236244
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 103
-    i1: 135
-    i2: 249
-    i3: 87
-    i4: 186
-    i5: 88
-    i6: 164
-    i7: 109
-    i8: 200
-    i9: 244
-    i10: 204
-    i11: 81
-    i12: 187
-    i13: 232
-    i14: 221
-    i15: 63
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

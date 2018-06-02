@@ -16,7 +16,7 @@ public class OurNetworkManager : NetworkManager {
         spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
         if (spellManager == null)
             Debug.Log("SpellManager is null");
-        if (spellManager) RegisterSpellPrefabs();
+        //if (spellManager) RegisterSpellPrefabs(); //Not needed for now -- Were doing everything locally
     }
 
     /*Prefabs that are spawned during runtime over the network need to be registed with the NetworkManager before use*/

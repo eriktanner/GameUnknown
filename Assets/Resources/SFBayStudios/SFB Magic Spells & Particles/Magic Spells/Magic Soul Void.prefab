@@ -78,8 +78,6 @@ GameObject:
   - component: {fileID: 400008}
   - component: {fileID: 19800008}
   - component: {fileID: 19900008}
-  - component: {fileID: 114434737888484714}
-  - component: {fileID: 114518632459209944}
   m_Layer: 0
   m_Name: Magic Soul Void
   m_TagString: Untagged
@@ -37435,38 +37433,6 @@ MonoBehaviour:
   done: 0
   maxTime: 0
   timePassed: 0
---- !u!114 &114434737888484714
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 141
-    i1: 50
-    i2: 235
-    i3: 163
-    i4: 151
-    i5: 79
-    i6: 68
-    i7: 230
-    i8: 25
-    i9: 102
-    i10: 56
-    i11: 127
-    i12: 213
-    i13: 39
-    i14: 144
-    i15: 89
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &114481099792927322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -37481,27 +37447,6 @@ MonoBehaviour:
   fadeLimit: 5
   fadePassed: 0
   fadeSpeed: 1
---- !u!114 &114518632459209944
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 2
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 0.5
 --- !u!114 &114533799296600768
 MonoBehaviour:
   m_ObjectHideFlags: 1

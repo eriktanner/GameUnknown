@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114956703885588378}
   m_Layer: 0
   m_Name: PComponent Liquid Spit Forward
   m_TagString: Untagged
@@ -4539,35 +4538,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114956703885588378
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 212
-    i1: 232
-    i2: 110
-    i3: 147
-    i4: 231
-    i5: 235
-    i6: 100
-    i7: 73
-    i8: 137
-    i9: 133
-    i10: 98
-    i11: 67
-    i12: 139
-    i13: 57
-    i14: 176
-    i15: 20
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

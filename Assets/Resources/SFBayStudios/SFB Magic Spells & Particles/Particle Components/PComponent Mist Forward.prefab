@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114185761618242108}
   m_Layer: 0
   m_Name: PComponent Mist Forward
   m_TagString: Untagged
@@ -4629,35 +4628,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114185761618242108
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 50
-    i1: 149
-    i2: 224
-    i3: 79
-    i4: 131
-    i5: 20
-    i6: 52
-    i7: 87
-    i8: 56
-    i9: 78
-    i10: 31
-    i11: 76
-    i12: 17
-    i13: 231
-    i14: 179
-    i15: 20
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

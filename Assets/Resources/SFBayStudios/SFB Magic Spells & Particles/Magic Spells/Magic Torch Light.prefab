@@ -27,8 +27,6 @@ GameObject:
   - component: {fileID: 400002}
   - component: {fileID: 19800002}
   - component: {fileID: 19900002}
-  - component: {fileID: 114574355616752046}
-  - component: {fileID: 114553126937311498}
   m_Layer: 0
   m_Name: Magic Torch Light
   m_TagString: Untagged
@@ -9379,56 +9377,3 @@ MonoBehaviour:
   flickerCount: 0.3
   intensityMin: 0.93
   intensityMax: 1.07
---- !u!114 &114553126937311498
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 2
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 0.5
---- !u!114 &114574355616752046
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 165
-    i1: 140
-    i2: 6
-    i3: 121
-    i4: 209
-    i5: 235
-    i6: 164
-    i7: 144
-    i8: 219
-    i9: 74
-    i10: 4
-    i11: 72
-    i12: 15
-    i13: 218
-    i14: 144
-    i15: 38
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1

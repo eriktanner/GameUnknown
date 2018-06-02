@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114056982292820390}
   m_Layer: 0
   m_Name: PComponent Thin Hypnotic Circle Flat
   m_TagString: Untagged
@@ -4725,35 +4724,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114056982292820390
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 235
-    i1: 202
-    i2: 123
-    i3: 166
-    i4: 117
-    i5: 90
-    i6: 132
-    i7: 249
-    i8: 251
-    i9: 80
-    i10: 237
-    i11: 195
-    i12: 239
-    i13: 230
-    i14: 14
-    i15: 246
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

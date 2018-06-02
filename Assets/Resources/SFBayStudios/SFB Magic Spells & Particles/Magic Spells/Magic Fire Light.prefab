@@ -10,8 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114569356710598358}
-  - component: {fileID: 114150890865096982}
   m_Layer: 0
   m_Name: Magic Fire Light
   m_TagString: Untagged
@@ -4682,27 +4680,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114150890865096982
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 2
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 0.5
 --- !u!114 &114241376699356540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4719,35 +4696,3 @@ MonoBehaviour:
   flickerCount: 0.3
   intensityMin: 0.97
   intensityMax: 1.03
---- !u!114 &114569356710598358
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 223
-    i1: 90
-    i2: 109
-    i3: 29
-    i4: 145
-    i5: 100
-    i6: 244
-    i7: 219
-    i8: 138
-    i9: 46
-    i10: 110
-    i11: 85
-    i12: 182
-    i13: 44
-    i14: 145
-    i15: 175
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1

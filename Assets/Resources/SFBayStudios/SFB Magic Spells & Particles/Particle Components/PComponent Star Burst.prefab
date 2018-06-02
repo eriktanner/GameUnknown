@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114357044773982856}
   m_Layer: 0
   m_Name: PComponent Star Burst
   m_TagString: Untagged
@@ -4476,35 +4475,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114357044773982856
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 96
-    i1: 187
-    i2: 246
-    i3: 36
-    i4: 217
-    i5: 253
-    i6: 68
-    i7: 85
-    i8: 26
-    i9: 206
-    i10: 229
-    i11: 70
-    i12: 237
-    i13: 116
-    i14: 147
-    i15: 176
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

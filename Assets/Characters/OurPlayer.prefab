@@ -5478,7 +5478,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409e9d0d91dca754daca734a100f1160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellList: []
+  spellList:
+  - {fileID: 11400000, guid: 5d249b8dc57fe9e4dabc22c67ba94ef7, type: 2}
+  - {fileID: 11400000, guid: cde667bc69812d94f8f638313f6801be, type: 2}
+  - {fileID: 11400000, guid: 930ea9c98a76bbb4e82f0bf8d977f628, type: 2}
   castSpawn: {fileID: 4431486795845504}
   spellDestruction: {fileID: 114462466476174060}
 --- !u!114 &114462466476174060

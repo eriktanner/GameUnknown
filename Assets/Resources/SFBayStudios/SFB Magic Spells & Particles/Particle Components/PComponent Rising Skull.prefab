@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114276982192807846}
   m_Layer: 0
   m_Name: PComponent Rising Skull
   m_TagString: Untagged
@@ -4614,35 +4613,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114276982192807846
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 238
-    i1: 32
-    i2: 80
-    i3: 178
-    i4: 147
-    i5: 74
-    i6: 164
-    i7: 157
-    i8: 249
-    i9: 92
-    i10: 120
-    i11: 139
-    i12: 223
-    i13: 227
-    i14: 209
-    i15: 18
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

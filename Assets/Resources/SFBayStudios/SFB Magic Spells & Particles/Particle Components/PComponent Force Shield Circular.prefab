@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114343756111216414}
   m_Layer: 0
   m_Name: PComponent Force Shield Circular
   m_TagString: Untagged
@@ -4632,35 +4631,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114343756111216414
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 69
-    i1: 117
-    i2: 86
-    i3: 255
-    i4: 105
-    i5: 219
-    i6: 116
-    i7: 122
-    i8: 24
-    i9: 44
-    i10: 39
-    i11: 63
-    i12: 110
-    i13: 172
-    i14: 252
-    i15: 54
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

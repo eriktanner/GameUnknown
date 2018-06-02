@@ -27,8 +27,6 @@ GameObject:
   - component: {fileID: 400002}
   - component: {fileID: 19800002}
   - component: {fileID: 19900002}
-  - component: {fileID: 114738362011796246}
-  - component: {fileID: 114617690859657814}
   m_Layer: 0
   m_Name: Magic Slow Down
   m_TagString: Untagged
@@ -9051,59 +9049,6 @@ MonoBehaviour:
   fadeLimit: 2
   fadePassed: 0
   fadeSpeed: 1
---- !u!114 &114617690859657814
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 2
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 0.5
---- !u!114 &114738362011796246
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 23
-    i1: 133
-    i2: 57
-    i3: 164
-    i4: 168
-    i5: 121
-    i6: 100
-    i7: 82
-    i8: 185
-    i9: 155
-    i10: 73
-    i11: 139
-    i12: 10
-    i13: 156
-    i14: 51
-    i15: 27
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &114927610703729170
 MonoBehaviour:
   m_ObjectHideFlags: 1

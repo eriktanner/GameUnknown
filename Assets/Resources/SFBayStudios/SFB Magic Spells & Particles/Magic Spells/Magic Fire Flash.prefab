@@ -44,8 +44,6 @@ GameObject:
   - component: {fileID: 400004}
   - component: {fileID: 19800004}
   - component: {fileID: 19900004}
-  - component: {fileID: 114776247369032440}
-  - component: {fileID: 114493247327955598}
   m_Layer: 0
   m_Name: Magic Fire Flash
   m_TagString: Untagged
@@ -13898,27 +13896,6 @@ MonoBehaviour:
   done: 0
   maxTime: 0
   timePassed: 0
---- !u!114 &114493247327955598
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 2
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 0.5
 --- !u!114 &114518537925408744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13933,35 +13910,3 @@ MonoBehaviour:
   fadeLimit: 0.3
   fadePassed: 0
   fadeSpeed: 10
---- !u!114 &114776247369032440
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 8
-    i1: 228
-    i2: 193
-    i3: 199
-    i4: 170
-    i5: 105
-    i6: 4
-    i7: 206
-    i8: 168
-    i9: 118
-    i10: 255
-    i11: 29
-    i12: 247
-    i13: 87
-    i14: 198
-    i15: 143
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1

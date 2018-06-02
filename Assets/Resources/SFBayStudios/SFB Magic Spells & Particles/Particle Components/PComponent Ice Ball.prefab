@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114868722151792264}
   m_Layer: 0
   m_Name: PComponent Ice Ball
   m_TagString: Untagged
@@ -4614,35 +4613,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114868722151792264
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 32
-    i1: 173
-    i2: 162
-    i3: 149
-    i4: 129
-    i5: 49
-    i6: 52
-    i7: 81
-    i8: 233
-    i9: 164
-    i10: 124
-    i11: 95
-    i12: 189
-    i13: 180
-    i14: 53
-    i15: 165
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

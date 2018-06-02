@@ -150,8 +150,6 @@ GameObject:
   - component: {fileID: 400016}
   - component: {fileID: 19800008}
   - component: {fileID: 19900008}
-  - component: {fileID: 114218762617981008}
-  - component: {fileID: 114906176366735542}
   m_Layer: 0
   m_Name: Magic Weakness
   m_TagString: Untagged
@@ -23615,38 +23613,6 @@ MonoBehaviour:
   fadeLimit: 4
   fadePassed: 0
   fadeSpeed: 0.3
---- !u!114 &114218762617981008
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 159
-    i1: 97
-    i2: 160
-    i3: 86
-    i4: 166
-    i5: 87
-    i6: 132
-    i7: 38
-    i8: 234
-    i9: 67
-    i10: 66
-    i11: 98
-    i12: 165
-    i13: 190
-    i14: 157
-    i15: 84
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &114547751735720452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -23729,27 +23695,6 @@ MonoBehaviour:
   done: 0
   maxTime: 0
   timePassed: 0
---- !u!114 &114906176366735542
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 2
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 0.5
 --- !u!114 &114976670770719508
 MonoBehaviour:
   m_ObjectHideFlags: 1

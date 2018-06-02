@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  - component: {fileID: 114066688624209314}
   m_Layer: 0
   m_Name: PComponent Spiked Star
   m_TagString: Untagged
@@ -4632,35 +4631,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
---- !u!114 &114066688624209314
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 51
-    i1: 157
-    i2: 25
-    i3: 85
-    i4: 69
-    i5: 92
-    i6: 244
-    i7: 239
-    i8: 43
-    i9: 246
-    i10: 189
-    i11: 43
-    i12: 255
-    i13: 159
-    i14: 107
-    i15: 204
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
