@@ -58,4 +58,6 @@ public class OurNetworkManager : NetworkManager {
         base.OnStartHost();
         cameraManager.SetSceneCamActive(true);
     }
+
+
 }

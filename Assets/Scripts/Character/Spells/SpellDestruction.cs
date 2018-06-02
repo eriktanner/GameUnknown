@@ -29,9 +29,9 @@ public class SpellDestruction : NetworkBehaviour
     {
         string spellName = spellObject.name;
 
-        if (spellName.Equals("Fireball"))
+        if (spellName.StartsWith("Fireball"))
             destroyFireball(spellObject);
-        if (spellName.Equals("Pain"))
+        if (spellName.StartsWith("Pain"))
             destroyPain(spellObject);
         else
             defaultDestroy(spellObject);
@@ -41,9 +41,9 @@ public class SpellDestruction : NetworkBehaviour
     {
         string spellName = spellObject.name;
 
-        if (spellName.Equals("Fireball"))
+        if (spellName.StartsWith("Fireball"))
             StartCoroutine(waitAndDestroy(spellObject, waitTime, destroyFireball));
-        if (spellName.Equals("Pain"))
+        if (spellName.StartsWith("Pain"))
             StartCoroutine(waitAndDestroy(spellObject, waitTime, destroyPain));
         else
             StartCoroutine(waitAndDestroy(spellObject, waitTime, defaultDestroy));
@@ -60,8 +60,7 @@ public class SpellDestruction : NetworkBehaviour
     /*Destroy Immediately*/
     void defaultDestroy(GameObject spellObject)
     {
-        if (spellObject != null)
-            CmdDestroySpellOrParticle(spellObject);
+        Destroy(spellObject);
     }
 
     /*We want to display collision of pain at end point no matter what, so that its range is known to player*/
@@ -71,8 +70,9 @@ public class SpellDestruction : NetworkBehaviour
             return;
 
         Spell spell = spellManager.getSpellFromName(spellObject.name);
-        CmdSpawnAndDestroyParticles(spell.name, spellObject.transform.position, 1.5f);
-        CmdDestroySpellOrParticle(spellObject);
+        spawnAndDestroyParticles(spell.name, spellObject.transform.position, 1.5f);
+
+        defaultDestroy(spellObject);
     }
 
     /*We want the embers and smoke to remain after destruction*/
@@ -90,8 +90,16 @@ public class SpellDestruction : NetworkBehaviour
 
     }
 
+    void spawnAndDestroyParticles(string spellName, Vector3 position, float waitTime)
+    {
+        Spell spell = spellManager.getSpellFromName(spellName);
 
+        GameObject collisionParticles = Instantiate(spell.collisionParticle, position, Quaternion.identity);
+        Destroy(collisionParticles, waitTime);
 
+    }
+    
+    
 
     [Command] /*Orders server to display collision particles and handle their destruction*/
     void CmdSpawnAndDestroyParticles(string spellName, Vector3 position, float waitTime)
@@ -102,7 +110,6 @@ public class SpellDestruction : NetworkBehaviour
         NetworkServer.Spawn(collisionParticles);
         waitAndDestroy(collisionParticles, waitTime, defaultDestroy);
     }
-
 
     [Command] /*Tell Server to destroy a game object (use for spells and particles)*/
     void CmdDestroySpellOrParticle(GameObject spellObject)

@@ -14,14 +14,15 @@ public class SpellCollision : NetworkBehaviour
     SpellDestruction spellDestruction;
     string shotBy;
 
+    GameObject localPlayer;
 
 
     void Start()
     {
         spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
         spell = spellManager.getSpellFromName(gameObject.name);
+        localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
     }
-
 
 
     /*Creates new SpellCollision Component, then attaches it to the passed in GameObject*/
@@ -35,49 +36,30 @@ public class SpellCollision : NetworkBehaviour
     /*Plays destroy sequence of a spell OnCollision*/
     void OnCollisionEnter(Collision collision)
     {
-        if (!isServer) //Only allow server to handle collision
+        if (localPlayer == null || !localPlayer.name.Equals(shotBy)) //Only allow person who shot to check collision
             return;
-
-        //Debug.Log("Collision With: " + collision.gameObject.name + ", Tag: " + collision.gameObject.tag);
+        
         GameObject collisionGameObject = collision.gameObject;
 
         if (!collisionGameObject.name.Equals(shotBy))
         {
-            
+
+            CallThruLocalPlayer localPlayerCalls = localPlayer.gameObject.GetComponent<CallThruLocalPlayer>();
             if (collisionGameObject.tag == "Player")
             {
-                CmdCollisionDamagePlayer(collisionGameObject.name);
+                localPlayerCalls.CmdCollisionDamagePlayer(collisionGameObject.name);
             }
-            CmdCollisionDestroySpell(collision.contacts[0].point); //Must be called last b/c of destrction of gameObject
-            
+            localPlayerCalls.CmdCallRpcDestroySpellOnCollision(gameObject.name, collision.contacts[0].point);
         }
 
     }
 
-    /*Emitting graphic particles and destroy will occur locally(does not need to be handled by server)*/
-    //IMPORTANT - To come back to, we would like to run the least amount over the server, but do we need have the graphics server authenticated?
-    void emitCollisionGraphics()
-    {
 
-    }
+    
 
 
 
-
-    [Command]
-    void CmdCollisionDamagePlayer(string playerName)
-    {
-            /*
-            EnemyHealthBar enemyHealthBar = collision.gameObject.GetComponent<EnemyHealthBar>();
-            if (enemyHealthBar)
-            {
-                enemyHealthBar.takeDamage(spellThatHit.damage);
-                enemyHealthBar.regenerateHealth();
-            }*/
-
-        //Debug.Log("Server Notified We Hit: " + playerName);
-
-    }
+    
 
 
 

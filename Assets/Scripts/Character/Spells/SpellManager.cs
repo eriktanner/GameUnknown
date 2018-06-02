@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 public class SpellManager : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class SpellManager : MonoBehaviour
 
     public Spell getSpellFromName(string spellName)
     {
-        return (Spell)Resources.Load("Spells/" + spellName, typeof(Spell)); //We are going to need to make a dictionary for this for performance
+        spellName = Regex.Replace(spellName, @"[0-9]", string.Empty);
+        return (Spell) Resources.Load("Spells/" + spellName, typeof(Spell)); //We are going to need to make a dictionary for this for performance
     }
 
 }

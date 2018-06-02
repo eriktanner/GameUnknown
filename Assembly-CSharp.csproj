@@ -68,12 +68,14 @@
      <Compile Include="Assets\Scripts\Character\Animations\SetAnimator.cs" />
      <Compile Include="Assets\Scripts\Character\Camera\PlayerCameraController.cs" />
      <Compile Include="Assets\Scripts\Character\Movement\CharacterMovementController.cs" />
+     <Compile Include="Assets\Scripts\Character\Network\CallThruLocalPlayer.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\CastSpell.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\Spell.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellCollision.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellDestruction.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellManager.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellNetworkInfo.cs" />
+     <Compile Include="Assets\Scripts\Game\OurGameManager.cs" />
      <Compile Include="Assets\Scripts\Network\NetworkPlayerSetup.cs" />
      <Compile Include="Assets\Scripts\Network\OurNetworkManager.cs" />
      <Compile Include="Assets\Scripts\UI\CastBar.cs" />

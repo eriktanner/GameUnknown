@@ -145,7 +145,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 a1ce0c3141be3ae70808d64035a67a88 Assembly-CSharp.dll:.ThirdPersonCamera
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.NetworkSpellCollision
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpellDestruction
 61b0acb41bbca6b5a9d4fd6ab6200251 Assembly-CSharp.dll:.CameraManager
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 f02726adeff0a3ec5905565234b372da UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
@@ -180,4 +180,5 @@ a6333fe17f3ba5399bffd336348da6c8 Assembly-CSharp.dll:.FaceUpdate
 3bd51ce799ce5be0ab7bda1988ae6eee Assembly-CSharp.dll:.PlayerCameraController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SceneLoader
 fd2f487588649455d2388ca7858457aa Assembly-CSharp.dll:.Spell
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpellDestruction
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.OurGameManager
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CallThruLocalPlayer

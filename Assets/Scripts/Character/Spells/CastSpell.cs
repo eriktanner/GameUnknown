@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 
 [RequireComponent((typeof(SpellDestruction)))]
+[RequireComponent((typeof(CallThruLocalPlayer)))]
 public class CastSpell : NetworkBehaviour
 {
     public List<Spell> spellList = new List<Spell>(3);
@@ -108,9 +109,33 @@ public class CastSpell : NetworkBehaviour
 
         Quaternion rotationToTarget = Quaternion.LookRotation(firePositionToAim);
 
-        CmdFireSpell(spell.name, rotationToTarget);
-        
+
+        //Spell spell = spellManager.getSpellFromName(spellName);
+        //GameObject spellObject = createSpellInWorld(spell, castSpawn.position, rotationToTarget);
+        //spellObject.name = OurGameManager.AddProjectileNumberToSpell(spell.name);
+        //spellDestruction.destroySpellOnServer(spellObject, spell.maxRange / spell.projectileSpeed);
+
+        CmdCallRpcFireSpell(spell.name, rotationToTarget);
+
         spellLock = false;
+    }
+
+    [ClientRpc]
+    void RpcFireSpell(string spellName, Quaternion rotationToTarget)
+    {
+        Spell spell = spellManager.getSpellFromName(spellName);
+        GameObject spellObject = createSpellInWorld(spell, castSpawn.position, rotationToTarget);
+        spellObject.name = OurGameManager.AddProjectileNumberToSpell(spell.name);
+        OurGameManager.IncrementProjectileCount();
+        spellDestruction.destroySpellOnServer(spellObject, spell.maxRange / spell.projectileSpeed);
+    }
+    
+
+
+    [Command]
+    void CmdCallRpcFireSpell(string spellName, Quaternion rotationToTarget)
+    {
+        RpcFireSpell(spellName, rotationToTarget);
     }
 
 
@@ -122,6 +147,14 @@ public class CastSpell : NetworkBehaviour
         spellDestruction.destroySpellOnServer(spellObject, spell.maxRange / spell.projectileSpeed);
         NetworkServer.Spawn(spellObject);
     }
+
+
+
+    
+
+
+
+
 
 
     void CancelCast()
