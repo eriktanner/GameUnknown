@@ -139,7 +139,7 @@ public class CastSpell : NetworkBehaviour
         GameObject spellObject = createSpellInWorld(spell, castSpawn.position, rotationToTarget);
         spellObject.name = OurGameManager.AddProjectileNumberToSpell(spell.name);
         OurGameManager.IncrementProjectileCount();
-        spellDestruction.destroySpellOnServer(spellObject, spell.maxRange / spell.projectileSpeed);
+        spellDestruction.destroySpell(spellObject, spell.maxRange / spell.projectileSpeed);
     }
     
 

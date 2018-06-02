@@ -28,7 +28,7 @@ void Start()
         spell = spellManager.getSpellFromName(gameObject.name);
         localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
 
-        distanceOfSphereCast = spell.projectileSpeed * .02f;
+        distanceOfSphereCast = spell.projectileSpeed * .1f;
     }
 
 
@@ -59,6 +59,7 @@ void Start()
 
         if (Physics.SphereCast(origin, spellRadius, direction, out Hit, distanceOfSphereCast))
         {
+            Debug.Log("SphereCastHit");
             OnSpellHit(Hit);
         }
 

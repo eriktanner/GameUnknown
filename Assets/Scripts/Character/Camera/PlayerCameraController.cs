@@ -11,7 +11,7 @@ public class PlayerCameraController : MonoBehaviour {
     public float maxDistance;
 
     float distance;
-    float currentX = 0.0f, currentY = 0.0f;
+    float currentY = 0.0f;
     float sensitivity; //Get From Settings
     Vector3 offset;
     
@@ -28,7 +28,6 @@ public class PlayerCameraController : MonoBehaviour {
     }
 
     void Update() {
-        currentX += Input.GetAxis("Mouse X");
         currentY += Input.GetAxis("Mouse Y");
         currentY = Mathf.Clamp(currentY, MIN_CLAMP_ANGLE, MAX_CLAMP_ANGLE);
     }

@@ -4,17 +4,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System;
 
-/*Handling spell destruction was definitely complicated.
- Reasons why this was so complicated:
- 1. Destroy sequences vary by spell
- 2. Needed wait times to destroy - therefore cannot simply call NetworkDestroy(does not take wait time)
- 3. We need to destroy by two ways - By Collision and By Time, needed to make them cofunctional and easy to perform
- How it works:
- 1. DestroyByTime - Call destroySpellOnServer and pass in wait time when spell is created and pass it in, 
- this will wait the time and handle the objects destruction
- 2. Collision - Detect collision and call destroySpellOnServer with no wait time, this will be instant
- IMPORTANT: Do not make a destroy sequence without checking if the spellObject == null
- (Wait Destroy may try to destroy object destroyed by collision)*/
+/*Handles spell destruction, must be attached to each player because we cannot
+ use coroutines statically*/
 public class SpellDestruction : NetworkBehaviour
 {
 
@@ -25,7 +16,7 @@ public class SpellDestruction : NetworkBehaviour
         spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
     }
 
-    public void destroySpellOnServer(GameObject spellObject)
+    public void destroySpell(GameObject spellObject)
     {
         string spellName = spellObject.name;
 
@@ -37,7 +28,7 @@ public class SpellDestruction : NetworkBehaviour
             defaultDestroy(spellObject);
     }
 
-    public void destroySpellOnServer(GameObject spellObject, float waitTime)
+    public void destroySpell(GameObject spellObject, float waitTime)
     {
         string spellName = spellObject.name;
 
