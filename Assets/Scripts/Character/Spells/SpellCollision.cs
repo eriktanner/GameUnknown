@@ -4,17 +4,16 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-/*Detects collision of spells, call initSpellCollision to init needed info*/
+/*Detects collision of spells, for overview of how spells and collisions are being 
+ handled look at Spell.cs documentation*/
 public class SpellCollision : NetworkBehaviour
 {
 
     Spell spell;
     SpellManager spellManager;
-
     SpellDestruction spellDestruction;
-    string shotBy;
-
     GameObject localPlayer;
+    string shotBy;
 
 
     void Start()
@@ -54,32 +53,5 @@ public class SpellCollision : NetworkBehaviour
 
     }
 
-
-    
-
-
-
-    
-
-
-
-    [Command]
-    void CmdCollisionDestroySpell(Vector3 position)
-    {
-
-        //Debug.Log("CommandDestroySpell");
-        NetworkServer.Destroy(gameObject);
-
-
-
-        if (spell.collisionParticle)
-        {
-            GameObject collisionParticles = Instantiate(spell.collisionParticle, position, Quaternion.identity);
-            Destroy(collisionParticles, 1.5f); //Depending on what we hit were going to want to adjust destory time
-            NetworkServer.Spawn(collisionParticles);
-
-            collisionParticles.transform.parent = GameObject.Find("Managers/SpellManager").transform; //TO DELETE - currently just avoid clutter
-        }
-    }
 
 }

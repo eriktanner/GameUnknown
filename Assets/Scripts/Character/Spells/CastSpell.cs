@@ -78,6 +78,16 @@ public class CastSpell : NetworkBehaviour
         castRoutine = StartCoroutine(CastAndFire(spell));
     }
 
+    void CancelCast()
+    {
+        if (cancelCast && castRoutine != null)
+        {
+            spellLock = false;
+            StopCoroutine(castRoutine);
+        }
+
+    }
+
     /*This waits the cast time and then fires the spell, we may want to get rid of the pin point accuracy*/
     private IEnumerator CastAndFire(Spell spell)
     {
@@ -108,16 +118,15 @@ public class CastSpell : NetworkBehaviour
         firePositionToAim = camFoundHit ? camHit.point - castSpawn.position : camRay.direction + offset;
 
         Quaternion rotationToTarget = Quaternion.LookRotation(firePositionToAim);
-
-
-        //Spell spell = spellManager.getSpellFromName(spellName);
-        //GameObject spellObject = createSpellInWorld(spell, castSpawn.position, rotationToTarget);
-        //spellObject.name = OurGameManager.AddProjectileNumberToSpell(spell.name);
-        //spellDestruction.destroySpellOnServer(spellObject, spell.maxRange / spell.projectileSpeed);
-
         CmdCallRpcFireSpell(spell.name, rotationToTarget);
 
         spellLock = false;
+    }
+
+    [Command]
+    void CmdCallRpcFireSpell(string spellName, Quaternion rotationToTarget)
+    {
+        RpcFireSpell(spellName, rotationToTarget);
     }
 
     [ClientRpc]
@@ -132,46 +141,11 @@ public class CastSpell : NetworkBehaviour
     
 
 
-    [Command]
-    void CmdCallRpcFireSpell(string spellName, Quaternion rotationToTarget)
-    {
-        RpcFireSpell(spellName, rotationToTarget);
-    }
-
-
-    [Command]
-    void CmdFireSpell(string spellName, Quaternion rotationToTarget)
-    {
-        Spell spell = spellManager.getSpellFromName(spellName);
-        GameObject spellObject = createSpellInWorld(spell, castSpawn.position, rotationToTarget);
-        spellDestruction.destroySpellOnServer(spellObject, spell.maxRange / spell.projectileSpeed);
-        NetworkServer.Spawn(spellObject);
-    }
-
-
-
-    
 
 
 
 
-
-
-    void CancelCast()
-    {
-        if (cancelCast && castRoutine != null)
-        {
-            spellLock = false;
-            StopCoroutine(castRoutine);
-        }
-
-    }
-
-
-
-
-
-    /*SpellList Functionality*/
+    /*General Functionality*/
 
     /*Creates the spell in the world and fires it.
      Adds RigidBody, SphereCollider, and SpellCollision to spell*/
