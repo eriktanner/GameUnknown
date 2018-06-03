@@ -9,8 +9,12 @@ public class SpellEffects : NetworkBehaviour {
     [Command]
     public void CmdFearPlayer(GameObject playerToFear)
     {
+
+
+
         Debug.Log("Calling Fear on: " + playerToFear.gameObject.name);
     }
+
 
 
 }

@@ -69,10 +69,13 @@
      <Compile Include="Assets\Scripts\Character\Camera\PlayerCameraController.cs" />
      <Compile Include="Assets\Scripts\Character\Movement\CharacterMovementController.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\CastSpell.cs" />
+     <Compile Include="Assets\Scripts\Character\Spells\PreFireSpellChecks\ValidSpellDistance.cs" />
+     <Compile Include="Assets\Scripts\Character\Spells\PreFireSpellChecks\ValidSpellLayer.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\Spell.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellCollision.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellDestruction.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellEffects.cs" />
+     <Compile Include="Assets\Scripts\Character\Spells\SpellEffects\FearSpellEffect.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellMovement.cs" />
      <Compile Include="Assets\Scripts\Managers\CameraManager.cs" />
      <Compile Include="Assets\Scripts\Managers\OurGameManager.cs" />
@@ -82,6 +85,7 @@
      <Compile Include="Assets\Scripts\UI\CastBar.cs" />
      <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
      <Compile Include="Assets\Scripts\UI\ManaBar.cs" />
+     <Compile Include="Assets\Scripts\Utility\InGameMessageDisplay.cs" />
      <Compile Include="Assets\UnityChan\Actions\FireSpells.cs" />
      <Compile Include="Assets\UnityChan\Scripts\CameraController.cs" />
      <Compile Include="Assets\UnityChan\Scripts\FaceUpdate.cs" />

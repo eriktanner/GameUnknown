@@ -95,8 +95,7 @@ public class CastSpell : NetworkBehaviour
         spellLock = true;
         castBar.CastSpellUI(spell);
         yield return new WaitForSeconds(spell.castTime);
-        manaBar.burnMana(spell.manaCost);
-        manaBar.regenerateMana();
+        
 
 
         Ray camRay = cam.ViewportPointToRay(Vector3.one * 0.5f);
@@ -111,15 +110,24 @@ public class CastSpell : NetworkBehaviour
             camFoundHit = true;
         }
 
-        Vector3 offset = Vector3.zero;
-        if (spell.maxRange <= 30)
-            offset = new Vector3(-.04f, .06f, 0);
-        else offset = new Vector3(-.03f, .05f, 0);
+        bool isWithinRangeOfSpell = ValidSpellDistance.SpellIsInRange(spell.name, transform.position, camHit.point, camFoundHit);
+        bool didHitValidLayer = ValidSpellLayer.SpellHitValidLayerBySpell(spell.name, camHit);
+        
 
-        aimToFromFirePosition = camFoundHit ? camHit.point - castSpawn.position : camRay.direction + offset;
+        if (isWithinRangeOfSpell && didHitValidLayer)
+        {
+            Vector3 offset = Vector3.zero;
+            if (spell.maxRange <= 30)
+                offset = new Vector3(-.04f, .06f, 0);
+            else offset = new Vector3(-.03f, .05f, 0);
 
-        Quaternion rotationToTarget = Quaternion.LookRotation(aimToFromFirePosition);
-        CmdCallRpcFireSpell(spell.name, rotationToTarget);
+            aimToFromFirePosition = camFoundHit ? camHit.point - castSpawn.position : camRay.direction + offset;
+            Quaternion rotationToTarget = Quaternion.LookRotation(aimToFromFirePosition);
+
+            CmdCallRpcFireSpell(spell.name, rotationToTarget);
+            manaBar.burnMana(spell.manaCost);
+            manaBar.regenerateMana();
+        }
 
         spellLock = false;
     }

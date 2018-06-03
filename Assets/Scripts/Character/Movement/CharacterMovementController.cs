@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 
 [RequireComponent((typeof(Rigidbody)))]
@@ -24,6 +25,10 @@ public class CharacterMovementController : MonoBehaviour {
     float sensitivity = 1.0f; //Get From Settings
     bool mouseHold, mouseDown, rightMouseDown, jump, dash;
 
+    bool playerIsInControl = true;
+
+    //Func<float, float> controlInput;
+
 
 
     void Start()
@@ -36,14 +41,22 @@ public class CharacterMovementController : MonoBehaviour {
 
     void GetInput()
     {
-        forwardInput = Input.GetAxis("Vertical");
-        leftRightInput = Input.GetAxis("Horizontal");
-        mouseDown = Input.GetButtonDown("Fire1");
-        mouseHold = Input.GetButton("Fire1");
-        rightMouseDown = Input.GetButtonDown("Fire2");
-        jump = Input.GetButtonDown("Jump");
-        dash = Input.GetButtonDown("Dash");
-        currentX += Input.GetAxis("Mouse X");
+        if (playerIsInControl)
+        {
+            forwardInput = Input.GetAxis("Vertical");
+            leftRightInput = Input.GetAxis("Horizontal");
+            mouseDown = Input.GetButtonDown("Fire1");
+            mouseHold = Input.GetButton("Fire1");
+            rightMouseDown = Input.GetButtonDown("Fire2");
+            jump = Input.GetButtonDown("Jump");
+            dash = Input.GetButtonDown("Dash");
+            currentX += Input.GetAxis("Mouse X");
+        }
+        else
+        {
+
+        }
+
     }
 
 
@@ -53,6 +66,9 @@ public class CharacterMovementController : MonoBehaviour {
 
     void FixedUpdate()
     {
+        if (!playerIsInControl)
+            return;
+
         MoveForward();
         MoveLeftRight();
         Turn();
@@ -66,7 +82,7 @@ public class CharacterMovementController : MonoBehaviour {
     {
         float forwardInputToUse = isGrounded() ? forwardInput : lockedForwardInput;
         if (animator) animator.SetFloat("InputZ", forwardInputToUse);
-        
+
         if (Mathf.Abs(forwardInput) > inputDelay)
         {
             Vector3 transformForwardToUse = isGrounded() ? transform.forward : transformForwardOnLastLock;
@@ -99,7 +115,7 @@ public class CharacterMovementController : MonoBehaviour {
     {
         if (jump && isGrounded())
         {
-            rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0 , rigidBody.velocity.z);
+            rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0, rigidBody.velocity.z);
             rigidBody.AddForce(transform.up * jumpVelocity, ForceMode.Impulse);
             if (animator) animator.Play("Jump");
 
@@ -107,12 +123,12 @@ public class CharacterMovementController : MonoBehaviour {
             lockedLeftRightInput = leftRightInput;
             transformForwardOnLastLock = transform.forward;
             transformRightOnLastLock = transform.right;
-            
+
         }
     }
 
 
-    
+
     /*Tells us if player is currently on a hard surface - THIS NEEDS TO BE FIXED
      This messes up escpecially on the client I don't know why*/
     bool isGrounded()
@@ -120,17 +136,24 @@ public class CharacterMovementController : MonoBehaviour {
         float radius = charCollider.radius * .4f;
         Vector3 pos = transform.position + Vector3.up * (radius * 0.2f);
         LayerMask ignorePlayerMask = ~(1 << 8);
-        return Physics.CheckSphere(pos, radius, ignorePlayerMask);  
+        return Physics.CheckSphere(pos, radius, ignorePlayerMask);
     }
 
     float dashNextAllowedTimeStamp = -100;
-    void Dash ()
+    void Dash()
     {
         if (dash && dashNextAllowedTimeStamp <= Time.time)
         {
             dashNextAllowedTimeStamp = Time.time + dashCooldownTime;
-            rigidBody.velocity = new Vector3(rigidBody.velocity.x/2, rigidBody.velocity.y, rigidBody.velocity.z/2);
+            rigidBody.velocity = new Vector3(rigidBody.velocity.x / 2, rigidBody.velocity.y, rigidBody.velocity.z / 2);
             rigidBody.AddForce(transform.forward * dashVelocity, ForceMode.Impulse);
         }
     }
+
+    /*Takes away or grants control over movement to local player*/
+    public void playerHasControl(bool hasControl)
+    {
+
+    }
+
 }

@@ -83,14 +83,6 @@ void Start()
         {
             hasAlreadyHit = true;
 
-            if (!SpellHitValidLayerBySpell(Hit)) //Replace mana if invalid hit
-            {
-                //ManaBar manaBar = localPlayer.gameObject.GetComponent<ManaBar>();
-                //manaBar.AddMana(spell.manaCost);
-                //Debug.Log("Mana should have been added");
-                return;
-            }
-
             if (hitTransform.tag == "Player")
             {
                 HealthBar healthBar = localPlayer.gameObject.GetComponent<HealthBar>();
@@ -111,23 +103,7 @@ void Start()
 
 
 
-    /*Certain spells are going to require certain layers to be hit before particles are instatiated*/
-    bool SpellHitValidLayerBySpell(RaycastHit Hit)
-    {
-
-        string spellName = spell.name;
-
-        if (spellName.StartsWith("Fear"))
-            return validLayerFear(Hit);
-        else
-            return true;
-
-    }
-
-    bool validLayerFear(RaycastHit Hit)
-    {
-        return Hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground");
-    }
+    
 
 
 }

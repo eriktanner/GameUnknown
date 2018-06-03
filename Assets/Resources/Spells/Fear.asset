@@ -22,4 +22,4 @@ MonoBehaviour:
   maxRange: 25
   projectileRadius: 0.1
   projectileSpeed: 60
-  castTime: 1.4
+  castTime: 1.5
