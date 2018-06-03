@@ -9,7 +9,7 @@ public class SpellMovement : MonoBehaviour {
 
     void Start()
     {
-        velocity = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>().getSpellFromName(gameObject.name).projectileSpeed;
+        velocity = SpellManager.getSpellFromName(gameObject.name).projectileSpeed;
     }
 
 

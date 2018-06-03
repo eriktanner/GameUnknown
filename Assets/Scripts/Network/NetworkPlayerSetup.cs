@@ -27,6 +27,7 @@ public class NetworkPlayerSetup : NetworkBehaviour {
     {
         string id = "Player " + GetComponent<NetworkIdentity>().netId;
         gameObject.name = id;
+        gameObject.transform.parent = GameObject.Find("Managers/GameManager").transform; ;
 
     }
 

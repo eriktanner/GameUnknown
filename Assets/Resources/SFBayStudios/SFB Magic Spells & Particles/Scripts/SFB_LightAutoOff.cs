@@ -8,9 +8,23 @@ public class SFB_LightAutoOff : MonoBehaviour {
 	public float fadePassed = 0.0f;
 	public float fadeSpeed = 1.0f;
 
-	// Update is called once per frame
-	void Update () {
-		fadePassed += Time.deltaTime;
+    public float startDelay = 0.0f;
+    float myTimePassed = 0.0f;
+    float initialTime;
+
+    void Start()
+    {
+        initialTime = Time.time;
+    }
+
+    // Update is called once per frame
+    void Update () {
+
+        myTimePassed += Time.time - initialTime;
+        if (myTimePassed < startDelay)
+            return;
+
+        fadePassed += Time.deltaTime;
 		if (fadePassed >= fadeLimit) {
 			FadeOut ();
 		}

@@ -16,7 +16,7 @@ public class ManaBar : MonoBehaviour {
 
     void Start()
     {
-        manaBarSlider = GameObject.Find("Canvas/ManaBar").GetComponent<Slider>();
+        //manaBarSlider = GameObject.Find("Canvas/ManaBar").GetComponent<Slider>();
         manaBarSlider.maxValue = totalMana;
         manaBarSlider.value = totalMana;
         currentMana = totalMana;
@@ -25,6 +25,12 @@ public class ManaBar : MonoBehaviour {
     public void burnMana(float manaCost)
     {
         currentMana -= manaCost;
+        manaBarSlider.value = currentMana;
+    }
+
+    public void AddMana(float mana)
+    {
+        currentMana += mana;
         manaBarSlider.value = currentMana;
     }
 

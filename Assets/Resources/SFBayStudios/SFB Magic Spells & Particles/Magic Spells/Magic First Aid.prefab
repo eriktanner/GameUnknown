@@ -9398,6 +9398,7 @@ MonoBehaviour:
   done: 0
   maxTime: 0
   timePassed: 0
+  startDelay: 4
 --- !u!114 &114359960165502766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9412,3 +9413,4 @@ MonoBehaviour:
   fadeLimit: 3.5
   fadePassed: 0
   fadeSpeed: 1
+  startDelay: 4

@@ -25,10 +25,10 @@ public class SpellCollision : MonoBehaviour
 void Start()
     {
         spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
-        spell = spellManager.getSpellFromName(gameObject.name);
+        spell = SpellManager.getSpellFromName(gameObject.name);
         localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
 
-        distanceOfSphereCast = spell.projectileSpeed * .1f;
+        distanceOfSphereCast = spell.projectileSpeed * .05f;
     }
 
 
@@ -59,31 +59,74 @@ void Start()
 
         if (Physics.SphereCast(origin, spellRadius, direction, out Hit, distanceOfSphereCast))
         {
-            Debug.Log("SphereCastHit");
             OnSpellHit(Hit);
         }
 
     }
 
+
+    bool hasAlreadyHit = false;
     /*Plays destroy sequence of a spell collision*/
     void OnSpellHit(RaycastHit Hit)
     {
+        if (hasAlreadyHit)
+            return;
+
         if (localPlayer == null || !localPlayer.name.Equals(shotBy)) //Only allow person who shot to check collision
             return;
-        
+
+
+
         Transform hitTransform = Hit.transform;
 
         if (!hitTransform.gameObject.name.Equals(shotBy))
         {
+            hasAlreadyHit = true;
 
-            CallThruLocalPlayer localPlayerCalls = localPlayer.gameObject.GetComponent<CallThruLocalPlayer>();
+            if (!SpellHitValidLayerBySpell(Hit)) //Replace mana if invalid hit
+            {
+                //ManaBar manaBar = localPlayer.gameObject.GetComponent<ManaBar>();
+                //manaBar.AddMana(spell.manaCost);
+                //Debug.Log("Mana should have been added");
+                return;
+            }
+
             if (hitTransform.tag == "Player")
             {
-                localPlayerCalls.CmdCollisionDamagePlayer(hitTransform.name);
+                HealthBar healthBar = localPlayer.gameObject.GetComponent<HealthBar>();
+                healthBar.CmdCollisionDamagePlayer(spell.name, hitTransform.gameObject.name);
             }
-            localPlayerCalls.CmdCallRpcDestroySpellOnCollision(gameObject.name, Hit.point);
+            SpellDestruction spellDestruction = localPlayer.gameObject.GetComponent<SpellDestruction>();
+            spellDestruction.CmdCallRpcDestroySpellOnCollision(gameObject.name, Hit.point);
+
+            
         }
 
+    }
+
+
+
+    
+        
+
+
+
+    /*Certain spells are going to require certain layers to be hit before particles are instatiated*/
+    bool SpellHitValidLayerBySpell(RaycastHit Hit)
+    {
+
+        string spellName = spell.name;
+
+        if (spellName.StartsWith("Fear"))
+            return validLayerFear(Hit);
+        else
+            return true;
+
+    }
+
+    bool validLayerFear(RaycastHit Hit)
+    {
+        return Hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground");
     }
 
 

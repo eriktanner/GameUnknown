@@ -5,21 +5,22 @@ using UnityEngine.Networking;
 
 
 [RequireComponent((typeof(SpellDestruction)))]
-[RequireComponent((typeof(CallThruLocalPlayer)))]
+[RequireComponent((typeof(ManaBar)))]
 public class CastSpell : NetworkBehaviour
 {
     public Spell[] spellList = new Spell[3];
     public Transform castSpawn;
     public SpellDestruction spellDestruction;
+    public ManaBar manaBar;
 
     CastBar castBar;
-    ManaBar manaBar;
     SpellManager spellManager;
     Camera cam;
     Coroutine castRoutine;
 
     bool spellLock = false;
     bool cancelCast = false;
+    
 
 
     void Start()
@@ -27,15 +28,12 @@ public class CastSpell : NetworkBehaviour
         //cam = Camera.main; **We will want to cache this upon entering game
         if (GameObject.Find("Canvas/CastBar").GetComponent<CastBar>() != null)
             castBar = GameObject.Find("Canvas/CastBar").GetComponent<CastBar>();
-        if (GameObject.Find("Canvas/ManaBar").GetComponent<ManaBar>() != null)
-            manaBar = GameObject.Find("Canvas/ManaBar").GetComponent<ManaBar>();
         if (GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>() != null)
             spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
-
-
+        
 
         addToSpellList("Fireball", 0);
-        addToSpellList("Pain", 1);
+        addToSpellList("Fear", 1);
         addToSpellList("Arcane Missile", 2);
     }
 
@@ -104,11 +102,11 @@ public class CastSpell : NetworkBehaviour
         Ray camRay = cam.ViewportPointToRay(Vector3.one * 0.5f);
         RaycastHit camHit;
         bool camFoundHit = false;
-        Vector3 firePositionToAim;
+        Vector3 aimToFromFirePosition;
 
         LayerMask ignorePlayerMask = ~(1 << 8);
 
-        if (Physics.Raycast(camRay, out camHit, ignorePlayerMask))
+        if (Physics.Raycast(camRay, out camHit, 300, ignorePlayerMask))
         {
             camFoundHit = true;
         }
@@ -118,9 +116,9 @@ public class CastSpell : NetworkBehaviour
             offset = new Vector3(-.04f, .06f, 0);
         else offset = new Vector3(-.03f, .05f, 0);
 
-        firePositionToAim = camFoundHit ? camHit.point - castSpawn.position : camRay.direction + offset;
+        aimToFromFirePosition = camFoundHit ? camHit.point - castSpawn.position : camRay.direction + offset;
 
-        Quaternion rotationToTarget = Quaternion.LookRotation(firePositionToAim);
+        Quaternion rotationToTarget = Quaternion.LookRotation(aimToFromFirePosition);
         CmdCallRpcFireSpell(spell.name, rotationToTarget);
 
         spellLock = false;
@@ -135,7 +133,7 @@ public class CastSpell : NetworkBehaviour
     [ClientRpc]
     void RpcFireSpell(string spellName, Quaternion rotationToTarget)
     {
-        Spell spell = spellManager.getSpellFromName(spellName);
+        Spell spell = SpellManager.getSpellFromName(spellName);
         GameObject spellObject = createSpellInWorld(spell, castSpawn.position, rotationToTarget);
         spellObject.name = OurGameManager.AddProjectileNumberToSpell(spell.name);
         OurGameManager.IncrementProjectileCount();
@@ -183,7 +181,7 @@ public class CastSpell : NetworkBehaviour
 
         if (!spellAlreadyExists)
         {
-            spellList[index] = spellManager.getSpellFromName(spellName);
+            spellList[index] = SpellManager.getSpellFromName(spellName);
         }
     }
 

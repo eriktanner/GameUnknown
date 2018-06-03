@@ -1,31 +1,64 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour {
+public class HealthBar : NetworkBehaviour {
 
-    public Slider healthBarSlider = null;  //reference for slider
+    public Slider healthBarSlider;  //reference for slider
     public Text healthText;   //reference for text
 
-    float currentHealth, totalHealth = 100;
+    float totalHealth = 100;
+    [SyncVar(hook = "OnChangeHealth")]
+    float currentHealth;
     float HealthRegenerationWaitTime = 5.0f;
     float regenerationRate = 0.05f;
 
     private Coroutine regenerateHealthRoutine;
 
+    GameObject localPlayer;
+
     void Start()
     {
-        healthBarSlider = GameObject.Find("Canvas/HealthBar").GetComponent<Slider>();
+        if (isLocalPlayer)
+        {
+            healthBarSlider.gameObject.SetActive(false);
+            healthBarSlider = GameObject.Find("Canvas/HealthBar").GetComponent<Slider>();
+        }
+
         healthBarSlider.maxValue = totalHealth;
         healthBarSlider.value = totalHealth;
         currentHealth = totalHealth;
+        localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
+
+
+    }
+
+    void Update()
+    {
+        OrientAndSizeEnemyHealthBars();
+    }
+
+    void OrientAndSizeEnemyHealthBars()
+    {
+        if (!isLocalPlayer)
+        { //Looks away for some reason (makes enemy healthbars appear straight)
+            healthBarSlider.transform.LookAt(2 * transform.position - localPlayer.transform.position);
+
+            Vector3 enemyPosition = gameObject.transform.position;
+            Vector3 playerPosition = localPlayer.transform.position;
+
+            float scaleBar = .8f + (enemyPosition - playerPosition).magnitude/40;
+            scaleBar = Mathf.Clamp(scaleBar, 1, 2);
+
+            healthBarSlider.transform.localScale = new Vector3(scaleBar - .5f, scaleBar + .5f,scaleBar);
+
+        }
     }
 
     public void takeDamage(float damage)
     {
         currentHealth -= damage;
-        healthBarSlider.value = currentHealth;
     }
 
     /*Waits a predetermined set amount of time, then regenerates mana*/
@@ -61,4 +94,31 @@ public class HealthBar : MonoBehaviour {
     {
         totalHealth = newTotalHealth;
     }
+
+    void OnChangeHealth(float newHealth)
+    {
+        healthBarSlider.value = newHealth;
+    }
+
+    
+    [Command]
+    public void CmdCollisionDamagePlayer(string spellName, string playerName)
+    {
+        GameObject hitPlayer = OurGameManager.GetPlayerGameObject(playerName);
+        HealthBar hitPlayerHealthBar = hitPlayer.GetComponent<HealthBar>();
+        hitPlayerHealthBar.takeDamage(SpellManager.getSpellFromName(spellName).damage);
+        hitPlayerHealthBar.regenerateHealth();
+
+        /*
+        EnemyHealthBar enemyHealthBar = collision.gameObject.GetComponent<EnemyHealthBar>();
+        if (enemyHealthBar)
+        {
+            enemyHealthBar.takeDamage(spellThatHit.damage);
+            enemyHealthBar.regenerateHealth();
+        }*/
+
+        //Debug.Log("Server Notified We Hit: " + playerName);
+
+    }
+
 }
