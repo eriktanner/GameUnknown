@@ -100,14 +100,21 @@ public class CastSpell : NetworkBehaviour
 
         Ray camRay = cam.ViewportPointToRay(Vector3.one * 0.5f);
         RaycastHit camHit;
-        bool camFoundHit = false;
-        Vector3 aimToFromFirePosition;
+        bool camFoundHit;
 
         LayerMask ignorePlayerMask = ~(1 << 8);
 
-        if (Physics.Raycast(camRay, out camHit, 300, ignorePlayerMask))
+        Vector3 hitPoint;
+        float rangeToUse = spell.maxRange + 4;
+
+        if (Physics.Raycast(camRay, out camHit, rangeToUse, ignorePlayerMask))
         {
             camFoundHit = true;
+            hitPoint = camHit.point;
+        } else
+        {
+            camFoundHit = false;
+            hitPoint = cam.transform.position + cam.transform.forward * rangeToUse + new Vector3(0, .4f, 0);
         }
 
         bool didHitValidLayer = ValidSpellLayer.SpellHitValidLayerBySpell(spell.name, camHit);
@@ -117,12 +124,7 @@ public class CastSpell : NetworkBehaviour
 
         if (isWithinRangeOfSpell && didHitValidLayer)
         {
-            Vector3 offset = Vector3.zero;
-            if (spell.maxRange <= 30)
-                offset = new Vector3(-.04f, .06f, 0);
-            else offset = new Vector3(-.03f, .05f, 0);
-
-            aimToFromFirePosition = camFoundHit ? camHit.point - castSpawn.position : camRay.direction + offset;
+            Vector3 aimToFromFirePosition  = hitPoint - castSpawn.position;
             Quaternion rotationToTarget = Quaternion.LookRotation(aimToFromFirePosition);
 
             CmdCallRpcFireSpell(spell.name, rotationToTarget);

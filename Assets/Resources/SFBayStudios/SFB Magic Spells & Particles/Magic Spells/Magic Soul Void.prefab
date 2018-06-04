@@ -186,7 +186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100022
 GameObject:
   m_ObjectHideFlags: 1
@@ -37415,6 +37415,7 @@ MonoBehaviour:
   done: 0
   maxTime: 0
   timePassed: 0
+  startDelay: 0
 --- !u!114 &114398255426272096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -37433,6 +37434,7 @@ MonoBehaviour:
   done: 0
   maxTime: 0
   timePassed: 0
+  startDelay: 0
 --- !u!114 &114481099792927322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -37447,6 +37449,7 @@ MonoBehaviour:
   fadeLimit: 5
   fadePassed: 0
   fadeSpeed: 1
+  startDelay: 0
 --- !u!114 &114533799296600768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -37461,6 +37464,7 @@ MonoBehaviour:
   fadeLimit: 3.8
   fadePassed: 0
   fadeSpeed: 1
+  startDelay: 0
 --- !u!114 &114894811968530832
 MonoBehaviour:
   m_ObjectHideFlags: 1

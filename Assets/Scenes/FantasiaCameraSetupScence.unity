@@ -891,6 +891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellList:
   - {fileID: 11400000, guid: c2966d205f668ac4bb67e7b5bfc2508d, type: 2}
+  - {fileID: 11400000, guid: 2b6a5b4d4644dd441819ee34c6d1b4de, type: 2}
 --- !u!4 &310098901
 Transform:
   m_ObjectHideFlags: 0

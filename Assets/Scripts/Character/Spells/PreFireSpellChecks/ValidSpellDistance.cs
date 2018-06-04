@@ -36,7 +36,7 @@ public static class ValidSpellDistance {
 
     
 
-    /*Looks up to se if a spell requires a valid distance in order for it to be casted. We need this so
+    /*Looks up to see if a spell requires a valid distance in order for it to be casted. We need this so
      that we can assign that spell cast an arbirtatily large destroy time (so that it not a valid cast and
      destroyed by time before it gets to its hit point) (Destroy by time often does not produce same length 
      of spell travel)*/

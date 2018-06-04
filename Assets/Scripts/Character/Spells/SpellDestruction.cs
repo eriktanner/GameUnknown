@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 using System;
 
 /*Handles spell destruction, must be attached to each player because we cannot
- use coroutines statically*/
+ use coroutines statically and we need to command the server*/
 [RequireComponent((typeof(SpellEffects)))]
 public class SpellDestruction : NetworkBehaviour
 {
@@ -17,7 +17,13 @@ public class SpellDestruction : NetworkBehaviour
         spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
         
     }
- 
+
+
+
+
+    //*********************************** Lookups ***************************************/
+
+
     /*Destroys a casted spell by wait time*/
     public void destroySpell(GameObject spellObject, float waitTime)
     {
@@ -35,102 +41,85 @@ public class SpellDestruction : NetworkBehaviour
     }
 
 
-    /*We may want to handle the destruction of the particles differently from the casted spell */
-    public void destroyParticlesByCollision(GameObject particles, float waitTime)
+    /*We may want to handle the destruction of the particles differently from the casted spell*/
+    public void findParticleWaitTimeAndDestructionMethod(GameObject particles, float waitTime)
     {
         if (particles == null)
             return;
-        
+
         string spellName = particles.name;
 
         if (spellName.StartsWith("Magic Fear"))
-            StartCoroutine(waitAndCall(particles, 3.75f, fearExplode));
+            StartCoroutine(waitAndCall(particles, 3.75f, explodeFearParticles));
         else
             StartCoroutine(waitAndCall(particles, waitTime, defaultDestroy));
     }
 
-    /*Waits a set amount of time, then calls destroy method on the spell object passed in*/
-    IEnumerator waitAndCall(GameObject spellObject, float waitTime, Action<GameObject> destroySpellMethod)
+    /*Depending on the spell, each collision particles may have different destroy times*/
+    float GetParticleDestroyTimeBySpell(string spellName)
     {
-        yield return new WaitForSeconds(waitTime);
-        destroySpellMethod(spellObject);
+        Spell spell = SpellManager.getSpellFromName(spellName);
+
+        if (spellName.StartsWith("Fear"))
+            return 7.6f;
+        else
+            return 1.5f;
     }
 
-    /*Destroy Immediately*/
-    void defaultDestroy(GameObject spellObject)
+
+
+
+    //*********************************** Destruction ***************************************/
+
+    public void spawnAndDestroyParticles(string spellName, Vector3 position, float waitTime)
+    {
+        Spell spell = SpellManager.getSpellFromName(spellName);
+
+        GameObject collisionParticles = Instantiate(spell.collisionParticle, position, Quaternion.identity);
+        findParticleWaitTimeAndDestructionMethod(collisionParticles, waitTime);
+    }
+  
+    public void defaultDestroy(GameObject spellObject)
     {
         Destroy(spellObject);
     }
 
-    /*We want to display collision of pain at end point no matter what, so that its range is known to player*/
+    public void defaultDestroy(GameObject spellObject, float time)
+    {
+        Destroy(spellObject, time);
+    }
+
+
+
+
+
+    //*********************************** Spells ***************************************/
+    //Note: Always called, even if spell does not hit (give it "destroy" prefix)
+
+   
     void destroyPain(GameObject spellObject)
     {
-        if (spellObject == null)
-            return;
-
-        Spell spell = SpellManager.getSpellFromName(spellObject.name);
-        spawnAndDestroyParticles(spell.name, spellObject.transform.position, 1.5f);
-
-        defaultDestroy(spellObject);
+        DestroyPain destroyPain = new DestroyPain(gameObject, spellObject);
+        destroyPain.destroyPain();
     }
-
     
-
-    /*We want the embers and smoke to remain after destruction*/
     void destroyFireball(GameObject spellObject)
     {
-        if (spellObject == null)
-            return;
-
-        Spell spell = SpellManager.getSpellFromName(spellObject.name);
-        if (spell != null && spellObject != null)
-        {
-            //Fireball sequence
-            defaultDestroy(spellObject);
-        }
-
+        DestroyFireball destroyFireball = new DestroyFireball(gameObject, spellObject);
+        destroyFireball.destroyFireball();
     }
 
 
 
 
-    
+    //******************************** Particles ***************************************/
+    //Note: Particle destruction only gets called (automatically) from RPC funcion if spell hits
 
-    /*Cast a sphere for all players in range, draw a ray cast to them to see if
-     they are in line of sight, if so fear*/
-    void fearExplode(GameObject particles)
+    
+    void explodeFearParticles(GameObject particles)
     {
-        Vector3 origin = particles.gameObject.transform.position;
-
-        Collider[] hitColliders = Physics.OverlapSphere(origin, 4.0f);
-
-        
-        for (int i = 0; i < hitColliders.Length; i++)
-        {
-            
-            if (hitColliders[i].gameObject.tag == "Player")
-            {
-                Vector3 toPosition = hitColliders[i].gameObject.transform.position;
-                Vector3 direction = toPosition - origin;
-                float distance = (toPosition - direction).magnitude;
-
-                RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, distance);
-
-                
-                bool isInLineOfSight = true;
-                foreach(RaycastHit hit in hits) //Other players will not effect Line of Sight
-                {
-                    
-                    if (hit.transform.gameObject.tag != "Player")
-                        isInLineOfSight = false;
-                }
-
-                spellEffects.CmdFearPlayer(hitColliders[i].gameObject);
-            }
-            
-        }
-
-        Destroy(particles, 2.0f);
+        ExplodeFear explodeFear = new ExplodeFear(gameObject, particles);
+        explodeFear.explodeFear();
     }
 
 
@@ -139,7 +128,7 @@ public class SpellDestruction : NetworkBehaviour
     
 
 
-
+    //********************************* Networking ***************************************/
 
     [Command]
     public void CmdCallRpcDestroySpellOnCollision(string spellName, Vector3 position)
@@ -161,33 +150,20 @@ public class SpellDestruction : NetworkBehaviour
         if (spell.collisionParticle)
         {
             GameObject collisionParticles = Instantiate(spell.collisionParticle, position, Quaternion.identity);
-            destroyParticlesByCollision(collisionParticles, GetParticleDestroyTimeBySpell(spellName)); 
+            findParticleWaitTimeAndDestructionMethod(collisionParticles, GetParticleDestroyTimeBySpell(spellName)); 
         }
     }
 
-    /*Depending on the spell, each collision particles may have different destroy times*/
-    float GetParticleDestroyTimeBySpell(string spellName)
+
+
+
+    //*********************************** Utility ***************************************/
+
+    /*Waits a set amount of time, then calls destroy method on the spell object passed in*/
+    IEnumerator waitAndCall(GameObject spellObject, float waitTime, Action<GameObject> destroySpellMethod)
     {
-        Spell spell = SpellManager.getSpellFromName(spellName);
-
-        if (spellName.StartsWith("Fear"))
-            return 7.6f;
-        else
-            return 1.5f;
+        yield return new WaitForSeconds(waitTime);
+        destroySpellMethod(spellObject);
     }
-
-    
-
-    void spawnAndDestroyParticles(string spellName, Vector3 position, float waitTime)
-    {
-        Spell spell = SpellManager.getSpellFromName(spellName);
-
-        GameObject collisionParticles = Instantiate(spell.collisionParticle, position, Quaternion.identity);
-        destroyParticlesByCollision(collisionParticles, waitTime);
-    }
-
-
-
-    
 
 }
