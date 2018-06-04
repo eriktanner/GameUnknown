@@ -46,10 +46,10 @@ public class FearSpellEffect {
     {
         System.Random myRandom = new System.Random();
         playerMovement.playerHasControl(false);
-        float turnTo = (float)myRandom.NextDouble() * 120;
+        float turnTo = (float) myRandom.NextDouble() * 120;
         turnTo = Mathf.Clamp(turnTo, 45, 120);
 
-        float randomDirection = (float)myRandom.NextDouble();
+        float randomDirection = (float) myRandom.NextDouble();
         randomDirection = (randomDirection <= .5) ? 1 : -1;
 
         for (int i = 0; i < 200; i++)
@@ -60,7 +60,7 @@ public class FearSpellEffect {
 
 
 
-        float newForward = (float)myRandom.NextDouble();
+        float newForward = (float) myRandom.NextDouble();
         playerMovement.forwardInput = Mathf.Clamp(newForward, .55f, .85f);
 
 

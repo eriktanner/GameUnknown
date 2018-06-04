@@ -28,7 +28,7 @@ void Start()
         spell = SpellManager.getSpellFromName(gameObject.name);
         localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
 
-        distanceOfSphereCast = spell.projectileSpeed * .05f;
+        SetDistanceOfSpehereCast();
     }
 
 
@@ -39,6 +39,19 @@ void Start()
         spellCollisionComponent.spellRadius = projRadius;
         spellCollisionComponent.shotBy = shotByIn;
         spellCollisionComponent.spellDestruction = spellDestructionIn;
+    }
+
+    /*Faster spells require longer sphere casts*/
+    void SetDistanceOfSpehereCast()
+    {
+        distanceOfSphereCast = spell.projectileSpeed * .05f;
+
+        if (spell.projectileSpeed > 50)
+            distanceOfSphereCast *= 2.0f;
+        else if (spell.projectileSpeed > 40)
+            distanceOfSphereCast *= 1.5f;
+        else if (spell.projectileSpeed > 30)
+            distanceOfSphereCast *= 1.2f;
     }
 
 

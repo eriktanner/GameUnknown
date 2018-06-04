@@ -133,20 +133,25 @@ public class CastSpell : NetworkBehaviour
         spellLock = false;
     }
 
-    [Command]
+    [Command] /*Calls Rpc Function. Look into Spell.cs to see how we're handling spells over the network*/
     void CmdCallRpcFireSpell(string spellName, Quaternion rotationToTarget)
     {
         RpcFireSpell(spellName, rotationToTarget);
     }
 
-    [ClientRpc]
+    [ClientRpc] /*Tells server to create a spell object on each client. */
     void RpcFireSpell(string spellName, Quaternion rotationToTarget)
     {
         Spell spell = SpellManager.getSpellFromName(spellName);
         GameObject spellObject = createSpellInWorld(spell, castSpawn.position, rotationToTarget);
         spellObject.name = OurGameManager.AddProjectileNumberToSpell(spell.name);
         OurGameManager.IncrementProjectileCount();
-        spellDestruction.destroySpell(spellObject, spell.maxRange / spell.projectileSpeed);
+
+        if (ValidSpellDistance.hasValidDistanceCheckBeforeCast(spell.name)) //Distance verified BEFORE cast, we can give large destroy time
+            spellDestruction.destroySpell(spellObject, 10);
+        else
+            spellDestruction.destroySpell(spellObject, spell.maxRange / spell.projectileSpeed); //Regular timed destroy, d = r * t (However often innaccurate)
+                                                                                                
     }
     
 

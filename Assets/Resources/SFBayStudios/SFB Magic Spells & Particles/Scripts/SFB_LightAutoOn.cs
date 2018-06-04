@@ -25,7 +25,6 @@ public class SFB_LightAutoOn : MonoBehaviour {
 	void Update () {
 
         myTimePassed += Time.time - initialTime;
-        Debug.Log("MyTimePassed: " + timePassed);
         if (myTimePassed < startDelay)
             return;
 
