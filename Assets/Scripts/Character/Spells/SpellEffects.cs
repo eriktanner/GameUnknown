@@ -10,7 +10,8 @@ public class SpellEffects : NetworkBehaviour {
     public void CmdFearPlayer(GameObject playerToFear)
     {
 
-
+        FearSpellEffect fearSpellEffect = new FearSpellEffect(playerToFear);
+        fearSpellEffect.initFearSequence();
 
         Debug.Log("Calling Fear on: " + playerToFear.gameObject.name);
     }

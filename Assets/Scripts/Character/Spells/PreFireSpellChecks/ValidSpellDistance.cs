@@ -9,8 +9,7 @@ public static class ValidSpellDistance {
 
     static void DisplayOutOfRangeMessage()
     {
-        InGameMessageDisplay.DisplayMessage("Out of range");
-        //Debug.Log("Out of Range");
+        InGameMessageDisplay.DisplayMessage("Out of range", 3);
     }
 
     /*We want to reduce the magnitude of the valid range because otherwise it might cast and be destroyed by

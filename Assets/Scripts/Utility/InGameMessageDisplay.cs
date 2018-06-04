@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*Display a red message to the player above his hitmarker*/
 public class InGameMessageDisplay : MonoBehaviour {
 
 
@@ -11,15 +12,22 @@ public class InGameMessageDisplay : MonoBehaviour {
     float displayTime = 0;
     static float timeAtStartOfMessage = 0;
     static float maxDisplayTime = 3;
+    
 
-    // Use this for initialization
+
     void Start () {
 		DisplayText = GameObject.Find("Canvas/DisplayMessage").GetComponent<Text>();
-        Debug.Log("Here");
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    public static void DisplayMessage(string message, float time)
+    {
+        DisplayText.text = message;
+        maxDisplayTime = time;
+        timeAtStartOfMessage = Time.time;
+    }
+
+
+    void Update () {
 
         displayTime = Time.time - timeAtStartOfMessage;
         if (displayTime <= maxDisplayTime)
@@ -41,14 +49,6 @@ public class InGameMessageDisplay : MonoBehaviour {
     static void fadeOutText()
     {
         DisplayText.CrossFadeAlpha(0.0f, maxDisplayTime / 200, false);
-    }
-
-   
-
-    public static void DisplayMessage(string message)
-    {
-        DisplayText.text = message;
-        timeAtStartOfMessage = Time.time;
     }
     
 }

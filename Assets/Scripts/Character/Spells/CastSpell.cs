@@ -110,8 +110,9 @@ public class CastSpell : NetworkBehaviour
             camFoundHit = true;
         }
 
-        bool isWithinRangeOfSpell = ValidSpellDistance.SpellIsInRange(spell.name, transform.position, camHit.point, camFoundHit);
         bool didHitValidLayer = ValidSpellLayer.SpellHitValidLayerBySpell(spell.name, camHit);
+        bool isWithinRangeOfSpell = ValidSpellDistance.SpellIsInRange(spell.name, transform.position, camHit.point, camFoundHit);
+        
         
 
         if (isWithinRangeOfSpell && didHitValidLayer)
@@ -155,6 +156,11 @@ public class CastSpell : NetworkBehaviour
 
 
     /*General Functionality*/
+
+    public void setSpellLock(bool isLocked)
+    {
+        spellLock = isLocked;
+    }
 
     /*Creates the spell in the world and fires it.
      Adds RigidBody, SphereCollider, and SpellCollision to spell*/

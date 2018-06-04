@@ -86,6 +86,7 @@
      <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
      <Compile Include="Assets\Scripts\UI\ManaBar.cs" />
      <Compile Include="Assets\Scripts\Utility\InGameMessageDisplay.cs" />
+     <Compile Include="Assets\Scripts\Utility\ThreadRandomNumber.cs" />
      <Compile Include="Assets\UnityChan\Actions\FireSpells.cs" />
      <Compile Include="Assets\UnityChan\Scripts\CameraController.cs" />
      <Compile Include="Assets\UnityChan\Scripts\FaceUpdate.cs" />

@@ -5773,6 +5773,10 @@ MonoBehaviour:
   jumpVelocity: 4
   dashVelocity: 8
   dashCooldownTime: 12
+  animator: {fileID: 0}
+  currentX: 0
+  forwardInput: 0
+  leftRightInput: 0
 --- !u!114 &114520544363811242
 MonoBehaviour:
   m_ObjectHideFlags: 1

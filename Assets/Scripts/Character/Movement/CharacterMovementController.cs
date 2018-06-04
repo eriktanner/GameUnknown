@@ -19,10 +19,11 @@ public class CharacterMovementController : MonoBehaviour {
 
     Rigidbody rigidBody;
     CapsuleCollider charCollider;
-    Animator animator;
-    float currentX = 0.0f;
-    float forwardInput, leftRightInput;
-    float sensitivity = 1.0f; //Get From Settings
+    public Animator animator;
+
+    public float currentX = 0.0f;
+    public float forwardInput, leftRightInput;
+    float sensitivity = 1.0f;
     bool mouseHold, mouseDown, rightMouseDown, jump, dash;
 
     bool playerIsInControl = true;
@@ -43,6 +44,8 @@ public class CharacterMovementController : MonoBehaviour {
     {
         if (playerIsInControl)
         {
+            
+            animator.Play("Movement");
             forwardInput = Input.GetAxis("Vertical");
             leftRightInput = Input.GetAxis("Horizontal");
             mouseDown = Input.GetButtonDown("Fire1");
@@ -51,10 +54,6 @@ public class CharacterMovementController : MonoBehaviour {
             jump = Input.GetButtonDown("Jump");
             dash = Input.GetButtonDown("Dash");
             currentX += Input.GetAxis("Mouse X");
-        }
-        else
-        {
-
         }
 
     }
@@ -66,9 +65,6 @@ public class CharacterMovementController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (!playerIsInControl)
-            return;
-
         MoveForward();
         MoveLeftRight();
         Turn();
@@ -153,7 +149,7 @@ public class CharacterMovementController : MonoBehaviour {
     /*Takes away or grants control over movement to local player*/
     public void playerHasControl(bool hasControl)
     {
-
+        playerIsInControl = hasControl;
     }
 
 }
