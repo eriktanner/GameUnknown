@@ -27,8 +27,7 @@ public class CharacterMovementController : MonoBehaviour {
     bool mouseHold, mouseDown, rightMouseDown, jump, dash;
 
     bool playerIsInControl = true;
-
-    //Func<float, float> controlInput;
+    
 
 
 
@@ -44,7 +43,6 @@ public class CharacterMovementController : MonoBehaviour {
     {
         if (playerIsInControl)
         {
-            
             animator.Play("Movement");
             forwardInput = Input.GetAxis("Vertical");
             leftRightInput = Input.GetAxis("Horizontal");
@@ -71,8 +69,6 @@ public class CharacterMovementController : MonoBehaviour {
         Jump();
         Dash();
     }
-
-
 
     void MoveForward()
     {
@@ -119,14 +115,12 @@ public class CharacterMovementController : MonoBehaviour {
             lockedLeftRightInput = leftRightInput;
             transformForwardOnLastLock = transform.forward;
             transformRightOnLastLock = transform.right;
-
         }
     }
 
 
 
-    /*Tells us if player is currently on a hard surface - THIS NEEDS TO BE FIXED
-     This messes up escpecially on the client I don't know why*/
+    /*Tells us if player is currently on a hard surface - THIS NEEDS TO BE FIXED*/
     bool isGrounded()
     {
         float radius = charCollider.radius * .4f;
