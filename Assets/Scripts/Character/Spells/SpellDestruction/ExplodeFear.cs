@@ -6,6 +6,8 @@
  control over their input, replaced with fear input*/
 public class ExplodeFear  {
 
+    float RADIUS = 4.0f;
+
     GameObject player;
     GameObject particles;
     SpellDestruction spellDestruction;
@@ -27,7 +29,7 @@ public class ExplodeFear  {
     {
         Vector3 origin = particles.gameObject.transform.position;
 
-        Collider[] hitColliders = Physics.OverlapSphere(origin, 4.0f);
+        Collider[] hitColliders = Physics.OverlapSphere(origin, RADIUS);
 
 
         for (int i = 0; i < hitColliders.Length; i++)
@@ -45,12 +47,12 @@ public class ExplodeFear  {
                 bool isInLineOfSight = true;
                 foreach (RaycastHit hit in hits) //Other players will not effect Line of Sight
                 {
-
                     if (hit.transform.gameObject.tag != "Player")
                         isInLineOfSight = false;
                 }
 
-                spellEffects.CmdFearPlayer(hitColliders[i].gameObject);
+                if (isInLineOfSight)
+                    spellEffects.CmdFearPlayer(hitColliders[i].gameObject);
             }
 
         }

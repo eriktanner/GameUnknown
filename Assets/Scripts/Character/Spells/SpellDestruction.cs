@@ -51,6 +51,8 @@ public class SpellDestruction : NetworkBehaviour
 
         if (spellName.StartsWith("Magic Fear"))
             StartCoroutine(waitAndCall(particles, 3.75f, explodeFearParticles));
+        else if (spellName.StartsWith("Magic Soul Void"))
+            StartCoroutine(waitAndCall(particles, 3.75f, explodeSoulVoidParticles));
         else
             StartCoroutine(waitAndCall(particles, waitTime, defaultDestroy));
     }
@@ -94,7 +96,7 @@ public class SpellDestruction : NetworkBehaviour
 
 
     //*********************************** Spells ***************************************/
-    //Note: Always called, even if spell does not hit (give it "destroy" prefix)
+    //Note: Always called, even if spell does not hit (give "destroy" prefix)
 
    
     void destroyPain(GameObject spellObject)
@@ -113,7 +115,7 @@ public class SpellDestruction : NetworkBehaviour
 
 
     //******************************** Particles ***************************************/
-    //Note: Particle destruction only gets called (automatically) from RPC funcion if spell hits
+    //Note: Particle destruction only gets called (automatically) from RPC funcion if spell hits (give "explode" prefix)
 
     
     void explodeFearParticles(GameObject particles)
@@ -122,10 +124,17 @@ public class SpellDestruction : NetworkBehaviour
         explodeFear.explodeFear();
     }
 
+    void explodeSoulVoidParticles(GameObject particles)
+    {
+        ExplodeSoulVoid explodeSoulVoid = new ExplodeSoulVoid(gameObject, particles);
+        explodeSoulVoid.explodeSoulVoid();
+    }
 
 
 
-    
+
+
+
 
 
     //********************************* Networking ***************************************/

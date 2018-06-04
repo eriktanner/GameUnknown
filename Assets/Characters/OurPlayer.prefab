@@ -5702,6 +5702,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5d249b8dc57fe9e4dabc22c67ba94ef7, type: 2}
   - {fileID: 11400000, guid: cde667bc69812d94f8f638313f6801be, type: 2}
   - {fileID: 11400000, guid: 930ea9c98a76bbb4e82f0bf8d977f628, type: 2}
+  - {fileID: 11400000, guid: 2b6a5b4d4644dd441819ee34c6d1b4de, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   castSpawn: {fileID: 4431486795845504}
   spellDestruction: {fileID: 114462466476174060}
   manaBar: {fileID: 114058023315044536}

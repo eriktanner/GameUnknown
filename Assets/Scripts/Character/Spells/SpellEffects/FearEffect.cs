@@ -1,17 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Threading;
 
-/*Fears a player object, takes control of their CharacterMovementController*/
-public class FearSpellEffect {
+/*Fear is a shadow spell that must be casted on the ground. It has an area of effect
+ a few seconds after it is casted, fearing enemies within a range causing them to lose
+ control over their input, replaced with fear input*/
+public class FearEffect {
 
     GameObject player;
     CharacterMovementController playerMovement;
     Animator animator;
     CastSpell playerCastSpell;
 
-    public FearSpellEffect(GameObject playerObject)
+    public FearEffect(GameObject playerObject)
     {
         player = playerObject;
         playerMovement = playerObject.GetComponent<CharacterMovementController>();

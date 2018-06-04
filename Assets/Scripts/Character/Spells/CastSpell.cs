@@ -35,6 +35,7 @@ public class CastSpell : NetworkBehaviour
         addToSpellList("Fireball", 0);
         addToSpellList("Fear", 1);
         addToSpellList("Arcane Missile", 2);
+        addToSpellList("Soul Void", 3);
     }
 
     void Update()
@@ -60,6 +61,11 @@ public class CastSpell : NetworkBehaviour
         {
             if (spellList[2])
                 FireSpell(spellList[2]);
+        }
+        if (Input.GetButtonDown("Spell4"))
+        {
+            if (spellList[2])
+                FireSpell(spellList[3]);
         }
         cancelCast = Input.GetButtonDown("CancelCast");
     }
