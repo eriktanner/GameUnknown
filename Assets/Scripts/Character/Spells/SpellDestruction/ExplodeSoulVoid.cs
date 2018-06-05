@@ -36,9 +36,9 @@ public class ExplodeSoulVoid : MonoBehaviour {
 
             if (hitColliders[i].gameObject.tag == "Player")
             {
-                Vector3 toPosition = hitColliders[i].gameObject.transform.position;
-                Vector3 direction = toPosition - origin;
-                float distance = (toPosition - direction).magnitude;
+                Vector3 collisionPosition = hitColliders[i].gameObject.transform.position + new Vector3(0, .2f, 0); //Vector offset only beneficial for ground casts (sometimes spell does not work)
+                Vector3 direction = collisionPosition - origin;
+                float distance = (collisionPosition - direction).magnitude;
 
                 RaycastHit[] hits = Physics.RaycastAll(player.transform.position, player.transform.forward, distance);
 

@@ -21,5 +21,5 @@ MonoBehaviour:
   manaCost: 2
   maxRange: 20
   projectileRadius: 0.15
-  projectileSpeed: 60
+  projectileSpeed: 40
   castTime: 0.5

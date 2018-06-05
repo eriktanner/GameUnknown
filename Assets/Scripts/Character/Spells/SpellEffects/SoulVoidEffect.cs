@@ -5,7 +5,7 @@ using System.Threading;
  seconds after it is lands. It damages and stuns players within radius*/
 public class SoulVoidEffect : MonoBehaviour {
 
-    float STUN_SECONDS = 2.5f;
+    int STUN_MILLISECONDS = 2500;
 
     GameObject player;
     CharacterMovementController playerMovement;
@@ -28,6 +28,7 @@ public class SoulVoidEffect : MonoBehaviour {
     /*Damages and stuns players*/
     public void initSoulVoidSequence()
     {
+        playerMovement.playerHasControl(false);
         playerCastSpell.setSpellLock(true);
         animator.Play("Fear");
 
@@ -53,10 +54,9 @@ public class SoulVoidEffect : MonoBehaviour {
 
     void voidStun()
     {
-        playerMovement.playerHasControl(false);
         playerMovement.forwardInput = 0;
         playerMovement.leftRightInput = 0;
-        Thread.Sleep((int)(STUN_SECONDS * 100));
+        Thread.Sleep(STUN_MILLISECONDS);
     }
     
 

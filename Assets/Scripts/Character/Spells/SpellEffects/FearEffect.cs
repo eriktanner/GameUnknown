@@ -24,12 +24,12 @@ public class FearEffect {
     /*Start of actual fear effect*/
     public void initFearSequence()
     {
+        playerMovement.playerHasControl(false);
         playerCastSpell.setSpellLock(true);
 
         animator.Play("Fear");
         new Thread(() =>
         {
-
             fearStep();
             fearStep();
             fearStep();
@@ -45,7 +45,6 @@ public class FearEffect {
     void fearStep()
     {
         System.Random myRandom = new System.Random();
-        playerMovement.playerHasControl(false);
         float turnTo = (float) myRandom.NextDouble() * 120;
         turnTo = Mathf.Clamp(turnTo, 45, 120);
 

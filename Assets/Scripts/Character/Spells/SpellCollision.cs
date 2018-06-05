@@ -21,12 +21,20 @@ public class SpellCollision : MonoBehaviour
     string shotBy;
     float spellRadius;
     float distanceOfSphereCast;
+    bool isInstantCollisionChecked = false;
 
     void Start()
     {
         spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
         spell = SpellManager.getSpellFromName(gameObject.name);
         localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
+
+        isInstantCollisionChecked = isInstantCollisionCheckBySpell(spell.name);
+
+        if (isInstantCollisionChecked)
+        {
+            instantCollisionHitCheck();
+        }
 
         SetDistanceOfSpehereCast();
     }
@@ -58,8 +66,10 @@ public class SpellCollision : MonoBehaviour
 
     void Update()
     {
-        CheckForHit();
+        if (!isInstantCollisionChecked)
+            CheckForHit();
     }
+
 
     /*Creates a SphereCast a short distance out from the spell use to detect if we hit another object.
      Faster spells will have longer SphereCasts*/
@@ -110,12 +120,34 @@ public class SpellCollision : MonoBehaviour
 
 
 
+    /*Spell is instantly spawned at hitmarker*/
+    void instantCollisionHitCheck()
+    {
+        Vector3 origin = transform.position;
+        Vector3 direction = transform.forward;
+        RaycastHit Hit;
+
+        if (Physics.Raycast(origin, direction, out Hit, spell.maxRange))
+        {
+            OnSpellHit(Hit);
+        }
+    }
+
+
+    /*Similar results to is ValidDistanceCheck, except also includes spells such as Pain*/
+    static bool isInstantCollisionCheckBySpell(string spellName)
+    {
+        if (spellName.StartsWith("Pain"))
+            return true;
+        if (spellName.StartsWith("Fear"))
+            return true;
+        else if (spellName.StartsWith("Soul Void"))
+            return true;
+        else if (spellName.StartsWith("Ice Wall"))
+            return true;
+        else
+            return false;
+    }
     
-        
-
-
-
-    
-
 
 }
