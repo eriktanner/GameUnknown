@@ -36,6 +36,7 @@ public class CastSpell : NetworkBehaviour
         addToSpellList("Fear", 1);
         addToSpellList("Arcane Missile", 2);
         addToSpellList("Soul Void", 3);
+        addToSpellList("Ice Wall", 4);
     }
 
     void Update()
@@ -64,8 +65,13 @@ public class CastSpell : NetworkBehaviour
         }
         if (Input.GetButtonDown("Spell4"))
         {
-            if (spellList[2])
+            if (spellList[3])
                 FireSpell(spellList[3]);
+        }
+        if (Input.GetButtonDown("Spell5"))
+        {
+            if (spellList[4])
+                FireSpell(spellList[4]);
         }
         cancelCast = Input.GetButtonDown("CancelCast");
     }
@@ -75,7 +81,7 @@ public class CastSpell : NetworkBehaviour
     {
         if (!spell || spellLock)
             return;
-
+        
         if (spell.prefab == null)
         {
             Debug.LogWarning("Spell  Prefab is null");
@@ -194,7 +200,7 @@ public class CastSpell : NetworkBehaviour
     /*Given a spell and index, adds to player's spellList*/
     void addToSpellList(string spellName, int index)
     {
-        if (index < 0 || index > 3)
+        if (index < 0 || index > 6)
             return;
 
         bool spellAlreadyExists = false;
@@ -227,7 +233,7 @@ public class CastSpell : NetworkBehaviour
     /*Removes spell from spellList's index*/
     void removeFromSpellList(int index)
     {
-        if (index < 0 || index > 3 || index > spellList.Length - 1)
+        if (index < 0 || index > 6 || index > spellList.Length - 1)
             return;
         spellList[index] = null;
     }

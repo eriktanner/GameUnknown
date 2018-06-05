@@ -5630,7 +5630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0.06666667
+  m_SendInterval: 0.05263158
   m_SyncRotationAxis: 2
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
@@ -5699,10 +5699,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellList:
-  - {fileID: 11400000, guid: 5d249b8dc57fe9e4dabc22c67ba94ef7, type: 2}
-  - {fileID: 11400000, guid: cde667bc69812d94f8f638313f6801be, type: 2}
-  - {fileID: 11400000, guid: 930ea9c98a76bbb4e82f0bf8d977f628, type: 2}
-  - {fileID: 11400000, guid: 2b6a5b4d4644dd441819ee34c6d1b4de, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   castSpawn: {fileID: 4431486795845504}

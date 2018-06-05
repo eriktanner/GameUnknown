@@ -105,7 +105,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100012
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100014
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100016
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100018
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,7 +241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100028
 GameObject:
   m_ObjectHideFlags: 0
@@ -51173,6 +51173,7 @@ MonoBehaviour:
   done: 0
   maxTime: 0
   timePassed: 0
+  startDelay: 0
 --- !u!114 &114332960109109596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51191,6 +51192,7 @@ MonoBehaviour:
   done: 0
   maxTime: 0
   timePassed: 0
+  startDelay: 0
 --- !u!114 &114357182150206272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51205,6 +51207,7 @@ MonoBehaviour:
   fadeLimit: 2.4
   fadePassed: 0
   fadeSpeed: 10
+  startDelay: 0
 --- !u!114 &114460787667665472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51219,6 +51222,7 @@ MonoBehaviour:
   fadeLimit: 1.4
   fadePassed: 0
   fadeSpeed: 10
+  startDelay: 0
 --- !u!114 &114573047301177974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51237,6 +51241,7 @@ MonoBehaviour:
   done: 0
   maxTime: 0
   timePassed: 0
+  startDelay: 0
 --- !u!114 &114654777257275454
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51255,6 +51260,7 @@ MonoBehaviour:
   done: 0
   maxTime: 0
   timePassed: 0
+  startDelay: 0
 --- !u!114 &114743345908577994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51269,6 +51275,7 @@ MonoBehaviour:
   fadeLimit: 3.4
   fadePassed: 0
   fadeSpeed: 10
+  startDelay: 0
 --- !u!114 &114944362272913496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51283,3 +51290,4 @@ MonoBehaviour:
   fadeLimit: 0.4
   fadePassed: 0
   fadeSpeed: 10
+  startDelay: 0

@@ -7,6 +7,7 @@ public class SpellManager : MonoBehaviour
 {
 
     public List<Spell> spellList = new List<Spell>();
+    public List<GameObject> spawnablePrefabs = new List<GameObject>();
     Transform spellManagerTransform;
 
 
@@ -29,6 +30,16 @@ public class SpellManager : MonoBehaviour
     public static GameObject getObjectFromSpellName(string spellName)
     {
         return GameObject.Find("Managers/SpellManager/" + spellName);
+    }
+
+    public GameObject getSpawnablePrefab(string prefabName)
+    {
+        foreach (GameObject prefab in spawnablePrefabs)
+        {
+            if (prefab.name.Equals(prefabName))
+                return prefab;
+        }
+        return null;
     }
 
     

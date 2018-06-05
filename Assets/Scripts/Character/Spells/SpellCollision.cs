@@ -22,7 +22,7 @@ public class SpellCollision : MonoBehaviour
     float spellRadius;
     float distanceOfSphereCast;
 
-void Start()
+    void Start()
     {
         spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
         spell = SpellManager.getSpellFromName(gameObject.name);
@@ -103,8 +103,7 @@ void Start()
             }
             SpellDestruction spellDestruction = localPlayer.gameObject.GetComponent<SpellDestruction>();
             spellDestruction.CmdCallRpcDestroySpellOnCollision(gameObject.name, Hit.point);
-
-            
+  
         }
 
     }

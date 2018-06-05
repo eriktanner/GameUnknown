@@ -19,13 +19,16 @@ public static class ValidSpellLayer {
         
 
         if (spellName.StartsWith("Fear"))
-            return validLayerFear(Hit);
+            return validLayerGround(Hit);
+        else if (spellName.StartsWith("Ice Wall"))
+            return validLayerGround(Hit);
         else
             return true;
 
     }
 
-    static bool validLayerFear(RaycastHit Hit)
+
+    static bool validLayerGround(RaycastHit Hit)
     {
         if (Hit.collider == null)
             return false;

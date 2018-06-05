@@ -59,9 +59,4 @@ public class ExplodeSoulVoid : MonoBehaviour {
         spellDestruction.defaultDestroy(particles, 2.0f);
     }
 
-
-
-
-
-
 }

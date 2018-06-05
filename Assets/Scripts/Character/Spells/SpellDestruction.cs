@@ -23,7 +23,6 @@ public class SpellDestruction : NetworkBehaviour
 
     //*********************************** Lookups ***************************************/
 
-
     /*Destroys a casted spell by wait time*/
     public void destroySpell(GameObject spellObject, float waitTime)
     {
@@ -53,6 +52,8 @@ public class SpellDestruction : NetworkBehaviour
             StartCoroutine(waitAndCall(particles, 3.75f, explodeFearParticles));
         else if (spellName.StartsWith("Magic Soul Void"))
             StartCoroutine(waitAndCall(particles, 3.75f, explodeSoulVoidParticles));
+        else if (spellName.StartsWith("Ice Wall"))
+            StartCoroutine(waitAndCall(particles, 0, explodeIceWall));
         else
             StartCoroutine(waitAndCall(particles, waitTime, defaultDestroy));
     }
@@ -128,6 +129,12 @@ public class SpellDestruction : NetworkBehaviour
     {
         ExplodeSoulVoid explodeSoulVoid = new ExplodeSoulVoid(gameObject, particles);
         explodeSoulVoid.explodeSoulVoid();
+    }
+
+    void explodeIceWall(GameObject particles)
+    {
+        ExplodeIceWall explodeIceWall = new ExplodeIceWall(gameObject, particles);
+        explodeIceWall.explodeIceWall();
     }
 
 

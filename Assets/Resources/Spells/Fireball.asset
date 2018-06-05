@@ -19,7 +19,7 @@ MonoBehaviour:
   cooldown: 0
   damage: 15
   manaCost: 4
-  maxRange: 60
+  maxRange: 50
   projectileRadius: 0.17
   projectileSpeed: 30
   castTime: 0.9
