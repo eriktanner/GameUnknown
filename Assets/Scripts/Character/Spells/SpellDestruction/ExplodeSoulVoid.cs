@@ -5,7 +5,7 @@
  seconds after it is lands. It damages and stuns players within radius*/
 public class ExplodeSoulVoid : MonoBehaviour {
 
-    float RADIUS = 4.0f;
+    float RADIUS = 3.5f;
 
     GameObject player;
     GameObject particles;
