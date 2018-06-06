@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*This class is a Utility class that allows us to take general behaviours when the player is loaded
- into the scene. General actions include giving classes references to the local player*/
+
+
+/*Utility class to help us set references to classes that need references to the local player*/
+[RequireComponent((typeof(Camera)))]
 public class OnPlayerStart : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    public Camera playerCam;
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start ()
+    {
+        SetLocalPlayers();
+        GameObject.Find("Managers/CameraManager").GetComponent<CameraManager>().SetPlayerCamOnStart(playerCam);
+    }
+
+
+    void SetLocalPlayers()
+    {
+        GameObject.Find("Managers/GameManager").GetComponent<FloatingDamageController>().setLocalPlayerOnPlayerStart();
+        GameObject.Find("Managers/SpellDestruction").GetComponent<SpellDestruction>().setLocalPlayerOnPlayerStart();
+    }
 }

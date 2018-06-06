@@ -10,9 +10,9 @@ public class FloatingDamageController : MonoBehaviour {
     FloatingDamage instance;
     Transform hitPlayerLocation;
 
-    
-    /* Gets set in OnPlayerStart */
-    public void setLocalPlayerOnStart()
+
+    //See OnPlayerStart Class in Utility
+    public void setLocalPlayerOnPlayerStart()
     {
         localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
     }

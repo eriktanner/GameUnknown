@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-[RequireComponent((typeof(SpellDestruction)))]
 [RequireComponent((typeof(ManaBar)))]
 public class CastSpell : NetworkBehaviour
 {
-    public Spell[] spellList = new Spell[3];
+    Spell[] spellList = new Spell[6];
+    SpellDestruction spellDestruction;
+
     public Transform castSpawn;
-    public SpellDestruction spellDestruction;
     public ManaBar manaBar;
 
     CastBar castBar;
@@ -30,7 +30,9 @@ public class CastSpell : NetworkBehaviour
             castBar = GameObject.Find("Canvas/CastBar").GetComponent<CastBar>();
         if (GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>() != null)
             spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
-        
+       
+        spellDestruction = GameObject.Find("Managers/SpellDestruction").GetComponent<SpellDestruction>();
+
 
         addToSpellList("Fireball", 0);
         addToSpellList("Fear", 1);
@@ -185,7 +187,7 @@ public class CastSpell : NetworkBehaviour
     public GameObject createSpellInWorld(Spell spell, Vector3 position, Quaternion rotation)
     {
         GameObject spellObject = Instantiate(spell.prefab, position, rotation);
-        SpellCollision.AddSpellCollision(spellObject,spell.projectileRadius, gameObject.name, spellDestruction);
+        SpellCollision.AddSpellCollision(spellObject,spell.projectileRadius, gameObject.name);
         spellObject.AddComponent<SpellMovement>();
 
         spellObject.name = spell.name;
