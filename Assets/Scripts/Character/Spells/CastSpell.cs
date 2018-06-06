@@ -141,7 +141,6 @@ public class CastSpell : NetworkBehaviour
 
             CmdCallRpcFireSpell(spell.name, rotationToTarget);
             manaBar.burnMana(spell.manaCost);
-            manaBar.regenerateMana();
         }
 
         spellLock = false;

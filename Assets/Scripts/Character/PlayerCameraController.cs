@@ -25,6 +25,8 @@ public class PlayerCameraController : MonoBehaviour {
         sensitivity = .5f;
         offset = new Vector3(0, 0, -maxDistance);
 
+
+        
     }
 
     void Update() {

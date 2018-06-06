@@ -8,7 +8,7 @@ public class ManaBar : MonoBehaviour {
     public Slider manaBarSlider = null;  //reference for slider
     public Text manaText;   //reference for text
 
-    float currentMana, totalMana = 100;
+    float currentMana, totalMana = 1000;
     float manaRegenerationWaitTime = 3.0f;
     float regenerationRate = 0.15f;
 
@@ -25,12 +25,17 @@ public class ManaBar : MonoBehaviour {
     public void burnMana(float manaCost)
     {
         currentMana -= manaCost;
+        if (currentMana < 0)
+            currentMana = 0;
         manaBarSlider.value = currentMana;
+        regenerateMana();
     }
 
     public void AddMana(float mana)
     {
         currentMana += mana;
+        if (currentMana > 1000)
+            currentMana = 1000;
         manaBarSlider.value = currentMana;
     }
 
@@ -56,9 +61,12 @@ public class ManaBar : MonoBehaviour {
         }
     }
 
+    public float CurrentMana
+    {
+        get { return currentMana; }
+    }
 
-
-    public float GetTotalMana
+    public float TotalMana
     {
         get { return totalMana; }
     }

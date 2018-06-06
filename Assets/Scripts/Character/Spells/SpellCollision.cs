@@ -108,8 +108,8 @@ public class SpellCollision : MonoBehaviour
 
             if (hitTransform.tag == "Player")
             {
-                HealthBar healthBar = localPlayer.gameObject.GetComponent<HealthBar>();
-                healthBar.CmdCollisionDamagePlayer(spell.name, hitTransform.gameObject.name);
+                Damage damage = new Damage(spell, hitTransform);
+                damage.ApplyDamage();
             }
             SpellDestruction spellDestruction = localPlayer.gameObject.GetComponent<SpellDestruction>();
             spellDestruction.CmdCallRpcDestroySpellOnCollision(gameObject.name, Hit.point);

@@ -186,3 +186,8 @@ a6333fe17f3ba5399bffd336348da6c8 Assembly-CSharp.dll:.FaceUpdate
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SceneLoader
 fd2f487588649455d2388ca7858457aa Assembly-CSharp.dll:.Spell
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpellMovement
+e1ff970319fa33ba4daa3ef83c5282a8 Assembly-CSharp.dll:.FloatingDamage
+166c78e571fd5c10d6c3c1dc3b2f79d6 Assembly-CSharp.dll:.FloatingDamageController
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.OurOnPlayerStart
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.OnPlayerStart
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Damage

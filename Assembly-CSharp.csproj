@@ -66,6 +66,7 @@
      <Compile Include="Assets\Resources\SFBayStudios\SFB Magic Spells &amp; Particles\Scripts\SFB_ParticleGrowOverTime.cs" />
      <Compile Include="Assets\Resources\SFBayStudios\SFB Magic Spells &amp; Particles\Scripts\SFB_ParticleTrailRotation.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterMovementController.cs" />
+     <Compile Include="Assets\Scripts\Character\OnPlayerStart.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerCameraController.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\CastSpell.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\PreFireSpellChecks\ValidSpellDistance.cs" />
@@ -82,15 +83,19 @@
      <Compile Include="Assets\Scripts\Character\Spells\SpellEffects\FearEffect.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellEffects\SoulVoidEffect.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellMovement.cs" />
+     <Compile Include="Assets\Scripts\Game\Damage.cs" />
      <Compile Include="Assets\Scripts\Managers\CameraManager.cs" />
      <Compile Include="Assets\Scripts\Managers\OurGameManager.cs" />
      <Compile Include="Assets\Scripts\Managers\SpellManager.cs" />
      <Compile Include="Assets\Scripts\Network\NetworkPlayerSetup.cs" />
      <Compile Include="Assets\Scripts\Network\OurNetworkManager.cs" />
      <Compile Include="Assets\Scripts\UI\CastBar.cs" />
+     <Compile Include="Assets\Scripts\UI\FloatingDamage.cs" />
+     <Compile Include="Assets\Scripts\UI\FloatingDamageController.cs" />
      <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
      <Compile Include="Assets\Scripts\UI\ManaBar.cs" />
      <Compile Include="Assets\Scripts\Utility\InGameMessageDisplay.cs" />
+     <Compile Include="Assets\Scripts\Utility\OurOnPlayerStart.cs" />
      <Compile Include="Assets\Scripts\Utility\ThreadRandomNumber.cs" />
      <Compile Include="Assets\UnityChan\Actions\FireSpells.cs" />
      <Compile Include="Assets\UnityChan\Scripts\CameraController.cs" />
@@ -113,6 +118,7 @@
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eyelash_blend.shader" />
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hada.shader" />
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hada_blend.shader" />
+     <None Include="Assets\Art\Fonts\Pixel Font - Tripfive\_README.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/Users/Public/Documents/Unity Projects/Fantasia/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>

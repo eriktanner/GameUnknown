@@ -8,7 +8,7 @@ public class HealthBar : NetworkBehaviour {
     public Slider healthBarSlider;  //reference for slider
     public Text healthText;   //reference for text
 
-    float totalHealth = 100;
+    float totalHealth = 1000;
     [SyncVar(hook = "OnChangeHealth")]
     float currentHealth;
     float HealthRegenerationWaitTime = 5.0f;
@@ -42,8 +42,8 @@ public class HealthBar : NetworkBehaviour {
     void OrientAndSizeEnemyHealthBars()
     {
         if (!isLocalPlayer)
-        { //Looks away for some reason (makes enemy healthbars appear straight)
-            healthBarSlider.transform.LookAt(2 * transform.position - localPlayer.transform.position);
+        {   //Looks away for some reason (makes enemy healthbars appear straight)
+            healthBarSlider.transform.LookAt(2 * transform.position - localPlayer.transform.position + new Vector3(0, 3, 0));
 
             Vector3 enemyPosition = gameObject.transform.position;
             Vector3 playerPosition = localPlayer.transform.position;
@@ -102,23 +102,12 @@ public class HealthBar : NetworkBehaviour {
 
     
     [Command]
-    public void CmdCollisionDamagePlayer(string spellName, string playerName)
+    public void CmdCollisionDamagePlayer(float damage, string playerName)
     {
         GameObject hitPlayer = OurGameManager.GetPlayerGameObject(playerName);
         HealthBar hitPlayerHealthBar = hitPlayer.GetComponent<HealthBar>();
-        hitPlayerHealthBar.takeDamage(SpellManager.getSpellFromName(spellName).damage);
+        hitPlayerHealthBar.takeDamage(damage);
         hitPlayerHealthBar.regenerateHealth();
-
-        /*
-        EnemyHealthBar enemyHealthBar = collision.gameObject.GetComponent<EnemyHealthBar>();
-        if (enemyHealthBar)
-        {
-            enemyHealthBar.takeDamage(spellThatHit.damage);
-            enemyHealthBar.regenerateHealth();
-        }*/
-
-        //Debug.Log("Server Notified We Hit: " + playerName);
-
     }
 
 }
