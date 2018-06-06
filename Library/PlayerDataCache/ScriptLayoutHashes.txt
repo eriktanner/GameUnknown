@@ -17,8 +17,10 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 30afa8783a8bbee2e465ec9ce1efaee2 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 30afa8783a8bbee2e465ec9ce1efaee2 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 607d64d2c4bc76ac9876e6f7b9cc7edf UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
+e018c8de6b1e74bb46a2a3b96df62947 Assembly-CSharp.dll:.OurOnPlayerStart
 858d61d9ded55edfc17c0d9d7b918bbb Assembly-CSharp.dll:.SFB_ParticleTrailRotation
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SoulVoidEffect
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.OnPlayerStart
 e79639aca152a01a366800e2cc73ca58 Assembly-CSharp.dll:.ManaBar
 7a85ac6da0f41c725300888bfe035ca5 Assembly-CSharp.dll:.NetworkPlayerSetup
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpellCollision
@@ -126,6 +128,7 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Damage
 e3bfb26d2f8a8a39f24d324d3d226cc1 Assembly-CSharp.dll:CameraController.CameraController
 1dd5afbe72b78672a791f893fdff3e5f Assembly-CSharp.dll:DigitalRuby.PyroParticles.FireBaseScript
 0de88d96fd292d919299f7af4af26e8d Assembly-CSharp.dll:.IdleChanger
@@ -150,7 +153,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 a1ce0c3141be3ae70808d64035a67a88 Assembly-CSharp.dll:.ThirdPersonCamera
 f4d62aa38d504665fe31bbce5b872f02 Assembly-CSharp.dll:.SpellDestruction
-61b0acb41bbca6b5a9d4fd6ab6200251 Assembly-CSharp.dll:.CameraManager
+169cf652ee5945151aa6b0e786ef32f3 Assembly-CSharp.dll:.CameraManager
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 f02726adeff0a3ec5905565234b372da UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
@@ -179,15 +182,12 @@ a6333fe17f3ba5399bffd336348da6c8 Assembly-CSharp.dll:.FaceUpdate
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.FireSpells
 00a151844dbacabd8a6d3807a4d0f53d Assembly-CSharp.dll:.UnityChanControlScriptWithRgidBody
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:DigitalRuby.PyroParticles.FireCollisionForwardScript
+e1ff970319fa33ba4daa3ef83c5282a8 Assembly-CSharp.dll:.FloatingDamage
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.OurGameManager
 523c3a04c55361a03f3249ced2deaeef Assembly-CSharp.dll:.CharacterMovementController
 1dd5afbe72b78672a791f893fdff3e5f Assembly-CSharp.dll:DigitalRuby.PyroParticles.FireConstantBaseScript
+166c78e571fd5c10d6c3c1dc3b2f79d6 Assembly-CSharp.dll:.FloatingDamageController
 3bd51ce799ce5be0ab7bda1988ae6eee Assembly-CSharp.dll:.PlayerCameraController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SceneLoader
 fd2f487588649455d2388ca7858457aa Assembly-CSharp.dll:.Spell
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpellMovement
-e1ff970319fa33ba4daa3ef83c5282a8 Assembly-CSharp.dll:.FloatingDamage
-166c78e571fd5c10d6c3c1dc3b2f79d6 Assembly-CSharp.dll:.FloatingDamageController
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.OurOnPlayerStart
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.OnPlayerStart
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Damage

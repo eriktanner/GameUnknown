@@ -25,7 +25,7 @@ public class Damage : MonoBehaviour {
         localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
         healthBarHit = localPlayer.gameObject.GetComponent<HealthBar>();
 
-        floatingDamageController = GameObject.Find("Managers/UIManager").GetComponent<FloatingDamageController>();
+        floatingDamageController = GameObject.Find("Managers/GameManager").GetComponent<FloatingDamageController>();
 
     }
     
@@ -80,10 +80,10 @@ public class Damage : MonoBehaviour {
     {
         if (!criticalDamage)
         {
-            floatingDamageController.CreateFloatingText(damageToDo, playerHitTransform.gameObject.transform);
+            floatingDamageController.CreateFloatingText(localPlayer.transform, damageToDo, playerHitTransform.gameObject.transform);
         } else
         {
-            floatingDamageController.CreateFloatingText(damageToDo, playerHitTransform.gameObject.transform);
+            floatingDamageController.CreateFloatingText(localPlayer.transform, damageToDo, playerHitTransform.gameObject.transform);
             floatingDamageController.CriticalDamageFontSizeIncrease();
         }
     }

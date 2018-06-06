@@ -5840,6 +5840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0033c0b3b4e4548a30639842ae2ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCam: {fileID: 20350776896645070}
 --- !u!114 &114615666743409206
 MonoBehaviour:
   m_ObjectHideFlags: 1

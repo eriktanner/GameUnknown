@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
 
-    Camera playerCam;
+    static Camera playerCam;
 
-    [SerializeField] Camera sceneCam;
+    [SerializeField] static Camera sceneCam;
     [SerializeField] float sceneRotationRadius = 24.0f;
     [SerializeField] float sceneCamRotationRate = 3.0f;
     bool sceneCanRotate;
@@ -18,6 +18,11 @@ public class CameraManager : MonoBehaviour {
     {
         sceneCam = GameObject.Find("Cameras/SkyCam").GetComponent<Camera>();
         SetSceneCamActive(true);
+    }
+
+    public void SetPlayerCamOnStart(Camera playerCamIn)
+    {
+        playerCam = playerCamIn;
     }
 
     public void SetSceneCamActive(bool isActive)
@@ -56,13 +61,13 @@ public class CameraManager : MonoBehaviour {
 
 
 
-    public void SetCursorToLockAndInvisible()
+    public static void SetCursorToLockAndInvisible()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    public void SetCursorToFreeAndVisible()
+    public static void SetCursorToFreeAndVisible()
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;

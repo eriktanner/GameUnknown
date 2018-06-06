@@ -12,28 +12,23 @@ public class FloatingDamageController : MonoBehaviour {
 
     
     /* Gets set in OnPlayerStart */
-    public void setLocalPlayer()
+    public void setLocalPlayerOnStart()
     {
         localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
     }
 
-	public void CreateFloatingText(float damage, Transform location)
+	public void CreateFloatingText(Transform playerWhoShot, float damage, Transform locationOfHit)
     {
         //Pull from pool of objects (or create for now)
         instance = Instantiate(floatingTextPrefab);
-        hitPlayerLocation = location;
+        hitPlayerLocation = locationOfHit;
 
-        
-        
-        instance.transform.position = hitPlayerLocation.position + instance.PositionOfText;
-        
-        instance.SetText(damage);
-
+        instance.initFloatingDamage(playerWhoShot.position, locationOfHit.position, damage);
     }
 
     void Update()
     {
-        if (instance != null && hitPlayerLocation != null)
+        if (instance != null && hitPlayerLocation != null && localPlayer != null)
             instance.transform.LookAt(2 * hitPlayerLocation.position - localPlayer.transform.position + new Vector3(0, 3, 0)); //Orients it the right way
     }
 
