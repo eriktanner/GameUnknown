@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-/*Detects collision of spells, for overview of how spells and collisions are being 
+/* Detects collision of spells, for overview of how spells and collisions are being 
  handled look at Spell.cs documentation
  
 We are going to want to change our system to using raycast because a spell may not hit on the local
 But appears to hit on other clients. This causes the spell to bounce off to other clients, we dont want that, we at least 
 want the spell to pass thru, hence no collider. This is more efficient anyways, we wont need the 
-collider or rigid body. We are going to need to use a SphereCast*/
+collider or rigid body. We are going to need to use a SphereCast */
 public class SpellCollision : MonoBehaviour
 {
 

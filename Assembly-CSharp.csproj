@@ -82,6 +82,7 @@
      <Compile Include="Assets\Scripts\Character\Spells\SpellEffects.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellEffects\FearEffect.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellEffects\SoulVoidEffect.cs" />
+     <Compile Include="Assets\Scripts\Character\Spells\SpellList.cs" />
      <Compile Include="Assets\Scripts\Character\Spells\SpellMovement.cs" />
      <Compile Include="Assets\Scripts\Game\Damage.cs" />
      <Compile Include="Assets\Scripts\Managers\CameraManager.cs" />

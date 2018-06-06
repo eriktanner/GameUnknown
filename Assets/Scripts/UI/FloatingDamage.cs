@@ -42,7 +42,7 @@ public class FloatingDamage : MonoBehaviour {
 
     public void FontSizeIncrease()
     {
-        transform.localScale *= 1.5f;
+        transform.localScale *= 1.6f;
         positionOfText += new Vector3(0, 2.0f * magnifyer, 0);
     }
     
