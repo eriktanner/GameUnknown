@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 54751775431803380}
   - component: {fileID: 136791320027438046}
   - component: {fileID: 114493332049907336}
-  - component: {fileID: 114291190651066624}
+  - component: {fileID: 114976174454824804}
   - component: {fileID: 114706053538641916}
   - component: {fileID: 114015491287944662}
   - component: {fileID: 114124330181891788}
@@ -3691,7 +3691,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745091028584094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 1.1, z: 0.3}
+  m_LocalPosition: {x: 0.3, y: 1.1, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4047792737343426}
@@ -5600,7 +5600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentsToDisable:
   - {fileID: 114493332049907336}
-  - {fileID: 114291190651066624}
+  - {fileID: 0}
   - {fileID: 81292994229058742}
   - {fileID: 20350776896645070}
   - {fileID: 114615666743409206}
@@ -5686,19 +5686,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114291190651066624
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1096529572963302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409e9d0d91dca754daca734a100f1160, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  castSpawn: {fileID: 4431486795845504}
-  manaBar: {fileID: 114058023315044536}
 --- !u!114 &114490499772677314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6041,6 +6028,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114976174454824804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1096529572963302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21fcaf8c1e537064c93b456aaf0daf03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castSpawn: {fileID: 4431486795845504}
+  manaBar: {fileID: 114058023315044536}
 --- !u!124 &124719092461205718
 Behaviour:
   m_ObjectHideFlags: 1

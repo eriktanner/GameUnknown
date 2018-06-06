@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*Creates the UI for the player's castbar*/
 public class CastBar : MonoBehaviour {
 
     public Slider castBarSlider = null;  //reference for slider

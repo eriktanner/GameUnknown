@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/*Instances of the floating damage text display above enemies hit by spells. Handles things such as
+ text size and positioning*/
 public class FloatingDamage : MonoBehaviour {
 
     public Animator animator;

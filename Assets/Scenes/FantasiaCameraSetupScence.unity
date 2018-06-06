@@ -296,7 +296,6 @@ Transform:
   - {fileID: 585693823}
   - {fileID: 425932517}
   - {fileID: 602961614}
-  - {fileID: 725662248}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1557,8 +1556,9 @@ GameObject:
   - component: {fileID: 725662251}
   - component: {fileID: 725662250}
   - component: {fileID: 725662249}
+  - component: {fileID: 725662252}
   m_Layer: 0
-  m_Name: SpellDestruction
+  m_Name: Spell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1570,11 +1570,11 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 725662247}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -71.70163, y: -29.66372, z: -27.558943}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 70473913}
+  m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &725662249
@@ -1632,6 +1632,17 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &725662252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 725662247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3626513b9d3240438ec958f5f33b900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &745953545
 GameObject:
   m_ObjectHideFlags: 0

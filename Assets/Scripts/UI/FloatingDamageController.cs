@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Controller for the instances of FloatingDamage*/
 public class FloatingDamageController : MonoBehaviour {
 
     public FloatingDamage floatingTextPrefab;
@@ -31,8 +32,6 @@ public class FloatingDamageController : MonoBehaviour {
         if (instance != null && hitPlayerLocation != null && localPlayer != null)
             instance.transform.LookAt(2 * hitPlayerLocation.position - localPlayer.transform.position + new Vector3(0, 3, 0)); //Orients it the right way
     }
-
-   
 
     public void CriticalDamageFontSizeIncrease()
     {

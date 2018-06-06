@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*Handles UI for user controlled manabar*/
 public class ManaBar : MonoBehaviour {
 
     public Slider manaBarSlider = null;  //reference for slider

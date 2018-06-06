@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
+/*UI for player healthbars. Handles both upper elft health bar and floating health bars*/
 public class HealthBar : NetworkBehaviour {
 
     public Slider healthBarSlider;  //reference for slider
