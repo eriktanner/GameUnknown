@@ -16,9 +16,9 @@ MonoBehaviour:
   prefab: {fileID: 1774912816483602, guid: e89f1a44afdf3614898d214a113d6e5f, type: 2}
   collisionParticle: {fileID: 100004, guid: c075eccfb32e94001be8045b50e5d286, type: 2}
   icon: {fileID: 0}
-  cooldown: 0
+  cooldown: 20
   damage: 0
-  manaCost: 15
+  manaCost: 150
   maxRange: 20
   projectileRadius: 0.14
   projectileSpeed: 40

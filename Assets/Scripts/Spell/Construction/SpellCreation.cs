@@ -15,6 +15,8 @@ public class SpellCreation : MonoBehaviour {
         spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
     }
 
+
+
     /*Creates the spell in world, gives it movement, and destruction timer*/
     public GameObject CreateSpellInWorld(Spell spell, Vector3 position, Quaternion rotation, string shotBy)
     {

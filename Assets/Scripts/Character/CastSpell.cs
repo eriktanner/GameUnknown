@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 [RequireComponent((typeof(ManaBar)))]
 public class CastSpell : NetworkBehaviour
 {
-    Spell[] spellList = new Spell[6];
+    SpellList spellList;
     SpellDestruction spellDestruction;
     SpellCreation spellCreation;
 
@@ -35,12 +35,7 @@ public class CastSpell : NetworkBehaviour
         spellDestruction = GameObject.Find("Spell").GetComponent<SpellDestruction>();
         spellCreation = GameObject.Find("Spell").GetComponent<SpellCreation>();
 
-
-        addToSpellList("Fireball", 0);
-        addToSpellList("Fear", 1);
-        addToSpellList("Arcane Missile", 2);
-        addToSpellList("Soul Void", 3);
-        addToSpellList("Ice Wall", 4);
+        spellList = GetComponent<SpellList>();
     }
 
     void Update()
@@ -54,28 +49,28 @@ public class CastSpell : NetworkBehaviour
     {
         if (Input.GetButtonDown("Spell1"))
         {
-            if (spellList[0])
-                FireSpell(spellList[0]);
+            if (!spellList.isOnCooldown(0))
+                FireSpell(spellList.GetSpellAtIndex(0));
         }
         if (Input.GetButtonDown("Spell2"))
         {
-            if (spellList[1])
-                FireSpell(spellList[1]);
+            if (!spellList.isOnCooldown(1))
+                FireSpell(spellList.GetSpellAtIndex(1));
         }
         if (Input.GetButtonDown("Spell3"))
         {
-            if (spellList[2])
-                FireSpell(spellList[2]);
+            if (!spellList.isOnCooldown(2))
+                FireSpell(spellList.GetSpellAtIndex(2));
         }
         if (Input.GetButtonDown("Spell4"))
         {
-            if (spellList[3])
-                FireSpell(spellList[3]);
+            if (!spellList.isOnCooldown(3))
+                FireSpell(spellList.GetSpellAtIndex(3));
         }
         if (Input.GetButtonDown("Spell5"))
         {
-            if (spellList[4])
-                FireSpell(spellList[4]);
+            if (!spellList.isOnCooldown(4))
+                FireSpell(spellList.GetSpellAtIndex(4));
         }
         cancelCast = Input.GetButtonDown("CancelCast");
     }
@@ -145,6 +140,7 @@ public class CastSpell : NetworkBehaviour
 
             CmdCallRpcFireSpell(spell.name, rotationToTarget);
             manaBar.burnMana(spell.manaCost);
+            spellList.TriggerCooldown(spell);
         }
 
         spellLock = false;
@@ -180,46 +176,7 @@ public class CastSpell : NetworkBehaviour
 
     
 
-    /*Given a spell and index, adds to player's spellList*/
-    void addToSpellList(string spellName, int index)
-    {
-        if (index < 0 || index > 6)
-            return;
-
-        bool spellAlreadyExists = false;
-        for (int i = 0; i < spellList.Length; i++)
-        {
-            if (spellList[i] != null && spellName.Equals(spellList[i].spellName))
-            {
-                spellAlreadyExists = true;
-            }
-        }
-
-        if (!spellAlreadyExists)
-        {
-            spellList[index] = SpellManager.getSpellFromName(spellName);
-        }
-    }
-
-    /*Given a spell, removes from player's spellList*/
-    void removeFromSpellList(string spellName)
-    {
-        for (int i = 0; i < spellList.Length; i++)
-        {
-            if (spellList[i] != null && spellName.Equals(spellList[i].spellName))
-            {
-                spellList[i] = null;
-            }
-        }
-    }
-
-    /*Removes spell from spellList's index*/
-    void removeFromSpellList(int index)
-    {
-        if (index < 0 || index > 6 || index > spellList.Length - 1)
-            return;
-        spellList[index] = null;
-    }
+    
 
 }
 

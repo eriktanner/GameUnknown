@@ -6,17 +6,20 @@ using System;
 
 /*Handles spell destruction of spells and their collision particles. Note: destruction does not handle
 actual spell effects*/
-[RequireComponent((typeof(SpellEffects)))]
 public class SpellDestruction : NetworkBehaviour
 {
-    public SpellEffects spellEffects;
     GameObject localPlayer;
+    NetworkIdentity spellDestructionNetId;
 
+    void Start()
+    {
+        spellDestructionNetId = GetComponent<NetworkIdentity>();
+    }
     
     //See OnPlayerStart Class in Utility
     public void setLocalPlayerOnPlayerStart()
     {
-        localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
+        localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;  
     }
 
 
@@ -152,12 +155,15 @@ public class SpellDestruction : NetworkBehaviour
     [Command]
     public void CmdCallRpcDestroySpellOnCollision(string spellName, Vector3 position)
     {
+        Debug.Log("ServerCall: " + spellName);
         RpcDestroySpellOnCollision(spellName, position);
     }
 
     [ClientRpc]
     void RpcDestroySpellOnCollision(string spellName, Vector3 position)
     {
+        Debug.Log("Destroying: " + spellName);
+
         Spell spell = SpellManager.getSpellFromName(spellName);
         GameObject spellInWorldToDestroy = SpellManager.getObjectFromSpellName(spellName);
 

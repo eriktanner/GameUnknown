@@ -17,7 +17,7 @@ public class ExplodeIceWall : MonoBehaviour {
     {
         player = playerObject;
         particles = particlesIn;
-        spellDestruction = GameObject.Find("Managers/SpellDestruction").GetComponent<SpellDestruction>();
+        spellDestruction = GameObject.Find("Spell").GetComponent<SpellDestruction>();
 
         if (GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>() != null)
             spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();

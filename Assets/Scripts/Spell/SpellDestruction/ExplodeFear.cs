@@ -16,8 +16,8 @@ public class ExplodeFear  {
     {
         player = playerObject;
         particles = particlesIn;
-        spellDestruction = GameObject.Find("Managers/SpellDestruction").GetComponent<SpellDestruction>();
-        spellEffects = GameObject.Find("Managers/SpellDestruction").GetComponent<SpellEffects>();
+        spellDestruction = GameObject.Find("Spell").GetComponent<SpellDestruction>();
+        spellEffects = GameObject.Find("Spell").GetComponent<SpellEffects>();
     }
 
 

@@ -33,7 +33,6 @@ public class NetworkPlayerSetup : NetworkBehaviour {
 
     /*Disables all remote player components*/
     void DisableRemoteComponents()
-        
     {
         for (int i = 0; i < componentsToDisable.Length; i++)
         {

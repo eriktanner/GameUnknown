@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 
 /* Detects collision of spells, for overview of how spells and collisions are being 
@@ -106,7 +107,8 @@ public class SpellCollision : MonoBehaviour
                 Damage damage = new Damage(spell, hitTransform);
                 damage.ApplyDamage();
             }
-            
+
+            Debug.Log("PreCMD: " );
             spellDestruction.CmdCallRpcDestroySpellOnCollision(gameObject.name, Hit.point);
         }
 

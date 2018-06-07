@@ -17,9 +17,9 @@ MonoBehaviour:
   collisionParticle: {fileID: 1774912816483602, guid: 172f52a3404f5144eaf431c5de23526a,
     type: 2}
   icon: {fileID: 0}
-  cooldown: 0
+  cooldown: 15
   damage: 0
-  manaCost: 15
+  manaCost: 80
   maxRange: 12
   projectileRadius: 0.18
   projectileSpeed: 40

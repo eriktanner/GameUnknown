@@ -18,7 +18,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   cooldown: 0
   damage: 50
-  manaCost: 2
+  manaCost: 20
   maxRange: 20
   projectileRadius: 0.15
   projectileSpeed: 40
