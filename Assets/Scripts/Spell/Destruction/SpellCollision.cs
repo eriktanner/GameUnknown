@@ -13,9 +13,8 @@ public class SpellCollision : MonoBehaviour
     Spell spell;
     SpellManager spellManager;
     SpellDestruction spellDestruction;
-    GameObject localPlayer;
 
-    string shotBy;
+    int shotBy;
     float spellRadius;
     float distanceOfSphereCast;
     bool isInstantCollisionChecked = false;
@@ -25,7 +24,6 @@ public class SpellCollision : MonoBehaviour
         spell = SpellManager.getSpellFromName(gameObject.name);
         spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
         spellDestruction = GameObject.Find("Spell").GetComponent<SpellDestruction>();
-        localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
 
 
         isInstantCollisionChecked = isInstantCollisionCheckBySpell(spell.name);
@@ -38,11 +36,11 @@ public class SpellCollision : MonoBehaviour
 
 
     /*Creates new SpellCollision Component, then attaches it to the passed in GameObject*/
-    public static void AddSpellCollision(GameObject attachTo, float projRadius, string shotByIn)
+    public static void AddSpellCollision(GameObject attachTo, float projRadius, int shotBy)
     {
         SpellCollision spellCollisionComponent = attachTo.AddComponent<SpellCollision>();
         spellCollisionComponent.spellRadius = projRadius;
-        spellCollisionComponent.shotBy = shotByIn;
+        spellCollisionComponent.shotBy = shotBy;
     }
 
     /*Faster spells require longer sphere casts*/
@@ -75,7 +73,6 @@ public class SpellCollision : MonoBehaviour
         Vector3 direction = transform.forward;
         RaycastHit Hit;
 
-
         if (Physics.SphereCast(origin, spellRadius, direction, out Hit, distanceOfSphereCast))
         {
             OnSpellHit(Hit);
@@ -88,28 +85,25 @@ public class SpellCollision : MonoBehaviour
     /*Plays destroy sequence of a spell collision*/
     void OnSpellHit(RaycastHit Hit)
     {
+
         if (hasAlreadyHit)
             return;
 
-        if (localPlayer == null || !localPlayer.name.Equals(shotBy)) //Only allow person who shot to check collision
-            return;
-
-
-
         Transform hitTransform = Hit.transform;
-
-        if (!hitTransform.gameObject.name.Equals(shotBy))
+        PhotonView HitPhotonView = hitTransform.gameObject.GetPhotonView();
+        
+        if (HitPhotonView != null && HitPhotonView.viewID != shotBy)
         {
             hasAlreadyHit = true;
+            
 
             if (hitTransform.tag == "Player")
             {
-                Damage damage = new Damage(spell, hitTransform);
+                DamageCalculator damage = DamageCalculator.AddDamageComponent(gameObject, spell, hitTransform.gameObject);
                 damage.ApplyDamage();
             }
-
-            Debug.Log("PreCMD: " );
-            spellDestruction.CmdCallRpcDestroySpellOnCollision(gameObject.name, Hit.point);
+            
+            spellDestruction.NetworkCallRpcDestroySpellOnCollision(gameObject.name, Hit.point, shotBy);
         }
 
     }

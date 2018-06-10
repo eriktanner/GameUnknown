@@ -6,26 +6,10 @@ using System;
 
 /*Handles spell destruction of spells and their collision particles. Note: destruction does not handle
 actual spell effects*/
-public class SpellDestruction : NetworkBehaviour
+public class SpellDestruction : Photon.MonoBehaviour
 {
-    GameObject localPlayer;
-    NetworkIdentity spellDestructionNetId;
-
-    void Start()
-    {
-        spellDestructionNetId = GetComponent<NetworkIdentity>();
-    }
     
-    //See OnPlayerStart Class in Utility
-    public void setLocalPlayerOnPlayerStart()
-    {
-        localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;  
-    }
-
-
-
-
-    //*********************************** Lookups ***************************************/
+        //*********************************** Lookups ***************************************/
 
     /*Destroys a casted spell by wait time*/
     public void destroySpell(GameObject spellObject, float waitTime)
@@ -45,7 +29,7 @@ public class SpellDestruction : NetworkBehaviour
 
 
     /*We may want to handle the destruction of the particles differently from the casted spell*/
-    public void findParticleWaitTimeAndDestructionMethod(GameObject particles, float waitTime)
+    public void findParticleWaitTimeAndDestructionMethod(GameObject particles, float waitTime, int shotBy)
     {
         if (particles == null)
             return;
@@ -53,11 +37,11 @@ public class SpellDestruction : NetworkBehaviour
         string spellName = particles.name;
 
         if (spellName.StartsWith("Magic Fear"))
-            StartCoroutine(waitAndCall(particles, 3.75f, explodeFearParticles));
+            StartCoroutine(waitAndCallShotBy(particles, 3.75f, shotBy, explodeFearParticles));
         else if (spellName.StartsWith("Magic Soul Void"))
-            StartCoroutine(waitAndCall(particles, 3.75f, explodeSoulVoidParticles));
+            StartCoroutine(waitAndCallShotBy(particles, 3.75f, shotBy, explodeSoulVoidParticles));
         else if (spellName.StartsWith("Ice Wall"))
-            StartCoroutine(waitAndCall(particles, 0, explodeIceWall));
+            StartCoroutine(waitAndCallShotBy(particles, 0, shotBy, explodeIceWall));
         else
             StartCoroutine(waitAndCall(particles, waitTime, defaultDestroy));
     }
@@ -78,12 +62,12 @@ public class SpellDestruction : NetworkBehaviour
 
     //*********************************** Destruction ***************************************/
 
-    public void spawnAndDestroyParticles(string spellName, Vector3 position, float waitTime)
+    public void spawnAndDestroyParticles(string spellName, Vector3 position, float waitTime, int shotBy)
     {
         Spell spell = SpellManager.getSpellFromName(spellName);
 
         GameObject collisionParticles = Instantiate(spell.collisionParticle, position, Quaternion.identity);
-        findParticleWaitTimeAndDestructionMethod(collisionParticles, waitTime);
+        findParticleWaitTimeAndDestructionMethod(collisionParticles, waitTime, shotBy);
     }
   
     public void defaultDestroy(GameObject spellObject)
@@ -123,23 +107,23 @@ public class SpellDestruction : NetworkBehaviour
     //Note: Particle destruction only gets called (automatically) from RPC funcion if spell hits (give "explode" prefix)
 
     
-    void explodeFearParticles(GameObject particles)
+    void explodeFearParticles(GameObject particles, int shotBy)
     {
-        ExplodeFear explodeFear = new ExplodeFear(localPlayer, particles);
+        ExplodeFear explodeFear = new ExplodeFear(OurGameManager.GetPlayerGameObject(""), particles);
         explodeFear.explodeFear();
     }
 
-    void explodeSoulVoidParticles(GameObject particles)
+    void explodeSoulVoidParticles(GameObject particles, int shotBy)
     {
-        ExplodeSoulVoid explodeSoulVoid = new ExplodeSoulVoid(localPlayer, particles);
+        ExplodeSoulVoid explodeSoulVoid = new ExplodeSoulVoid(OurGameManager.GetPlayerGameObject(""), particles);
         explodeSoulVoid.explodeSoulVoid();
     }
 
-    void explodeIceWall(GameObject particles)
+    void explodeIceWall(GameObject particles, int shotBy)
     {
         if (particles == null)
             Debug.Log("particles are null");
-        ExplodeIceWall explodeIceWall = new ExplodeIceWall(localPlayer, particles);
+        ExplodeIceWall explodeIceWall = new ExplodeIceWall(OurGameManager.GetPlayerGameObject(""), particles);
         explodeIceWall.explodeIceWall();
     }
 
@@ -152,15 +136,38 @@ public class SpellDestruction : NetworkBehaviour
 
     //********************************* Networking ***************************************/
 
-    [Command]
-    public void CmdCallRpcDestroySpellOnCollision(string spellName, Vector3 position)
+    public void NetworkCallRpcDestroySpellOnCollision(string spellName, Vector3 position, int shotBy)
     {
-        Debug.Log("ServerCall: " + spellName);
-        RpcDestroySpellOnCollision(spellName, position);
+        photonView.RPC("RpcDestroySpellOnCollision", PhotonTargets.All, spellName, position, shotBy);
     }
 
-    [ClientRpc]
-    void RpcDestroySpellOnCollision(string spellName, Vector3 position)
+    [PunRPC]
+    void RpcDestroySpellOnCollision(string spellName, Vector3 position, int shotBy)
+    {
+
+        Spell spell = SpellManager.getSpellFromName(spellName);
+        GameObject spellInWorldToDestroy = SpellManager.getObjectFromSpellName(spellName);
+
+        if (spellInWorldToDestroy == null)
+            return;
+
+        Destroy(spellInWorldToDestroy);
+
+        if (spell.collisionParticle)
+        {
+            GameObject collisionParticles = Instantiate(spell.collisionParticle, position, Quaternion.identity);
+            findParticleWaitTimeAndDestructionMethod(collisionParticles, GetParticleDestroyTimeBySpell(spellName), shotBy);
+        }
+    }
+
+
+    public void CmdCallRpcDestroySpellOnCollision(string spellName, Vector3 position, int shotBy)
+    {
+        RpcDestroySpellOnCollision(spellName, position, shotBy);
+    }
+    
+    /*
+    void RpcDestroySpellOnCollision(string spellName, Vector3 position, string shotBy)
     {
         Debug.Log("Destroying: " + spellName);
 
@@ -175,14 +182,23 @@ public class SpellDestruction : NetworkBehaviour
         if (spell.collisionParticle)
         {
             GameObject collisionParticles = Instantiate(spell.collisionParticle, position, Quaternion.identity);
-            findParticleWaitTimeAndDestructionMethod(collisionParticles, GetParticleDestroyTimeBySpell(spellName)); 
+            findParticleWaitTimeAndDestructionMethod(collisionParticles, GetParticleDestroyTimeBySpell(spellName), shotBy); 
         }
     }
-
+    */
 
 
 
     //*********************************** Utility ***************************************/
+
+    /*Waits a set amount of time, then calls destroy method on the spell object passed in*/
+    IEnumerator waitAndCallShotBy(GameObject spellObject, float waitTime, int shotBy, Action<GameObject, int> destroySpellMethod)
+    {
+        yield return new WaitForSeconds(waitTime);
+        destroySpellMethod(spellObject, shotBy);
+    }
+
+
 
     /*Waits a set amount of time, then calls destroy method on the spell object passed in*/
     IEnumerator waitAndCall(GameObject spellObject, float waitTime, Action<GameObject> destroySpellMethod)

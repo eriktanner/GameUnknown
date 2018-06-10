@@ -1,7 +1,7 @@
 ﻿using UnityEngine.Networking;
 using UnityEngine;
 
-public class NetworkPlayerSetup : NetworkBehaviour {
+public class NetworkPlayerSetup : Photon.MonoBehaviour {
 
     
     public Behaviour[] componentsToDisable;
@@ -13,21 +13,25 @@ public class NetworkPlayerSetup : NetworkBehaviour {
         cameraManager = GameObject.Find("Managers/CameraManager").GetComponent<CameraManager>();
         
 
-        if (!isLocalPlayer)
+        if (!photonView.isMine)
         {
             DisableRemoteComponents();
-            AssignRemoteLayersAndTags();
-        } 
+        } else
+        {
+            cameraManager.SetSceneCamActive(false);
+        }
 
+
+        AssignRemoteLayersAndTags();
         RegisterPlayer();
     }
 
     /*Assigns all player/enemy ids, later register to some kind of dictionary*/
     void RegisterPlayer()
     {
-        string id = "Player " + GetComponent<NetworkIdentity>().netId;
+        string id = "Player " + GetComponent<PhotonView>().ownerId;
         gameObject.name = id;
-        gameObject.transform.parent = GameObject.Find("Managers/GameManager").transform; ;
+        gameObject.transform.parent = GameObject.Find("Managers/GameManager").transform;
 
     }
 

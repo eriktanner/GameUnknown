@@ -1,11 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
 /*This class handles user input related to casting spells*/
 [RequireComponent((typeof(ManaBar)))]
-public class CastSpell : NetworkBehaviour
+public class CastSpell : Photon.MonoBehaviour
 {
     SpellList spellList;
     SpellDestruction spellDestruction;
@@ -16,6 +16,7 @@ public class CastSpell : NetworkBehaviour
 
     CastBar castBar;
     SpellManager spellManager;
+    OurGameManager GameManager;
     Camera cam;
     Coroutine castRoutine;
 
@@ -31,7 +32,9 @@ public class CastSpell : NetworkBehaviour
             castBar = GameObject.Find("Canvas/CastBar").GetComponent<CastBar>();
         if (GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>() != null)
             spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
-       
+
+        GameManager = GameObject.Find("Managers/GameManager").GetComponent<OurGameManager>();
+
         spellDestruction = GameObject.Find("Spell").GetComponent<SpellDestruction>();
         spellCreation = GameObject.Find("Spell").GetComponent<SpellCreation>();
 
@@ -138,7 +141,8 @@ public class CastSpell : NetworkBehaviour
             Vector3 aimToFromFirePosition  = hitPoint - castSpawn.position;
             Quaternion rotationToTarget = Quaternion.LookRotation(aimToFromFirePosition);
 
-            CmdCallRpcFireSpell(spell.name, rotationToTarget);
+            Debug.Log("Caster viewID: " + photonView.viewID);
+            NetworkFireSpell(spell.name, rotationToTarget, PhotonNetwork.player.ID);
             manaBar.burnMana(spell.manaCost);
             spellList.TriggerCooldown(spell);
         }
@@ -146,17 +150,30 @@ public class CastSpell : NetworkBehaviour
         spellLock = false;
     }
 
-    [Command] /*Calls Rpc Function. Look into Spell.cs to see how we're handling spells over the network*/
-    void CmdCallRpcFireSpell(string spellName, Quaternion rotationToTarget)
+
+
+
+    /*Calls Rpc Function. Look into Spell.cs to see how we're handling spells over the network*/
+    void NetworkFireSpell(string spellName, Quaternion rotationToTarget, int shotBy)
     {
-        RpcFireSpell(spellName, rotationToTarget);
+        photonView.RPC("RpcFireSpell", PhotonTargets.All, spellName, rotationToTarget, shotBy);
     }
 
-    [ClientRpc] /*Tells server to create a spell object on each client. */
-    void RpcFireSpell(string spellName, Quaternion rotationToTarget)
+
+    [PunRPC]/*Tells server to create a spell object on each client. */
+    void RpcFireSpell(string spellName, Quaternion rotationToTarget, int shotBy)
     {
         Spell spell = SpellManager.getSpellFromName(spellName);
-        GameObject spellObject = spellCreation.CreateSpellInWorld(spell, castSpawn.position, rotationToTarget, gameObject.name);
+        GameObject spellObject = spellCreation.CreateSpellInWorld(spell, castSpawn.position, rotationToTarget);
+        
+
+        if (PhotonNetwork.isMasterClient)
+        {
+            SpellCollision.AddSpellCollision(spellObject, spell.projectileRadius, shotBy); //Only master client detects collision
+            SpellIdentifier.AddSpellIdentifier(spellObject, gameObject, PhotonPlayer.Find(shotBy), shotBy);
+            Debug.Log("GameObject: " + gameObject.name);
+        }
+
         spellObject.name = OurGameManager.AddProjectileNumberToSpell(spell.name);
         OurGameManager.IncrementProjectileCount();                                                                                        
     }

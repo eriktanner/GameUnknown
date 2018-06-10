@@ -9,9 +9,9 @@ public class CharacterMovementController : MonoBehaviour {
     const float FORWARD_TO_BACKWARD_RATIO = 0.5f;
 
     public float inputDelay = 0.1f;
-    public float forwardVelocity = 5.0f, rotateVelocity = 2.2f;
-    public float leftRightVelocity = 4.0f, jumpVelocity = 4.0f;
-    public float dashVelocity = 8.0f, dashCooldownTime = 12.0f;
+    public float forwardVelocity = 7.0f, rotateVelocity = 2.2f;
+    public float leftRightVelocity = 5.0f, jumpVelocity = 160.0f;
+    public float dashVelocity = 220.0f, dashCooldownTime = 12.0f;
 
 
     float lockedForwardInput = 0, lockedLeftRightInput = 0;
@@ -44,8 +44,8 @@ public class CharacterMovementController : MonoBehaviour {
         if (playerIsInControl)
         {
             animator.Play("Movement");
-            forwardInput = Input.GetAxis("Vertical");
             leftRightInput = Input.GetAxis("Horizontal");
+            forwardInput = Input.GetAxis("Vertical") * (1 - Mathf.Abs(leftRightInput)/3);
             mouseDown = Input.GetButtonDown("Fire1");
             mouseHold = Input.GetButton("Fire1");
             rightMouseDown = Input.GetButtonDown("Fire2");

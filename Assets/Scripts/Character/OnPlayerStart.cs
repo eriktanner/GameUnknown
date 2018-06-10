@@ -19,7 +19,7 @@ public class OnPlayerStart : MonoBehaviour {
 
     void SetLocalPlayers()
     {
-        GameObject.Find("Managers/GameManager").GetComponent<FloatingDamageController>().setLocalPlayerOnPlayerStart();
-        GameObject.Find("Spell").GetComponent<SpellDestruction>().setLocalPlayerOnPlayerStart();
     }
+
+    
 }

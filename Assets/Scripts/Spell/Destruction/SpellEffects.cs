@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 /*Handles the servers calls for in-depth spell effects*/
-public class SpellEffects : NetworkBehaviour {
+public class SpellEffects : Photon.MonoBehaviour {
     
-    [Command]
     public void CmdFearPlayer(GameObject playerHit)
     {
         FearEffect fearSpellEffect = new FearEffect(playerHit);
@@ -14,8 +13,7 @@ public class SpellEffects : NetworkBehaviour {
 
         Debug.Log("Calling Fear on: " + playerHit.gameObject.name);
     }
-
-    [Command]
+    
     public void CmdSoulVoidPlayer(GameObject playerHit)
     {
         SoulVoidEffect soulVoidEffect = new SoulVoidEffect(playerHit);

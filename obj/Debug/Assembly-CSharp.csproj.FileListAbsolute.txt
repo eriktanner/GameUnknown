@@ -166,3 +166,6 @@ D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\UnityEngine.Spa
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp.dll
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp.pdb
+D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Photon3Unity3D.dll
+D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\websocket-sharp.dll
+D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Photon3Unity3D.xml

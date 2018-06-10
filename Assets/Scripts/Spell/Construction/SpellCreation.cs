@@ -18,10 +18,9 @@ public class SpellCreation : MonoBehaviour {
 
 
     /*Creates the spell in world, gives it movement, and destruction timer*/
-    public GameObject CreateSpellInWorld(Spell spell, Vector3 position, Quaternion rotation, string shotBy)
+    public GameObject CreateSpellInWorld(Spell spell, Vector3 position, Quaternion rotation)
     {
         GameObject spellObject = Instantiate(spell.prefab, position, rotation);
-        SpellCollision.AddSpellCollision(spellObject, spell.projectileRadius, shotBy);
         spellObject.AddComponent<SpellMovement>();
 
         spellObject.name = spell.name;
@@ -37,5 +36,7 @@ public class SpellCreation : MonoBehaviour {
         spellObject.transform.parent = spellManager.SpellManagerTransform;
         return spellObject;
     }
+
+
 
 }

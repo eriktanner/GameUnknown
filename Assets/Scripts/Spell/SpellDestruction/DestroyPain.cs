@@ -24,7 +24,7 @@ public class DestroyPain  {
             return;
 
         Spell spell = SpellManager.getSpellFromName(spellObject.name);
-        spellDestruction.spawnAndDestroyParticles(spell.name, spellObject.transform.position, 1.5f); //Creates particles
+        spellDestruction.spawnAndDestroyParticles(spell.name, spellObject.transform.position, 1.5f, -1); //Creates particles
 
         spellDestruction.defaultDestroy(spellObject); //Destroys spell prefab
     }

@@ -197,4 +197,8 @@ D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp-Edit
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp-Editor.csproj.CopyComplete
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp-Editor.dll
 D:\Users\Public\Documents\Unity Projects\Fantasia\obj\Debug\Assembly-CSharp-Editor.pdb
+D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Newtonsoft.Json.dll
+D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Photon3Unity3D.dll
+D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\websocket-sharp.dll
+D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Photon3Unity3D.xml
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Assembly-CSharp.pdb

@@ -4,13 +4,12 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 /*UI for player healthbars. Handles both upper elft health bar and floating health bars*/
-public class HealthBar : NetworkBehaviour {
+public class HealthBar : Photon.MonoBehaviour {
 
     public Slider healthBarSlider;  //reference for slider
     public Text healthText;   //reference for text
 
     float totalHealth = 1000;
-    [SyncVar(hook = "OnChangeHealth")]
     float currentHealth;
     float HealthRegenerationWaitTime = 5.0f;
     float regenerationRate = 0.05f;
@@ -21,7 +20,7 @@ public class HealthBar : NetworkBehaviour {
 
     void Start()
     {
-        if (isLocalPlayer)
+        if (photonView.isMine)
         {
             healthBarSlider.gameObject.SetActive(false);
             healthBarSlider = GameObject.Find("Canvas/HealthBar").GetComponent<Slider>();
@@ -30,9 +29,7 @@ public class HealthBar : NetworkBehaviour {
         healthBarSlider.maxValue = totalHealth;
         healthBarSlider.value = totalHealth;
         currentHealth = totalHealth;
-        localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
-
-
+        localPlayer = OurGameManager.LocalPlayer;
     }
 
     void Update()
@@ -42,9 +39,9 @@ public class HealthBar : NetworkBehaviour {
 
     void OrientAndSizeEnemyHealthBars()
     {
-        if (!isLocalPlayer)
+        if (!photonView.isMine)
         {   //Looks away for some reason (makes enemy healthbars appear straight)
-            healthBarSlider.transform.LookAt(2 * transform.position - localPlayer.transform.position + new Vector3(0, 3, 0));
+            //healthBarSlider.transform.LookAt(2 * transform.position - localPlayer.transform.position + new Vector3(0, 3, 0));
 
             Vector3 enemyPosition = gameObject.transform.position;
             Vector3 playerPosition = localPlayer.transform.position;
@@ -102,7 +99,6 @@ public class HealthBar : NetworkBehaviour {
     }
 
     
-    [Command]
     public void CmdCollisionDamagePlayer(float damage, string playerName)
     {
         GameObject hitPlayer = OurGameManager.GetPlayerGameObject(playerName);

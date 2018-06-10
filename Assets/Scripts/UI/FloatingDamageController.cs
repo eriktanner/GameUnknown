@@ -6,37 +6,23 @@ using UnityEngine;
 public class FloatingDamageController : MonoBehaviour {
 
     public FloatingDamage floatingTextPrefab;
-    GameObject localPlayer;
 
     FloatingDamage instance;
-    Transform hitPlayerLocation;
+    Vector3 hitPlayerLocation;
 
 
-    //See OnPlayerStart Class in Utility
-    public void setLocalPlayerOnPlayerStart()
-    {
-        localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
-    }
+    
 
-	public void CreateFloatingText(Transform playerWhoShot, float damage, Transform locationOfHit)
+	public void CreateFloatingText(float damage, Vector3 locationOfHit, bool criticalDamage, int shotBy)
     {
         //Pull from pool of objects (or create for now)
         instance = Instantiate(floatingTextPrefab);
         hitPlayerLocation = locationOfHit;
 
-        instance.initFloatingDamage(playerWhoShot.position, locationOfHit.position, damage);
+        instance.initFloatingDamage(locationOfHit, damage, criticalDamage, shotBy);
+
     }
 
-    void Update()
-    {
-        if (instance != null && hitPlayerLocation != null && localPlayer != null)
-            instance.transform.LookAt(2 * hitPlayerLocation.position - localPlayer.transform.position + new Vector3(0, 3, 0)); //Orients it the right way
-    }
-
-    public void CriticalDamageFontSizeIncrease()
-    {
-        instance.FontSizeIncrease();
-    }
 
 
 }
