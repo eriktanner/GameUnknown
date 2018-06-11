@@ -41,7 +41,7 @@ public class HealthBar : Photon.MonoBehaviour {
     {
         if (!photonView.isMine)
         {   //Looks away for some reason (makes enemy healthbars appear straight)
-            //healthBarSlider.transform.LookAt(2 * transform.position - localPlayer.transform.position + new Vector3(0, 3, 0));
+            healthBarSlider.transform.LookAt(2 * transform.position - localPlayer.transform.position + new Vector3(0, 3, 0));
 
             Vector3 enemyPosition = gameObject.transform.position;
             Vector3 playerPosition = localPlayer.transform.position;
@@ -54,9 +54,31 @@ public class HealthBar : Photon.MonoBehaviour {
         }
     }
 
-    public void takeDamage(float damage)
+    /*For server to calculate would-be health to then send over the network*/
+    public float CalculateTakeDamage(float damage)
     {
-        currentHealth -= damage;
+        float temp = currentHealth - damage;
+        return temp;
+    }
+
+    /*Tell clients to set health to this amount, then start regenerating health*/
+    public void SetHealth(float newHealth)
+    {
+        currentHealth = newHealth;
+        healthBarSlider.value = currentHealth;
+        regenerateHealth();
+    }
+
+    /*Syncrhonize health bar*/
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(healthBarSlider.value);
+        } else
+        {
+            healthBarSlider.value = (float) stream.ReceiveNext();
+        }
     }
 
     /*Waits a predetermined set amount of time, then regenerates mana*/
@@ -81,30 +103,5 @@ public class HealthBar : Photon.MonoBehaviour {
         }
     }
 
-
-
-    public float GetTotalHealth
-    {
-        get { return totalHealth; }
-    }
-
-    public void SetTotalHealth(float newTotalHealth)
-    {
-        totalHealth = newTotalHealth;
-    }
-
-    void OnChangeHealth(float newHealth)
-    {
-        healthBarSlider.value = newHealth;
-    }
-
-    
-    public void CmdCollisionDamagePlayer(float damage, string playerName)
-    {
-        GameObject hitPlayer = OurGameManager.GetPlayerGameObject(playerName);
-        HealthBar hitPlayerHealthBar = hitPlayer.GetComponent<HealthBar>();
-        hitPlayerHealthBar.takeDamage(damage);
-        hitPlayerHealthBar.regenerateHealth();
-    }
 
 }

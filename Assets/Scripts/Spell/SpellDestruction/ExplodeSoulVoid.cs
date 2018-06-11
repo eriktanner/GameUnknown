@@ -7,15 +7,17 @@ public class ExplodeSoulVoid : MonoBehaviour {
 
     float RADIUS = 3.5f;
 
+    int ShotBy;
     GameObject player;
     GameObject particles;
     SpellDestruction spellDestruction;
     SpellEffects spellEffects;
 
-    public ExplodeSoulVoid(GameObject playerObject, GameObject particlesIn)
+    public ExplodeSoulVoid(GameObject playerObject, GameObject particlesIn, int shotBy)
     {
         player = playerObject;
         particles = particlesIn;
+        ShotBy = shotBy;
         spellDestruction = GameObject.Find("Spell").GetComponent<SpellDestruction>();
         spellEffects = GameObject.Find("Spell").GetComponent<SpellEffects>();
     }
@@ -51,7 +53,7 @@ public class ExplodeSoulVoid : MonoBehaviour {
                 }
 
                 if (isInLineOfSight)
-                    spellEffects.CmdSoulVoidPlayer(hitColliders[i].gameObject);
+                    spellEffects.CmdSoulVoidPlayer(hitColliders[i].gameObject, ShotBy);
             }
 
         }

@@ -14,7 +14,7 @@ public class SpellCollision : MonoBehaviour
     SpellManager spellManager;
     SpellDestruction spellDestruction;
 
-    int shotBy;
+    int ShotBy;
     float spellRadius;
     float distanceOfSphereCast;
     bool isInstantCollisionChecked = false;
@@ -24,6 +24,7 @@ public class SpellCollision : MonoBehaviour
         spell = SpellManager.getSpellFromName(gameObject.name);
         spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
         spellDestruction = GameObject.Find("Spell").GetComponent<SpellDestruction>();
+        ShotBy = gameObject.GetComponent<SpellIdentifier>().ShotBy;
 
 
         isInstantCollisionChecked = isInstantCollisionCheckBySpell(spell.name);
@@ -36,11 +37,10 @@ public class SpellCollision : MonoBehaviour
 
 
     /*Creates new SpellCollision Component, then attaches it to the passed in GameObject*/
-    public static void AddSpellCollision(GameObject attachTo, float projRadius, int shotBy)
+    public static void AddSpellCollision(GameObject attachTo, float projRadius)
     {
         SpellCollision spellCollisionComponent = attachTo.AddComponent<SpellCollision>();
         spellCollisionComponent.spellRadius = projRadius;
-        spellCollisionComponent.shotBy = shotBy;
     }
 
     /*Faster spells require longer sphere casts*/
@@ -92,20 +92,20 @@ public class SpellCollision : MonoBehaviour
         Transform hitTransform = Hit.transform;
         PhotonView HitPhotonView = hitTransform.gameObject.GetPhotonView();
         
-        if (HitPhotonView != null && HitPhotonView.viewID != shotBy)
+        if (HitPhotonView != null && HitPhotonView.viewID != ShotBy)
         {
             hasAlreadyHit = true;
             
 
             if (hitTransform.tag == "Player")
             {
-                DamageCalculator damage = DamageCalculator.AddDamageComponent(gameObject, spell, hitTransform.gameObject);
+                Damage damage = new Damage(spell, hitTransform.gameObject, ShotBy);
                 damage.ApplyDamage();
             }
             
-            spellDestruction.NetworkCallRpcDestroySpellOnCollision(gameObject.name, Hit.point, shotBy);
         }
 
+        spellDestruction.NetworkCallRpcDestroySpellOnCollision(gameObject.name, Hit.point, ShotBy);
     }
 
 

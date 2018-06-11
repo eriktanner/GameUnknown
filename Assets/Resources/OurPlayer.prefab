@@ -5606,6 +5606,7 @@ MonoBehaviour:
   - {fileID: 81292994229058742}
   - {fileID: 20350776896645070}
   - {fileID: 114615666743409206}
+  - {fileID: 114634005097917436}
 --- !u!114 &114058023315044536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5863,6 +5864,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114346393917835004}
   - {fileID: 114799180023121030}
+  - {fileID: 114672916418669896}
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1

@@ -5,55 +5,31 @@ using UnityEngine;
 /*This class handles calculation of damage randomization and critical damage of spells*/
 public class DamageCalculator : Photon.MonoBehaviour {
 
-    Damager damager;
-
-    GameObject PlayerHit;
-    
-    
-
     Spell spell;
-    FloatingDamageController floatingDamageController;
-
-    float damageToDo;
-    bool criticalDamage = false;
+    public float DamageToDo { get; set; }
+    public bool IsCriticalDamage { get; set; }
 
 
     /*TODO Make a Damage Controller that takes isntances of damage so that we dont keep reinstatiating it*/
-    public static DamageCalculator AddDamageComponent(GameObject attachTo, Spell spell, GameObject playerHit)
+    public DamageCalculator(Spell spell)
     {
-        DamageCalculator damageComponent = attachTo.AddComponent<DamageCalculator>();
-        damageComponent.spell = spell;
-        
-        damageComponent.PlayerHit = playerHit;
-        
-
-        damageComponent.floatingDamageController = GameObject.Find("Managers/GameManager").GetComponent<FloatingDamageController>();
-        damageComponent.damager = GameObject.Find("Spell").GetComponent<Damager>();
-
-        return damageComponent;
-    }
-    
-
-    /*Damages player and displays damage text*/
-    public void ApplyDamage()
-    {
+        this.spell = spell;
         CalculateDamage();
-        damager.displayFloatingDamage(PlayerHit.transform.position, damageToDo, criticalDamage, gameObject.GetComponent<SpellIdentifier>().ShotBy);
-        //healthBarHit.CmdCollisionDamagePlayer(damageToDo, PlayerHit.transform.gameObject.name);
     }
+
 
     /*Does the randomized calculation of damage, and also randomizes for a critical hit*/
     void CalculateDamage()
     {
         float checkForCrit = Random.value;
-        criticalDamage = (checkForCrit < .15f);
+        IsCriticalDamage = (checkForCrit < .15f);
 
-        if (criticalDamage)
+        if (IsCriticalDamage)
         {
-            damageToDo = CrticalDamageCalculation();
+            DamageToDo = CrticalDamageCalculation();
         } else
         {
-            damageToDo = NormalDamageCalculation();
+            DamageToDo = NormalDamageCalculation();
         }
     }
 

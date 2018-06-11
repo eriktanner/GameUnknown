@@ -21,7 +21,7 @@ public class FloatingDamage : MonoBehaviour {
 
     void Awake()
     {
-        Destroy(gameObject, 2);
+        Destroy(gameObject, 1.7f);
         damageText = GetComponent<TextMesh>();
         positionOfText = new Vector3(Random.Range(-.7f, .7f), 3.5f + Random.Range(-.25f, .25f), Random.Range(-.7f, .7f));
 

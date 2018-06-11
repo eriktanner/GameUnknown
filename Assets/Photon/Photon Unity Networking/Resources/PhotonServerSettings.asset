@@ -39,4 +39,6 @@ MonoBehaviour:
   - RpcFireSpell
   - RpcDestroySpellOnCollision
   - TargetDisplayFloatingDamage
+  - RpcSetPlayerToNewHealthValue
+  - RpcAddGOtoPhotonPlayerID
   DisableAutoOpenWizard: 1

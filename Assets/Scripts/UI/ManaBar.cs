@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /*Handles UI for user controlled manabar*/
-public class ManaBar : MonoBehaviour {
+public class ManaBar : Photon.MonoBehaviour {
 
     public Slider manaBarSlider = null;  //reference for slider
     public Text manaText;   //reference for text
@@ -16,7 +16,13 @@ public class ManaBar : MonoBehaviour {
 
     void Start()
     {
-        //manaBarSlider = GameObject.Find("Canvas/ManaBar").GetComponent<Slider>();
+        /*setting enabled to false is not enough, bar still apears must setactive to false*/
+        if (!photonView.isMine)
+        {
+            manaBarSlider.gameObject.SetActive(false);
+            return;
+        }
+
         manaBarSlider.maxValue = totalMana;
         manaBarSlider.value = totalMana;
         currentMana = totalMana;
@@ -28,6 +34,7 @@ public class ManaBar : MonoBehaviour {
         if (currentMana < 0)
             currentMana = 0;
         manaBarSlider.value = currentMana;
+        Debug.Log("burning mana: " + manaBarSlider.value);
         regenerateMana();
     }
 
@@ -38,6 +45,7 @@ public class ManaBar : MonoBehaviour {
             currentMana = 1000;
         manaBarSlider.value = currentMana;
     }
+
 
     /*Waits a predetermined set amount of time, then regenerates mana*/
     public void regenerateMana()

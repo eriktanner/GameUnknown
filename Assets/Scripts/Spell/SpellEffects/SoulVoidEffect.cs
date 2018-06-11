@@ -7,22 +7,24 @@ public class SoulVoidEffect : MonoBehaviour {
 
     int STUN_MILLISECONDS = 2500;
 
+    int ShotBy;
     Spell spell;
-    GameObject player;
+    GameObject PlayerHit;
     CharacterMovementController playerMovement;
     Animator animator;
     CastSpell playerCastSpell;
-    GameObject localPlayer;
+    SpellDamageApplier damageApplier;
 
 
-    public SoulVoidEffect(GameObject playerObject)
+    public SoulVoidEffect(GameObject playerObject, int shotBy)
     {
-        player = playerObject;
+        PlayerHit = playerObject;
+        ShotBy = shotBy;
         playerMovement = playerObject.GetComponent<CharacterMovementController>();
         animator = playerMovement.animator;
         playerCastSpell = playerObject.GetComponent<CastSpell>();
         spell = SpellManager.getSpellFromName("Soul Void");
-        localPlayer = GameObject.Find("Managers/NetworkManager").GetComponent<OurNetworkManager>().client.connection.playerControllers[0].gameObject;
+        damageApplier = GameObject.Find("Spell").GetComponent<SpellDamageApplier>();
     }
 
 
@@ -50,8 +52,7 @@ public class SoulVoidEffect : MonoBehaviour {
 
     void damagePlayer()
     {
-        HealthBar healthBar = localPlayer.gameObject.GetComponent<HealthBar>();
-        healthBar.CmdCollisionDamagePlayer(spell.damage, player.name);
+        damageApplier.ApplyDamageFromTo(PlayerHit, spell.damage, ShotBy);
     }
 
     void voidStun()

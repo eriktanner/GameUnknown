@@ -8,11 +8,11 @@ public class SpellIdentifier : MonoBehaviour {
 
     public PhotonPlayer PlayerPhotonPlayer;
 
-    public static GameObject AddSpellIdentifier(GameObject attachTo, GameObject playerGameObject, PhotonPlayer playerPhotonPlayer, int shotBy)
+    public static GameObject AddSpellIdentifier(GameObject attachTo, GameObject playerGameObject, int shotBy)
     {
         SpellIdentifier spellIdentifier = attachTo.AddComponent<SpellIdentifier>();
         spellIdentifier.PlayerGameObject = playerGameObject;
-        spellIdentifier.PlayerPhotonPlayer = playerPhotonPlayer;
+        spellIdentifier.PlayerPhotonPlayer = PhotonPlayer.Find(shotBy);
         spellIdentifier.ShotBy = shotBy;
         return attachTo;
     }

@@ -27,11 +27,13 @@ public class CastSpell : Photon.MonoBehaviour
 
     void Start()
     {
+
         //cam = Camera.main; **We will want to cache this upon entering game
         if (GameObject.Find("Canvas/CastBar").GetComponent<CastBar>() != null)
             castBar = GameObject.Find("Canvas/CastBar").GetComponent<CastBar>();
         if (GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>() != null)
             spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
+        
 
         GameManager = GameObject.Find("Managers/GameManager").GetComponent<OurGameManager>();
 
@@ -141,10 +143,9 @@ public class CastSpell : Photon.MonoBehaviour
             Vector3 aimToFromFirePosition  = hitPoint - castSpawn.position;
             Quaternion rotationToTarget = Quaternion.LookRotation(aimToFromFirePosition);
 
-            Debug.Log("Caster viewID: " + photonView.viewID);
-            NetworkFireSpell(spell.name, rotationToTarget, PhotonNetwork.player.ID);
             manaBar.burnMana(spell.manaCost);
             spellList.TriggerCooldown(spell);
+            NetworkFireSpell(spell.name, rotationToTarget, PhotonNetwork.player.ID);
         }
 
         spellLock = false;
@@ -164,14 +165,17 @@ public class CastSpell : Photon.MonoBehaviour
     void RpcFireSpell(string spellName, Quaternion rotationToTarget, int shotBy)
     {
         Spell spell = SpellManager.getSpellFromName(spellName);
+
+        if (spellCreation == null)
+            spellCreation = GameObject.Find("Spell").GetComponent<SpellCreation>();
+
         GameObject spellObject = spellCreation.CreateSpellInWorld(spell, castSpawn.position, rotationToTarget);
         
 
         if (PhotonNetwork.isMasterClient)
         {
-            SpellCollision.AddSpellCollision(spellObject, spell.projectileRadius, shotBy); //Only master client detects collision
-            SpellIdentifier.AddSpellIdentifier(spellObject, gameObject, PhotonPlayer.Find(shotBy), shotBy);
-            Debug.Log("GameObject: " + gameObject.name);
+            SpellCollision.AddSpellCollision(spellObject, spell.projectileRadius); //Only master client detects collision
+            SpellIdentifier.AddSpellIdentifier(spellObject, gameObject, shotBy);
         }
 
         spellObject.name = OurGameManager.AddProjectileNumberToSpell(spell.name);

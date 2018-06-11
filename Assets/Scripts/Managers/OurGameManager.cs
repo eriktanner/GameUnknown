@@ -8,19 +8,18 @@ public class OurGameManager : MonoBehaviour
     static uint projectileCount = 0;
 
     SpawnSpots[] spawnSpots;
-    static GameObject localPlayer;
-    
 
+    static GameObject localPlayer;
     public static GameObject LocalPlayer
     {
         get { return localPlayer; }
     }
 
-    
+
 
     void Start()
     {
-        spawnSpots = FindObjectsOfType<SpawnSpots>();
+        spawnSpots = FindObjectsOfType<SpawnSpots>(); 
         SpawnPlayer();
     }
 
@@ -32,9 +31,9 @@ public class OurGameManager : MonoBehaviour
             Debug.Log("No Spawn spots");
             return;
         }
+
         localPlayer = PhotonNetwork.Instantiate("OurPlayer", spawnSpot.transform.position, spawnSpot.transform.rotation, 0);
         PhotonNetwork.player.TagObject = localPlayer;
-
     }
 
     /*This is going to be used to destroy projectiles on all clients
