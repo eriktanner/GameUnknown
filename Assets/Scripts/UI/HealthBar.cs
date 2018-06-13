@@ -12,7 +12,7 @@ public class HealthBar : Photon.MonoBehaviour {
     float totalHealth = 1000;
     float currentHealth;
     float HealthRegenerationWaitTime = 5.0f;
-    float regenerationRate = 0.05f;
+    float regenerationRate = 0.15f;
 
     private Coroutine regenerateHealthRoutine;
 

@@ -5784,11 +5784,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputDelay: 0.1
-  forwardVelocity: 7
+  forwardVelocity: 4.5
   rotateVelocity: 2.2
-  leftRightVelocity: 5
+  leftRightVelocity: 3.5
   jumpVelocity: 160
-  dashVelocity: 220
+  dashVelocity: 200
   dashCooldownTime: 12
   animator: {fileID: 0}
   currentX: 0
@@ -6216,7 +6216,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: ef82fa6dcf7df2948ae14efb8dc7a94c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}

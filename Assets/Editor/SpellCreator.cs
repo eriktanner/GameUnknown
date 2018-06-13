@@ -13,7 +13,7 @@ public class SpellCreator : EditorWindow {
         spellWindow.Show();
     }
 
-    Spell tempSpell = null;
+    SpellStats tempSpell = null;
     SpellManager spellManager = null;
 
     void OnGUI()
@@ -45,12 +45,12 @@ public class SpellCreator : EditorWindow {
         if (tempSpell == null)
         {
             if (GUILayout.Button("Create Spell"))
-                tempSpell = CreateInstance<Spell>();
+                tempSpell = CreateInstance<SpellStats>();
         } else
         {
             if (GUILayout.Button("Create Scriptable Object"))
             {
-                AssetDatabase.CreateAsset(tempSpell, "Assets/Resources/Spells/" + tempSpell.spellName + ".asset");
+                AssetDatabase.CreateAsset(tempSpell, "Assets/Resources/SpellStats/" + tempSpell.spellName + ".asset");
                 AssetDatabase.SaveAssets();
                 spellManager.spellList.Add(tempSpell);
                 Selection.activeObject = tempSpell;

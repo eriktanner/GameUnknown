@@ -1,18 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SpellIdentifier : MonoBehaviour {
+
+    public string SpellName;
     public int ShotBy;
-    public GameObject PlayerGameObject;
+    public string ShotByName;
+    
+    
 
-    public PhotonPlayer PlayerPhotonPlayer;
-
-    public static GameObject AddSpellIdentifier(GameObject attachTo, GameObject playerGameObject, int shotBy)
+    public static GameObject AddSpellIdentifier(GameObject attachTo, string spellName, string shotByName, int shotBy)
     {
         SpellIdentifier spellIdentifier = attachTo.AddComponent<SpellIdentifier>();
-        spellIdentifier.PlayerGameObject = playerGameObject;
-        spellIdentifier.PlayerPhotonPlayer = PhotonPlayer.Find(shotBy);
+        spellIdentifier.SpellName = SpellManager.getOriginalSpellName(spellName);
+        spellIdentifier.ShotByName = shotByName;
         spellIdentifier.ShotBy = shotBy;
         return attachTo;
     }

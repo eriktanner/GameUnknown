@@ -77,11 +77,16 @@ public class CastSpell : Photon.MonoBehaviour
             if (!spellList.isOnCooldown(4))
                 FireSpell(spellList.GetSpellAtIndex(4));
         }
+        if (Input.GetButtonDown("Spell6"))
+        {
+            if (!spellList.isOnCooldown(5))
+                FireSpell(spellList.GetSpellAtIndex(5));
+        }
         cancelCast = Input.GetButtonDown("CancelCast");
     }
     
 
-    void FireSpell(Spell spell)
+    void FireSpell(SpellStats spell)
     {
         if (!spell || spellLock)
             return;
@@ -106,7 +111,7 @@ public class CastSpell : Photon.MonoBehaviour
     }
 
     /*This waits the cast time and then fires the spell, we may want to get rid of the pin point accuracy*/
-    private IEnumerator CastAndFire(Spell spell)
+    private IEnumerator CastAndFire(SpellStats spell)
     {
         spellLock = true;
         castBar.CastSpellUI(spell);
@@ -118,7 +123,7 @@ public class CastSpell : Photon.MonoBehaviour
         RaycastHit camHit;
         bool camFoundHit;
 
-        LayerMask ignorePlayerMask = ~(1 << 8);
+        LayerMask ignorePlayerMask = ~(1 << 8); //this may not be good for targeting other players
 
         Vector3 hitPoint;
         float rangeToUse = spell.maxRange + 4;
@@ -132,6 +137,7 @@ public class CastSpell : Photon.MonoBehaviour
             camFoundHit = false;
             hitPoint = cam.transform.position + cam.transform.forward * rangeToUse + new Vector3(0, .4f, 0);
         }
+
 
         bool didHitValidLayer = ValidSpellLayer.SpellHitValidLayerBySpell(spell.name, camHit);
         bool isWithinRangeOfSpell = ValidSpellDistance.SpellIsInRange(spell.name, transform.position, camHit.point, camFoundHit);
@@ -164,18 +170,18 @@ public class CastSpell : Photon.MonoBehaviour
     [PunRPC]/*Tells server to create a spell object on each client. */
     void RpcFireSpell(string spellName, Quaternion rotationToTarget, int shotBy)
     {
-        Spell spell = SpellManager.getSpellFromName(spellName);
+        SpellStats spell = SpellManager.GetSpellStatsFromName(spellName);
 
         if (spellCreation == null)
             spellCreation = GameObject.Find("Spell").GetComponent<SpellCreation>();
 
-        GameObject spellObject = spellCreation.CreateSpellInWorld(spell, castSpawn.position, rotationToTarget);
-        
+        GameObject spellObject = spellCreation.CreateSpellInWorld(spell, castSpawn.position, rotationToTarget, gameObject.name, shotBy);
+
 
         if (PhotonNetwork.isMasterClient)
         {
             SpellCollision.AddSpellCollision(spellObject, spell.projectileRadius); //Only master client detects collision
-            SpellIdentifier.AddSpellIdentifier(spellObject, gameObject, shotBy);
+
         }
 
         spellObject.name = OurGameManager.AddProjectileNumberToSpell(spell.name);

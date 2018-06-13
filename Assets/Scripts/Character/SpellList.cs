@@ -8,17 +8,18 @@ using UnityEngine;
 Possibly think about giving each spell a class with Spell, cooldown timer, etc*/
 public class SpellList : MonoBehaviour {
     
-    Spell[] spellList = new Spell[6];
+    SpellStats[] spellList = new SpellStats[6];
     float[] spellCooldowns = new float[6];
 
 
     void Start()
     {
         addToSpellList("Fireball", 0);
-        addToSpellList("Fear", 1);
+        addToSpellList("Pain", 1);
         addToSpellList("Arcane Missile", 2);
         addToSpellList("Soul Void", 3);
         addToSpellList("Ice Wall", 4);
+        addToSpellList("Fear", 5);
     }
 
     void Update()
@@ -38,7 +39,7 @@ public class SpellList : MonoBehaviour {
     }
  
 
-    public Spell GetSpellAtIndex(int index)
+    public SpellStats GetSpellAtIndex(int index)
     {
         if (index < 0 || index > 5)
         {
@@ -48,7 +49,7 @@ public class SpellList : MonoBehaviour {
     }
 
     /*Triggers cooldown at spellCooldown index that corresponds to the spell index*/
-    public void TriggerCooldown(Spell spell)
+    public void TriggerCooldown(SpellStats spell)
     {
         for (int i = 0; i < 6; i++)
         {
@@ -83,7 +84,7 @@ public class SpellList : MonoBehaviour {
 
         if (!spellAlreadyExists)
         {
-            spellList[index] = SpellManager.getSpellFromName(spellName);
+            spellList[index] = SpellManager.GetSpellStatsFromName(spellName);
         }
     }
 

@@ -16,15 +16,14 @@ public static class ValidSpellLayer {
     /*Certain spells are going to require certain layers to be hit before particles are instatiated*/
     public static bool SpellHitValidLayerBySpell(string spellName, RaycastHit Hit)
     {
-        
+        Spell spell = SpellDictionary.GetSpellFromSpellName(spellName);
 
-        if (spellName.StartsWith("Fear"))
+        if (spell != null && spell.IsValidDistanceChecked)
+        {
             return validLayerGround(Hit);
-        else if (spellName.StartsWith("Ice Wall"))
-            return validLayerGround(Hit);
-        else
-            return true;
+        }
 
+        return true;
     }
 
 

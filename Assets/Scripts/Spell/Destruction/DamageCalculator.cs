@@ -5,13 +5,13 @@ using UnityEngine;
 /*This class handles calculation of damage randomization and critical damage of spells*/
 public class DamageCalculator : Photon.MonoBehaviour {
 
-    Spell spell;
+    SpellStats spell;
     public float DamageToDo { get; set; }
     public bool IsCriticalDamage { get; set; }
 
 
     /*TODO Make a Damage Controller that takes isntances of damage so that we dont keep reinstatiating it*/
-    public DamageCalculator(Spell spell)
+    public DamageCalculator(SpellStats spell)
     {
         this.spell = spell;
         CalculateDamage();

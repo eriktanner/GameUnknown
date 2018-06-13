@@ -12,41 +12,29 @@ public static class ValidSpellDistance {
         InGameMessageDisplay.DisplayMessage("Out of range", 3);
     }
 
-    /*Looks up to see if a spell requires a valid distance in order for it to be casted. We need this so
-     that we can assign that spell cast an arbirtatily large destroy time (so that it not a valid cast and
-     destroyed by time before it gets to its hit point) (Destroy by time often does not produce same length 
-     of spell travel)*/
-    public static bool hasValidDistanceCheckBeforeCast(string spellName)
-    {
-        if (spellName.StartsWith("Fear"))
-            return true;
-        else if (spellName.StartsWith("Soul Void"))
-            return true;
-        else if (spellName.StartsWith("Ice Wall"))
-            return true;
-        else
-            return false;
-    }
-
+   
     /*Certain spells are going to require certain layers to be hit before particles are instatiated*/
     public static bool SpellIsInRange(string spellName, Vector3 origin, Vector3 hitPosition, bool rayDidMakeContact)
     {
+
         float distance = (hitPosition - origin).magnitude;
+        Spell spell = SpellDictionary.GetSpellFromSpellName(spellName);
 
-        if (spellName.StartsWith("Fear"))
+        if (spell != null && spell.IsValidDistanceChecked)
+        {
             return validRange(spellName, distance, rayDidMakeContact);
-        else if (spellName.StartsWith("Soul Void"))
-            return validRange(spellName, distance, rayDidMakeContact);
-        else if (spellName.StartsWith("Ice Wall"))
-            return validRange(spellName, distance, rayDidMakeContact);
-        else
-            return true;
+        }
 
+        if (spell == null)
+        {
+            Debug.Log("SpellDictionary.GetSpellFromSpellName(spellName: is null");
+        }
+        return true;
     }
 
     static bool validRange(string spellName, float distance, bool rayDidMakeContact)
     {
-        Spell spell = SpellManager.getSpellFromName(spellName);
+        SpellStats spell = SpellManager.GetSpellStatsFromName(spellName);
         bool isInRange = distance < spell.maxRange;
         if (!isInRange || !rayDidMakeContact)
         {

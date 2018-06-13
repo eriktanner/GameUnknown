@@ -8,7 +8,7 @@ public class SoulVoidEffect : MonoBehaviour {
     int STUN_MILLISECONDS = 2500;
 
     int ShotBy;
-    Spell spell;
+    SpellStats spell;
     GameObject PlayerHit;
     CharacterMovementController playerMovement;
     Animator animator;
@@ -23,7 +23,7 @@ public class SoulVoidEffect : MonoBehaviour {
         playerMovement = playerObject.GetComponent<CharacterMovementController>();
         animator = playerMovement.animator;
         playerCastSpell = playerObject.GetComponent<CastSpell>();
-        spell = SpellManager.getSpellFromName("Soul Void");
+        spell = SpellManager.GetSpellStatsFromName("Soul Void");
         damageApplier = GameObject.Find("Spell").GetComponent<SpellDamageApplier>();
     }
 

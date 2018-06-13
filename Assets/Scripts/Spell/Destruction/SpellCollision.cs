@@ -21,13 +21,13 @@ public class SpellCollision : MonoBehaviour
 
     void Start()
     {
-        spell = SpellManager.getSpellFromName(gameObject.name);
+        spell = SpellDictionary.GetSpellFromSpellObject(gameObject);
         spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
         spellDestruction = GameObject.Find("Spell").GetComponent<SpellDestruction>();
         ShotBy = gameObject.GetComponent<SpellIdentifier>().ShotBy;
 
 
-        isInstantCollisionChecked = isInstantCollisionCheckBySpell(spell.name);
+        isInstantCollisionChecked = spell.IsInstantCollision;
         if (isInstantCollisionChecked)
         {
             instantCollisionHitCheck();
@@ -46,13 +46,13 @@ public class SpellCollision : MonoBehaviour
     /*Faster spells require longer sphere casts*/
     void SetDistanceOfSpehereCast()
     {
-        distanceOfSphereCast = spell.projectileSpeed * .1f;
+        distanceOfSphereCast = spell.SpellStats.projectileSpeed * .1f;
 
-        if (spell.projectileSpeed > 50)
+        if (spell.SpellStats.projectileSpeed > 50)
             distanceOfSphereCast *= 2.0f;
-        else if (spell.projectileSpeed > 40)
+        else if (spell.SpellStats.projectileSpeed > 40)
             distanceOfSphereCast *= 1.5f;
-        else if (spell.projectileSpeed > 30)
+        else if (spell.SpellStats.projectileSpeed > 30)
             distanceOfSphereCast *= 1.2f;
     }
 
@@ -99,13 +99,13 @@ public class SpellCollision : MonoBehaviour
 
             if (hitTransform.tag == "Player")
             {
-                Damage damage = new Damage(spell, hitTransform.gameObject, ShotBy);
+                Damage damage = new Damage(spell.SpellStats, hitTransform.gameObject, ShotBy);
                 damage.ApplyDamage();
             }
             
         }
 
-        spellDestruction.NetworkCallRpcDestroySpellOnCollision(gameObject.name, Hit.point, ShotBy);
+        spellDestruction.NetworkRpcDestroySpellOnCollision(gameObject.name, Hit.point, ShotBy);
     }
 
 
@@ -117,27 +117,10 @@ public class SpellCollision : MonoBehaviour
         Vector3 direction = transform.forward;
         RaycastHit Hit;
 
-        if (Physics.Raycast(origin, direction, out Hit, spell.maxRange))
+        if (Physics.Raycast(origin, direction, out Hit, spell.SpellStats.maxRange))
         {
             OnSpellHit(Hit);
         }
     }
-
-
-    /*Similar results to is ValidDistanceCheck, except also includes spells such as Pain*/
-    static bool isInstantCollisionCheckBySpell(string spellName)
-    {
-        if (spellName.StartsWith("Pain"))
-            return true;
-        if (spellName.StartsWith("Fear"))
-            return true;
-        else if (spellName.StartsWith("Soul Void"))
-            return true;
-        else if (spellName.StartsWith("Ice Wall"))
-            return true;
-        else
-            return false;
-    }
-    
 
 }

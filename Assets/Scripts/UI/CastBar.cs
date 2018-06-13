@@ -31,7 +31,7 @@ public class CastBar : MonoBehaviour {
     }
 
     /*Displays the UI for a spell being casted*/
-    public void CastSpellUI(Spell spell)
+    public void CastSpellUI(SpellStats spell)
     {
         castBarSlider.value = 0;
 
@@ -41,7 +41,7 @@ public class CastBar : MonoBehaviour {
     }
 
     /*Fills the cast bar UI, showing a spell is being casted*/
-    private IEnumerator FillBar(Spell spell)
+    private IEnumerator FillBar(SpellStats spell)
     {
 
         castBarSlider.gameObject.SetActive(true);

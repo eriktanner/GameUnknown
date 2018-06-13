@@ -2,7 +2,7 @@
 
 
 /*Destroys a fireball. Fireballs dissapears but smoke remains TODO*/
-public class DestroyFireball : MonoBehaviour {
+public class DestroyFireball {
 
     GameObject player;
     GameObject spellObject;
@@ -12,7 +12,6 @@ public class DestroyFireball : MonoBehaviour {
     {
         player = playerObject;
         spellObject = spellObjectIn;
-        spellDestruction = player.GetComponent<SpellDestruction>();
     }
 
 
@@ -21,9 +20,16 @@ public class DestroyFireball : MonoBehaviour {
     {
         if (spellObject == null)
             return;
-
-        Spell spell = SpellManager.getSpellFromName(spellObject.name);
-        spellDestruction.defaultDestroy(spellObject);
         
+        GameObject.Destroy(spellObject);
+    }
+
+    /*Destoys collision particles after set timer*/
+    public void explodeFireball()
+    {
+        if (spellObject == null)
+            return;
+
+        GameObject.Destroy(spellObject, 1.5f);
     }
 }

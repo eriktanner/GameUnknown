@@ -34,7 +34,6 @@ public class ManaBar : Photon.MonoBehaviour {
         if (currentMana < 0)
             currentMana = 0;
         manaBarSlider.value = currentMana;
-        Debug.Log("burning mana: " + manaBarSlider.value);
         regenerateMana();
     }
 

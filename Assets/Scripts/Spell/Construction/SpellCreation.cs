@@ -18,24 +18,30 @@ public class SpellCreation : MonoBehaviour {
 
 
     /*Creates the spell in world, gives it movement, and destruction timer*/
-    public GameObject CreateSpellInWorld(Spell spell, Vector3 position, Quaternion rotation)
+    public GameObject CreateSpellInWorld(SpellStats spell, Vector3 position, Quaternion rotation, string shotByName, int shotBy)
     {
         GameObject spellObject = Instantiate(spell.prefab, position, rotation);
-        spellObject.AddComponent<SpellMovement>();
 
+
+        //Components
+        spellObject.AddComponent<SpellMovement>();
+        System.Type SpellType = SpellDictionary.GetComponentType(SpellManager.getOriginalSpellName(spell.name));
+        spellObject.AddComponent(SpellType);
+
+        //Identify
+        SpellIdentifier.AddSpellIdentifier(spellObject, spell.name, shotByName, shotBy);
         spellObject.name = spell.name;
         spellObject.tag = "Spell";
         spellObject.layer = 10;
-
-        
-        if (ValidSpellDistance.hasValidDistanceCheckBeforeCast(spell.name)) //Distance verified BEFORE cast, we can give large destroy time
-            spellDestruction.destroySpell(spellObject, 10);
-        else
-            spellDestruction.destroySpell(spellObject, spell.maxRange / spell.projectileSpeed); //Regular timed destroy, d = r * t (However often innaccurate)
-
         spellObject.transform.parent = spellManager.SpellManagerTransform;
+
+
+        //Init Lifespan Timer
+        spellDestruction.DestroySpellByTime(spellObject);
         return spellObject;
     }
+
+
 
 
 

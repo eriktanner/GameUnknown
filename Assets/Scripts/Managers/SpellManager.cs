@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 public class SpellManager : MonoBehaviour
 {
 
-    public List<Spell> spellList = new List<Spell>();
+    public List<SpellStats> spellList = new List<SpellStats>();
     public List<GameObject> spawnablePrefabs = new List<GameObject>();
     Transform spellManagerTransform;
 
@@ -14,6 +14,7 @@ public class SpellManager : MonoBehaviour
     void Start()
     {
         spellManagerTransform = GameObject.Find("Managers/SpellManager").transform;
+        SpellDictionary.InitSpellDictionary();
     }
 
     public Transform SpellManagerTransform
@@ -21,11 +22,20 @@ public class SpellManager : MonoBehaviour
         get { return spellManagerTransform; }
     }
 
-    public static Spell getSpellFromName(string spellName)
+    public static SpellStats GetSpellStatsFromName(string spellName)
     {
-        spellName = Regex.Replace(spellName, @"[0-9]", string.Empty);
-        return (Spell) Resources.Load("Spells/" + spellName, typeof(Spell)); //We are going to need to make a dictionary for this for performance
+        spellName = getOriginalSpellName(spellName);
+        return (SpellStats) Resources.Load("SpellStats/" + spellName, typeof(SpellStats)); //We are going to need to make a dictionary for this for performance
     }
+
+    public static string getOriginalSpellName(string spellName)
+    {
+        string removeFromString = Regex.Replace(spellName, @"[0-9]", string.Empty);
+        removeFromString = Regex.Replace(removeFromString, "Clone", string.Empty);
+        removeFromString = Regex.Replace(removeFromString, "[()]", string.Empty);
+        return removeFromString;
+    }
+    
 
     public static GameObject getObjectFromSpellName(string spellName)
     {

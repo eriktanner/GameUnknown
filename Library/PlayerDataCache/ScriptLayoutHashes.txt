@@ -67,6 +67,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 86d36c43c53541d667100dc90b89cfba UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 9ee352c8e172702d238c396bd428f5a3 Assembly-CSharp.dll:.InputToEvent
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Fear
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -142,7 +143,6 @@ d7c3cc9e6aeec9a00634f6abffbe35e2 Assembly-CSharp.dll:.ConnectAndJoinRandom
 72e5ebea62576bb9a8c3a0213137cb6d Assembly-CSharp.dll:.Launcher
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ExplodeIceWall
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
@@ -151,11 +151,12 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 e3bfb26d2f8a8a39f24d324d3d226cc1 Assembly-CSharp.dll:CameraController.CameraController
 1dd5afbe72b78672a791f893fdff3e5f Assembly-CSharp.dll:DigitalRuby.PyroParticles.FireBaseScript
 0de88d96fd292d919299f7af4af26e8d Assembly-CSharp.dll:.IdleChanger
+fd2f487588649455d2388ca7858457aa Assembly-CSharp.dll:.SpellStats
 4ce2b1853c9a392b036a6a654be90ccb Assembly-CSharp.dll:.OnClickInstantiate
 090584907af2e462994cc893ced507b3 Assembly-CSharp.dll:.PhotonRigidbodyView
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpellList
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PhotonNetworkManager
-d0e5e8142e17b83fe61780a155b9b163 Assembly-CSharp.dll:.SpellIdentifier
+08716fa69bdee9282085ff96c04160ab Assembly-CSharp.dll:.SpellIdentifier
 49bc66d54afe3d873c5e04e0dc2980ab Assembly-CSharp.dll:.PhotonTransformView
 c0ad1fb5d400aa83cb257e5f6c3714cf Assembly-CSharp.dll:.OnClickDestroy
 5daf445123fe683ecda685002667e59a Assembly-CSharp.dll:.SFB_ParticleGrowOverTime
@@ -166,6 +167,7 @@ c0ad1fb5d400aa83cb257e5f6c3714cf Assembly-CSharp.dll:.OnClickDestroy
 b9efe2a0d1c9ba7bc46e66a07a897115 Assembly-CSharp.dll:.ServerSettings
 43294ec8a676944978bb7198ea43935c Assembly-CSharp.dll:DigitalRuby.PyroParticles.FireLightScript
 e3db0de06ede87e84b88d4a2079f2b57 Assembly-CSharp.dll:ExitGames.UtilityScripts.TextButtonTransition
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DestroyPain
 c1d4772696f184fb2e081c05af1c31fc Assembly-CSharp.dll:.SFB_LightColorChange
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -208,7 +210,7 @@ ee8540d1efea9148410a914295c889e3 Assembly-CSharp.dll:.OnJoinedInstantiate
 6b7f3b627f03aa2dae54ad0ecb0a7d7a Assembly-CSharp.dll:.PhotonLagSimulationGui
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlayerUI
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-b77f3dc10919f98677f2bca45f6b68e7 Assembly-CSharp.dll:.SpellManager
+34a003198fdf16ef446c0b8fb5e9d65c Assembly-CSharp.dll:.SpellManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ExplodeSoulVoid
 26c2bd70ed88ab54212e03929d642afb Assembly-CSharp.dll:.CastSpell
 d45bccd0168f38d52f587b8d700aeb2c Assembly-CSharp.dll:.SFB_LightAutoOn
@@ -234,5 +236,6 @@ e1ff970319fa33ba4daa3ef83c5282a8 Assembly-CSharp.dll:.FloatingDamage
 b2dc25029b6f083ffbbdf9df269f825a Assembly-CSharp.dll:.InRoomChat
 3bd51ce799ce5be0ab7bda1988ae6eee Assembly-CSharp.dll:.PlayerCameraController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SceneLoader
-fd2f487588649455d2388ca7858457aa Assembly-CSharp.dll:.Spell
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpellMovement
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Fireball
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.IceWall

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb306c56963572847a3cb4e1abfcc542, type: 3}
+  m_Name: Fear
+  m_EditorClassIdentifier: 
+  spellName: Fear
+  shotBy: 
+  prefab: {fileID: 1774912816483602, guid: e89f1a44afdf3614898d214a113d6e5f, type: 2}
+  collisionParticle: {fileID: 100004, guid: c075eccfb32e94001be8045b50e5d286, type: 2}
+  icon: {fileID: 0}
+  cooldown: 15
+  damage: 0
+  manaCost: 70
+  maxRange: 30
+  projectileRadius: 0.15
+  projectileSpeed: 40
+  castTime: 1.2
