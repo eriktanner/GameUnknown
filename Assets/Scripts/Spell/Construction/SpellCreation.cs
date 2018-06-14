@@ -5,27 +5,16 @@ using UnityEngine;
 /*This class handles the in-world instation of spells*/
 public class SpellCreation : MonoBehaviour {
 
+    
 
-    SpellManager spellManager;
-    SpellDestruction spellDestruction;
-
-    void Start()
-    {
-        spellDestruction = GameObject.Find("Spell").GetComponent<SpellDestruction>();
-        spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
-    }
-
-
-
-    /*Creates the spell in world, gives it movement, and destruction timer*/
-    public GameObject CreateSpellInWorld(SpellStats spell, Vector3 position, Quaternion rotation, string shotByName, int shotBy)
+    /*Creates the spell in world and gives it movement*/
+    public static GameObject CreateSpellInWorld(SpellStats spell, Vector3 position, Quaternion rotation, string shotByName, int shotBy)
     {
         GameObject spellObject = Instantiate(spell.prefab, position, rotation);
 
-
         //Components
         spellObject.AddComponent<SpellMovement>();
-        System.Type SpellType = SpellDictionary.GetTypeFromSpellName(SpellManager.getOriginalSpellName(spell.name));
+        System.Type SpellType = SpellDictionary.GetTypeFromSpellName(spell.name);
         spellObject.AddComponent(SpellType);
 
         //Identify
@@ -33,16 +22,29 @@ public class SpellCreation : MonoBehaviour {
         spellObject.name = spell.name;
         spellObject.tag = "Spell";
         spellObject.layer = 10;
-        spellObject.transform.parent = spellManager.SpellManagerTransform;
+        spellObject.transform.parent = SpellManager.SpellManagerTransform;
 
-
-        //Init Lifespan Timer
-        spellDestruction.DestroySpellByTime(spellObject);
         return spellObject;
     }
 
 
+    public static GameObject CreateCollisionParticlesInWorld(string spellName, Vector3 position, SpellStats spellStats, SpellIdentifier spellIdentifierOfOriginalSpell)
+    {
+        if (spellIdentifierOfOriginalSpell == null)
+        {
+            Debug.Log("SpellCreation(CreateCollisionParticles): spellIdentifer is null");
+            return null;
+        }
 
+        string spellNameToTransfer = spellIdentifierOfOriginalSpell.SpellName;
+        int shotByToTransfer = spellIdentifierOfOriginalSpell.ShotByID;
+        string shotByNameToTransfer = spellIdentifierOfOriginalSpell.ShotByName;
 
+        GameObject collisionParticles = Instantiate(spellStats.collisionParticle, position, Quaternion.identity);
+        collisionParticles.AddComponent(SpellDictionary.GetTypeFromSpellName(SpellManager.GetOriginalSpellName(spellName)));
+        SpellIdentifier.AddSpellIdentifier(collisionParticles, spellNameToTransfer, shotByNameToTransfer, shotByToTransfer);
+
+        return collisionParticles;
+    }
 
 }

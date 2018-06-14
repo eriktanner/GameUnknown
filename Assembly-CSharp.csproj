@@ -155,7 +155,6 @@
      <Compile Include="Assets\Scripts\Managers\SpellManager.cs" />
      <Compile Include="Assets\Scripts\Network\Launcher.cs" />
      <Compile Include="Assets\Scripts\Network\NetworkPlayerSetup.cs" />
-     <Compile Include="Assets\Scripts\Network\OurNetworkManager.cs" />
      <Compile Include="Assets\Scripts\Network\PhotonNetworkManager.cs" />
      <Compile Include="Assets\Scripts\Network\PlayerNameInputField.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\Spell.cs" />

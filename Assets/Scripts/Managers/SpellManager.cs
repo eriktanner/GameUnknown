@@ -1,34 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
 
 public class SpellManager : MonoBehaviour
 {
 
+    public static SpellManager Instance { get; private set; }
+
     public List<SpellStats> spellList = new List<SpellStats>();
-    public List<GameObject> spawnablePrefabs = new List<GameObject>();
-    Transform spellManagerTransform;
+    public static List<GameObject> spawnablePrefabs = new List<GameObject>();
+    public static Transform SpellManagerTransform { get; private set; }
 
 
     void Start()
     {
-        spellManagerTransform = GameObject.Find("Managers/SpellManager").transform;
+        EnsureSingleton();
+        SpellManagerTransform = GameObject.Find("Managers/SpellManager").transform;
         SpellDictionary.InitSpellDictionary();
     }
 
-    public Transform SpellManagerTransform
+    void EnsureSingleton()
     {
-        get { return spellManagerTransform; }
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
+
+    
 
     public static SpellStats GetSpellStatsFromName(string spellName)
     {
-        spellName = getOriginalSpellName(spellName);
+        spellName = GetOriginalSpellName(spellName);
         return (SpellStats) Resources.Load("SpellStats/" + spellName, typeof(SpellStats)); //We are going to need to make a dictionary for this for performance
     }
 
-    public static string getOriginalSpellName(string spellName)
+    public static string GetOriginalSpellName(string spellName)
     {
         string removeFromString = Regex.Replace(spellName, @"[0-9]", string.Empty);
         removeFromString = Regex.Replace(removeFromString, "Clone", string.Empty);
@@ -37,12 +48,12 @@ public class SpellManager : MonoBehaviour
     }
     
 
-    public static GameObject getObjectFromSpellName(string spellName)
+    public static GameObject GetObjectFromSpellName(string spellName)
     {
         return GameObject.Find("Managers/SpellManager/" + spellName);
     }
 
-    public GameObject getSpawnablePrefab(string prefabName)
+    public static GameObject GetSpawnableSpellPrefab(string prefabName)
     {
         foreach (GameObject prefab in spawnablePrefabs)
         {

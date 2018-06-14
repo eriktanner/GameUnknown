@@ -23,6 +23,7 @@ public static class SpellDictionary
 
     public static System.Type GetTypeFromSpellName(string spellName)
     {
+        spellName = SpellManager.GetOriginalSpellName(spellName);
         return nameToType[spellName];
     }
 
@@ -37,7 +38,7 @@ public static class SpellDictionary
         }
 
 
-        string spellName = SpellManager.getOriginalSpellName(spellIdentifier.SpellName);
+        string spellName = SpellManager.GetOriginalSpellName(spellIdentifier.SpellName);
         if (spellName == null)
         {
             Debug.Log("SpellDictionary(GetSpellFromSpellObject): " + spellObject.name + " spellName is null.");
@@ -52,7 +53,7 @@ public static class SpellDictionary
     public static Spell GetSpellFromSpellName(string spellNameIn)
     {
         GameObject temp = new GameObject();
-        System.Type spellType = GetTypeFromSpellName(SpellManager.getOriginalSpellName(spellNameIn));
+        System.Type spellType = GetTypeFromSpellName(SpellManager.GetOriginalSpellName(spellNameIn));
         temp.AddComponent(spellType);
         return (Spell) temp.GetComponent(spellType);
     }

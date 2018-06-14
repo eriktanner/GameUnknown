@@ -10,15 +10,11 @@ public class DestroyIceWall {
 
     GameObject player;
     GameObject particles;
-    SpellManager spellManager;
 
     public DestroyIceWall(GameObject particlesIn)
     {
         player = OurGameManager.GetPlayerGameObject(particlesIn.GetComponent<SpellIdentifier>().ShotByName);
         particles = particlesIn;
-
-        if (GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>() != null)
-            spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
     }
 
 
@@ -27,7 +23,7 @@ public class DestroyIceWall {
     they are in line of sight, if so damage and stun*/
     public void explodeIceWall()
     {
-        GameObject iceWallPrefab = spellManager.getSpawnablePrefab("Ice Wall");
+        GameObject iceWallPrefab = SpellManager.GetSpawnableSpellPrefab("Ice Wall");
 
         Vector3 wallPosition = particles.gameObject.transform.position;
         Vector3 spaceBetween = wallPosition - player.transform.position;

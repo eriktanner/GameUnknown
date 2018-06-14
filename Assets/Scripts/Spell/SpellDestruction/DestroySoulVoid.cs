@@ -18,7 +18,7 @@ public class DestroySoulVoid : MonoBehaviour {
             return;
         
         particles = particlesIn;
-        ShotBy = spellIdentifier.ShotBy;
+        ShotBy = spellIdentifier.ShotByID;
         spellEffects = GameObject.Find("Spell").GetComponent<SpellEffects>();
     }
 

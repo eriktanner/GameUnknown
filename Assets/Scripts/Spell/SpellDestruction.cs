@@ -50,8 +50,8 @@ public class SpellDestruction : Photon.MonoBehaviour
     {
 
         SpellStats spellStats = SpellManager.GetSpellStatsFromName(spellName);
-        GameObject spellInWorldToDestroy = SpellManager.getObjectFromSpellName(spellName);
-        Spell spell = (Spell)spellInWorldToDestroy.GetComponent(SpellDictionary.GetTypeFromSpellName(SpellManager.getOriginalSpellName(spellName)));
+        GameObject spellInWorldToDestroy = SpellManager.GetObjectFromSpellName(spellName);
+        Spell spell = (Spell)spellInWorldToDestroy.GetComponent(SpellDictionary.GetTypeFromSpellName(spellName));
 
         if (spellInWorldToDestroy == null || spellStats == null || spell == null)
         {
@@ -59,29 +59,12 @@ public class SpellDestruction : Photon.MonoBehaviour
             return;
         }
 
-
         spell.SpellDestruction();
-
 
         if (spellStats.collisionParticle)
         {
-
             SpellIdentifier spellIdentifier = spellInWorldToDestroy.GetComponent<SpellIdentifier>();
-            if (spellIdentifier == null)
-            {
-                Debug.Log("SpellDestruction - RpcDestroySpellOnCollision: no spell Identifier");
-                return;
-            }
-
-            string SpellNameToTransfer = spellIdentifier.SpellName;
-            int shotByToTransfer = spellIdentifier.ShotBy;
-            string shotByNameToTransfer = spellIdentifier.ShotByName;
-
-
-            GameObject collisionParticles = Instantiate(spellStats.collisionParticle, position, Quaternion.identity);
-            collisionParticles.AddComponent(SpellDictionary.GetTypeFromSpellName(SpellManager.getOriginalSpellName(spellName)));
-            SpellIdentifier.AddSpellIdentifier(collisionParticles, SpellNameToTransfer, shotByNameToTransfer, shotByToTransfer);
-
+            GameObject collisionParticles = SpellCreation.CreateCollisionParticlesInWorld(spellName, position, spellStats, spellIdentifier);
             ExplodeParticles(collisionParticles);
         }
         else {
@@ -89,11 +72,13 @@ public class SpellDestruction : Photon.MonoBehaviour
         }
     }
 
-
     
+
+
+
 
     //*********************************** Utility ***************************************/
-    
+
     IEnumerator waitAndCall(GameObject spellObject, float waitTime, Action destroyMethod)
     {
         yield return new WaitForSeconds(waitTime);
@@ -109,7 +94,7 @@ public class SpellDestruction : Photon.MonoBehaviour
 
         if (spell.IsValidDistanceChecked) //Arbitrarily large
             lifespan = 10;
-        else{
+        else {
             float timeTakesToTravelMaxDistance = spell.SpellStats.maxRange / spell.SpellStats.projectileSpeed;
             lifespan = timeTakesToTravelMaxDistance;
         }

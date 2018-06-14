@@ -15,7 +15,6 @@ public class CastSpell : Photon.MonoBehaviour
     public ManaBar manaBar;
 
     CastBar castBar;
-    SpellManager spellManager;
     OurGameManager GameManager;
     Camera cam;
     Coroutine castRoutine;
@@ -31,8 +30,6 @@ public class CastSpell : Photon.MonoBehaviour
         //cam = Camera.main; **We will want to cache this upon entering game
         if (GameObject.Find("Canvas/CastBar").GetComponent<CastBar>() != null)
             castBar = GameObject.Find("Canvas/CastBar").GetComponent<CastBar>();
-        if (GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>() != null)
-            spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
         
 
         GameManager = GameObject.Find("Managers/GameManager").GetComponent<OurGameManager>();
@@ -175,7 +172,8 @@ public class CastSpell : Photon.MonoBehaviour
         if (spellCreation == null)
             spellCreation = GameObject.Find("Spell").GetComponent<SpellCreation>();
 
-        GameObject spellObject = spellCreation.CreateSpellInWorld(spell, castSpawn.position, rotationToTarget, gameObject.name, shotBy);
+        GameObject spellObject = SpellCreation.CreateSpellInWorld(spell, castSpawn.position, rotationToTarget, gameObject.name, shotBy);
+        spellDestruction.DestroySpellByTime(spellObject);
 
 
         if (PhotonNetwork.isMasterClient)
