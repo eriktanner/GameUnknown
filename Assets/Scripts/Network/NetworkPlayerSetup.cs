@@ -1,24 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Networking;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class NetworkPlayerSetup : Photon.MonoBehaviour {
 
     
     public Behaviour[] componentsToDisable;
-    CameraManager cameraManager;
-    OurGameManager GameManager;
-    
 
-    
+    OurGameManager GameManager;
     
 
 
     void Start()
     {
-        cameraManager = GameObject.Find("Managers/CameraManager").GetComponent<CameraManager>();
-        GameManager = GameObject.Find("Managers/GameManager").GetComponent<OurGameManager>();
+        GameManager = OurGameManager.Instance;
 
 
         if (!photonView.isMine)
@@ -28,7 +21,6 @@ public class NetworkPlayerSetup : Photon.MonoBehaviour {
         {
             SceneCamera.SetSceneCamActive(false);
         }
-
 
         AssignRemoteLayersAndTags();
         RegisterPlayer();

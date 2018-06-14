@@ -22,8 +22,8 @@ public class SpellCollision : MonoBehaviour
     void Start()
     {
         spell = SpellDictionary.GetSpellFromSpellObject(gameObject);
-        spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
-        spellDestruction = GameObject.Find("Spell").GetComponent<SpellDestruction>();
+        spellManager = SpellManager.Instance;
+        spellDestruction = SpellDestruction.Instance;
         ShotBy = gameObject.GetComponent<SpellIdentifier>().ShotByID;
 
 

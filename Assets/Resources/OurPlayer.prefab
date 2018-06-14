@@ -258,10 +258,10 @@ GameObject:
   - component: {fileID: 136791320027438046}
   - component: {fileID: 114493332049907336}
   - component: {fileID: 114976174454824804}
-  - component: {fileID: 114015491287944662}
-  - component: {fileID: 114672916418669896}
   - component: {fileID: 114058023315044536}
   - component: {fileID: 114957873712148622}
+  - component: {fileID: 114672916418669896}
+  - component: {fileID: 114015491287944662}
   - component: {fileID: 114523450497069904}
   - component: {fileID: 114799180023121030}
   - component: {fileID: 114346393917835004}
@@ -5618,7 +5618,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaBarSlider: {fileID: 114634005097917436}
-  manaText: {fileID: 0}
 --- !u!114 &114216779646517954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5881,9 +5880,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c14e4fa546c1047948c2dc850e0e1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookAtTransform: {fileID: 4581586549631056}
-  camTransform: {fileID: 4825426449655942}
-  maxDistance: 0
+  PlayerCamTransform: {fileID: 4825426449655942}
+  LookAtTransform: {fileID: 4581586549631056}
+  maxDistance: 2.5
 --- !u!114 &114625565766081884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5987,7 +5986,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarSlider: {fileID: 114520544363811242}
-  healthText: {fileID: 0}
 --- !u!114 &114683842805198330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6108,8 +6106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21fcaf8c1e537064c93b456aaf0daf03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ManaBar: {fileID: 114058023315044536}
+  SpellList: {fileID: 114957873712148622}
+  PlayerCameraController: {fileID: 114615666743409206}
   castSpawn: {fileID: 4431486795845504}
-  manaBar: {fileID: 114058023315044536}
 --- !u!124 &124719092461205718
 Behaviour:
   m_ObjectHideFlags: 1

@@ -27,7 +27,6 @@ public static class SpellDictionary
         return nameToType[spellName];
     }
 
-
     public static Spell GetSpellFromSpellObject(GameObject spellObject)
     {
         SpellIdentifier spellIdentifier = spellObject.GetComponent<SpellIdentifier>();
@@ -36,7 +35,6 @@ public static class SpellDictionary
             Debug.Log("SpellDictionary(GetSpellFromSpellObject): " + spellObject.name + " SpellIdentifier is null.");
             return null;
         }
-
 
         string spellName = SpellManager.GetOriginalSpellName(spellIdentifier.SpellName);
         if (spellName == null)
@@ -50,10 +48,20 @@ public static class SpellDictionary
     }
 
 
+    /*This needs to be fixed - Both creates a Gamebject and Destroys it - really bad effeciency - gets called every spell*/
     public static Spell GetSpellFromSpellName(string spellNameIn)
     {
         GameObject temp = new GameObject();
         System.Type spellType = GetTypeFromSpellName(SpellManager.GetOriginalSpellName(spellNameIn));
+
+        if (spellType == null)
+        {
+            Debug.Log("SpellDictionary(GetSpellFromSpellName): spellType is null");
+            return null;
+        }
+
+        GameObject.Destroy(temp, 3.0f);
+
         temp.AddComponent(spellType);
         return (Spell) temp.GetComponent(spellType);
     }

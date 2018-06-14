@@ -1,32 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+
+[RequireComponent((typeof(Camera)))]
 public class PlayerCameraController : MonoBehaviour {
 
     const float MIN_CLAMP_ANGLE = -60f, MAX_CLAMP_ANGLE = 70.0f;
     const float SMOOTH_SPEED_IN = .999f, SMOOTH_SPEED_OUT = 1.02f;
 
-    public Transform lookAtTransform, camTransform;
-    public float maxDistance;
+    public Transform LookAtTransform;
+    public float DefaultDistance = 2.5f;
 
+    Camera PlayerCam;
+    Transform PlayerCamTransform;
     float distance;
-    float currentY = 0.0f;
-    float sensitivity; //Get From Settings
+    float currentY;
+    float sensitivity = .5f;
     Vector3 offset;
     
 
     void Start() {
-        camTransform = transform;
-        if (lookAtTransform == null)
-            lookAtTransform = camTransform;
-        maxDistance = 2.5f;
-        distance = maxDistance;
-        sensitivity = .5f;
-        offset = new Vector3(0, 0, -maxDistance);
-
-
-        
+        PlayerCam = GetComponent<Camera>();
+        PlayerCamTransform = PlayerCam.transform;
+        distance = DefaultDistance;
+        offset = new Vector3(0, 0, -DefaultDistance); 
     }
 
     void Update() {
@@ -43,36 +39,62 @@ public class PlayerCameraController : MonoBehaviour {
     void UpdateCamera()
     {
         offset = new Vector3(offset.x, offset.y, -distance);
-        camTransform.position = lookAtTransform.position + lookAtTransform.rotation * offset;
-        camTransform.LookAt(lookAtTransform.position);
+        PlayerCamTransform.position = LookAtTransform.position + LookAtTransform.rotation * offset;
+        PlayerCamTransform.LookAt(LookAtTransform.position);
  
         Quaternion upAndDown = Quaternion.Euler(-currentY * sensitivity, 0, 0);
-        camTransform.localRotation *= upAndDown;
+        PlayerCamTransform.localRotation *= upAndDown;
     }
 
 
     /*Manual lerping of camera if camera collides with an object*/
     void CameraCollision() {
         RaycastHit hit;
-        if (Physics.Linecast(lookAtTransform.position, camTransform.position, out hit))
+        if (Physics.Linecast(LookAtTransform.position, PlayerCamTransform.position, out hit))
         {
-            distance = Mathf.Clamp(hit.distance * SMOOTH_SPEED_IN, 1, maxDistance);
+            distance = Mathf.Clamp(hit.distance * SMOOTH_SPEED_IN, 1, DefaultDistance);
         }
         else
         {
-            float isNextDistanceACollisionDistance = Mathf.Clamp(distance * SMOOTH_SPEED_OUT, 1, maxDistance);
+            float isNextDistanceACollisionDistance = Mathf.Clamp(distance * SMOOTH_SPEED_OUT, 1, DefaultDistance);
             Vector3 testOffset = new Vector3(offset.x, offset.y, -isNextDistanceACollisionDistance);
 
             //NOTE - Code is copied from UpdateCamera()
-            Transform nextCamTransform = camTransform;
-            nextCamTransform.position = lookAtTransform.position + lookAtTransform.rotation * testOffset;
+            Transform nextCamTransform = PlayerCamTransform;
+            nextCamTransform.position = LookAtTransform.position + LookAtTransform.rotation * testOffset;
 
             //Pushes camera back if it wont cause a new collision - caused jittery cam
-            if (!Physics.Linecast(lookAtTransform.position, nextCamTransform.position, out hit))
+            if (!Physics.Linecast(LookAtTransform.position, nextCamTransform.position, out hit))
             {
-                distance = Mathf.Clamp(distance * SMOOTH_SPEED_OUT, 1, maxDistance);
+                distance = Mathf.Clamp(distance * SMOOTH_SPEED_OUT, 1, DefaultDistance);
             }
         }
     }
+
+
+
+    public Vector3 GetHitmarkerPointInWorld(SpellStats spell, out RaycastHit camHit, out bool camFoundHit)
+    {
+        Ray camRay = PlayerCam.ViewportPointToRay(Vector3.one * 0.5f);
+
+        LayerMask ignorePlayerMask = ~(1 << 8);
+        float rangeToUse = spell.maxRange + 3.0f;
+
+        Vector3 hitPoint;
+
+        if (Physics.Raycast(camRay, out camHit, rangeToUse, ignorePlayerMask))
+        {
+            camFoundHit = true;
+            hitPoint = camHit.point;
+        }
+        else
+        {
+            camFoundHit = false;
+            hitPoint = PlayerCam.transform.position + PlayerCam.transform.forward * rangeToUse + new Vector3(0, .4f, 0);
+        }
+        return hitPoint;
+    }
+
+
 
 }

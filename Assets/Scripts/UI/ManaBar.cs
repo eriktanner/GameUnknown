@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ManaBar : Photon.MonoBehaviour {
 
     public Slider manaBarSlider = null;  //reference for slider
-    public Text manaText;   //reference for text
 
     float currentMana, totalMana = 1000;
     float manaRegenerationWaitTime = 3.0f;

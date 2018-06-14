@@ -28,7 +28,6 @@ public class SpellManager : MonoBehaviour
     }
 
 
-
     public static SpellStats GetSpellStatsFromName(string spellName)
     {
         spellName = GetOriginalSpellName(spellName);

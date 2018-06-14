@@ -6,7 +6,7 @@ using System;
 [RequireComponent((typeof(CapsuleCollider)))]
 public class CharacterMovementController : MonoBehaviour {
 
-    const float FORWARD_TO_BACKWARD_RATIO = 0.5f;
+    const float FORWARD_TO_BACKWARD_RATIO = 1.0f;
 
     public float inputDelay = 0.1f;
     public float forwardVelocity = 7.0f, rotateVelocity = 2.2f;

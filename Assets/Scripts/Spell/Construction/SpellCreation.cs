@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 
 /*This class handles the in-world instation of spells*/
-public class SpellCreation {
+public static class SpellCreation {
 
-    
 
     /*Creates the spell in world and gives it movement*/
     public static GameObject CreateSpellInWorld(SpellStats spell, Vector3 position, Quaternion rotation, string shotByName, int shotBy)
@@ -51,6 +50,8 @@ public class SpellCreation {
         GameObject collisionParticles = GameObject.Instantiate(spellStats.collisionParticle, position, Quaternion.identity);
         collisionParticles.AddComponent(SpellDictionary.GetTypeFromSpellName(SpellManager.GetOriginalSpellName(spellName)));
         SpellIdentifier.AddSpellIdentifier(collisionParticles, spellNameToTransfer, shotByNameToTransfer, shotByToTransfer);
+
+        collisionParticles.transform.parent = SpellManager.SpellManagerTransform;
 
         return collisionParticles;
     }

@@ -4,23 +4,30 @@ using UnityEngine;
 
 public class OurGameManager : MonoBehaviour
 {
+    public static OurGameManager Instance { get; private set; }
+
+    public static GameObject LocalPlayer { get; private set; }
 
     static uint projectileCount = 0;
+    static SpawnSpots[] spawnSpots;
 
-    SpawnSpots[] spawnSpots;
-
-    static GameObject localPlayer;
-    public static GameObject LocalPlayer
-    {
-        get { return localPlayer; }
-    }
+    
 
 
 
     void Start()
     {
+        EnsureSingleton();
         spawnSpots = FindObjectsOfType<SpawnSpots>(); 
         SpawnPlayer();
+    }
+
+    void EnsureSingleton()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
     void SpawnPlayer()
@@ -32,8 +39,8 @@ public class OurGameManager : MonoBehaviour
             return;
         }
 
-        localPlayer = PhotonNetwork.Instantiate("OurPlayer", spawnSpot.transform.position, spawnSpot.transform.rotation, 0);
-        PhotonNetwork.player.TagObject = localPlayer;
+        LocalPlayer = PhotonNetwork.Instantiate("OurPlayer", spawnSpot.transform.position, spawnSpot.transform.rotation, 0);
+        PhotonNetwork.player.TagObject = LocalPlayer;
     }
 
     /*This is going to be used to destroy projectiles on all clients

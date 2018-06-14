@@ -1,88 +1,76 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
-/*This class handles user input related to casting spells*/
 [RequireComponent((typeof(ManaBar)))]
+[RequireComponent((typeof(SpellList)))]
+[RequireComponent((typeof(PlayerCameraController)))]
 public class CastSpell : Photon.MonoBehaviour
-{
-    SpellList spellList;
-    SpellDestruction spellDestruction;
+{  
+    public ManaBar ManaBar;
+    public SpellList SpellList;
+    public PlayerCameraController PlayerCameraController;
     public Transform castSpawn;
-    public ManaBar manaBar;
 
-    CastBar castBar;
-    OurGameManager GameManager;
-    Camera cam;
-    Coroutine castRoutine;
+    SpellDestruction SpellDestruction;
+    Coroutine CastRoutine;
+    CastBar CastBar;
 
-    bool spellLock = false;
-    bool cancelCast = false;
+    bool SpellLock = false;
+    bool DoCancelCast = false;
     
 
 
     void Start()
     {
-
-        //cam = Camera.main; **We will want to cache this upon entering game
-        if (GameObject.Find("Canvas/CastBar").GetComponent<CastBar>() != null)
-            castBar = GameObject.Find("Canvas/CastBar").GetComponent<CastBar>();
-        
-
-        GameManager = GameObject.Find("Managers/GameManager").GetComponent<OurGameManager>();
-
-        spellDestruction = GameObject.Find("Spell").GetComponent<SpellDestruction>();
-
-        spellList = GetComponent<SpellList>();
+        CastBar = CastBar.Instance;
+        SpellDestruction = SpellDestruction.Instance;
     }
 
     void Update()
     {
         GetInput();
         CancelCast();
-        cam = Camera.main; //To be cached, needed for networking building
     }
 
     void GetInput()
     {
         if (Input.GetButtonDown("Spell1"))
         {
-            if (!spellList.isOnCooldown(0))
-                FireSpell(spellList.GetSpellAtIndex(0));
+            if (!SpellList.isOnCooldown(0))
+                FireSpell(SpellList.GetSpellAtIndex(0));
         }
         if (Input.GetButtonDown("Spell2"))
         {
-            if (!spellList.isOnCooldown(1))
-                FireSpell(spellList.GetSpellAtIndex(1));
+            if (!SpellList.isOnCooldown(1))
+                FireSpell(SpellList.GetSpellAtIndex(1));
         }
         if (Input.GetButtonDown("Spell3"))
         {
-            if (!spellList.isOnCooldown(2))
-                FireSpell(spellList.GetSpellAtIndex(2));
+            if (!SpellList.isOnCooldown(2))
+                FireSpell(SpellList.GetSpellAtIndex(2));
         }
         if (Input.GetButtonDown("Spell4"))
         {
-            if (!spellList.isOnCooldown(3))
-                FireSpell(spellList.GetSpellAtIndex(3));
+            if (!SpellList.isOnCooldown(3))
+                FireSpell(SpellList.GetSpellAtIndex(3));
         }
         if (Input.GetButtonDown("Spell5"))
         {
-            if (!spellList.isOnCooldown(4))
-                FireSpell(spellList.GetSpellAtIndex(4));
+            if (!SpellList.isOnCooldown(4))
+                FireSpell(SpellList.GetSpellAtIndex(4));
         }
         if (Input.GetButtonDown("Spell6"))
         {
-            if (!spellList.isOnCooldown(5))
-                FireSpell(spellList.GetSpellAtIndex(5));
+            if (!SpellList.isOnCooldown(5))
+                FireSpell(SpellList.GetSpellAtIndex(5));
         }
-        cancelCast = Input.GetButtonDown("CancelCast");
+        DoCancelCast = Input.GetButtonDown("CancelCast");
     }
     
 
     void FireSpell(SpellStats spell)
     {
-        if (!spell || spellLock)
+        if (!spell || SpellLock)
             return;
         
         if (spell.prefab == null)
@@ -91,71 +79,60 @@ public class CastSpell : Photon.MonoBehaviour
             return;
         }
 
-        castRoutine = StartCoroutine(CastAndFire(spell));
+        CastRoutine = StartCoroutine(CastAndFire(spell));
     }
 
     void CancelCast()
     {
-        if (cancelCast && castRoutine != null)
+        if (DoCancelCast && CastRoutine != null)
         {
-            spellLock = false;
-            StopCoroutine(castRoutine);
+            SpellLock = false;
+            StopCoroutine(CastRoutine);
         }
     }
 
     public void SetSpellLock(bool isLocked)
     {
-        spellLock = isLocked;
+        SpellLock = isLocked;
     }
 
     
 
     private IEnumerator CastAndFire(SpellStats spell)
     {
-        spellLock = true;
-        castBar.CastSpellUI(spell);
+        SpellLock = true;
+        CastBar.CastSpellUI(spell.castTime);
         yield return new WaitForSeconds(spell.castTime);
-        
 
-
-        Ray camRay = cam.ViewportPointToRay(Vector3.one * 0.5f);
         RaycastHit camHit;
         bool camFoundHit;
-
-        LayerMask ignorePlayerMask = ~(1 << 8); 
-
         Vector3 hitPoint;
-        float rangeToUse = spell.maxRange + 4;
-
-        if (Physics.Raycast(camRay, out camHit, rangeToUse, ignorePlayerMask))
-        {
-            camFoundHit = true;
-            hitPoint = camHit.point;
-        } else
-        {
-            camFoundHit = false;
-            hitPoint = cam.transform.position + cam.transform.forward * rangeToUse + new Vector3(0, .4f, 0);
-        }
+        hitPoint = PlayerCameraController.GetHitmarkerPointInWorld(spell, out camHit, out camFoundHit);
 
 
-        bool didHitValidLayer = ValidSpellLayer.SpellHitValidLayerBySpell(spell.name, camHit);
-        bool isWithinRangeOfSpell = ValidSpellDistance.SpellIsInRange(spell.name, transform.position, camHit.point, camFoundHit);
+        if (IsValidCast(spell, camHit, camFoundHit))
+            Fire(spell, hitPoint);
         
-        
-
-        if (isWithinRangeOfSpell && didHitValidLayer)
-        {
-            Vector3 aimToFromFirePosition  = hitPoint - castSpawn.position;
-            Quaternion rotationToTarget = Quaternion.LookRotation(aimToFromFirePosition);
-
-            manaBar.burnMana(spell.manaCost);
-            spellList.TriggerCooldown(spell);
-            NetworkFireSpell(spell.name, rotationToTarget, PhotonNetwork.player.ID);
-        }
-
-        spellLock = false;
+        SpellLock = false;
     }
 
+    bool IsValidCast(SpellStats spell, RaycastHit camHit, bool camFoundHit)
+    {
+        bool didHitValidLayer = ValidSpellLayer.SpellHitValidLayerBySpell(spell.name, camHit);
+        bool isWithinRangeOfSpell = ValidSpellDistance.SpellIsInRange(spell.name, transform.position, camHit.point, camFoundHit);
+        return didHitValidLayer && isWithinRangeOfSpell;
+    }
+
+
+    void Fire(SpellStats spell, Vector3 hitPoint)
+    {
+        Vector3 aimToFromFirePosition = hitPoint - castSpawn.position;
+        Quaternion rotationToTarget = Quaternion.LookRotation(aimToFromFirePosition);
+
+        ManaBar.burnMana(spell.manaCost);
+        SpellList.TriggerCooldown(spell);
+        NetworkFireSpell(spell.name, rotationToTarget, PhotonNetwork.player.ID);
+    }
 
 
 
@@ -170,7 +147,7 @@ public class CastSpell : Photon.MonoBehaviour
         SpellStats spell = SpellManager.GetSpellStatsFromName(spellName);
         
         GameObject spellObject = SpellCreation.CreateSpellInWorld(spell, castSpawn.position, rotationToTarget, gameObject.name, shotBy);
-        spellDestruction.DestroySpellByTime(spellObject);
+        SpellDestruction.DestroySpellByTime(spellObject);
     }
 
     

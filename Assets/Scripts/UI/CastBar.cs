@@ -6,16 +6,28 @@ using UnityEngine.UI;
 /*Creates the UI for the player's castbar*/
 public class CastBar : MonoBehaviour {
 
-    public Slider castBarSlider = null;  //reference for slider
-    public Text castText;   //reference for text
-    private Coroutine castBarRoutine;
+
+    public static CastBar Instance { get; private set; }
+
+    Slider castBarSlider;
+    Coroutine castBarRoutine;
+
 
 
     void Start()
     {
+        EnsureSingleton();
         castBarSlider = GameObject.Find("Canvas/CastBar").GetComponent<Slider>();
-        //castBarSlider.gameObject.SetActive(false);
     }
+
+    void EnsureSingleton()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
+
 
     void Update()
     {
@@ -31,21 +43,20 @@ public class CastBar : MonoBehaviour {
     }
 
     /*Displays the UI for a spell being casted*/
-    public void CastSpellUI(SpellStats spell)
+    public void CastSpellUI(float castTime)
     {
         castBarSlider.value = 0;
 
         castBarSlider.gameObject.SetActive(true);
-        castBarRoutine = StartCoroutine(FillBar(spell));
-        //castBarSlider.gameObject.SetActive(false);
+        castBarRoutine = StartCoroutine(FillBar(castTime));
     }
 
     /*Fills the cast bar UI, showing a spell is being casted*/
-    private IEnumerator FillBar(SpellStats spell)
+    private IEnumerator FillBar(float castTime)
     {
 
         castBarSlider.gameObject.SetActive(true);
-        float rate = 1.0f / spell.castTime;
+        float rate = 1.0f / castTime;
         float progress = 0.0f;
         while (progress <= 1.0f)
         {

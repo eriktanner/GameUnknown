@@ -8,7 +8,24 @@ using System;
 actual spell effects*/
 public class SpellDestruction : Photon.MonoBehaviour
 {
-    
+
+    public static SpellDestruction Instance { get; private set; }
+
+    void Start()
+    {
+        EnsureSingleton();
+    }
+
+    void EnsureSingleton()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
+
+
+
     /*Explodes particles on collision*/
     public void ExplodeParticles(GameObject particleObject)
     {
@@ -35,9 +52,6 @@ public class SpellDestruction : Photon.MonoBehaviour
 
     
 
-
- 
-
     //********************************* Networking ***************************************/
 
     public void NetworkRpcDestroySpellOnCollision(string spellName, Vector3 position, int shotBy)
@@ -51,9 +65,16 @@ public class SpellDestruction : Photon.MonoBehaviour
 
         SpellStats spellStats = SpellManager.GetSpellStatsFromName(spellName);
         GameObject spellInWorldToDestroy = SpellManager.GetObjectFromSpellName(spellName);
+        if (spellInWorldToDestroy == null)
+        {
+            Debug.Log("SpellInWorldToDestroyNotFound");
+            return;
+        }
+
+
         Spell spell = (Spell)spellInWorldToDestroy.GetComponent(SpellDictionary.GetTypeFromSpellName(spellName));
 
-        if (spellInWorldToDestroy == null || spellStats == null || spell == null)
+        if (spellStats == null || spell == null)
         {
             Debug.Log("SpellDestruction - RpcDestroySpellOnCollision: null");
             return;
@@ -73,9 +94,6 @@ public class SpellDestruction : Photon.MonoBehaviour
     }
 
     
-
-
-
 
     //*********************************** Utility ***************************************/
 

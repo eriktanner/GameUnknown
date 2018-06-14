@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class HealthBar : Photon.MonoBehaviour {
 
     public Slider healthBarSlider;  //reference for slider
-    public Text healthText;   //reference for text
 
     float totalHealth = 1000;
     float currentHealth;
