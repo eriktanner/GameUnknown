@@ -9,8 +9,6 @@ public class CastSpell : Photon.MonoBehaviour
 {
     SpellList spellList;
     SpellDestruction spellDestruction;
-    SpellCreation spellCreation;
-
     public Transform castSpawn;
     public ManaBar manaBar;
 
@@ -35,7 +33,6 @@ public class CastSpell : Photon.MonoBehaviour
         GameManager = GameObject.Find("Managers/GameManager").GetComponent<OurGameManager>();
 
         spellDestruction = GameObject.Find("Spell").GetComponent<SpellDestruction>();
-        spellCreation = GameObject.Find("Spell").GetComponent<SpellCreation>();
 
         spellList = GetComponent<SpellList>();
     }
@@ -104,10 +101,15 @@ public class CastSpell : Photon.MonoBehaviour
             spellLock = false;
             StopCoroutine(castRoutine);
         }
-
     }
 
-    /*This waits the cast time and then fires the spell, we may want to get rid of the pin point accuracy*/
+    public void SetSpellLock(bool isLocked)
+    {
+        spellLock = isLocked;
+    }
+
+    
+
     private IEnumerator CastAndFire(SpellStats spell)
     {
         spellLock = true;
@@ -120,7 +122,7 @@ public class CastSpell : Photon.MonoBehaviour
         RaycastHit camHit;
         bool camFoundHit;
 
-        LayerMask ignorePlayerMask = ~(1 << 8); //this may not be good for targeting other players
+        LayerMask ignorePlayerMask = ~(1 << 8); 
 
         Vector3 hitPoint;
         float rangeToUse = spell.maxRange + 4;
@@ -157,47 +159,28 @@ public class CastSpell : Photon.MonoBehaviour
 
 
 
-    /*Calls Rpc Function. Look into Spell.cs to see how we're handling spells over the network*/
     void NetworkFireSpell(string spellName, Quaternion rotationToTarget, int shotBy)
     {
         photonView.RPC("RpcFireSpell", PhotonTargets.All, spellName, rotationToTarget, shotBy);
     }
 
-
-    [PunRPC]/*Tells server to create a spell object on each client. */
+    [PunRPC]
     void RpcFireSpell(string spellName, Quaternion rotationToTarget, int shotBy)
     {
         SpellStats spell = SpellManager.GetSpellStatsFromName(spellName);
-
-        if (spellCreation == null)
-            spellCreation = GameObject.Find("Spell").GetComponent<SpellCreation>();
-
+        
         GameObject spellObject = SpellCreation.CreateSpellInWorld(spell, castSpawn.position, rotationToTarget, gameObject.name, shotBy);
         spellDestruction.DestroySpellByTime(spellObject);
-
-
-        if (PhotonNetwork.isMasterClient)
-        {
-            SpellCollision.AddSpellCollision(spellObject, spell.projectileRadius); //Only master client detects collision
-
-        }
-
-        spellObject.name = OurGameManager.AddProjectileNumberToSpell(spell.name);
-        OurGameManager.IncrementProjectileCount();                                                                                        
     }
+
     
 
 
 
 
+ 
 
-
-    /*General Functionality*/
-
-    public void setSpellLock(bool isLocked)
-    {
-        spellLock = isLocked;
-    }
+    
 
     
 

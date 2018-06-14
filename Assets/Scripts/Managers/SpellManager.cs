@@ -6,10 +6,10 @@ public class SpellManager : MonoBehaviour
 {
 
     public static SpellManager Instance { get; private set; }
-
-    public List<SpellStats> spellList = new List<SpellStats>();
     public static List<GameObject> spawnablePrefabs = new List<GameObject>();
     public static Transform SpellManagerTransform { get; private set; }
+
+    public List<SpellStats> spellList = new List<SpellStats>();
 
 
     void Start()
@@ -22,16 +22,12 @@ public class SpellManager : MonoBehaviour
     void EnsureSingleton()
     {
         if (Instance == null)
-        {
             Instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
 
-    
+
 
     public static SpellStats GetSpellStatsFromName(string spellName)
     {
@@ -46,8 +42,8 @@ public class SpellManager : MonoBehaviour
         removeFromString = Regex.Replace(removeFromString, "[()]", string.Empty);
         return removeFromString;
     }
-    
 
+    
     public static GameObject GetObjectFromSpellName(string spellName)
     {
         return GameObject.Find("Managers/SpellManager/" + spellName);

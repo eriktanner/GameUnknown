@@ -770,8 +770,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  spawnablePrefabs:
-  - {fileID: 1936564245134828, guid: c025c864647f9a846a77b07371cc80b3, type: 2}
 --- !u!4 &310098901
 Transform:
   m_ObjectHideFlags: 0
@@ -862,6 +860,7 @@ GameObject:
   m_Component:
   - component: {fileID: 425932517}
   - component: {fileID: 425932518}
+  - component: {fileID: 425932519}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -893,8 +892,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a657db9ad979e95428104a7ee41a8b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneRotationRadius: 24
-  sceneCamRotationRate: 3
+--- !u!114 &425932519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 425932516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6e07e487e699743ac5f7acc44ff687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationRadius: 24
+  rotationRate: 3
 --- !u!1 &463090528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,7 +1664,6 @@ GameObject:
   m_Component:
   - component: {fileID: 725662248}
   - component: {fileID: 725662251}
-  - component: {fileID: 725662252}
   - component: {fileID: 725662250}
   - component: {fileID: 725662249}
   - component: {fileID: 725662254}
@@ -1727,17 +1736,6 @@ MonoBehaviour:
   instantiationId: 1
   currentMasterID: -1
   isRuntimeInstantiated: 0
---- !u!114 &725662252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 725662247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3626513b9d3240438ec958f5f33b900, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &725662253
 MonoBehaviour:
   m_ObjectHideFlags: 0

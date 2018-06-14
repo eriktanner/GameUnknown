@@ -1,30 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /*This class handles the in-world instation of spells*/
-public class SpellCreation : MonoBehaviour {
+public class SpellCreation {
 
     
 
     /*Creates the spell in world and gives it movement*/
     public static GameObject CreateSpellInWorld(SpellStats spell, Vector3 position, Quaternion rotation, string shotByName, int shotBy)
     {
-        GameObject spellObject = Instantiate(spell.prefab, position, rotation);
+        GameObject spellObject = GameObject.Instantiate(spell.prefab, position, rotation);
 
         //Components
         spellObject.AddComponent<SpellMovement>();
         System.Type SpellType = SpellDictionary.GetTypeFromSpellName(spell.name);
         spellObject.AddComponent(SpellType);
+        if (PhotonNetwork.isMasterClient)
+            SpellCollision.AddSpellCollision(spellObject, spell.projectileRadius);
+
 
         //Identify
         SpellIdentifier.AddSpellIdentifier(spellObject, spell.name, shotByName, shotBy);
-        spellObject.name = spell.name;
+        AssignUniqueSpellName(spell.name, spellObject);
         spellObject.tag = "Spell";
         spellObject.layer = 10;
         spellObject.transform.parent = SpellManager.SpellManagerTransform;
 
         return spellObject;
+    }
+
+
+    private static void AssignUniqueSpellName(string originalSpellName, GameObject spellObject)
+    {
+        spellObject.name = OurGameManager.AddProjectileNumberToSpell(originalSpellName);
+        OurGameManager.IncrementProjectileCount();
     }
 
 
@@ -40,7 +48,7 @@ public class SpellCreation : MonoBehaviour {
         int shotByToTransfer = spellIdentifierOfOriginalSpell.ShotByID;
         string shotByNameToTransfer = spellIdentifierOfOriginalSpell.ShotByName;
 
-        GameObject collisionParticles = Instantiate(spellStats.collisionParticle, position, Quaternion.identity);
+        GameObject collisionParticles = GameObject.Instantiate(spellStats.collisionParticle, position, Quaternion.identity);
         collisionParticles.AddComponent(SpellDictionary.GetTypeFromSpellName(SpellManager.GetOriginalSpellName(spellName)));
         SpellIdentifier.AddSpellIdentifier(collisionParticles, spellNameToTransfer, shotByNameToTransfer, shotByToTransfer);
 

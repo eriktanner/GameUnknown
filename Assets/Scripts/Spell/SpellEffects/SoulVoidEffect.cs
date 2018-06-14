@@ -33,7 +33,7 @@ public class SoulVoidEffect : MonoBehaviour {
     public void initSoulVoidSequence()
     {
         playerMovement.playerHasControl(false);
-        playerCastSpell.setSpellLock(true);
+        playerCastSpell.SetSpellLock(true);
         animator.Play("Fear");
 
         damagePlayer();
@@ -43,7 +43,7 @@ public class SoulVoidEffect : MonoBehaviour {
             voidStun();
 
             playerMovement.playerHasControl(true);
-            playerCastSpell.setSpellLock(false);
+            playerCastSpell.SetSpellLock(false);
 
         }).Start();
 

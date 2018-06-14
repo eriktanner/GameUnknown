@@ -13,7 +13,6 @@ public class OnPlayerStart : MonoBehaviour {
     void Start ()
     {
         SetLocalPlayers();
-        GameObject.Find("Managers/CameraManager").GetComponent<CameraManager>().SetPlayerCamOnStart(playerCam);
     }
 
 

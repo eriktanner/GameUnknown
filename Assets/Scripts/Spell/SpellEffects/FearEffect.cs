@@ -25,7 +25,7 @@ public class FearEffect {
     public void initFearSequence()
     {
         playerMovement.playerHasControl(false);
-        playerCastSpell.setSpellLock(true);
+        playerCastSpell.SetSpellLock(true);
 
         animator.Play("Fear");
         new Thread(() =>
@@ -35,7 +35,7 @@ public class FearEffect {
             fearStep();
 
             playerMovement.playerHasControl(true);
-            playerCastSpell.setSpellLock(false);
+            playerCastSpell.SetSpellLock(false);
 
         }).Start();
 

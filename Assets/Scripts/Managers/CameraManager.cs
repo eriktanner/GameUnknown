@@ -1,64 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
 
 public class CameraManager : MonoBehaviour {
 
-    static Camera playerCam;
-
-    [SerializeField] static Camera sceneCam;
-    [SerializeField] float sceneRotationRadius = 24.0f;
-    [SerializeField] float sceneCamRotationRate = 3.0f;
-    bool sceneCanRotate;
-    float sceneCamRotation;
-
-
+    public static CameraManager Instance { get; private set; }
 
     void Start()
     {
-        sceneCam = GameObject.Find("Cameras/SkyCam").GetComponent<Camera>();
-        SetSceneCamActive(true);
+        EnsureSingleton();
     }
 
-    public void SetPlayerCamOnStart(Camera playerCamIn)
+    void EnsureSingleton()
     {
-        playerCam = playerCamIn;
+        if (Instance == null)
+            Instance = this;
+         else 
+            Destroy(gameObject);
     }
-
-    public void SetSceneCamActive(bool isActive)
-    {
-        sceneCam.enabled = isActive;
-        sceneCanRotate = isActive;
-
-        if (isActive == true)
-            SetCursorToFreeAndVisible();
-        else SetCursorToLockAndInvisible();
-
-    }
-
-
-    void Update()
-    {
-        rotateSceneCam();
-
-    }
-    
-    void rotateSceneCam()
-    {
-        if (!sceneCanRotate)
-            return;
-        
-        sceneCamRotation += sceneCamRotationRate * Time.deltaTime;
-        if (sceneCamRotation >= 360)
-            sceneCamRotation = -360;
-
-        sceneCam.transform.position = Vector3.zero;
-        sceneCam.transform.rotation = Quaternion.Euler(0, sceneCamRotation, 0);
-        sceneCam.transform.Translate(0, sceneRotationRadius, -sceneRotationRadius);
-        sceneCam.transform.LookAt(Vector3.zero);
-    }
-
-
 
 
     public static void SetCursorToLockAndInvisible()

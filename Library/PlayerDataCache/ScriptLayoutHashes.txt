@@ -4,6 +4,7 @@ D:/Users/Public/Documents/Unity Projects/Builds/Test/Test.exe
 SceneListBegin?
 Assets/Scenes/Launcher.unity
 Assets/Scenes/Room for 4.unity
+Assets/Scenes/Room for 5.unity
 SceneListEnd?
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PunTeams
 4d0187d1ee26ceba125a106f0dde0360 Assembly-CSharp.dll:.SmoothSyncMovement
@@ -138,7 +139,6 @@ c2d15b04283157b00cbdbfaf16c18482 Assembly-CSharp.dll:.PickupItemSyncer
 1de5b0589e6fb98c8b8d7fcded724e3b Assembly-CSharp.dll:.CullArea
 300afefc536d832e02230bef81ec01c5 Assembly-CSharp.dll:.SFB_MoveOverTime
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PunPlayerScores
-3f8b8ee6621fa63992962981cf34a2b4 Assembly-CSharp.dll:.OurNetworkManager
 d7c3cc9e6aeec9a00634f6abffbe35e2 Assembly-CSharp.dll:.ConnectAndJoinRandom
 72e5ebea62576bb9a8c3a0213137cb6d Assembly-CSharp.dll:.Launcher
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
@@ -157,7 +157,7 @@ fd2f487588649455d2388ca7858457aa Assembly-CSharp.dll:.SpellStats
 090584907af2e462994cc893ced507b3 Assembly-CSharp.dll:.PhotonRigidbodyView
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpellList
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PhotonNetworkManager
-07660cb9ffee894b5fdc4394a82ce8d3 Assembly-CSharp.dll:.SpellIdentifier
+27201fe4f2c0672980c30af12df45951 Assembly-CSharp.dll:.SpellIdentifier
 49bc66d54afe3d873c5e04e0dc2980ab Assembly-CSharp.dll:.PhotonTransformView
 c0ad1fb5d400aa83cb257e5f6c3714cf Assembly-CSharp.dll:.OnClickDestroy
 5daf445123fe683ecda685002667e59a Assembly-CSharp.dll:.SFB_ParticleGrowOverTime
@@ -211,7 +211,7 @@ ee8540d1efea9148410a914295c889e3 Assembly-CSharp.dll:.OnJoinedInstantiate
 6b7f3b627f03aa2dae54ad0ecb0a7d7a Assembly-CSharp.dll:.PhotonLagSimulationGui
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlayerUI
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-34a003198fdf16ef446c0b8fb5e9d65c Assembly-CSharp.dll:.SpellManager
+6d156ebd961232aea86f474ee3682f5f Assembly-CSharp.dll:.SpellManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.IceWall
 26c2bd70ed88ab54212e03929d642afb Assembly-CSharp.dll:.CastSpell
 d45bccd0168f38d52f587b8d700aeb2c Assembly-CSharp.dll:.SFB_LightAutoOn
