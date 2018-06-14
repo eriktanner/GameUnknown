@@ -8,6 +8,10 @@ using UnityEngine;
 Possibly think about giving each spell a class with Spell, cooldown timer, etc*/
 public class SpellList : MonoBehaviour {
     
+
+    /*Seperate into SpellListComponent and SpellCooldown Component*/
+
+
     SpellStats[] spellList = new SpellStats[6];
     float[] spellCooldowns = new float[6];
 

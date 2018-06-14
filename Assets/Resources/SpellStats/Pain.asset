@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Pain
   shotBy: 
-  prefab: {fileID: 1774912816483602, guid: e89f1a44afdf3614898d214a113d6e5f, type: 2}
+  prefab: {fileID: 100004, guid: 826d765a5a4554af48a035aa441da3ec, type: 2}
   collisionParticle: {fileID: 100004, guid: 826d765a5a4554af48a035aa441da3ec, type: 2}
   icon: {fileID: 0}
   cooldown: 0
@@ -21,5 +21,5 @@ MonoBehaviour:
   manaCost: 20
   maxRange: 25
   projectileRadius: 0.18
-  projectileSpeed: 40
+  projectileSpeed: 20
   castTime: 0.3

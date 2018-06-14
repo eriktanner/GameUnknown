@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-D:/Users/Public/Documents/Unity Projects/Builds/FantasiaBuilds/FantasiaBuilds.exe
+D:/Users/Public/Documents/Unity Projects/Builds/Test/Test.exe
 SceneListBegin?
 Assets/Scenes/Launcher.unity
 Assets/Scenes/Room for 4.unity
@@ -32,7 +32,6 @@ e79639aca152a01a366800e2cc73ca58 Assembly-CSharp.dll:.ManaBar
 7a85ac6da0f41c725300888bfe035ca5 Assembly-CSharp.dll:.NetworkPlayerSetup
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.NetworkCullingHandler
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpellCollision
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DestroyFireball
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:ExitGames.UtilityScripts.PlayerRoomIndexing
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -134,6 +133,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 c2d15b04283157b00cbdbfaf16c18482 Assembly-CSharp.dll:.PickupItemSyncer
 090584907af2e462994cc893ced507b3 Assembly-CSharp.dll:.PhotonRigidbody2DView
 34cc888a35f550e5f6d40b4f0d846418 Assembly-CSharp.dll:DigitalRuby.PyroParticles.MeteorSwarmScript
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Pain
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.OnStartDelete
 1de5b0589e6fb98c8b8d7fcded724e3b Assembly-CSharp.dll:.CullArea
 300afefc536d832e02230bef81ec01c5 Assembly-CSharp.dll:.SFB_MoveOverTime
@@ -148,6 +148,7 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Fireball
 e3bfb26d2f8a8a39f24d324d3d226cc1 Assembly-CSharp.dll:CameraController.CameraController
 1dd5afbe72b78672a791f893fdff3e5f Assembly-CSharp.dll:DigitalRuby.PyroParticles.FireBaseScript
 0de88d96fd292d919299f7af4af26e8d Assembly-CSharp.dll:.IdleChanger
@@ -156,7 +157,7 @@ fd2f487588649455d2388ca7858457aa Assembly-CSharp.dll:.SpellStats
 090584907af2e462994cc893ced507b3 Assembly-CSharp.dll:.PhotonRigidbodyView
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpellList
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PhotonNetworkManager
-08716fa69bdee9282085ff96c04160ab Assembly-CSharp.dll:.SpellIdentifier
+07660cb9ffee894b5fdc4394a82ce8d3 Assembly-CSharp.dll:.SpellIdentifier
 49bc66d54afe3d873c5e04e0dc2980ab Assembly-CSharp.dll:.PhotonTransformView
 c0ad1fb5d400aa83cb257e5f6c3714cf Assembly-CSharp.dll:.OnClickDestroy
 5daf445123fe683ecda685002667e59a Assembly-CSharp.dll:.SFB_ParticleGrowOverTime
@@ -167,7 +168,6 @@ c0ad1fb5d400aa83cb257e5f6c3714cf Assembly-CSharp.dll:.OnClickDestroy
 b9efe2a0d1c9ba7bc46e66a07a897115 Assembly-CSharp.dll:.ServerSettings
 43294ec8a676944978bb7198ea43935c Assembly-CSharp.dll:DigitalRuby.PyroParticles.FireLightScript
 e3db0de06ede87e84b88d4a2079f2b57 Assembly-CSharp.dll:ExitGames.UtilityScripts.TextButtonTransition
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DestroyPain
 c1d4772696f184fb2e081c05af1c31fc Assembly-CSharp.dll:.SFB_LightColorChange
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -184,6 +184,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 a1ce0c3141be3ae70808d64035a67a88 Assembly-CSharp.dll:.ThirdPersonCamera
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DestroySoulVoid
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PointedAtGameObjectInfo
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpellDestruction
 169cf652ee5945151aa6b0e786ef32f3 Assembly-CSharp.dll:.CameraManager
@@ -211,7 +212,7 @@ ee8540d1efea9148410a914295c889e3 Assembly-CSharp.dll:.OnJoinedInstantiate
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlayerUI
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 34a003198fdf16ef446c0b8fb5e9d65c Assembly-CSharp.dll:.SpellManager
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ExplodeSoulVoid
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.IceWall
 26c2bd70ed88ab54212e03929d642afb Assembly-CSharp.dll:.CastSpell
 d45bccd0168f38d52f587b8d700aeb2c Assembly-CSharp.dll:.SFB_LightAutoOn
 ce0cf5a45003ec50f7e5664216d1f95c Assembly-CSharp.dll:.CastBar
@@ -237,5 +238,3 @@ b2dc25029b6f083ffbbdf9df269f825a Assembly-CSharp.dll:.InRoomChat
 3bd51ce799ce5be0ab7bda1988ae6eee Assembly-CSharp.dll:.PlayerCameraController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SceneLoader
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpellMovement
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Fireball
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.IceWall

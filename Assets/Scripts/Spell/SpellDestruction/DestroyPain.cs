@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 /*Displays pain collision particle even if it does not make a collision*/
@@ -29,11 +27,8 @@ public class DestroyPain {
             GameObject.Destroy(particleObject);
             return;
         }
-
-
+        
         GameObject collisionParticles = GameObject.Instantiate(spell.SpellStats.collisionParticle, particleObject.transform.position, Quaternion.identity);
         GameObject.Destroy(collisionParticles, 1.5f);
-
-        GameObject.Destroy(particleObject);
     }
 }

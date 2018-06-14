@@ -22,4 +22,9 @@ public class SpellMovement : MonoBehaviour {
     {
         transform.position += transform.forward * velocity * Time.deltaTime;
     }
+
+    public void FreezeSpellMovement()
+    {
+        velocity = 0;
+    }
 }

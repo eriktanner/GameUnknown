@@ -18,7 +18,7 @@ public class SpellDestruction : Photon.MonoBehaviour
         Spell spell = SpellDictionary.GetSpellFromSpellObject(particleObject);
 
         if (spell != null)
-            StartCoroutine(waitAndCall(spell.TimeFromHitToParticleExplosion, spell.ParticleDestruction));
+            StartCoroutine(waitAndCall(particleObject, spell.TimeFromHitToParticleExplosion, spell.ParticleDestruction));
     }
 
     /*Destroys a casted spell by its lifespan*/
@@ -30,7 +30,7 @@ public class SpellDestruction : Photon.MonoBehaviour
         Spell spell = SpellDictionary.GetSpellFromSpellObject(spellObject);
      
         if (spell != null)
-            StartCoroutine(waitAndCall(GetLifespanOfSpell(spell), spell.SpellDestruction));   
+            StartCoroutine(waitAndCall(spellObject, GetLifespanOfSpell(spell), spell.SpellDestruction));   
     }
 
     
@@ -49,18 +49,21 @@ public class SpellDestruction : Photon.MonoBehaviour
     void RpcDestroySpellOnCollision(string spellName, Vector3 position, int shotBy)
     {
 
-        SpellStats spell = SpellManager.GetSpellStatsFromName(spellName);
+        SpellStats spellStats = SpellManager.GetSpellStatsFromName(spellName);
         GameObject spellInWorldToDestroy = SpellManager.getObjectFromSpellName(spellName);
+        Spell spell = (Spell)spellInWorldToDestroy.GetComponent(SpellDictionary.GetTypeFromSpellName(SpellManager.getOriginalSpellName(spellName)));
 
-        if (spellInWorldToDestroy == null || spell == null)
+        if (spellInWorldToDestroy == null || spellStats == null || spell == null)
         {
             Debug.Log("SpellDestruction - RpcDestroySpellOnCollision: null");
             return;
         }
-        Destroy(spellInWorldToDestroy);
 
 
-        if (spell.collisionParticle)
+        spell.SpellDestruction();
+
+
+        if (spellStats.collisionParticle)
         {
 
             SpellIdentifier spellIdentifier = spellInWorldToDestroy.GetComponent<SpellIdentifier>();
@@ -75,8 +78,8 @@ public class SpellDestruction : Photon.MonoBehaviour
             string shotByNameToTransfer = spellIdentifier.ShotByName;
 
 
-            GameObject collisionParticles = Instantiate(spell.collisionParticle, position, Quaternion.identity);
-            collisionParticles.AddComponent(SpellDictionary.GetComponentType(SpellManager.getOriginalSpellName(spellName)));
+            GameObject collisionParticles = Instantiate(spellStats.collisionParticle, position, Quaternion.identity);
+            collisionParticles.AddComponent(SpellDictionary.GetTypeFromSpellName(SpellManager.getOriginalSpellName(spellName)));
             SpellIdentifier.AddSpellIdentifier(collisionParticles, SpellNameToTransfer, shotByNameToTransfer, shotByToTransfer);
 
             ExplodeParticles(collisionParticles);
@@ -84,34 +87,33 @@ public class SpellDestruction : Photon.MonoBehaviour
         else {
             Debug.Log("SpellDestruction - spell.collisionParticle: null");
         }
-
     }
 
 
     
 
     //*********************************** Utility ***************************************/
-
-
-    /*Waits a set amount of time, then calls destroy method on the spell/particle object passed in*/
-    IEnumerator waitAndCall(float waitTime, Action destroyMethod)
+    
+    IEnumerator waitAndCall(GameObject spellObject, float waitTime, Action destroyMethod)
     {
         yield return new WaitForSeconds(waitTime);
-        if (destroyMethod.Target != null)
+        if (spellObject != null)
+        {
             destroyMethod();
+        }
     }
 
-
-    /*Returns the amount of time needed for a spell to travel it's max distance*/
     float GetLifespanOfSpell(Spell spell)
     {
         float lifespan = 0;
 
-        if (spell.IsValidDistanceChecked) //Distance verified BEFORE cast, we can give large destroy time
+        if (spell.IsValidDistanceChecked) //Arbitrarily large
             lifespan = 10;
-        else
-            lifespan = spell.SpellStats.maxRange / spell.SpellStats.projectileSpeed; //Regular timed destroy, d = r * t (However often innaccurate)
-
+        else{
+            float timeTakesToTravelMaxDistance = spell.SpellStats.maxRange / spell.SpellStats.projectileSpeed;
+            lifespan = timeTakesToTravelMaxDistance;
+        }
+           
         return lifespan;
     }
 }

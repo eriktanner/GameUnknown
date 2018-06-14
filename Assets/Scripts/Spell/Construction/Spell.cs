@@ -20,14 +20,14 @@ public abstract class Spell : MonoBehaviour {
      Note: Always called, even if spell does not hit*/
     public virtual void SpellDestruction()
     {
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     /*Override for different particle destruction methods
      Note: Call only if spell collides with a surface*/
     public virtual void ParticleDestruction()
     {
-
+        Destroy(gameObject, 3.0f);
     }
 
 

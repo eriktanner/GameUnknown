@@ -25,7 +25,7 @@ public class SpellCreation : MonoBehaviour {
 
         //Components
         spellObject.AddComponent<SpellMovement>();
-        System.Type SpellType = SpellDictionary.GetComponentType(SpellManager.getOriginalSpellName(spell.name));
+        System.Type SpellType = SpellDictionary.GetTypeFromSpellName(SpellManager.getOriginalSpellName(spell.name));
         spellObject.AddComponent(SpellType);
 
         //Identify

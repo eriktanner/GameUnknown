@@ -35,6 +35,10 @@ public static class ValidSpellDistance {
     static bool validRange(string spellName, float distance, bool rayDidMakeContact)
     {
         SpellStats spell = SpellManager.GetSpellStatsFromName(spellName);
+        if (spell == null)
+        {
+            Debug.Log("SpellDictionary.GetSpellFromSpellName(spellName(validRange): is null");
+        }
         bool isInRange = distance < spell.maxRange;
         if (!isInRange || !rayDidMakeContact)
         {

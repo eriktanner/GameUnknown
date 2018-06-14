@@ -12,7 +12,7 @@ public class Launcher : Photon.PunBehaviour
 
     /// This client's version number. 
     string _gameVersion = "v1.0.0";
-    public byte MaxPlayersPerRoom = 4;
+    public byte MaxPlayersPerRoom = 5;
 
 
     public PhotonLogLevel Loglevel = PhotonLogLevel.Informational;
@@ -83,7 +83,7 @@ public class Launcher : Photon.PunBehaviour
             Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
         }
         //Debug.Log("PhotonNetwork : Loading Level : " + PhotonNetwork.room.PlayerCount);
-        PhotonNetwork.LoadLevel("Room for " + 4);
+        PhotonNetwork.LoadLevel("Room for " + 5);
     }
 
 
@@ -122,7 +122,7 @@ public class Launcher : Photon.PunBehaviour
 
             // #Critical
             // Load the Room Level. 
-            PhotonNetwork.LoadLevel("Room for 4");
+            PhotonNetwork.LoadLevel("Room for 5");
         }
     }
 

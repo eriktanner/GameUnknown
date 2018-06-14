@@ -6,29 +6,27 @@ using UnityEngine;
 public static class SpellDictionary
 {
 
-    public static Dictionary<string, System.Type> nameToComponent = new Dictionary<string, System.Type>();
+    public static Dictionary<string, System.Type> nameToType = new Dictionary<string, System.Type>();
 
 
 
     public static void InitSpellDictionary()
     {
-        nameToComponent.Add("Arcane Missile", new ArcaneMissile().GetType());
-        nameToComponent.Add("Fear", new Fear().GetType());
-        nameToComponent.Add("Fireball", new Fireball().GetType());
-        nameToComponent.Add("Ice Wall", new IceWall().GetType());
-        nameToComponent.Add("Pain", new Pain().GetType());
-        nameToComponent.Add("Soul Void", new SoulVoid().GetType());
+        nameToType.Add("Arcane Missile", new ArcaneMissile().GetType());
+        nameToType.Add("Fear", new Fear().GetType());
+        nameToType.Add("Fireball", new Fireball().GetType());
+        nameToType.Add("Ice Wall", new IceWall().GetType());
+        nameToType.Add("Pain", new Pain().GetType());
+        nameToType.Add("Soul Void", new SoulVoid().GetType());
     }
 
 
-    public static System.Type GetComponentType(string spellName)
+    public static System.Type GetTypeFromSpellName(string spellName)
     {
-        return nameToComponent[spellName];
+        return nameToType[spellName];
     }
 
 
-
-    /*Retrieves the spell name from the spellObject's spell identifier and lookups/returns the corresponding SpellType*/
     public static Spell GetSpellFromSpellObject(GameObject spellObject)
     {
         SpellIdentifier spellIdentifier = spellObject.GetComponent<SpellIdentifier>();
@@ -46,24 +44,16 @@ public static class SpellDictionary
             return null;
         }
 
-        System.Type lookup = GetComponentType(spellName);
+        System.Type lookup = GetTypeFromSpellName(spellName);
         return (Spell)spellObject.GetComponent(lookup);
     }
 
 
-    /*Retrieves the spell name from the spellObject's spell identifier and lookups/returns the corresponding SpellType*/
     public static Spell GetSpellFromSpellName(string spellNameIn)
     {
-        string spellName = SpellManager.getOriginalSpellName(spellNameIn);
-        System.Type spellType = GetComponentType(spellName);
-        Spell mySpell = (Spell) Activator.CreateInstance(spellType);
-
         GameObject temp = new GameObject();
-        System.Type SpellType = GetComponentType(SpellManager.getOriginalSpellName(spellNameIn));
-        temp.AddComponent(SpellType);
-
-
-
+        System.Type spellType = GetTypeFromSpellName(SpellManager.getOriginalSpellName(spellNameIn));
+        temp.AddComponent(spellType);
         return (Spell) temp.GetComponent(spellType);
     }
 
