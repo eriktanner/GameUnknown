@@ -3,11 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Fire
-  - Ground
-  - Enemy
-  - Spell
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -18,9 +14,9 @@ TagManager:
   - 
   - 
   - Player
-  - Ground
-  - Spell
-  - Enemy
+  - 
+  - 
+  - 
   - 
   - 
   - 
