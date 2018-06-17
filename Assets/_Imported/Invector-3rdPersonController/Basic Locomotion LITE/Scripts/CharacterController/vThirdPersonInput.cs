@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Invector.CharacterController
 {
-    public class vThirdPersonInput : MonoBehaviour
+    public class vThirdPersonInput : Photon.MonoBehaviour
     {
         #region variables
 
@@ -38,6 +38,11 @@ namespace Invector.CharacterController
 
         protected virtual void Start()
         {
+            if (!photonView.isMine)
+            {
+                enabled = false;
+                return;
+            }
             CharacterInit();
         }
 

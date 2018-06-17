@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 namespace Invector.CharacterController
 {
-    public abstract class vThirdPersonMotor : MonoBehaviour
+    public abstract class vThirdPersonMotor : Photon.MonoBehaviour
     {
         #region Variables        
 

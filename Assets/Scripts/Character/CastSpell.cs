@@ -3,17 +3,16 @@ using UnityEngine;
 
 [RequireComponent((typeof(ManaBar)))]
 [RequireComponent((typeof(SpellList)))]
-[RequireComponent((typeof(PlayerCameraController)))]
 public class CastSpell : Photon.MonoBehaviour
 {  
     public ManaBar ManaBar;
     public SpellList SpellList;
-    public PlayerCameraController PlayerCameraController;
     public Transform castSpawn;
 
     SpellDestruction SpellDestruction;
     Coroutine CastRoutine;
     CastBar CastBar;
+    Camera PlayerCam;
 
     bool SpellLock = false;
     bool DoCancelCast = false;
@@ -22,6 +21,7 @@ public class CastSpell : Photon.MonoBehaviour
 
     void Start()
     {
+        PlayerCam = Camera.main;
         CastBar = CastBar.Instance;
         SpellDestruction = SpellDestruction.Instance;
     }
@@ -107,7 +107,7 @@ public class CastSpell : Photon.MonoBehaviour
         RaycastHit camHit;
         bool camFoundHit;
         Vector3 hitPoint;
-        hitPoint = PlayerCameraController.GetHitmarkerPointInWorld(spell, out camHit, out camFoundHit);
+        hitPoint = GetHitmarkerPointInWorld(spell, out camHit, out camFoundHit);
 
 
         if (IsValidCast(spell, camHit, camFoundHit))
@@ -150,18 +150,38 @@ public class CastSpell : Photon.MonoBehaviour
         SpellDestruction.DestroySpellByTime(spellObject);
     }
 
-    
 
 
 
 
- 
 
-    
 
-    
+    public Vector3 GetHitmarkerPointInWorld(SpellStats spell, out RaycastHit camHit, out bool camFoundHit)
+    {
+        Ray camRay = PlayerCam.ViewportPointToRay(Vector3.one * 0.5f);
 
-    
+        LayerMask ignorePlayerMask = ~(1 << 8);
+        float rangeToUse = spell.maxRange + 3.0f;
+
+        Vector3 hitPoint;
+
+        if (Physics.Raycast(camRay, out camHit, rangeToUse, ignorePlayerMask))
+        {
+            camFoundHit = true;
+            hitPoint = camHit.point;
+        }
+        else
+        {
+            camFoundHit = false;
+            hitPoint = PlayerCam.transform.position + PlayerCam.transform.forward * rangeToUse + new Vector3(0, .4f, 0);
+        }
+        return hitPoint;
+    }
+
+
+
+
+
 
 }
 

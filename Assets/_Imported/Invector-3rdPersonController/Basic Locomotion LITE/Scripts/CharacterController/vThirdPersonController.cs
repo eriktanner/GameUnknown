@@ -7,6 +7,12 @@ namespace Invector.CharacterController
     {
         protected virtual void Start()
         {
+
+            if (!photonView.isMine)
+            {
+                enabled = false;
+                return;
+            }
 #if !UNITY_EDITOR
                 Cursor.visible = false;
 #endif
