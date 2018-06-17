@@ -3,6 +3,7 @@ PlayerPath?
 D:/Users/Public/Documents/Unity Projects/Builds/FantasiaBuilds/FantasiaBuilds.exe
 SceneListBegin?
 Assets/Scenes/Launcher.unity
+Assets/Scenes/Room for 4.unity
 Assets/Scenes/Room for 5.unity
 SceneListEnd?
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PunTeams

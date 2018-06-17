@@ -15,7 +15,7 @@ public class SceneCamera : MonoBehaviour {
     void Start()
     {
         sceneCam = GameObject.Find("Cameras/SkyCam").GetComponent<Camera>();
-        SetSceneCamActive(true);
+        //SetSceneCamActive(true);
     }
 
     void Update()

@@ -19,7 +19,7 @@ public class NetworkPlayerSetup : Photon.MonoBehaviour {
             DisableRemoteComponents();
         } else
         {
-            SceneCamera.SetSceneCamActive(false);
+            //SceneCamera.SetSceneCamActive(false);
         }
 
         AssignRemoteLayersAndTags();

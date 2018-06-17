@@ -5554,9 +5554,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   componentsToDisable:
-  - {fileID: 114172738147122056}
+  - {fileID: 0}
   - {fileID: 114205687432645178}
-  - {fileID: 114951932638301018}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 114978745022482362}
