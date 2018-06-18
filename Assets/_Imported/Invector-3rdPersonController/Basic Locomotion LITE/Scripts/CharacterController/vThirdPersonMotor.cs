@@ -331,7 +331,7 @@ public abstract class vThirdPersonMotor : Photon.MonoBehaviour
         }
         else
         {
-            var vel = transform.forward * (jumpForward);
+            var vel = transform.forward * (jumpForward * speed);
             _rigidbody.velocity = new Vector3(vel.x, _rigidbody.velocity.y, vel.z);
         }
     }

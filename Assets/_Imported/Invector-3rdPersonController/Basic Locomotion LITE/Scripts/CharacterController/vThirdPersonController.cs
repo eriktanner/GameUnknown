@@ -47,4 +47,3 @@ public class vThirdPersonController : vThirdPersonAnimator
             targetRotation = transform.rotation;
         }
     }
-}

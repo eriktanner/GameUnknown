@@ -98,17 +98,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  smoothCameraRotation: 14
+  smoothCameraRotation: 20
   cullingLayer:
     serializedVersion: 2
     m_Bits: 1
   lockCamera: 0
   rightOffset: 0
-  defaultDistance: 3.5
+  defaultDistance: 4.5
   height: 2
   smoothFollow: 5
-  xMouseSensitivity: 0.3
-  yMouseSensitivity: 0.3
+  xMouseSensitivity: 1
+  yMouseSensitivity: 1
   yMinLimit: -40
   yMaxLimit: 80
   indexList: 0
