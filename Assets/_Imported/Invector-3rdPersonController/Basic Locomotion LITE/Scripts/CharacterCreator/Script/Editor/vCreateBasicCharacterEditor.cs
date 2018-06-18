@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.IO;
 using Invector;
-using Invector.CharacterController;
 using UnityEngine.EventSystems;
 
 public class vCreateBasicCharacterEditor : EditorWindow

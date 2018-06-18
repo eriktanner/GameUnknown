@@ -10,7 +10,7 @@ public class SoulVoidEffect : MonoBehaviour {
     int ShotBy;
     SpellStats spell;
     GameObject PlayerHit;
-    CharacterMovementController playerMovement;
+    vThirdPersonMotor playerMovement;
     Animator animator;
     CastSpell playerCastSpell;
     SpellDamageApplier damageApplier;
@@ -20,8 +20,8 @@ public class SoulVoidEffect : MonoBehaviour {
     {
         PlayerHit = playerObject;
         ShotBy = shotBy;
-        playerMovement = playerObject.GetComponent<CharacterMovementController>();
-        animator = playerMovement.animator;
+        playerMovement = playerObject.GetComponent<vThirdPersonMotor>();
+        //animator = playerMovement.animator;
         playerCastSpell = playerObject.GetComponent<CastSpell>();
         spell = SpellManager.GetSpellStatsFromName("Soul Void");
         damageApplier = GameObject.Find("Spell").GetComponent<SpellDamageApplier>();
@@ -32,17 +32,16 @@ public class SoulVoidEffect : MonoBehaviour {
     /*Damages and stuns players*/
     public void initSoulVoidSequence()
     {
-        playerMovement.playerHasControl(false);
         playerCastSpell.SetSpellLock(true);
-        animator.Play("Fear");
+        //animator.Play("Fear");
 
         damagePlayer();
 
         new Thread(() =>
         {
             voidStun();
-
-            playerMovement.playerHasControl(true);
+            
+            playerMovement.stunMovement = false;
             playerCastSpell.SetSpellLock(false);
 
         }).Start();
@@ -57,8 +56,7 @@ public class SoulVoidEffect : MonoBehaviour {
 
     void voidStun()
     {
-        playerMovement.forwardInput = 0;
-        playerMovement.leftRightInput = 0;
+        playerMovement.stunMovement = true;
         Thread.Sleep(STUN_MILLISECONDS);
     }
     
