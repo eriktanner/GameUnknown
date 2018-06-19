@@ -26,16 +26,12 @@ public class SpellEffects : Photon.MonoBehaviour {
     {
         FearEffect fearSpellEffect = new FearEffect(playerHit);
         fearSpellEffect.initFearSequence();
-
-        Debug.Log("Calling Fear on: " + playerHit.gameObject.name);
     }
     
     public void CmdSoulVoidPlayer(GameObject playerHit, int shotBy)
     {
         SoulVoidEffect soulVoidEffect = new SoulVoidEffect(playerHit, shotBy);
         soulVoidEffect.initSoulVoidSequence();
-
-        Debug.Log("Calling Soul Void on: " + playerHit.gameObject.name);
     }
 
 }

@@ -200,6 +200,7 @@
      <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
      <Compile Include="Assets\Scripts\UI\InGameMessageDisplay.cs" />
      <Compile Include="Assets\Scripts\UI\ManaBar.cs" />
+     <Compile Include="Assets\Scripts\Utility\PlayersWithinRadius.cs" />
      <Compile Include="Assets\Scripts\Utility\ThreadRandomNumber.cs" />
      <None Include="Assets\_Imported\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
      <None Include="Assets\_Imported\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />

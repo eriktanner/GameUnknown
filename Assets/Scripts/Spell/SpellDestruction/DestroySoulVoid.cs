@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 /*Checks for enemies within a radius and in line of sight of soul void explosion. Stuns
  * damages enemies who qualify (In SpellEffects)*/
-public class DestroySoulVoid : MonoBehaviour {
+public class DestroySoulVoid {
 
     float RADIUS = 3.5f;
 
@@ -31,40 +32,15 @@ public class DestroySoulVoid : MonoBehaviour {
         if (particles == null)
             return;
 
-
         Vector3 origin = particles.gameObject.transform.position;
 
-        Collider[] hitColliders = Physics.OverlapSphere(origin, RADIUS);
-
-
-        for (int i = 0; i < hitColliders.Length; i++)
+        List<GameObject> playersInRadiusAndLOS = PlayersWithinRadius.FindPlayersWithinRadiusAndLOS(origin, RADIUS);
+        foreach(GameObject hitPlayer in playersInRadiusAndLOS)
         {
-
-            if (hitColliders[i].gameObject.tag == "Player")
-            {
-                Vector3 collisionPosition = hitColliders[i].gameObject.transform.position + new Vector3(0, .3f, 0); //Vector offset only beneficial for ground casts (sometimes spell does not work)
-                Vector3 direction = collisionPosition - origin;
-                float distance = (collisionPosition - direction).magnitude;
-
-                
-
-                RaycastHit[] hits = Physics.RaycastAll(origin, direction, distance);
-
-
-                bool isInLineOfSight = true;
-                foreach (RaycastHit hit in hits) //Other players will not effect Line of Sight
-                {
-                    if (hit.transform.gameObject.tag != "Player")
-                        isInLineOfSight = false;
-                }
-
-                if (isInLineOfSight)
-                    spellEffects.CmdSoulVoidPlayer(hitColliders[i].gameObject, ShotBy);
-            }
-
+            spellEffects.CmdSoulVoidPlayer(hitPlayer, ShotBy);
         }
-
-        Destroy(particles, 2.0f);
+            
+        GameObject.Destroy(particles, 2.0f);
     }
 
 }

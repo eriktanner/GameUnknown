@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 /*Checks for enemies within a radius and in line of sight of fear explosion. Fears enemies
@@ -22,38 +23,18 @@ public class DestroyFear {
     they are in line of sight, if so fear*/
     public void explodeFear()
     {
+        if (particles == null)
+            return;
+
         Vector3 origin = particles.gameObject.transform.position;
 
-        Collider[] hitColliders = Physics.OverlapSphere(origin, RADIUS);
-
-
-        for (int i = 0; i < hitColliders.Length; i++)
+        List<GameObject> playersInRadiusAndLOS = PlayersWithinRadius.FindPlayersWithinRadiusAndLOS(origin, RADIUS);
+        foreach (GameObject hitPlayer in playersInRadiusAndLOS)
         {
-
-            if (hitColliders[i].gameObject.tag == "Player")
-            {
-                Vector3 collisionParticles = hitColliders[i].gameObject.transform.position + new Vector3(0, .3f, 0); //Vector offset only beneficial for ground casts (sometimes spell does not work);
-                Vector3 direction = collisionParticles - origin;
-                float distance = (collisionParticles - direction).magnitude;
-
-                RaycastHit[] hits = Physics.RaycastAll(origin, direction, distance);
-
-
-                bool isInLineOfSight = true;
-                foreach (RaycastHit hit in hits) //Other players will not effect Line of Sight
-                {
-                    if (hit.transform.gameObject.tag != "Player")
-                        isInLineOfSight = false;
-                }
-
-                if (isInLineOfSight)
-                    spellEffects.CmdFearPlayer(hitColliders[i].gameObject);
-            }
-
+            spellEffects.CmdFearPlayer(hitPlayer);
         }
 
-        if (particles != null)
-            GameObject.Destroy(particles, 2.0f);
+       GameObject.Destroy(particles, 2.0f);
     }
 
 }

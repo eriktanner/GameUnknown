@@ -32,7 +32,6 @@ public class SoulVoidEffect {
     /*Damages and stuns players*/
     public void initSoulVoidSequence()
     {
-        playerCastSpell.SetSpellLock(true);
         //animator.Play("Fear");
 
         damagePlayer();
@@ -46,6 +45,7 @@ public class SoulVoidEffect {
     {
         playerMovement.StopMovement();
         playerMovement.LockMovement(true);
+        playerCastSpell.SetSpellLock(true);
         yield return new WaitForSeconds(STUN_SECONDS);
         playerMovement.LockMovement(false);
         playerMovement.PlayerHasControl(true);
