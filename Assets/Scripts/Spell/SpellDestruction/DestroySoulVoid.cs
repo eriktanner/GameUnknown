@@ -34,7 +34,7 @@ public class DestroySoulVoid {
 
         Vector3 origin = particles.gameObject.transform.position;
 
-        List<GameObject> playersInRadiusAndLOS = PlayersWithinRadius.FindPlayersWithinRadiusAndLOS(origin, RADIUS);
+        List<GameObject> playersInRadiusAndLOS = GameplayUtility.FindPlayersWithinRadiusAndLOS(origin, RADIUS);
         foreach(GameObject hitPlayer in playersInRadiusAndLOS)
         {
             spellEffects.CmdSoulVoidPlayer(hitPlayer, ShotBy);

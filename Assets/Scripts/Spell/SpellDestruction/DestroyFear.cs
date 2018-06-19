@@ -28,7 +28,7 @@ public class DestroyFear {
 
         Vector3 origin = particles.gameObject.transform.position;
 
-        List<GameObject> playersInRadiusAndLOS = PlayersWithinRadius.FindPlayersWithinRadiusAndLOS(origin, RADIUS);
+        List<GameObject> playersInRadiusAndLOS = GameplayUtility.FindPlayersWithinRadiusAndLOS(origin, RADIUS);
         foreach (GameObject hitPlayer in playersInRadiusAndLOS)
         {
             spellEffects.CmdFearPlayer(hitPlayer);

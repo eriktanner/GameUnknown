@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 /*Finds players within a certain radius and in line of sight*/
-public class PlayersWithinRadius {
+public static class GameplayUtility {
 
 
     /*Finds players within a certain radius and in line of sight*/
@@ -38,14 +38,13 @@ public class PlayersWithinRadius {
 
     private static bool PlayerIsInLineOfSight(RaycastHit[] hits)
     {
-        bool isInLineOfSight = true;
         foreach (RaycastHit hit in hits)
         {
             if (hit.transform.gameObject.tag != "Player")
-                isInLineOfSight = false;
+                return false;
         }
 
-        return isInLineOfSight;
+        return true;
     }
 
     private static RaycastHit[] RaycastAllToPlayer(Vector3 origin, GameObject gameObjectHit)
