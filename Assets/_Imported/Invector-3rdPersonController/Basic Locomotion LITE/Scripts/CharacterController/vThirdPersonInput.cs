@@ -14,6 +14,8 @@ public class vThirdPersonInput : Photon.MonoBehaviour
     public KeyCode jumpInput = KeyCode.Space;
     public KeyCode strafeInput = KeyCode.Tab;
     public KeyCode sprintInput = KeyCode.LeftShift;
+    public bool playerInControl = true;
+
 
     [Header("Camera Settings")]
     public string rotateCameraXInput = "Mouse X";
@@ -90,19 +92,47 @@ public class vThirdPersonInput : Photon.MonoBehaviour
             JumpInput();
         }
 
-        if (cc.stunMovement)
-        {
-            cc.input.x = 0;
-            cc.input.y = 0;
-        }
+        
     }
 
     #region Basic Locomotion Inputs      
 
+    public virtual void LockMovement(bool isLocked)
+    {
+        cc.lockMovement = isLocked;
+    }
+
+    public virtual void StopMovement()
+    {
+        cc.input.x = 0;
+        cc.input.y = 0;
+        cc.Sprint(false);
+    }
+
+    public void SetForwardInput(float inputForward)
+    {
+        cc.input.y = inputForward;
+    }
+
+    public void SetLeftRightInput(float inputLeftRight)
+    {
+        cc.input.x = inputLeftRight;
+    }
+
+    public void PlayerHasControl(bool playerIsInControl)
+    {
+        playerInControl = playerIsInControl;
+    }
+    
+
+
     protected virtual void MoveCharacter()
     {
-        cc.input.x = Input.GetAxis(horizontalInput);
-        cc.input.y = Input.GetAxis(verticallInput);
+        if (playerInControl)
+        {
+            cc.input.x = Input.GetAxis(horizontalInput);
+            cc.input.y = Input.GetAxis(verticallInput);
+        }
     }
 
     protected virtual void StrafeInput()
@@ -113,18 +143,28 @@ public class vThirdPersonInput : Photon.MonoBehaviour
 
     protected virtual void SprintInput()
     {
-        if (Input.GetKeyDown(sprintInput))
-            cc.Sprint(true);
-        else if (Input.GetKeyUp(sprintInput))
-            cc.Sprint(false);
+        if (playerInControl)
+        {
+            if (Input.GetKeyDown(sprintInput))
+                cc.Sprint(true);
+            else if (Input.GetKeyUp(sprintInput))
+                cc.Sprint(false);
+        }
+
+        
     }
 
     protected virtual void JumpInput()
     {
-        if (Input.GetKeyDown(jumpInput))
-            cc.Jump();
+        if (playerInControl)
+        {
+            if (Input.GetKeyDown(jumpInput))
+                cc.Jump();
+        }
     }
 
+
+    // TODO - Remove
     protected virtual void ExitGameInput()
     {
         // just a example to quit the application 

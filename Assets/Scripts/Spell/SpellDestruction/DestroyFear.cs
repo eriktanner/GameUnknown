@@ -32,9 +32,9 @@ public class DestroyFear {
 
             if (hitColliders[i].gameObject.tag == "Player")
             {
-                Vector3 toPosition = hitColliders[i].gameObject.transform.position;
-                Vector3 direction = toPosition - origin;
-                float distance = (toPosition - direction).magnitude;
+                Vector3 collisionParticles = hitColliders[i].gameObject.transform.position + new Vector3(0, .3f, 0); //Vector offset only beneficial for ground casts (sometimes spell does not work);
+                Vector3 direction = collisionParticles - origin;
+                float distance = (collisionParticles - direction).magnitude;
 
                 RaycastHit[] hits = Physics.RaycastAll(origin, direction, distance);
 

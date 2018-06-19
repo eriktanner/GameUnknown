@@ -1,21 +1,23 @@
 ﻿using UnityEngine;
-using System.Threading;
+using System.Collections;
 
 /*Fear is a shadow spell that must be casted on the ground. It has an area of effect
  a few seconds after it is casted, fearing enemies within a range causing them to lose
  control over their input, replaced with fear input*/
-public class FearEffect {
+public class FearEffect : MonoBehaviour {
 
-    GameObject player;
-    CharacterMovementController playerMovement;
+    const float FEAR_STEP_TIME = 1.0f;
+    const float FEAR_PAUSE_TIME = .5f;
+
+
     Animator animator;
+    vThirdPersonInput playerMovement;
     CastSpell playerCastSpell;
 
     public FearEffect(GameObject playerObject)
-    {
-        player = playerObject;
-        playerMovement = playerObject.GetComponent<CharacterMovementController>();
-        animator = playerMovement.animator;
+    { 
+        //animator = playerMovement.animator;
+        playerMovement = playerObject.GetComponent<vThirdPersonInput>();
         playerCastSpell  = playerObject.GetComponent<CastSpell>();
     }
 
@@ -24,48 +26,45 @@ public class FearEffect {
     /*Start of actual fear effect*/
     public void initFearSequence()
     {
-        playerMovement.playerHasControl(false);
+        playerMovement.PlayerHasControl(false);
         playerCastSpell.SetSpellLock(true);
 
-        animator.Play("Fear");
-        new Thread(() =>
-        {
-            fearStep();
-            fearStep();
-            fearStep();
-
-            playerMovement.playerHasControl(true);
-            playerCastSpell.SetSpellLock(false);
-
-        }).Start();
+        SpellEffects.Instance.StartCoroutine(Fear()); 
 
     }
 
 
-    void fearStep()
+    IEnumerator Fear()
     {
-        System.Random myRandom = new System.Random();
-        float turnTo = (float) myRandom.NextDouble() * 120;
-        turnTo = Mathf.Clamp(turnTo, 45, 120);
-
-        float randomDirection = (float) myRandom.NextDouble();
-        randomDirection = (randomDirection <= .5) ? 1 : -1;
-
-        for (int i = 0; i < 200; i++)
-        {
-            playerMovement.currentX += turnTo * randomDirection / 200;
-            Thread.Sleep(1);
-        }
-
-
-
-        float newForward = (float) myRandom.NextDouble();
-        playerMovement.forwardInput = Mathf.Clamp(newForward, .55f, .85f);
+        FearStep();
+        yield return new WaitForSeconds(FEAR_STEP_TIME);
+        PauseStep();
+        yield return new WaitForSeconds(FEAR_PAUSE_TIME);
+        FearStep();
+        yield return new WaitForSeconds(FEAR_STEP_TIME);
+        PauseStep();
+        yield return new WaitForSeconds(FEAR_PAUSE_TIME);
+        FearStep();
+        yield return new WaitForSeconds(FEAR_STEP_TIME);
+        PauseStep();
+        yield return new WaitForSeconds(FEAR_PAUSE_TIME);
 
 
-        Thread.Sleep(1000);
-        playerMovement.forwardInput = 0;
-        Thread.Sleep(600);
+        playerMovement.PlayerHasControl(true);
+        playerMovement.LockMovement(false);
+        playerCastSpell.SetSpellLock(false);
     }
-
+    
+    void FearStep()
+    {
+        playerMovement.LockMovement(false);
+        playerMovement.SetForwardInput(Random.Range(-1, 1));
+        playerMovement.SetLeftRightInput(Random.Range(-1, 1));
+    }
+    
+    void PauseStep()
+    {
+        playerMovement.StopMovement();
+        playerMovement.LockMovement(true);
+    }
 }

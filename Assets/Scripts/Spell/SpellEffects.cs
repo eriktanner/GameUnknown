@@ -5,7 +5,23 @@ using UnityEngine.Networking;
 
 /*Handles the servers calls for in-depth spell effects*/
 public class SpellEffects : Photon.MonoBehaviour {
-    
+
+    public static SpellEffects Instance { get; private set; }
+
+    void Start()
+    {
+        EnsureSingleton();
+    }
+
+    void EnsureSingleton()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
+
+
     public void CmdFearPlayer(GameObject playerHit)
     {
         FearEffect fearSpellEffect = new FearEffect(playerHit);

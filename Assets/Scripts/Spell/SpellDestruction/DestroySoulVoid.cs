@@ -42,7 +42,7 @@ public class DestroySoulVoid : MonoBehaviour {
 
             if (hitColliders[i].gameObject.tag == "Player")
             {
-                Vector3 collisionPosition = hitColliders[i].gameObject.transform.position + new Vector3(0, .2f, 0); //Vector offset only beneficial for ground casts (sometimes spell does not work)
+                Vector3 collisionPosition = hitColliders[i].gameObject.transform.position + new Vector3(0, .3f, 0); //Vector offset only beneficial for ground casts (sometimes spell does not work)
                 Vector3 direction = collisionPosition - origin;
                 float distance = (collisionPosition - direction).magnitude;
 

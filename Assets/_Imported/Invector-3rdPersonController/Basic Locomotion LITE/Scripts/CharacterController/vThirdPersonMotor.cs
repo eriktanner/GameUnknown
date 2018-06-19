@@ -35,8 +35,6 @@ public abstract class vThirdPersonMotor : Photon.MonoBehaviour
     public LocomotionType locomotionType = LocomotionType.FreeWithStrafe;
     [Tooltip("lock the player movement")]
     public bool lockMovement;
-    [Tooltip("stun the player")]
-    public bool stunMovement;
     [Tooltip("Speed of the rotation on free directional movement")]
     [SerializeField]
     public float freeRotationSpeed = 10f;

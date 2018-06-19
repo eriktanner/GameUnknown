@@ -1,30 +1,30 @@
 ﻿using UnityEngine;
-using System.Threading;
+using System.Collections;
 
 /*Soul void is a shadow spell that is casted on ground and explodes a few
  seconds after it is lands. It damages and stuns players within radius*/
-public class SoulVoidEffect : MonoBehaviour {
+public class SoulVoidEffect {
 
-    int STUN_MILLISECONDS = 2500;
+    float STUN_SECONDS = 2.5f;
 
     int ShotBy;
-    SpellStats spell;
-    GameObject PlayerHit;
-    vThirdPersonMotor playerMovement;
+    float spellDamage;
     Animator animator;
+    GameObject PlayerHit;
+    vThirdPersonInput playerMovement;
     CastSpell playerCastSpell;
     SpellDamageApplier damageApplier;
 
 
     public SoulVoidEffect(GameObject playerObject, int shotBy)
     {
+        //animator = playerMovement.animator;
         PlayerHit = playerObject;
         ShotBy = shotBy;
-        playerMovement = playerObject.GetComponent<vThirdPersonMotor>();
-        //animator = playerMovement.animator;
+        playerMovement = playerObject.GetComponent<vThirdPersonInput>();
+        spellDamage = SpellManager.GetSpellStatsFromName("Soul Void").damage;
         playerCastSpell = playerObject.GetComponent<CastSpell>();
-        spell = SpellManager.GetSpellStatsFromName("Soul Void");
-        damageApplier = GameObject.Find("Spell").GetComponent<SpellDamageApplier>();
+        damageApplier = SpellDamageApplier.Instance;
     }
 
 
@@ -37,28 +37,26 @@ public class SoulVoidEffect : MonoBehaviour {
 
         damagePlayer();
 
-        new Thread(() =>
-        {
-            voidStun();
-            
-            playerMovement.stunMovement = false;
-            playerCastSpell.SetSpellLock(false);
-
-        }).Start();
+        SpellEffects.Instance.StartCoroutine(SoulVoid());
 
     }
 
+
+    IEnumerator SoulVoid()
+    {
+        playerMovement.StopMovement();
+        playerMovement.LockMovement(true);
+        yield return new WaitForSeconds(STUN_SECONDS);
+        playerMovement.LockMovement(false);
+        playerMovement.PlayerHasControl(true);
+        playerCastSpell.SetSpellLock(false);
+    }
 
     void damagePlayer()
     {
-        damageApplier.ApplyDamageFromTo(PlayerHit, spell.damage, ShotBy);
+        damageApplier.ApplyDamageFromTo(PlayerHit, spellDamage, ShotBy);
     }
 
-    void voidStun()
-    {
-        playerMovement.stunMovement = true;
-        Thread.Sleep(STUN_MILLISECONDS);
-    }
     
 
 }

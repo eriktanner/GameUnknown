@@ -5408,10 +5408,10 @@ MonoBehaviour:
   useRootMotion: 0
   freeWalkSpeed: 2
   freeRunningSpeed: 3
-  freeSprintSpeed: 4
+  freeSprintSpeed: 3.3
   strafeWalkSpeed: 2
   strafeRunningSpeed: 3
-  strafeSprintSpeed: 4
+  strafeSprintSpeed: 3.3
   stepOffsetEnd: 0.45
   stepOffsetStart: 0.1
   stepSmooth: 4
