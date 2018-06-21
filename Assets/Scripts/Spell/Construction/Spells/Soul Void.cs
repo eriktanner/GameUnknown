@@ -10,11 +10,13 @@ public class SoulVoid : Spell {
     public override bool IsInstantCollision { get { return true; } }
 
 
-    public override float TimeFromHitToParticleExplosion { get { return 3.75f; } }
+    public override float TimeFromHitToParticleExplosion { get { return 1f; } }
+    public override float SpellEffectRadius { get { return 3.5f; } }
 
+    /*
     public override void ParticleDestruction()
     {
         DestroySoulVoid explodeSoulVoid = new DestroySoulVoid(gameObject);
         explodeSoulVoid.explodeSoulVoid();
-    }
+    }*/
 }

@@ -201,5 +201,5 @@ D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Newtonsoft.Json
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Photon3Unity3D.dll
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\websocket-sharp.dll
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Photon3Unity3D.xml
-D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Assembly-CSharp.pdb
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\UnityEditor.OSXStandalone.Extensions.dll
+D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Assembly-CSharp.pdb

@@ -35,7 +35,7 @@ public class SpellDestruction : Photon.MonoBehaviour
         Spell spell = SpellDictionary.GetSpellFromSpellObject(particleObject);
 
         if (spell != null)
-            StartCoroutine(waitAndCall(particleObject, spell.TimeFromHitToParticleExplosion, spell.ParticleDestruction));
+            StartCoroutine(waitAndCall(particleObject, spell.TimeFromHitToParticleExplosion, spell.SpellEffect));
     }
 
     /*Destroys a casted spell by its lifespan*/
@@ -67,7 +67,7 @@ public class SpellDestruction : Photon.MonoBehaviour
         GameObject spellInWorldToDestroy = SpellManager.GetObjectFromSpellName(spellName);
         if (spellInWorldToDestroy == null)
         {
-            Debug.Log("SpellInWorldToDestroyNotFound");
+            Debug.Log("SpellInWorldToDestroyNotFound: " + spellName);
             return;
         }
 

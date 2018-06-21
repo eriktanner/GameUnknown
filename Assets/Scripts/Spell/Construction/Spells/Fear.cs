@@ -10,13 +10,14 @@ public class Fear : Spell {
     public override bool IsInstantCollision { get { return true; } }
 
     
-    public override float TimeFromHitToParticleExplosion { get { return 3.75f; } }
+    public override float TimeFromHitToParticleExplosion { get { return 1f; } }
+    public override float SpellEffectRadius { get { return 4f; } }
 
-    
+    /*
     public override void ParticleDestruction()
     {
         DestroyFear explodeFear = new DestroyFear(gameObject);
         if (explodeFear != null)
             explodeFear.explodeFear();
-    }
+    }*/
 }

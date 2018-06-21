@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 /*Fear is a shadow spell that must be casted on the ground. It has an area of effect
  a few seconds after it is casted, fearing enemies within a range causing them to lose
  control over their input, replaced with fear input*/
-public class FearEffect : MonoBehaviour {
+public class FearEffect : SpellEffect {
+
+    public override System.Type SpellType { get { return Type.GetType(typeof(Fear).Name); } }
 
     const float FEAR_STEP_TIME = 1.0f;
     const float FEAR_PAUSE_TIME = .5f;
@@ -14,22 +17,25 @@ public class FearEffect : MonoBehaviour {
     vThirdPersonInput playerMovement;
     CastSpell playerCastSpell;
 
-    public FearEffect(GameObject playerObject)
-    { 
-        //animator = playerMovement.animator;
-        playerMovement = playerObject.GetComponent<vThirdPersonInput>();
-        playerCastSpell  = playerObject.GetComponent<CastSpell>();
+    public FearEffect() {}
+
+    public override void SetupEffect(GameObject playerHit, GameObject particles)
+    {
+        playerMovement = playerHit.GetComponent<vThirdPersonInput>();
+        playerCastSpell = playerHit.GetComponent<CastSpell>();
     }
 
-
+   
 
     /*Start of actual fear effect*/
-    public void initFearSequence()
+    public override void ProcessEffect(GameObject playerHit, GameObject particles)
     {
+        SetupEffect(playerHit, particles);
+
         playerMovement.PlayerHasControl(false);
         playerCastSpell.SetSpellLock(true);
 
-        SpellEffects.Instance.StartCoroutine(Fear()); 
+        SpellDestruction.Instance.StartCoroutine(Fear()); 
 
     }
 
@@ -58,8 +64,8 @@ public class FearEffect : MonoBehaviour {
     void FearStep()
     {
         playerMovement.LockMovement(false);
-        playerMovement.SetForwardInput(Random.Range(-1, 1));
-        playerMovement.SetLeftRightInput(Random.Range(-1, 1));
+        playerMovement.SetForwardInput(UnityEngine.Random.Range(-1, 1));
+        playerMovement.SetLeftRightInput(UnityEngine.Random.Range(-1, 1));
     }
     
     void PauseStep()

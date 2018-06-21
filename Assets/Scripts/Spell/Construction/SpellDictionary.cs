@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /*Anything Type related*/
 public static class SpellDictionary
@@ -12,12 +13,12 @@ public static class SpellDictionary
 
     public static void InitSpellDictionary()
     {
-        nameToType.Add("Arcane Missile", new ArcaneMissile().GetType());
-        nameToType.Add("Fear", new Fear().GetType());
-        nameToType.Add("Fireball", new Fireball().GetType());
-        nameToType.Add("Ice Wall", new IceWall().GetType());
-        nameToType.Add("Pain", new Pain().GetType());
-        nameToType.Add("Soul Void", new SoulVoid().GetType());
+        nameToType.Add("Arcane Missile", Type.GetType(typeof(ArcaneMissile).Name));
+        nameToType.Add("Fear", Type.GetType(typeof(Fear).Name));
+        nameToType.Add("Fireball", Type.GetType(typeof(Fireball).Name));
+        nameToType.Add("Ice Wall", Type.GetType(typeof(IceWall).Name));
+        nameToType.Add("Pain", Type.GetType(typeof(Pain).Name));
+        nameToType.Add("Soul Void", Type.GetType(typeof(SoulVoid).Name));
     }
 
 

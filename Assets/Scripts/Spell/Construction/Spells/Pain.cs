@@ -23,7 +23,7 @@ public class Pain : Spell {
     }
     
 
-    public override void ParticleDestruction()
+    public override void SpellEffect()
     {
         //DestroyPain destroyPain = new DestroyPain(gameObject);
         //destroyPain.explodePain();
