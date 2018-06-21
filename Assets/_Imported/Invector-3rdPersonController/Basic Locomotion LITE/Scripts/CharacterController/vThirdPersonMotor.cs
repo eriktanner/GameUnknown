@@ -276,6 +276,7 @@ public abstract class vThirdPersonMotor : Photon.MonoBehaviour
             }
         }
     }
+
     protected void ControlSpeed(float velocity)
     {
         if (Time.deltaTime == 0) return;
@@ -286,16 +287,10 @@ public abstract class vThirdPersonMotor : Photon.MonoBehaviour
             Vector3 v = (deltaPosition * (velocity > 0 ? velocity : 1f)) / Time.deltaTime;
             v.y = _rigidbody.velocity.y;
             _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, v, 20f * Time.deltaTime);
-        } else if (actions || forceRootMotion) {
-            //this.velocity = velocity;
-            //Vector3 v = Vector3.zero;
-            //v.y = _rigidbody.velocity.y;
-            //_rigidbody.velocity = v;
-            //transform.position = animator.rootPosition;
-            //if (forceRootMotion)
-            //    transform.rotation = animator.rootRotation;
-            Debug.Log("ROLL");
+        } else if (isRolling) { //Previously (actions || forceRootMotion)
+
             transform.position += transform.forward * Time.deltaTime * 3.2f;
+
         } else {
             var velY = transform.forward * velocity * speed;
             velY.y = _rigidbody.velocity.y;
