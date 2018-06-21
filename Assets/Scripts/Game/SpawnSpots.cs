@@ -6,6 +6,4 @@ public class SpawnSpots : MonoBehaviour {
 
     public int teamId = 0;
 
-
-
 }

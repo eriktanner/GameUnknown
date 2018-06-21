@@ -13,7 +13,7 @@ public class IceWall : Spell {
     public override float TimeFromHitToParticleExplosion { get { return 0; } }
 
 
-    public override void ParticleDestruction()
+    public override void SpellEffect()
     {
         DestroyIceWall explodeIceWall = new DestroyIceWall(gameObject);
         if (explodeIceWall != null)

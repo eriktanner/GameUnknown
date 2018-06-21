@@ -20,6 +20,7 @@ public static class ValidSpellDistance {
         float distance = (hitPosition - origin).magnitude;
         Spell spell = SpellDictionary.GetSpellFromSpellName(spellName);
 
+
         if (spell != null && spell.IsValidDistanceChecked)
         {
             return validRange(spellName, distance, rayDidMakeContact);
