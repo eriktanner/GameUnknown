@@ -35,7 +35,7 @@ public class SpellDestruction : Photon.MonoBehaviour
         Spell spell = SpellDictionary.GetSpellFromSpellObject(particleObject);
 
         if (spell != null)
-            StartCoroutine(waitAndCall(particleObject, spell.TimeFromHitToParticleExplosion, spell.SpellEffect));
+            StartCoroutine(waitAndCall(particleObject, spell.TimeFromHitToParticleExplosion, spell.AreaOfEffect));
     }
 
     /*Destroys a casted spell by its lifespan*/

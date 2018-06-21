@@ -157,6 +157,7 @@
      <Compile Include="Assets\Scripts\Character\PlayerCameraController.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerUI.cs" />
      <Compile Include="Assets\Scripts\Character\SpellList.cs" />
+     <Compile Include="Assets\Scripts\Game\GameKeybindings.cs" />
      <Compile Include="Assets\Scripts\Game\SceneCamera.cs" />
      <Compile Include="Assets\Scripts\Game\SpawnSpots.cs" />
      <Compile Include="Assets\Scripts\Managers\CameraManager.cs" />

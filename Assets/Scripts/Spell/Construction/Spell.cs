@@ -25,23 +25,12 @@ public abstract class Spell : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    /*Override for different particle destruction methods
-     Note: Call only if spell collides with a surface*/
-    public virtual void SpellEffect()
+    
+    public virtual void AreaOfEffect()
     {
-        if (SpellEffectRadius > 0)
-        {
-            AreaOfEffect();
-        } else
-        {
-            NormalHit();
-        }
+        if (SpellEffectRadius < 0)
+            return;
 
-        Destroy(gameObject, 3.0f);
-    }
-
-    protected virtual void AreaOfEffect()
-    {
         SpellEffect spellEffect = SpellEffectFactory.GetEffectFromFactory(GetType());
 
         if (spellEffect != null)
@@ -59,11 +48,20 @@ public abstract class Spell : MonoBehaviour {
         {
             Debug.Log("SpellEffect Not Found");
         }
+
+
+        Destroy(gameObject, 3.0f);
     }
 
-    protected virtual void NormalHit()
-    {
 
+
+    public virtual void DirectHit(int shotBy, GameObject target)
+    {
+        if (target.tag == "Player")
+        {
+            Damage damage = new Damage(SpellStats, target, shotBy);
+            damage.ApplyDamage();
+        }
     }
 
 

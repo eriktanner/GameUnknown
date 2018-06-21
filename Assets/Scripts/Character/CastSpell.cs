@@ -8,6 +8,7 @@ public class CastSpell : Photon.MonoBehaviour
     public ManaBar ManaBar;
     public SpellList SpellList;
     public Transform castSpawn;
+    
 
     SpellDestruction SpellDestruction;
     Coroutine CastRoutine;
@@ -64,7 +65,7 @@ public class CastSpell : Photon.MonoBehaviour
             if (!SpellList.isOnCooldown(5))
                 FireSpell(SpellList.GetSpellAtIndex(5));
         }
-        DoCancelCast = Input.GetButtonDown("CancelCast");
+        DoCancelCast = Input.GetKey(GameKeybindings.CancelCastInput);
     }
     
 

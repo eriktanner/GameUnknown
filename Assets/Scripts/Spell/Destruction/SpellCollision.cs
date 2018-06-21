@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Networking;
-
+﻿using UnityEngine;
 
 /* Detects collision of spells, for overview of how spells and collisions are being 
  handled look at Spell.cs documentation
@@ -95,14 +91,7 @@ public class SpellCollision : MonoBehaviour
         if (HitPhotonView != null && HitPhotonView.viewID != ShotBy)
         {
             hasAlreadyHit = true;
-            
-
-            if (hitTransform.tag == "Player")
-            {
-                Damage damage = new Damage(spell.SpellStats, hitTransform.gameObject, ShotBy);
-                damage.ApplyDamage();
-            }
-            
+            spell.DirectHit(ShotBy, hitTransform.gameObject);
         }
 
         spellDestruction.NetworkRpcDestroySpellOnCollision(gameObject.name, Hit.point, ShotBy);

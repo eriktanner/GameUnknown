@@ -31,7 +31,7 @@ public class CastBar : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetButtonDown("CancelCast"))
+        if (Input.GetKey(GameKeybindings.CancelCastInput))
         {
             if (castBarRoutine != null)
             {

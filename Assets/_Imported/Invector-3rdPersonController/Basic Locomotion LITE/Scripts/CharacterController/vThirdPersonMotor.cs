@@ -289,7 +289,7 @@ public abstract class vThirdPersonMotor : Photon.MonoBehaviour
             _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, v, 20f * Time.deltaTime);
         } else if (isRolling) { //Previously (actions || forceRootMotion)
 
-            transform.position += transform.forward * Time.deltaTime * 3.2f;
+            transform.position += transform.forward * Time.deltaTime * 3.75f;
 
         } else {
             var velY = transform.forward * velocity * speed;

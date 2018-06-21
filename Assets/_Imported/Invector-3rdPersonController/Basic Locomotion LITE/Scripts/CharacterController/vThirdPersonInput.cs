@@ -11,11 +11,11 @@ public class vThirdPersonInput : Photon.MonoBehaviour
     [Header("Default Inputs")]
     public string horizontalInput = "Horizontal";
     public string verticallInput = "Vertical";
-    public KeyCode jumpInput = KeyCode.Space;
-    public KeyCode strafeInput = KeyCode.Tab;
-    public KeyCode sprintInput = KeyCode.LeftShift;
-    public KeyCode rollInput = KeyCode.LeftControl;
-    public bool playerInControl = true;
+    KeyCode jumpInput = GameKeybindings.JumpInput;
+    KeyCode strafeInput = GameKeybindings.StrafeInput;
+    KeyCode sprintInput = GameKeybindings.SprintInput;
+    KeyCode rollInput = GameKeybindings.RollInput;
+    bool playerInControl = true;
 
 
     [Header("Camera Settings")]
@@ -88,7 +88,6 @@ public class vThirdPersonInput : Photon.MonoBehaviour
         if (!cc.lockMovement)
         {
             MoveCharacter();
-            SprintInput();
             StrafeInput();
             JumpInput();
             RollInput();

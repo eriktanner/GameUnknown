@@ -346,7 +346,7 @@ InputManager:
     descriptiveName: Interupts player's cast
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: tab
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
