@@ -40,6 +40,11 @@ public abstract class vThirdPersonMotor : Photon.MonoBehaviour
     public float freeRotationSpeed = 10f;
     [Tooltip("Speed of the rotation while strafe movement")]
     public float strafeRotationSpeed = 10f;
+    [SerializeField]
+    protected bool turnOnSpotAnim = false;
+    [Tooltip("Can control the roll direction")]
+    [SerializeField]
+    protected bool rollControl = false;
 
     [Header("Jump Options")]
 
@@ -102,7 +107,18 @@ public abstract class vThirdPersonMotor : Photon.MonoBehaviour
     // action bools
     [HideInInspector]
     public bool
-        isJumping;
+        inTurn,
+        isJumping,
+        isRolling;
+
+    // one bool to rule then all
+    [HideInInspector]
+    public bool actions {
+        get {
+            return isRolling;
+        }
+    }
+
 
     protected void RemoveComponents()
     {
@@ -126,7 +142,13 @@ public abstract class vThirdPersonMotor : Photon.MonoBehaviour
     public Quaternion freeRotation;
     [HideInInspector]
     public bool keepDirection;
-
+    // get Layers from the Animator Controller
+    [HideInInspector]
+    public AnimatorStateInfo baseLayerInfo, underBodyInfo, rightArmInfo, leftArmInfo, fullBodyInfo, upperBodyInfo;
+    [HideInInspector]
+    public bool lockRotation;
+    [HideInInspector]
+    public bool forceRootMotion;
     #endregion
 
     #region Components               
@@ -232,20 +254,22 @@ public abstract class vThirdPersonMotor : Photon.MonoBehaviour
     {
         // set speed to both vertical and horizontal inputs
         speed = Mathf.Abs(input.x) + Mathf.Abs(input.y);
+        // limits the character to walk by default
         speed = Mathf.Clamp(speed, 0, 1f);
         // add 0.5f on sprint to change the animation on animator
         if (isSprinting) speed += 0.5f;
 
-        if (input != Vector2.zero && targetDirection.magnitude > 0.1f)
-        {
+        animator.SetFloat("InputMagnitude", speed, .2f, Time.deltaTime);
+
+        var conditions = (!actions || isRolling && rollControl);
+        if (input != Vector2.zero && targetDirection.magnitude > 0.1f && conditions && !lockRotation) {
             Vector3 lookDirection = targetDirection.normalized;
             freeRotation = Quaternion.LookRotation(lookDirection, transform.up);
             var diferenceRotation = freeRotation.eulerAngles.y - transform.eulerAngles.y;
             var eulerY = transform.eulerAngles.y;
 
             // apply free directional rotation while not turning180 animations
-            if (isGrounded || (!isGrounded && jumpAirControl))
-            {
+            if (isGrounded || (!isGrounded && jumpAirControl)) {
                 if (diferenceRotation < 0 || diferenceRotation > 0) eulerY = freeRotation.eulerAngles.y;
                 var euler = new Vector3(transform.eulerAngles.x, eulerY, transform.eulerAngles.z);
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(euler), freeRotationSpeed * Time.deltaTime);
@@ -256,27 +280,33 @@ public abstract class vThirdPersonMotor : Photon.MonoBehaviour
     {
         if (Time.deltaTime == 0) return;
 
-        if (useRootMotion)
-        {
-            Vector3 v = (animator.deltaPosition * (velocity > 0 ? velocity : 1f)) / Time.deltaTime;
+        if (useRootMotion && !actions) {
+            this.velocity = velocity;
+            var deltaPosition = new Vector3(animator.deltaPosition.x, transform.position.y, animator.deltaPosition.z);
+            Vector3 v = (deltaPosition * (velocity > 0 ? velocity : 1f)) / Time.deltaTime;
             v.y = _rigidbody.velocity.y;
             _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, v, 20f * Time.deltaTime);
-        }
-        else
-        {
+        } else if (actions || forceRootMotion) {
+            //this.velocity = velocity;
+            //Vector3 v = Vector3.zero;
+            //v.y = _rigidbody.velocity.y;
+            //_rigidbody.velocity = v;
+            //transform.position = animator.rootPosition;
+            //if (forceRootMotion)
+            //    transform.rotation = animator.rootRotation;
+            Debug.Log("ROLL");
+            transform.position += transform.forward * Time.deltaTime * 3.2f;
+        } else {
             var velY = transform.forward * velocity * speed;
             velY.y = _rigidbody.velocity.y;
             var velX = transform.right * velocity * direction;
             velX.x = _rigidbody.velocity.x;
 
-            if (isStrafing)
-            {
+            if (isStrafing) {
                 Vector3 v = (transform.TransformDirection(new Vector3(input.x, 0, input.y)) * (velocity > 0 ? velocity : 1f));
                 v.y = _rigidbody.velocity.y;
                 _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, v, 20f * Time.deltaTime);
-            }
-            else
-            {
+            } else {
                 _rigidbody.velocity = velY;
                 _rigidbody.AddForce(transform.forward * (velocity * speed) * Time.deltaTime, ForceMode.VelocityChange);
             }

@@ -14,6 +14,7 @@ public class vThirdPersonInput : Photon.MonoBehaviour
     public KeyCode jumpInput = KeyCode.Space;
     public KeyCode strafeInput = KeyCode.Tab;
     public KeyCode sprintInput = KeyCode.LeftShift;
+    public KeyCode rollInput = KeyCode.LeftControl;
     public bool playerInControl = true;
 
 
@@ -90,6 +91,7 @@ public class vThirdPersonInput : Photon.MonoBehaviour
             SprintInput();
             StrafeInput();
             JumpInput();
+            RollInput();
         }
 
         
@@ -161,6 +163,11 @@ public class vThirdPersonInput : Photon.MonoBehaviour
             if (Input.GetKeyDown(jumpInput))
                 cc.Jump();
         }
+    }
+
+    protected virtual void RollInput() {
+        if (Input.GetKeyDown(rollInput))
+            cc.Roll();
     }
 
 
