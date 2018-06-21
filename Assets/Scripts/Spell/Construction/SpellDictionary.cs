@@ -1,32 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using System.Reflection;
+using System.Linq;
 
 /*Anything Type related*/
 public static class SpellDictionary
 {
 
-    public static Dictionary<string, System.Type> nameToType = new Dictionary<string, System.Type>();
+    public static Dictionary<string, System.Type> nameToType;
 
-
-
-    public static void InitSpellDictionary()
-    {
-        nameToType.Add("Arcane Missile", Type.GetType(typeof(ArcaneMissile).Name));
-        nameToType.Add("Fear", Type.GetType(typeof(Fear).Name));
-        nameToType.Add("Fireball", Type.GetType(typeof(Fireball).Name));
-        nameToType.Add("Ice Wall", Type.GetType(typeof(IceWall).Name));
-        nameToType.Add("Pain", Type.GetType(typeof(Pain).Name));
-        nameToType.Add("Soul Void", Type.GetType(typeof(SoulVoid).Name));
-    }
-
-
-    public static System.Type GetTypeFromSpellName(string spellName)
-    {
-        spellName = SpellManager.GetOriginalSpellName(spellName);
-        return nameToType[spellName];
-    }
 
     public static Spell GetSpellFromSpellObject(GameObject spellObject)
     {
@@ -65,6 +48,37 @@ public static class SpellDictionary
 
         temp.AddComponent(spellType);
         return (Spell) temp.GetComponent(spellType);
+    }
+
+    public static System.Type GetTypeFromSpellName(string spellName)
+    {
+        spellName = SpellManager.GetOriginalSpellName(spellName);
+        if (nameToType == null)
+            RegisterNamesToTypes();
+
+
+        if (nameToType.ContainsKey(spellName))
+        {
+            System.Type foundEffect = nameToType[spellName];
+            return foundEffect;
+        }
+        return null;
+    }
+
+    private static void RegisterNamesToTypes()
+    {
+        var EffectTypes = Assembly.GetAssembly(typeof(Spell)).GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(Spell)));
+
+        nameToType = new Dictionary<string, System.Type>();
+
+        foreach (var type in EffectTypes)
+        {
+            var tempSpell = Activator.CreateInstance(type) as Spell;
+
+            if (!nameToType.ContainsKey(tempSpell.SpellStats.name))
+                nameToType.Add(tempSpell.SpellStats.name, tempSpell.GetType());
+        }
+
     }
 
 

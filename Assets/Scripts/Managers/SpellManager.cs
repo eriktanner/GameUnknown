@@ -16,7 +16,6 @@ public class SpellManager : MonoBehaviour
     {
         EnsureSingleton();
         SpellManagerTransform = GameObject.Find("Managers/SpellManager").transform;
-        SpellDictionary.InitSpellDictionary();
     }
 
     void EnsureSingleton()
