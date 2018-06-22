@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
+using System;
 
 /*We may not want ceratin spells to cast if not a valid range for them*/
 public static class ValidSpellDistance {
@@ -16,20 +16,13 @@ public static class ValidSpellDistance {
     /*Certain spells are going to require certain layers to be hit before particles are instatiated*/
     public static bool SpellIsInRange(string spellName, Vector3 origin, Vector3 hitPosition, bool rayDidMakeContact)
     {
-
         float distance = (hitPosition - origin).magnitude;
-        Spell spell = SpellDictionary.GetSpellFromSpellName(spellName);
 
-
-        if (spell != null && spell.IsValidDistanceChecked)
+        if (SpellIsValidDistanceChecked(spellName))
         {
             return validRange(spellName, distance, rayDidMakeContact);
         }
 
-        if (spell == null)
-        {
-            Debug.Log("SpellDictionary.GetSpellFromSpellName(spellName: is null");
-        }
         return true;
     }
 
@@ -49,10 +42,14 @@ public static class ValidSpellDistance {
         return true;
     }
 
-    
 
 
+    public static bool SpellIsValidDistanceChecked(string spellNameIn)
+    {
+        var spell = Activator.CreateInstance(SpellDictionary.GetTypeFromSpellName(spellNameIn)) as Spell;
+        return spell.IsValidDistanceChecked;
+    }
 
-    
+
 
 }

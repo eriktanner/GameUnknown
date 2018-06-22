@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 
@@ -16,9 +15,7 @@ public static class ValidSpellLayer {
     /*Certain spells are going to require certain layers to be hit before particles are instatiated*/
     public static bool SpellHitValidLayerBySpell(string spellName, RaycastHit Hit)
     {
-        Spell spell = SpellDictionary.GetSpellFromSpellName(spellName);
-
-        if (spell != null && spell.IsValidDistanceChecked)
+        if (SpellIsValidLayerCheckedGround(spellName))
         {
             return validLayerGround(Hit);
         }
@@ -36,4 +33,12 @@ public static class ValidSpellLayer {
         if (!isValidLayer) DisplayInvalidLayerMessage();
         return isValidLayer;
     }
+
+
+    public static bool SpellIsValidLayerCheckedGround(string spellNameIn)
+    {
+        var spell = Activator.CreateInstance(SpellDictionary.GetTypeFromSpellName(spellNameIn)) as Spell;
+        return spell.IsValidLayerCheckedGround;
+    }
+
 }

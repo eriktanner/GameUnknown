@@ -25,7 +25,7 @@ public static class SpellEffectFactory {
     {
         var EffectTypes = Assembly.GetAssembly(typeof(SpellEffect)).GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(SpellEffect)));
 
-        typeToEffect = new Dictionary<Type, SpellEffect>();
+        typeToEffect = new Dictionary<System.Type, SpellEffect>();
 
         foreach(var type in EffectTypes)
         {

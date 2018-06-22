@@ -28,8 +28,9 @@ public abstract class Spell : MonoBehaviour {
     
     public virtual void AreaOfEffect()
     {
-        if (SpellEffectRadius < 0)
+        if (SpellEffectRadius <= 0)
             return;
+
 
         SpellEffect spellEffect = SpellEffectFactory.GetEffectFromFactory(GetType());
 
@@ -42,7 +43,6 @@ public abstract class Spell : MonoBehaviour {
             {
                 spellEffect.ProcessEffect(hitPlayer, gameObject);
             }
-
         }
         else
         {

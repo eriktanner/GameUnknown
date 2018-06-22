@@ -13,11 +13,4 @@ public class Fear : Spell {
     public override float TimeFromHitToParticleExplosion { get { return 1f; } }
     public override float SpellEffectRadius { get { return 4f; } }
 
-    /*
-    public override void ParticleDestruction()
-    {
-        DestroyFear explodeFear = new DestroyFear(gameObject);
-        if (explodeFear != null)
-            explodeFear.explodeFear();
-    }*/
 }

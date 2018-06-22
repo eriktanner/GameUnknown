@@ -12,5 +12,4 @@ public class Fireball : Spell {
     
     public override float TimeFromHitToParticleExplosion { get { return 0; } }
 
-
 }

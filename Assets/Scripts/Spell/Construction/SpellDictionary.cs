@@ -20,35 +20,13 @@ public static class SpellDictionary
             return null;
         }
 
-        string spellName = SpellManager.GetOriginalSpellName(spellIdentifier.SpellName);
-        if (spellName == null)
-        {
-            Debug.Log("SpellDictionary(GetSpellFromSpellObject): " + spellObject.name + " spellName is null.");
+        System.Type lookup = GetTypeFromSpellName(spellIdentifier.SpellName);
+        if (lookup == null)
             return null;
-        }
 
-        System.Type lookup = GetTypeFromSpellName(spellName);
-        return (Spell)spellObject.GetComponent(lookup);
+        return (Spell) spellObject.GetComponent(lookup);
     }
 
-
-    /*This needs to be fixed - Both creates a Gamebject and Destroys it - really bad effeciency - gets called every spell*/
-    public static Spell GetSpellFromSpellName(string spellNameIn)
-    {
-        GameObject temp = new GameObject();
-        System.Type spellType = GetTypeFromSpellName(SpellManager.GetOriginalSpellName(spellNameIn));
-
-        if (spellType == null)
-        {
-            Debug.Log("SpellDictionary(GetSpellFromSpellName): spellType is null");
-            return null;
-        }
-
-        GameObject.Destroy(temp, 3.0f);
-
-        temp.AddComponent(spellType);
-        return (Spell) temp.GetComponent(spellType);
-    }
 
     public static System.Type GetTypeFromSpellName(string spellName)
     {
@@ -67,18 +45,19 @@ public static class SpellDictionary
 
     private static void RegisterNamesToTypes()
     {
-        var EffectTypes = Assembly.GetAssembly(typeof(Spell)).GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(Spell)));
+        var spellTypes = Assembly.GetAssembly(typeof(Spell)).GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(Spell)));
 
         nameToType = new Dictionary<string, System.Type>();
 
-        foreach (var type in EffectTypes)
+        foreach (var type in spellTypes)
         {
             var tempSpell = Activator.CreateInstance(type) as Spell;
 
-            if (!nameToType.ContainsKey(tempSpell.SpellStats.name))
+            if (tempSpell.SpellStats != null && !nameToType.ContainsKey(tempSpell.SpellStats.name))
+            {
                 nameToType.Add(tempSpell.SpellStats.name, tempSpell.GetType());
+            }
         }
-
     }
 
 
