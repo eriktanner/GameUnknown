@@ -6173,10 +6173,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalInput: Horizontal
   verticallInput: Vertical
-  jumpInput: 32
-  strafeInput: 324
-  sprintInput: 304
-  playerInControl: 1
   rotateCameraXInput: Mouse X
   rotateCameraYInput: Mouse Y
   customCameraState: 
@@ -6216,6 +6212,12 @@ MonoBehaviour:
   - Type: 1
     SynchronizeType: 2
     Name: VerticalVelocity
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsRolling
+  - Type: 1
+    SynchronizeType: 0
+    Name: TurnOnSpotDirection
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -6325,7 +6327,9 @@ MonoBehaviour:
   lockMovement: 0
   freeRotationSpeed: 10
   strafeRotationSpeed: 10
-  jumpAirControl: 0
+  turnOnSpotAnim: 1
+  rollControl: 1
+  jumpAirControl: 1
   jumpTimer: 0.3
   jumpCounter: 0
   jumpForward: 4
@@ -6346,10 +6350,14 @@ MonoBehaviour:
   isStrafing: 0
   isSprinting: 0
   isSliding: 0
+  inTurn: 0
   isJumping: 0
+  isRolling: 0
   targetDirection: {x: 0, y: 0, z: 0}
   freeRotation: {x: 0, y: 0, z: 0, w: 0}
   keepDirection: 0
+  lockRotation: 0
+  forceRootMotion: 0
   animator: {fileID: 0}
   _rigidbody: {fileID: 0}
   maxFrictionPhysics: {fileID: 0}
@@ -6362,6 +6370,8 @@ MonoBehaviour:
   direction: 0
   verticalVelocity: 0
   velocity: 0
+  matchTarget: {fileID: 0}
+  lookAtWeight: 0
 --- !u!114 &114640642541161300
 MonoBehaviour:
   m_ObjectHideFlags: 1
