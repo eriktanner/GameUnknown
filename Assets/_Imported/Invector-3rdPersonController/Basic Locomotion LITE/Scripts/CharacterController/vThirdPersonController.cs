@@ -28,7 +28,7 @@ public class vThirdPersonController : vThirdPersonAnimator
 
     public virtual void Jump() {
         // conditions to do this action
-        bool jumpConditions = isGrounded && !isJumping;
+        bool jumpConditions = isGrounded && !isJumping && !isRolling;
         // return if jumpCondigions is false
         if (!jumpConditions) return;
         // trigger jump behaviour
@@ -44,11 +44,10 @@ public class vThirdPersonController : vThirdPersonAnimator
     public virtual void Roll() {
         if (animator.IsInTransition(0)) return;
 
-        // can roll even if it's on a quickturn or quickstop animation
         bool actionsRoll = !actions || (actions);
         // general conditions to roll
         //bool rollConditions = (input != Vector2.zero || speed > 0.25f) && actionsRoll && isGrounded && !isJumping;
-        bool rollConditions = !isJumping;
+        bool rollConditions = actionsRoll && isGrounded && !isJumping;
 
         if (!rollConditions || isRolling) return;
 
