@@ -6335,9 +6335,9 @@ MonoBehaviour:
   jumpForward: 4
   jumpHeight: 4
   useRootMotion: 0
-  freeWalkSpeed: 2
-  freeRunningSpeed: 3
-  freeSprintSpeed: 3.3
+  freeWalkSpeed: 3
+  freeRunningSpeed: 4
+  freeSprintSpeed: 4.3
   strafeWalkSpeed: 2
   strafeRunningSpeed: 3
   strafeSprintSpeed: 3.3
