@@ -66,7 +66,10 @@ public class HealthBar : Photon.MonoBehaviour {
         currentHealth = newHealth;
         healthBarSlider.value = currentHealth;
         regenerateHealth();
+        
     }
+
+    
 
     /*Syncrhonize health bar*/
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -80,7 +83,7 @@ public class HealthBar : Photon.MonoBehaviour {
         }
     }
 
-    /*Waits a predetermined set amount of time, then regenerates mana*/
+    /*Waits a predetermined set amount of time, then regenerates health*/
     public void regenerateHealth()
     {
         if (regenerateHealthRoutine != null)

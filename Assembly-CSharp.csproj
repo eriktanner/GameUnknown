@@ -183,9 +183,9 @@
      <Compile Include="Assets\Scripts\Spell\Destruction\Damage.cs" />
      <Compile Include="Assets\Scripts\Spell\Destruction\DamageCalculator.cs" />
      <Compile Include="Assets\Scripts\Spell\Destruction\SpellCollision.cs" />
+     <Compile Include="Assets\Scripts\Spell\NetworkDamageApplier.cs" />
      <Compile Include="Assets\Scripts\Spell\PreFireSpellChecks\ValidSpellDistance.cs" />
      <Compile Include="Assets\Scripts\Spell\PreFireSpellChecks\ValidSpellLayer.cs" />
-     <Compile Include="Assets\Scripts\Spell\SpellDamageApplier.cs" />
      <Compile Include="Assets\Scripts\Spell\SpellDamageDisplay.cs" />
      <Compile Include="Assets\Scripts\Spell\SpellDestruction.cs" />
      <Compile Include="Assets\Scripts\Spell\SpellEffectFactory.cs" />

@@ -68,6 +68,7 @@ public class Launcher : Photon.PunBehaviour
     public override void OnLeftRoom()
     {
         SceneManager.LoadScene(0);
+        Cursor.visible = true;
     }
 
     /*LocalPlayer leaves room*/

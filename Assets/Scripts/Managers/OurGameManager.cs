@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class OurGameManager : MonoBehaviour
@@ -8,7 +7,9 @@ public class OurGameManager : MonoBehaviour
 
     public static GameObject LocalPlayer { get; private set; }
 
-    static uint projectileCount = 0;
+    public static Dictionary<GameObject, PhotonPlayer> playerToPhotonPlayer = new Dictionary<GameObject, PhotonPlayer>();
+
+    public static int ProjectileCount { get; set; }
     static SpawnSpots[] spawnSpots;
 
     
@@ -30,6 +31,7 @@ public class OurGameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+
     void SpawnPlayer()
     {
         SpawnSpots spawnSpot = spawnSpots[Random.Range(0, spawnSpots.Length - 1)];
@@ -39,21 +41,29 @@ public class OurGameManager : MonoBehaviour
             return;
         }
 
+        
         LocalPlayer = PhotonNetwork.Instantiate("NewPlayer", spawnSpot.transform.position, spawnSpot.transform.rotation, 0);
         PhotonNetwork.player.TagObject = LocalPlayer;
     }
 
-    /*This is going to be used to destroy projectiles on all clients
-     All clients are local, but we can get references to each local if we name them all the same*/
-    public static string AddProjectileNumberToSpell(string spellIn)
+
+    //TODO make this more efficient - only track newly added or left players
+    /*Keeps a u to date list of whoever is currently in the game*/
+    public static void TrackListOfPlayers()
     {
-        return spellIn + projectileCount;
+        var photonViews = FindObjectsOfType<PhotonView>();
+        foreach (var view in photonViews)
+        {
+            var player = view.owner;
+            //Objects in the scene don't have an owner, its means view.owner will be null
+            if (player != null)
+            {
+                if (!playerToPhotonPlayer.ContainsKey(view.gameObject))
+                    playerToPhotonPlayer.Add(view.gameObject, player);
+            }
+        }
     }
 
-    public static void IncrementProjectileCount()
-    {
-        projectileCount++;
-    }
 
     public static GameObject GetPlayerGameObject(string id)
     {
@@ -61,7 +71,12 @@ public class OurGameManager : MonoBehaviour
     }
 
 
+    public static PhotonPlayer GetPhotonPlayerFromGameObject(GameObject hitPlayer)
+    {
+        if (playerToPhotonPlayer.ContainsKey(hitPlayer))
+            return playerToPhotonPlayer[hitPlayer];
+        return null;
+    }
 
-    
 
 }

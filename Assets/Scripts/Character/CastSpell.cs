@@ -139,8 +139,9 @@ public class CastSpell : Photon.MonoBehaviour
 
     void NetworkFireSpell(string spellName, Quaternion rotationToTarget, int shotBy)
     {
+        photonView.RPC("ServerKeepProjectileCountInSync", PhotonTargets.MasterClient);
         photonView.RPC("RpcFireSpell", PhotonTargets.All, spellName, rotationToTarget, shotBy);
-    }
+    }  
 
     [PunRPC]
     void RpcFireSpell(string spellName, Quaternion rotationToTarget, int shotBy)
@@ -148,11 +149,22 @@ public class CastSpell : Photon.MonoBehaviour
         SpellStats spell = SpellManager.GetSpellStatsFromName(spellName);
         
         GameObject spellObject = SpellCreation.CreateSpellInWorld(spell, castSpawn.position, rotationToTarget, gameObject.name, shotBy);
+
         SpellDestruction.DestroySpellByTime(spellObject);
     }
 
 
+    [PunRPC]
+    void ServerKeepProjectileCountInSync()
+    {
+        photonView.RPC("SetClientProjectileCountToServerCount", PhotonTargets.All, OurGameManager.ProjectileCount);
+    }
 
+    [PunRPC]
+    void SetClientProjectileCountToServerCount(int serverProjectileCount)
+    {
+        OurGameManager.ProjectileCount = serverProjectileCount;
+    }
 
 
 

@@ -12,7 +12,7 @@ public class Damage {
 
 
     SpellDamageDisplay damageDisplay;
-    SpellDamageApplier damageApplier;
+    NetworkDamageApplier damageApplier;
 
 
     public Damage(SpellStats spell, GameObject playerHit, int shotBy)
@@ -21,7 +21,7 @@ public class Damage {
         PlayerHit = playerHit;
         ShotBy = shotBy;
         damageDisplay = GameObject.Find("Spell").GetComponent<SpellDamageDisplay>();
-        damageApplier = GameObject.Find("Spell").GetComponent<SpellDamageApplier>();
+        damageApplier = GameObject.Find("Spell").GetComponent<NetworkDamageApplier>();
     }
 
 

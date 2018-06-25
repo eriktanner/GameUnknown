@@ -15,6 +15,7 @@ public class vThirdPersonInput : Photon.MonoBehaviour
     KeyCode strafeInput = GameKeybindings.StrafeInput;
     KeyCode sprintInput = GameKeybindings.SprintInput;
     KeyCode rollInput = GameKeybindings.RollInput;
+    KeyCode exitGameInput = GameKeybindings.ExitGameInput;
     bool playerInControl = true;
 
 
@@ -91,6 +92,7 @@ public class vThirdPersonInput : Photon.MonoBehaviour
             StrafeInput();
             JumpInput();
             RollInput();
+            ExitGameInput();
         }
 
         
@@ -174,12 +176,12 @@ public class vThirdPersonInput : Photon.MonoBehaviour
     protected virtual void ExitGameInput()
     {
         // just a example to quit the application 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(exitGameInput))
         {
             if (!Cursor.visible)
                 Cursor.visible = true;
             else
-                Application.Quit();
+                PhotonNetworkManager.LeaveRoom();
         }
     }
 

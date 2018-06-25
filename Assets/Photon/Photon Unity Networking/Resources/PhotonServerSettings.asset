@@ -41,4 +41,7 @@ MonoBehaviour:
   - TargetDisplayFloatingDamage
   - RpcSetPlayerToNewHealthValue
   - RpcAddGOtoPhotonPlayerID
+  - RpcSetCursorToVisibleOnKickFromMatch
+  - ServerKeepProjectileCountInSync
+  - SetClientProjectileCountToServerCount
   DisableAutoOpenWizard: 1

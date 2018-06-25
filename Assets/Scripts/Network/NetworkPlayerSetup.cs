@@ -26,16 +26,20 @@ public class NetworkPlayerSetup : Photon.MonoBehaviour {
         RegisterPlayer();
     }
 
-    
-
     /*Assigns all player/enemy ids, later register to some kind of dictionary*/
     void RegisterPlayer()
     {
         string id = "Player " + GetComponent<PhotonView>().ownerId;
         gameObject.name = id;
         gameObject.transform.parent = GameObject.Find("Managers/GameManager").transform;
+        OurGameManager.TrackListOfPlayers();
+
 
     }
+
+    
+    
+
 
     /*Disables all remote player components*/
     void DisableRemoteComponents()

@@ -40,9 +40,10 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void LeaveRoom()
+    public static void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
+        Cursor.visible = true;
     }
 
     

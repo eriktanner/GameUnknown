@@ -1666,8 +1666,8 @@ GameObject:
   - component: {fileID: 725662248}
   - component: {fileID: 725662251}
   - component: {fileID: 725662249}
-  - component: {fileID: 725662254}
   - component: {fileID: 725662253}
+  - component: {fileID: 725662250}
   m_Layer: 0
   m_Name: Spell
   m_TagString: Untagged
@@ -1697,6 +1697,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a29312a71e6d6c45b9fd6896f947e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &725662250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 725662247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92eaffc564b1bde4caca422920b0512a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &725662251
@@ -1738,17 +1749,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatingTextPrefab: {fileID: 114321561792164276, guid: e20afc1414a037f4884483c7a459496b,
     type: 2}
---- !u!114 &725662254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 725662247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08d9153386f29704f9d06c19aa3e08a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &734334786
 GameObject:
   m_ObjectHideFlags: 0
@@ -3313,11 +3313,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4246449018374444, guid: d927b5dab2204df4ba2ddd24dad7fa45, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4246449018374444, guid: d927b5dab2204df4ba2ddd24dad7fa45, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 4.93
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4246449018374444, guid: d927b5dab2204df4ba2ddd24dad7fa45, type: 2}
       propertyPath: m_LocalRotation.x

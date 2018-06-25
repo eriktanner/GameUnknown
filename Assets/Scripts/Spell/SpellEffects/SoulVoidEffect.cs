@@ -17,7 +17,7 @@ public class SoulVoidEffect : SpellEffect {
     GameObject PlayerHit;
     vThirdPersonInput playerMovement;
     CastSpell playerCastSpell;
-    SpellDamageApplier damageApplier;
+    NetworkDamageApplier damageApplier;
 
     public SoulVoidEffect() {}
 
@@ -35,7 +35,7 @@ public class SoulVoidEffect : SpellEffect {
         playerMovement = playerHit.GetComponent<vThirdPersonInput>();
         spellDamage = SpellManager.GetSpellStatsFromName("Soul Void").damage;
         playerCastSpell = playerHit.GetComponent<CastSpell>();
-        damageApplier = SpellDamageApplier.Instance;
+        damageApplier = NetworkDamageApplier.Instance;
     }
 
     /*Damages and stuns players*/

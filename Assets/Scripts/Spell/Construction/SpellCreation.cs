@@ -28,11 +28,13 @@ public static class SpellCreation {
     }
 
 
-    private static void AssignUniqueSpellName(string originalSpellName, GameObject spellObject)
+    static void AssignUniqueSpellName(string originalSpellName, GameObject spellObject)
     {
-        spellObject.name = OurGameManager.AddProjectileNumberToSpell(originalSpellName);
-        OurGameManager.IncrementProjectileCount();
+        spellObject.name = originalSpellName + OurGameManager.ProjectileCount;
+        OurGameManager.ProjectileCount++;
     }
+
+
 
 
     public static GameObject CreateCollisionParticlesInWorld(string spellName, Vector3 position, SpellStats spellStats, SpellIdentifier spellIdentifierOfOriginalSpell)

@@ -29,7 +29,10 @@ public abstract class Spell : MonoBehaviour {
     public virtual void AreaOfEffect()
     {
         if (SpellEffectRadius <= 0)
+        {
+            Destroy(gameObject, 2.5f);
             return;
+        }
 
 
         SpellEffect spellEffect = SpellEffectFactory.GetEffectFromFactory(GetType());
@@ -62,6 +65,8 @@ public abstract class Spell : MonoBehaviour {
             Damage damage = new Damage(SpellStats, target, shotBy);
             damage.ApplyDamage();
         }
+
+        Destroy(gameObject, 2.0f);
     }
 
 
