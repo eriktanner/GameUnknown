@@ -61,6 +61,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\_Imported\CharactersCellShaded\UnityChanTPK\Script\SpringBone\Editor\Inspectors\AngleLimitsPropertyInfo.cs" />
+    <Compile Include="Assets\_Imported\CharactersCellShaded\UnityChanTPK\Script\SpringBone\Editor\Inspectors\InspectorFloatSlider.cs" />
+    <Compile Include="Assets\_Imported\CharactersCellShaded\UnityChanTPK\Script\SpringBone\Editor\Inspectors\InspectorPropertyInfo.cs" />
+    <Compile Include="Assets\_Imported\CharactersCellShaded\UnityChanTPK\Script\SpringBone\Editor\Inspectors\SpringBoneInspector.cs" />
+    <Compile Include="Assets\_Imported\CharactersCellShaded\UnityChanTPK\Script\SpringBone\Editor\Inspectors\SpringBonePivotInspector.cs" />
+    <Compile Include="Assets\_Imported\CharactersCellShaded\UnityChanTPK\Script\SpringBone\Editor\Inspectors\SpringCapsuleColliderInspector.cs" />
+    <Compile Include="Assets\_Imported\CharactersCellShaded\UnityChanTPK\Script\SpringBone\Editor\Inspectors\SpringManagerInspector.cs" />
     <Compile Include="Assets\_Imported\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Camera\Editor\v3rdPersonCameraEditor.cs" />
     <Compile Include="Assets\_Imported\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\Editor\vCharacterEditor.cs" />
     <Compile Include="Assets\_Imported\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\Editor\vThirdPersonInputEditor.cs" />
