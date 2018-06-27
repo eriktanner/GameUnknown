@@ -36,6 +36,7 @@ public class vThirdPersonInput : Photon.MonoBehaviour
     public bool keepDirection;                          // keep the current direction in case you change the cameraState
 
     protected vThirdPersonController cc;                // access the ThirdPersonController component                
+    
 
     #endregion
 
@@ -166,10 +167,17 @@ public class vThirdPersonInput : Photon.MonoBehaviour
         }
     }
 
+
+    float canRollTimestamp;
     protected virtual void RollInput() {
-        if (Input.GetKeyDown(rollInput))
+        if (Input.GetKeyDown(rollInput) && canRollTimestamp <= Time.time)
+        {
+            canRollTimestamp = Time.time + 3.0f;
             cc.Roll();
+        }
     }
+
+  
 
 
     // TODO - Remove
