@@ -36,9 +36,10 @@ public class vThirdPersonInput : Photon.MonoBehaviour
     public bool keepDirection;                          // keep the current direction in case you change the cameraState
 
     protected vThirdPersonController cc;                // access the ThirdPersonController component                
-    
+
 
     #endregion
+
 
     protected virtual void Start()
     {

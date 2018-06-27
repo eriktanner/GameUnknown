@@ -139,8 +139,8 @@ public class CastSpell : Photon.MonoBehaviour
 
     void NetworkFireSpell(string spellName, Quaternion rotationToTarget, int shotBy)
     {
-        photonView.RPC("ServerKeepProjectileCountInSync", PhotonTargets.MasterClient);
         photonView.RPC("RpcFireSpell", PhotonTargets.All, spellName, rotationToTarget, shotBy);
+        photonView.RPC("ServerKeepProjectileCountInSync", PhotonTargets.MasterClient); //Call after fire, network too slow other way around
     }  
 
     [PunRPC]
@@ -157,6 +157,7 @@ public class CastSpell : Photon.MonoBehaviour
     [PunRPC]
     void ServerKeepProjectileCountInSync()
     {
+        OurGameManager.ProjectileCount++;
         photonView.RPC("SetClientProjectileCountToServerCount", PhotonTargets.All, OurGameManager.ProjectileCount);
     }
 

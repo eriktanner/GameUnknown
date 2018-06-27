@@ -31,7 +31,6 @@ public static class SpellCreation {
     static void AssignUniqueSpellName(string originalSpellName, GameObject spellObject)
     {
         spellObject.name = originalSpellName + OurGameManager.ProjectileCount;
-        OurGameManager.ProjectileCount++;
     }
 
 

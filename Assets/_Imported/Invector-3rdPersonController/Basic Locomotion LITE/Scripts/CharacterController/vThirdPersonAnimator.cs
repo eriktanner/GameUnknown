@@ -25,6 +25,7 @@ public abstract class vThirdPersonAnimator : vThirdPersonMotor
     int fullbodyLayer { get { return animator.GetLayerIndex("FullBody"); } }
 
     #endregion
+    
 
     public virtual void UpdateAnimator()
     {
@@ -36,6 +37,7 @@ public abstract class vThirdPersonAnimator : vThirdPersonMotor
         // trigger by input
         RollAnimation();
 
+        
         LocomotionAnimation();
     }
 
@@ -52,10 +54,22 @@ public abstract class vThirdPersonAnimator : vThirdPersonMotor
         // to have better control of your actions, you can filter the animations state using bools 
         // this way you can know exactly what animation state the character is playing
 
-        isRolling = baseLayerInfo.IsName("Roll");
-        animator.SetBool("IsRolling", isRolling);
-        Debug.Log("IsRolling: " + isRolling);
+        
         inTurn = baseLayerInfo.IsName("TurnOnSpot");
+    }
+
+    public void OnAnimationEnded(string animationName)
+    {
+        if (!photonView.isMine)
+        {
+            return;
+        }
+
+        if (animationName.Equals("Roll"))
+        {
+            isRolling = false;
+            animator.SetBool("IsRolling", false);
+        }
     }
 
     #region Locomotion Animations

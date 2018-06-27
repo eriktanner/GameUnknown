@@ -40,6 +40,7 @@ public class vThirdPersonController : vThirdPersonAnimator
         else
             animator.CrossFadeInFixedTime("JumpMove", 0.2f);
     }
+    
 
     public virtual void Roll() {
         if (animator.IsInTransition(0)) return;
@@ -53,7 +54,9 @@ public class vThirdPersonController : vThirdPersonAnimator
         if (!rollConditions || isRolling) return;
 
         //animator.SetTrigger("ResetState");
-        animator.CrossFadeInFixedTime("Roll", 0.1f);
+        isRolling = true;
+        animator.SetBool("IsRolling", true);
+        //animator.CrossFadeInFixedTime("Roll", 0.1f);
     }
 
 
