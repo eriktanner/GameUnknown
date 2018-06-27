@@ -157,14 +157,14 @@ public class CastSpell : Photon.MonoBehaviour
     [PunRPC]
     void ServerKeepProjectileCountInSync()
     {
-        OurGameManager.ProjectileCount++;
-        photonView.RPC("SetClientProjectileCountToServerCount", PhotonTargets.All, OurGameManager.ProjectileCount);
+        SpellManager.ProjectileCount++;
+        photonView.RPC("SetClientProjectileCountToServerCount", PhotonTargets.All, SpellManager.ProjectileCount);
     }
 
     [PunRPC]
     void SetClientProjectileCountToServerCount(int serverProjectileCount)
     {
-        OurGameManager.ProjectileCount = serverProjectileCount;
+        SpellManager.ProjectileCount = serverProjectileCount;
     }
 
 

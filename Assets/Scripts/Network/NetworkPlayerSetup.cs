@@ -31,10 +31,8 @@ public class NetworkPlayerSetup : Photon.MonoBehaviour {
     {
         string id = "Player " + GetComponent<PhotonView>().ownerId;
         gameObject.name = id;
-        gameObject.transform.parent = GameObject.Find("Managers/GameManager").transform;
-        OurGameManager.TrackListOfPlayers();
-
-
+        gameObject.transform.parent = GameObject.Find("Managers/PlayerManager").transform;
+        PlayerManager.TrackListOfPlayers();
     }
 
     

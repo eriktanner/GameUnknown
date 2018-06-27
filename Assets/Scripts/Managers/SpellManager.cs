@@ -10,7 +10,7 @@ public class SpellManager : MonoBehaviour
     public static Transform SpellManagerTransform { get; private set; }
 
     public List<SpellStats> spellList = new List<SpellStats>();
-
+    public static int ProjectileCount { get; set; }
 
     void Start()
     {

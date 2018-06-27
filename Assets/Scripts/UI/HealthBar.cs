@@ -28,7 +28,7 @@ public class HealthBar : Photon.MonoBehaviour {
         healthBarSlider.maxValue = totalHealth;
         healthBarSlider.value = totalHealth;
         currentHealth = totalHealth;
-        localPlayer = OurGameManager.LocalPlayer;
+        localPlayer = PlayerManager.LocalPlayer;
     }
 
     void Update()

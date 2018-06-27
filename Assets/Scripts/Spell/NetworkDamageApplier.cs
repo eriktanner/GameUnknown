@@ -23,7 +23,7 @@ public class NetworkDamageApplier : Photon.MonoBehaviour {
     {
         float hitPlayerHealthAfterDamage = hitPlayer.GetComponent<HealthBar>().CalculateTakeDamage(damage);
 
-        PhotonPlayer hitPhotonPlayer = OurGameManager.GetPhotonPlayerFromGameObject(hitPlayer);
+        PhotonPlayer hitPhotonPlayer = PlayerManager.GetPhotonPlayerFromGameObject(hitPlayer);
 
         if (hitPlayerHealthAfterDamage <= 0) {
             KillPlayer(hitPhotonPlayer);
@@ -51,7 +51,7 @@ public class NetworkDamageApplier : Photon.MonoBehaviour {
     [PunRPC] /*Sets the hit player's health to the new value, automatically regenerates after a while*/
     void RpcSetPlayerToNewHealthValue(string hitPlayerName, float newHealth)
     {
-        GameObject hitPlayerGO = OurGameManager.GetPlayerGameObject(hitPlayerName);
+        GameObject hitPlayerGO = PlayerManager.GetPlayerGameObject(hitPlayerName);
 
         if (hitPlayerGO != null)
         {

@@ -239,6 +239,7 @@
      <Compile Include="Assets\Scripts\Managers\CameraManager.cs" />
      <Compile Include="Assets\Scripts\Managers\LauncherGameManager.cs" />
      <Compile Include="Assets\Scripts\Managers\OurGameManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\Managers\SpellManager.cs" />
      <Compile Include="Assets\Scripts\Network\Launcher.cs" />
      <Compile Include="Assets\Scripts\Network\NetworkPlayerSetup.cs" />
