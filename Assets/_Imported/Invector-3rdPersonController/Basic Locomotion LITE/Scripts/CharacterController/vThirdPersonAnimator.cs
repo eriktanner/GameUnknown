@@ -53,6 +53,8 @@ public abstract class vThirdPersonAnimator : vThirdPersonMotor
         // this way you can know exactly what animation state the character is playing
 
         isRolling = baseLayerInfo.IsName("Roll");
+        animator.SetBool("IsRolling", isRolling);
+        Debug.Log("IsRolling: " + isRolling);
         inTurn = baseLayerInfo.IsName("TurnOnSpot");
     }
 

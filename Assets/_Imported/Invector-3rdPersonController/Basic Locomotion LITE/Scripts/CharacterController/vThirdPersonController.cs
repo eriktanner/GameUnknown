@@ -49,6 +49,7 @@ public class vThirdPersonController : vThirdPersonAnimator
         //bool rollConditions = (input != Vector2.zero || speed > 0.25f) && actionsRoll && isGrounded && !isJumping;
         bool rollConditions = actionsRoll && isGrounded && !isJumping;
 
+
         if (!rollConditions || isRolling) return;
 
         //animator.SetTrigger("ResetState");

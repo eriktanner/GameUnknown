@@ -202,3 +202,5 @@ D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Photon3Unity3D.
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\websocket-sharp.dll
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Photon3Unity3D.xml
 D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\Assembly-CSharp.pdb
+D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\uEcho.dll
+D:\Users\Public\Documents\Unity Projects\Fantasia\Temp\bin\Debug\uEcho.xml

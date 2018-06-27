@@ -42,7 +42,7 @@ public class OurGameManager : MonoBehaviour
         }
 
         
-        LocalPlayer = PhotonNetwork.Instantiate("NewPlayer", spawnSpot.transform.position, spawnSpot.transform.rotation, 0);
+        LocalPlayer = PhotonNetwork.Instantiate("NewPlayer 4", spawnSpot.transform.position, spawnSpot.transform.rotation, 0);
         PhotonNetwork.player.TagObject = LocalPlayer;
     }
 

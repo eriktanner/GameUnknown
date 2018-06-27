@@ -387,6 +387,7 @@
      <None Include="Assets\_Imported\CharactersCellShaded\UnityChanTPK\Models\Toon\Shader\Tess\Toon_ShadingGradeMap_AngelRing_TransClipping_Tess_StencilOut.shader" />
      <None Include="Assets\_Imported\RealToon\RealToon Shaders\Version 4\No Outline\Default_NO.shader" />
      <None Include="Assets\_Imported\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hair_ds.shader" />
+     <None Include="Assets\_Imported\UnityPark\uEcho\uEchoLicense.txt" />
      <None Include="Assets\_Imported\CharactersCellShaded\UnityChanTPK\Models\Toon\Shader\Toon_DoubleShadeWithFeather_Clipping.shader" />
      <None Include="Assets\_Imported\CharactersAnime\Riko\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
      <None Include="Assets\_Imported\CharactersCellShaded\UnityChanTPK\Models\Toon\Shader\ToonColor_DoubleShadeWithFeather_Clipping_StencilOut.shader" />
