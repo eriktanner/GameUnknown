@@ -5,13 +5,13 @@ public class NetworkPlayerSetup : Photon.MonoBehaviour {
     
     public Behaviour[] componentsToDisable;
 
-    OurGameManager GameManager;
+    GameManager GameManager;
     
 
 
     void Start()
     {
-        GameManager = OurGameManager.Instance;
+        GameManager = GameManager.Instance;
 
 
         if (!photonView.isMine)
