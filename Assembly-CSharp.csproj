@@ -244,6 +244,8 @@
      <Compile Include="Assets\Scripts\Network\NetworkPlayerSetup.cs" />
      <Compile Include="Assets\Scripts\Network\PhotonNetworkManager.cs" />
      <Compile Include="Assets\Scripts\Network\PlayerNameInputField.cs" />
+     <Compile Include="Assets\Scripts\Spell\Construction\AreaSpell.cs" />
+     <Compile Include="Assets\Scripts\Spell\Construction\DirectSpell.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\Spell.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\SpellCreation.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\SpellDictionary.cs" />

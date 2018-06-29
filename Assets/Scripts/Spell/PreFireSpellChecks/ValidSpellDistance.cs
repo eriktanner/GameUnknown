@@ -18,7 +18,7 @@ public static class ValidSpellDistance {
     {
         float distance = (hitPosition - origin).magnitude;
 
-        if (SpellIsValidDistanceChecked(spellName))
+        if (SpellDictionary.GetSpellFromSpellName(spellName).IsValidDistanceChecked)
         {
             return validRange(spellName, distance, rayDidMakeContact);
         }
@@ -44,12 +44,6 @@ public static class ValidSpellDistance {
 
 
 
-    public static bool SpellIsValidDistanceChecked(string spellNameIn)
-    {
-        var spell = Activator.CreateInstance(SpellDictionary.GetTypeFromSpellName(spellNameIn)) as Spell;
-        return spell.IsValidDistanceChecked;
-    }
-
-
+    
 
 }

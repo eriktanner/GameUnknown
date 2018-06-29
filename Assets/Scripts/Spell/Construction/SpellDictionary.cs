@@ -43,6 +43,12 @@ public static class SpellDictionary
         return null;
     }
 
+    public static Spell GetSpellFromSpellName(string spellName)
+    {
+        Spell spell = Activator.CreateInstance(GetTypeFromSpellName(spellName)) as Spell;
+        return spell;
+    }
+
     private static void RegisterNamesToTypes()
     {
         var spellTypes = Assembly.GetAssembly(typeof(Spell)).GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(Spell)));

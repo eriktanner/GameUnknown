@@ -12,7 +12,7 @@ public class SpellList : MonoBehaviour {
     /*Seperate into SpellListComponent and SpellCooldown Component*/
 
 
-    SpellStats[] spellList = new SpellStats[6];
+    Spell[] spellList = new Spell[6];
     float[] spellCooldowns = new float[6];
 
 
@@ -43,7 +43,7 @@ public class SpellList : MonoBehaviour {
     }
  
 
-    public SpellStats GetSpellAtIndex(int index)
+    public Spell GetSpellAtIndex(int index)
     {
         if (index < 0 || index > 5)
         {
@@ -53,17 +53,18 @@ public class SpellList : MonoBehaviour {
     }
 
     /*Triggers cooldown at spellCooldown index that corresponds to the spell index*/
-    public void TriggerCooldown(SpellStats spell)
+    public void TriggerCooldown(Spell spell)
     {
         for (int i = 0; i < 6; i++)
         {
             if (spellList[i] == spell)
-                spellCooldowns[i] = spellList[i].cooldown;
+                spellCooldowns[i] = spellList[i].SpellStats.cooldown;
         } 
     }
 
     public bool isOnCooldown(int index)
     {
+        //Debug.Log("Cooldown: " + spellCooldowns[index]);
         return spellCooldowns[index] > 0;
     }
 
@@ -80,7 +81,7 @@ public class SpellList : MonoBehaviour {
         bool spellAlreadyExists = false;
         for (int i = 0; i < spellList.Length; i++)
         {
-            if (spellList[i] != null && spellName.Equals(spellList[i].spellName))
+            if (spellList[i] != null && spellName.Equals(spellList[i].SpellStats.spellName))
             {
                 spellAlreadyExists = true;
             }
@@ -88,7 +89,7 @@ public class SpellList : MonoBehaviour {
 
         if (!spellAlreadyExists)
         {
-            spellList[index] = SpellManager.GetSpellStatsFromName(spellName);
+            spellList[index] = SpellDictionary.GetSpellFromSpellName(spellName);
         }
     }
 
@@ -97,7 +98,7 @@ public class SpellList : MonoBehaviour {
     {
         for (int i = 0; i < spellList.Length; i++)
         {
-            if (spellList[i] != null && spellName.Equals(spellList[i].spellName))
+            if (spellList[i] != null && spellName.Equals(spellList[i].SpellStats.spellName))
             {
                 spellList[i] = null;
             }

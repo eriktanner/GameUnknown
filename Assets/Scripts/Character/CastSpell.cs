@@ -38,7 +38,9 @@ public class CastSpell : Photon.MonoBehaviour
         if (Input.GetButtonDown("Spell1"))
         {
             if (!SpellList.isOnCooldown(0))
+            {
                 FireSpell(SpellList.GetSpellAtIndex(0));
+            }
         }
         if (Input.GetButtonDown("Spell2"))
         {
@@ -48,12 +50,16 @@ public class CastSpell : Photon.MonoBehaviour
         if (Input.GetButtonDown("Spell3"))
         {
             if (!SpellList.isOnCooldown(2))
+            {
                 FireSpell(SpellList.GetSpellAtIndex(2));
+            }
         }
         if (Input.GetButtonDown("Spell4"))
         {
             if (!SpellList.isOnCooldown(3))
+            {
                 FireSpell(SpellList.GetSpellAtIndex(3));
+            }
         }
         if (Input.GetButtonDown("Spell5"))
         {
@@ -69,12 +75,12 @@ public class CastSpell : Photon.MonoBehaviour
     }
     
 
-    void FireSpell(SpellStats spell)
+    void FireSpell(Spell spell)
     {
-        if (!spell || SpellLock)
+        if (!spell.SpellStats || SpellLock)
             return;
         
-        if (spell.prefab == null)
+        if (spell.SpellStats.prefab == null)
         {
             Debug.LogWarning("Spell  Prefab is null");
             return;
@@ -99,16 +105,17 @@ public class CastSpell : Photon.MonoBehaviour
 
     
 
-    private IEnumerator CastAndFire(SpellStats spell)
+    private IEnumerator CastAndFire(Spell spell)
     {
         SpellLock = true;
-        CastBar.CastSpellUI(spell.castTime);
-        yield return new WaitForSeconds(spell.castTime);
+        if (spell.SpellStats.castTime > 0)
+            CastBar.CastSpellUI(spell.SpellStats.castTime);
+        yield return new WaitForSeconds(spell.SpellStats.castTime);
 
         RaycastHit camHit;
         bool camFoundHit;
         Vector3 hitPoint;
-        hitPoint = GetHitmarkerPointInWorld(spell, out camHit, out camFoundHit);
+        hitPoint = GetHitmarkerPointInWorld(spell.SpellStats.maxRange, out camHit, out camFoundHit);
 
 
         if (IsValidCast(spell, camHit, camFoundHit))
@@ -117,22 +124,22 @@ public class CastSpell : Photon.MonoBehaviour
         SpellLock = false;
     }
 
-    bool IsValidCast(SpellStats spell, RaycastHit camHit, bool camFoundHit)
+    bool IsValidCast(Spell spell, RaycastHit camHit, bool camFoundHit)
     {
-        bool didHitValidLayer = ValidSpellLayer.SpellHitValidLayerBySpell(spell.name, camHit);
-        bool isWithinRangeOfSpell = ValidSpellDistance.SpellIsInRange(spell.name, transform.position, camHit.point, camFoundHit);
+        bool didHitValidLayer = ValidSpellLayer.SpellHitValidLayerBySpell(spell.SpellStats.name, camHit);
+        bool isWithinRangeOfSpell = ValidSpellDistance.SpellIsInRange(spell.SpellStats.name, transform.position, camHit.point, camFoundHit);
         return didHitValidLayer && isWithinRangeOfSpell;
     }
 
 
-    void Fire(SpellStats spell, Vector3 hitPoint)
+    void Fire(Spell spell, Vector3 hitPoint)
     {
         Vector3 aimToFromFirePosition = hitPoint - castSpawn.position;
         Quaternion rotationToTarget = Quaternion.LookRotation(aimToFromFirePosition);
 
-        ManaBar.burnMana(spell.manaCost);
+        ManaBar.burnMana(spell.SpellStats.manaCost);
         SpellList.TriggerCooldown(spell);
-        NetworkFireSpell(spell.name, rotationToTarget, PhotonNetwork.player.ID);
+        NetworkFireSpell(spell.SpellStats.name, rotationToTarget, PhotonNetwork.player.ID);
     }
 
 
@@ -147,7 +154,7 @@ public class CastSpell : Photon.MonoBehaviour
     void RpcFireSpell(string spellName, Quaternion rotationToTarget, int shotBy)
     {
         SpellStats spell = SpellManager.GetSpellStatsFromName(spellName);
-        
+
         GameObject spellObject = SpellCreation.CreateSpellInWorld(spell, castSpawn.position, rotationToTarget, gameObject.name, shotBy);
 
         SpellDestruction.DestroySpellByTime(spellObject);
@@ -170,12 +177,12 @@ public class CastSpell : Photon.MonoBehaviour
 
 
 
-    public Vector3 GetHitmarkerPointInWorld(SpellStats spell, out RaycastHit camHit, out bool camFoundHit)
+    public Vector3 GetHitmarkerPointInWorld(float maxRange, out RaycastHit camHit, out bool camFoundHit)
     {
         Ray camRay = PlayerCam.ViewportPointToRay(Vector3.one * 0.5f);
 
         LayerMask ignorePlayerMask = ~(1 << 8);
-        float rangeToUse = spell.maxRange + 3.0f;
+        float rangeToUse = maxRange + 3.0f;
 
         Vector3 hitPoint;
 
