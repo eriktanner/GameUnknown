@@ -261,6 +261,7 @@
      <Compile Include="Assets\Scripts\Spell\Destruction\Damage.cs" />
      <Compile Include="Assets\Scripts\Spell\Destruction\DamageCalculator.cs" />
      <Compile Include="Assets\Scripts\Spell\Destruction\SpellCollision.cs" />
+     <Compile Include="Assets\Scripts\Spell\NetworkAbilities.cs" />
      <Compile Include="Assets\Scripts\Spell\NetworkDamageApplier.cs" />
      <Compile Include="Assets\Scripts\Spell\PreFireSpellChecks\ValidSpellDistance.cs" />
      <Compile Include="Assets\Scripts\Spell\PreFireSpellChecks\ValidSpellLayer.cs" />
@@ -278,6 +279,7 @@
      <Compile Include="Assets\Scripts\UI\InGameMessageDisplay.cs" />
      <Compile Include="Assets\Scripts\UI\ManaBar.cs" />
      <Compile Include="Assets\Scripts\Utility\GameplayUtility.cs" />
+     <Compile Include="Assets\Scripts\Utility\TaskManager.cs" />
      <Compile Include="Assets\Scripts\Utility\ThreadRandomNumber.cs" />
      <None Include="Assets\_Imported\CharactersCellShaded\UnityChanTPK\Models\Toon\Shader\ToonColor_DoubleShadeWithFeather_StencilMask.shader" />
      <None Include="Assets\_Imported\PostProcessing\Resources\Shaders\DepthOfField.shader" />

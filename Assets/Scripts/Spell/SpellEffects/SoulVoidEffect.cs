@@ -45,9 +45,7 @@ public class SoulVoidEffect : SpellEffect {
         //animator.Play("Fear");
 
         damagePlayer();
-
-        SpellDestruction.Instance.StartCoroutine(SoulVoid());
-
+        TaskManager.CreateTask(SoulVoid());
     }
 
 

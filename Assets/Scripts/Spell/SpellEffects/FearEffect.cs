@@ -35,7 +35,8 @@ public class FearEffect : SpellEffect {
         playerMovement.PlayerHasControl(false);
         playerCastSpell.SetSpellLock(true);
 
-        SpellDestruction.Instance.StartCoroutine(Fear()); 
+
+        TaskManager.CreateTask(Fear());
 
     }
 

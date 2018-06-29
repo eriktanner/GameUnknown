@@ -10,7 +10,7 @@ public class CastSpell : Photon.MonoBehaviour
     public Transform castSpawn;
     
 
-    SpellDestruction SpellDestruction;
+    NetworkAbilities networkAbilities;
     Coroutine CastRoutine;
     CastBar CastBar;
     Camera PlayerCam;
@@ -24,7 +24,7 @@ public class CastSpell : Photon.MonoBehaviour
     {
         PlayerCam = Camera.main;
         CastBar = CastBar.Instance;
-        SpellDestruction = SpellDestruction.Instance;
+        networkAbilities = NetworkAbilities.Instance;
     }
 
     void Update()
@@ -139,40 +139,18 @@ public class CastSpell : Photon.MonoBehaviour
 
         ManaBar.burnMana(spell.SpellStats.manaCost);
         SpellList.TriggerCooldown(spell);
-        NetworkFireSpell(spell.SpellStats.name, rotationToTarget, PhotonNetwork.player.ID);
+        NetworkFireSpell(spell.SpellStats.name, rotationToTarget);
     }
 
 
 
-    void NetworkFireSpell(string spellName, Quaternion rotationToTarget, int shotBy)
+    void NetworkFireSpell(string spellName, Quaternion rotationToTarget)
     {
-        photonView.RPC("RpcFireSpell", PhotonTargets.All, spellName, rotationToTarget, shotBy);
-        photonView.RPC("ServerKeepProjectileCountInSync", PhotonTargets.MasterClient); //Call after fire, network too slow other way around
+        networkAbilities.photonView.RPC("RpcFireSpell", PhotonTargets.All, spellName, rotationToTarget, castSpawn.position, gameObject.name, PhotonNetwork.player.ID);
+        networkAbilities.photonView.RPC("ServerKeepProjectileCountInSync", PhotonTargets.MasterClient); //Call after fire, network too slow other way around
     }  
 
-    [PunRPC]
-    void RpcFireSpell(string spellName, Quaternion rotationToTarget, int shotBy)
-    {
-        SpellStats spell = SpellManager.GetSpellStatsFromName(spellName);
-
-        GameObject spellObject = SpellCreation.CreateSpellInWorld(spell, castSpawn.position, rotationToTarget, gameObject.name, shotBy);
-
-        SpellDestruction.DestroySpellByTime(spellObject);
-    }
-
-
-    [PunRPC]
-    void ServerKeepProjectileCountInSync()
-    {
-        SpellManager.ProjectileCount++;
-        photonView.RPC("SetClientProjectileCountToServerCount", PhotonTargets.All, SpellManager.ProjectileCount);
-    }
-
-    [PunRPC]
-    void SetClientProjectileCountToServerCount(int serverProjectileCount)
-    {
-        SpellManager.ProjectileCount = serverProjectileCount;
-    }
+    
 
 
 

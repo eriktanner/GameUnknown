@@ -57,14 +57,13 @@ public class SpellList : MonoBehaviour {
     {
         for (int i = 0; i < 6; i++)
         {
-            if (spellList[i] == spell)
+            if (spellList[i].SpellStats == spell.SpellStats)
                 spellCooldowns[i] = spellList[i].SpellStats.cooldown;
         } 
     }
 
     public bool isOnCooldown(int index)
     {
-        //Debug.Log("Cooldown: " + spellCooldowns[index]);
         return spellCooldowns[index] > 0;
     }
 
