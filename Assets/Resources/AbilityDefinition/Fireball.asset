@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb306c56963572847a3cb4e1abfcc542, type: 3}
+  m_Name: Fireball
+  m_EditorClassIdentifier: 
+  spellName: Fireball
+  shotBy: 
+  prefab: {fileID: 100008, guid: 305a87c2136134cf7aa00ab1225c5289, type: 2}
+  collisionParticle: {fileID: 100000, guid: c17f7da048ca646b6af33275801eab88, type: 2}
+  icon: {fileID: 0}
+  cooldown: 1.5
+  damage: 250
+  manaCost: 40
+  maxRange: 50
+  projectileRadius: 0.2
+  projectileSpeed: 45
+  castTime: 1

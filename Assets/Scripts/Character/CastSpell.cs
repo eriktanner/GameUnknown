@@ -119,7 +119,11 @@ public class CastSpell : Photon.MonoBehaviour
 
 
         if (IsValidCast(spell, camHit, camFoundHit))
-            Fire(spell, hitPoint);
+        {
+            ManaBar.burnMana(spell.SpellStats.manaCost);
+            SpellList.TriggerCooldown(spell);
+            networkAbilities.Fire(spell, castSpawn.position, hitPoint);
+        }
         
         SpellLock = false;
     }
@@ -132,23 +136,11 @@ public class CastSpell : Photon.MonoBehaviour
     }
 
 
-    void Fire(Spell spell, Vector3 hitPoint)
-    {
-        Vector3 aimToFromFirePosition = hitPoint - castSpawn.position;
-        Quaternion rotationToTarget = Quaternion.LookRotation(aimToFromFirePosition);
-
-        ManaBar.burnMana(spell.SpellStats.manaCost);
-        SpellList.TriggerCooldown(spell);
-        NetworkFireSpell(spell.SpellStats.name, rotationToTarget);
-    }
+    
 
 
 
-    void NetworkFireSpell(string spellName, Quaternion rotationToTarget)
-    {
-        networkAbilities.photonView.RPC("RpcFireSpell", PhotonTargets.All, spellName, rotationToTarget, castSpawn.position, gameObject.name, PhotonNetwork.player.ID);
-        networkAbilities.photonView.RPC("ServerKeepProjectileCountInSync", PhotonTargets.MasterClient); //Call after fire, network too slow other way around
-    }  
+      
 
     
 

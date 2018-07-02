@@ -227,6 +227,8 @@
      <Compile Include="Assets\Photon\PhotonChatApi\ChatUserStatus.cs" />
      <Compile Include="Assets\Photon\PhotonChatApi\IChatClientListener.cs" />
      <Compile Include="Assets\Photon\Plugins\WebSocket\WebSocket.cs" />
+     <Compile Include="Assets\Scripts\Ability\Abilities\AbilityDamageSpell.cs" />
+     <Compile Include="Assets\Scripts\Ability\Ability.cs" />
      <Compile Include="Assets\Scripts\Character\CastSpell.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterMovementController.cs" />
      <Compile Include="Assets\Scripts\Character\OnPlayerStart.cs" />
@@ -244,6 +246,7 @@
      <Compile Include="Assets\Scripts\Network\NetworkPlayerSetup.cs" />
      <Compile Include="Assets\Scripts\Network\PhotonNetworkManager.cs" />
      <Compile Include="Assets\Scripts\Network\PlayerNameInputField.cs" />
+     <Compile Include="Assets\Scripts\Spell\Construction\AbilityDefinition.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\AreaSpell.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\DirectSpell.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\Spell.cs" />
@@ -263,8 +266,6 @@
      <Compile Include="Assets\Scripts\Spell\Destruction\SpellCollision.cs" />
      <Compile Include="Assets\Scripts\Spell\NetworkAbilities.cs" />
      <Compile Include="Assets\Scripts\Spell\NetworkDamageApplier.cs" />
-     <Compile Include="Assets\Scripts\Spell\PreFireSpellChecks\ValidSpellDistance.cs" />
-     <Compile Include="Assets\Scripts\Spell\PreFireSpellChecks\ValidSpellLayer.cs" />
      <Compile Include="Assets\Scripts\Spell\SpellDamageDisplay.cs" />
      <Compile Include="Assets\Scripts\Spell\SpellDestruction.cs" />
      <Compile Include="Assets\Scripts\Spell\SpellEffectFactory.cs" />
@@ -273,6 +274,8 @@
      <Compile Include="Assets\Scripts\Spell\SpellEffects\FearEffect.cs" />
      <Compile Include="Assets\Scripts\Spell\SpellEffects\SoulVoidEffect.cs" />
      <Compile Include="Assets\Scripts\Spell\SpellEffects\SpellEffect.cs" />
+     <Compile Include="Assets\Scripts\Spell\ValidCastChecks\ValidSpellDistance.cs" />
+     <Compile Include="Assets\Scripts\Spell\ValidCastChecks\ValidSpellLayer.cs" />
      <Compile Include="Assets\Scripts\UI\CastBar.cs" />
      <Compile Include="Assets\Scripts\UI\FloatingDamage.cs" />
      <Compile Include="Assets\Scripts\UI\HealthBar.cs" />

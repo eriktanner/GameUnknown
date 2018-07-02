@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -91,6 +92,7 @@ public class SpellList : MonoBehaviour {
             spellList[index] = SpellDictionary.GetSpellFromSpellName(spellName);
         }
     }
+
 
     /*Given a spell, removes from player's spellList*/
     void removeFromSpellList(string spellName)

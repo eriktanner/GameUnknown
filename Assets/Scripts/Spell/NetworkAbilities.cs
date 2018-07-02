@@ -21,8 +21,27 @@ public class NetworkAbilities : Photon.MonoBehaviour {
             Destroy(gameObject);
     }
 
+    public void Fire(Spell spell, Vector3 castSpawn, Vector3 hitPoint)
+    {
+        Vector3 aimToFromFirePosition = hitPoint - castSpawn;
+        Quaternion rotationToTarget = Quaternion.LookRotation(aimToFromFirePosition);
+
+        
+        NetworkFireSpell(spell, castSpawn, rotationToTarget);
+    }
 
 
+    void NetworkFireSpell(Spell spell, Vector3 castSpawn, Quaternion rotationToTarget)
+    {
+        if (spell.SpellStats == null || spell.SpellStats.name == null)
+        {
+            Debug.Log("NetworkAbilities - NetworkFireSpell: null");
+            return;
+        }
+
+        photonView.RPC("RpcFireSpell", PhotonTargets.All, spell.SpellStats.name, rotationToTarget, castSpawn, PlayerManager.LocalPlayer.name, PhotonNetwork.player.ID);
+        photonView.RPC("ServerKeepProjectileCountInSync", PhotonTargets.MasterClient); //Call after fire, network too slow other way around
+    }
 
     [PunRPC]
     void RpcFireSpell(string spellName, Quaternion rotationToTarget, Vector3 castSpawn, string shotByname, int shotBy)
