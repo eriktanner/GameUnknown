@@ -82,4 +82,10 @@ public static class AbilityUtility {
         postWaitMethod();
     }
 
+    public static IEnumerator WaitAndCall(float waitTime, Action<GameObject, RaycastHit> postWaitMethod, GameObject caster, RaycastHit hit)
+    {
+        yield return new WaitForSeconds(waitTime);
+        postWaitMethod(caster, hit);
+    }
+
 }

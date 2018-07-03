@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 interface IHaveHealth
 {
@@ -26,11 +28,12 @@ interface IWait
     float WaitTime { get; }
 }
 
-interface ITick
+interface ICanTick
 {
-    float NumTicks { get; }
-    float TimeBetweenTicks { get; }
+
 }
+
+
 
 interface ICast
 {
@@ -43,6 +46,11 @@ interface IProjectile
     float ProjectileSpeed { get; }
 }
 
+interface IAOE
+{
+    float Radius { get; }
+}
+
 interface IDamage
 {
     float Damage { get; }
@@ -51,6 +59,13 @@ interface IDamage
 interface IHeal
 {
     float Heal { get; }
+}
+
+interface ITick
+{
+    float NumTicks { get; }
+    float TimeBetweenTicks { get; }
+    DOTHitCheck DOTHitCheck { get; }
 }
 
 interface IDOT : ITick
@@ -63,9 +78,9 @@ interface IHOT : ITick
     float TotalHOT { get; }
 }
 
-interface IAOE
+interface IStunOT
 {
-    float Radius { get; }
+    float StunTime { get; }
 }
 
 interface IStun

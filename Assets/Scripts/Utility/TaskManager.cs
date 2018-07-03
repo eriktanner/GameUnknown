@@ -131,7 +131,7 @@ public class Task
     TaskManager.TaskState task;
 }
 
-class TaskManager : MonoBehaviour
+public class TaskManager : MonoBehaviour
 {
     public class TaskState
     {

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AbilityBasicSpell : AbilityProjectile {
     
@@ -15,6 +14,11 @@ public class AbilityBasicSpell : AbilityProjectile {
     {
         base.InitAbilityEffectSequence(caster, spellObject, hit);
 
-        InterfaceToEffects.ProcessEffects(Caster, Hit.transform.gameObject, AbilityData);
+        InterfaceToEffects.ProcessInitialEffects(caster, hit.transform.gameObject, AbilityData);
+
+        if (AbilityData as ITick != null)
+            ((ITick) AbilityData).DOTHitCheck.CheckHit(caster, hit);
     }
+
+
 }

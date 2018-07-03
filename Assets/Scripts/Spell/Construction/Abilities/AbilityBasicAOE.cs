@@ -5,11 +5,11 @@ using UnityEngine;
 public class AbilityBasicAOE : AbilityProjectile {
 
 
+
     public AbilityBasicAOE(AbilityData abilityData)
     {
         AbilityData = abilityData;
     }
-
 
     
     public override void InitAbilityEffectSequence(GameObject caster, GameObject spellObject, RaycastHit hit)
@@ -17,24 +17,34 @@ public class AbilityBasicAOE : AbilityProjectile {
         base.InitAbilityEffectSequence(caster, spellObject, hit);
 
         if (AbilityData as IWait != null)
-            TaskManager.CreateTask(AbilityUtility.WaitAndCall(((IWait) AbilityData).WaitTime, AreaOfEffect));
+            TaskManager.CreateTask(AbilityUtility.WaitAndCall(((IWait) AbilityData).WaitTime, AreaOfEffect, caster, hit));
         else
-            AreaOfEffect();
+            AreaOfEffect(caster, hit);
     }
     
-    public virtual void AreaOfEffect()
+    public virtual void AreaOfEffect(GameObject caster, RaycastHit hit)
     {
         if (AbilityData as IAOE == null)
         {
             return;
         }
-        
-        List<GameObject> playersInRadiusAndLOS = AbilityUtility.FindPlayersWithinRadiusAndLOS(Hit.point, ((IAOE)AbilityData).Radius);
+
+        InitialAreaOfEffect(caster, hit);
+
+        if (AbilityData as ITick != null)
+            ((ITick) AbilityData).DOTHitCheck.CheckHit(caster, hit);
+    }
+
+    void InitialAreaOfEffect(GameObject caster, RaycastHit hit)
+    {
+        List<GameObject> playersInRadiusAndLOS = AbilityUtility.FindPlayersWithinRadiusAndLOS(hit.point, ((IAOE) AbilityData).Radius);
 
         foreach (GameObject hitPlayer in playersInRadiusAndLOS)
         {
-            InterfaceToEffects.ProcessEffects(Caster, hitPlayer, AbilityData);
+            InterfaceToEffects.ProcessInitialEffects(caster, hitPlayer, AbilityData);
         }
     }
+
+    
 
 }

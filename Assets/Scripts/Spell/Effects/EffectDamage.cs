@@ -3,14 +3,11 @@
 public static class EffectDamage {
 
 
-    public static void DamageEffect(GameObject caster, GameObject target, AbilityData abilityData)
+    public static void DamageEffect(GameObject caster, GameObject target, float baseDamage)
     {
         if (target.tag == "Player")
         {
-            if (((IDamage) abilityData) == null)
-                return;
-
-            Damage damage = new Damage(abilityData, target, PlayerManager.GetPhotonPlayerFromGameObject(caster).ID);
+            Damage damage = new Damage(baseDamage, target, PlayerManager.GetPhotonPlayerFromGameObject(caster).ID);
             damage.ApplyDamage();
         }
         

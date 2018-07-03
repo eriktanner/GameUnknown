@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class SoulVoidData : AbilityData, IBasicAOE, IDamage, IWait, IInstantCollision, IStun
+public class SoulVoidData : AbilityData, IBasicAOE, IDamage, IWait, IInstantCollision, IStun, IDOT
 {
     public override string AbilityName { get { return "Soul Void"; } }
     public override Ability Ability { get { return new AbilityBasicAOE(this); } }
@@ -21,5 +22,9 @@ public class SoulVoidData : AbilityData, IBasicAOE, IDamage, IWait, IInstantColl
     public float WaitTime { get { return 1.5f; } }
     public float StunTime { get { return 2.0f; } }
 
+    public float NumTicks { get { return 3; } }
+    public float TimeBetweenTicks { get { return 2; } }
+    public float TotalDOT { get { return 200; } }
+    public DOTHitCheck DOTHitCheck { get { return new DotCheckArea(this); } }
 
 }

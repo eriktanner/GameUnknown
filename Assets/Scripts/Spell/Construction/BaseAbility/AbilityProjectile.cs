@@ -13,8 +13,6 @@ public abstract class AbilityProjectile : Ability {
 
     public override void InitAbilityEffectSequence(GameObject caster, GameObject spellObject, RaycastHit hit)
     {
-        base.InitAbilityEffectSequence(caster, spellObject, hit);
-        Hit = hit;
         NetworkAbilities.Instance.NetworkCreateCollisionParticles(spellObject.name, hit.point);
         NetworkAbilities.Instance.NetworkRpcDestroySpellOnCollision(spellObject.name);
     }

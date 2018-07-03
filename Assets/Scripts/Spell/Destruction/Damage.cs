@@ -6,7 +6,7 @@ using UnityEngine;
 public class Damage {
 
 
-    AbilityData Spell;
+    float BaseDamage;
     GameObject PlayerHit;
     int ShotBy;
 
@@ -15,9 +15,9 @@ public class Damage {
     NetworkDamageApplier damageApplier;
 
 
-    public Damage(AbilityData spell, GameObject playerHit, int shotBy)
+    public Damage(float baseDamage, GameObject playerHit, int shotBy)
     {
-        Spell = spell;
+        BaseDamage = baseDamage;
         PlayerHit = playerHit;
         ShotBy = shotBy;
         damageDisplay = GameObject.Find("Spell").GetComponent<SpellDamageDisplay>();
@@ -31,7 +31,9 @@ public class Damage {
     /*Damages player and displays damage text*/
     public void ApplyDamage()
     {
-        DamageCalculator damageCalculation = new DamageCalculator(Spell);
+        DamageCalculator damageCalculation = new DamageCalculator(BaseDamage);
+
+        Debug.Log("hitPlayer position: " + PlayerHit.transform.position);
 
         damageDisplay.displayFloatingDamage(PlayerHit.transform.position, damageCalculation.DamageToDo, damageCalculation. IsCriticalDamage, ShotBy);
         damageApplier.ApplyDamageFromTo(PlayerHit, damageCalculation.DamageToDo, ShotBy);
