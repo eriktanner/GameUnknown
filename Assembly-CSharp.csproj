@@ -234,6 +234,7 @@
      <Compile Include="Assets\Scripts\Character\PlayerCameraController.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerUI.cs" />
      <Compile Include="Assets\Scripts\Game\GameKeybindings.cs" />
+     <Compile Include="Assets\Scripts\Game\GameSettings.cs" />
      <Compile Include="Assets\Scripts\Game\SceneCamera.cs" />
      <Compile Include="Assets\Scripts\Game\SpawnSpots.cs" />
      <Compile Include="Assets\Scripts\Managers\CameraManager.cs" />
@@ -244,9 +245,11 @@
      <Compile Include="Assets\Scripts\Network\NetworkPlayerSetup.cs" />
      <Compile Include="Assets\Scripts\Network\PhotonNetworkManager.cs" />
      <Compile Include="Assets\Scripts\Network\PlayerNameInputField.cs" />
+     <Compile Include="Assets\Scripts\Spell\Construction\Abilities\AbilityAOE.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\Abilities\AbilityBasicDamageSpell.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\AbilityData\AbilityData.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\AbilityData\FireballData.cs" />
+     <Compile Include="Assets\Scripts\Spell\Construction\AbilityData\SoulVoidData.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\AbilityDictionary.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\AbilityIdentifier.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\BaseAbility\Ability.cs" />
@@ -256,6 +259,8 @@
      <Compile Include="Assets\Scripts\Spell\Destruction\Damage.cs" />
      <Compile Include="Assets\Scripts\Spell\Destruction\DamageCalculator.cs" />
      <Compile Include="Assets\Scripts\Spell\Destruction\SpellCollision.cs" />
+     <Compile Include="Assets\Scripts\Spell\Effects\EffectDamage.cs" />
+     <Compile Include="Assets\Scripts\Spell\Effects\EffectStun.cs" />
      <Compile Include="Assets\Scripts\Spell\NetworkAbilities.cs" />
      <Compile Include="Assets\Scripts\Spell\NetworkDamageApplier.cs" />
      <Compile Include="Assets\Scripts\Spell\SpellDamageDisplay.cs" />
@@ -273,8 +278,9 @@
      <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
      <Compile Include="Assets\Scripts\UI\InGameMessageDisplay.cs" />
      <Compile Include="Assets\Scripts\UI\ManaBar.cs" />
-     <Compile Include="Assets\Scripts\Utility\GameplayUtility.cs" />
+     <Compile Include="Assets\Scripts\Utility\AbilityUtility.cs" />
      <Compile Include="Assets\Scripts\Utility\Interfaces.cs" />
+     <Compile Include="Assets\Scripts\Utility\InterfaceToEffect.cs" />
      <Compile Include="Assets\Scripts\Utility\TaskManager.cs" />
      <Compile Include="Assets\Scripts\Utility\ThreadRandomNumber.cs" />
      <None Include="Assets\_Imported\CharactersCellShaded\UnityChanTPK\Models\Toon\Shader\ToonColor_DoubleShadeWithFeather_StencilMask.shader" />

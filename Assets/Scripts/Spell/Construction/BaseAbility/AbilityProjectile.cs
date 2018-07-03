@@ -5,9 +5,17 @@ using System.Collections;
 public abstract class AbilityProjectile : Ability {
 
 
-    public override void InitAbilityEffectSequence(GameObject spellObject, RaycastHit Hit)
+    public override void CastAbility(GameObject player, Vector3 spawnSpot, Vector3 aimTowards)
     {
-        NetworkAbilities.Instance.NetworkCreateCollisionParticles(spellObject.name, Hit.point);
+        base.CastAbility(player, spawnSpot, aimTowards);
+        Fire(AbilityData, spawnSpot, aimTowards);
+    }
+
+    public override void InitAbilityEffectSequence(GameObject caster, GameObject spellObject, RaycastHit hit)
+    {
+        base.InitAbilityEffectSequence(caster, spellObject, hit);
+        Hit = hit;
+        NetworkAbilities.Instance.NetworkCreateCollisionParticles(spellObject.name, hit.point);
         NetworkAbilities.Instance.NetworkRpcDestroySpellOnCollision(spellObject.name, spellObject.GetComponent<AbilityIdentifier>().ShotByID);
     }
 
@@ -36,19 +44,7 @@ public abstract class AbilityProjectile : Ability {
 
 
 
-    /*Explodes particles on collision*/
-    public void ExplodeParticles(GameObject particleObject)
-    {
-        if (particleObject == null)
-            return;
-
-        AbilityData spell = AbilityDictionary.GetAbilityDataFromSpellObject(particleObject);
-
-        if (spell as IWait != null)
-            TaskManager.CreateTask(WaitAndCall(particleObject, ((IWait) spell).WaitTime, spell.Ability.AreaOfEffect));
-        else
-            spell.Ability.AreaOfEffect(particleObject);
-    }
+    
 
     /*Destroys a casted spell by its lifespan*/
     public void DestroyProjectileByTime(GameObject projectileObject)
@@ -58,13 +54,13 @@ public abstract class AbilityProjectile : Ability {
 
         AbilityData projectile = AbilityDictionary.GetAbilityDataFromSpellObject(projectileObject);
 
-        TaskManager.CreateTask(WaitAndCall(projectileObject, GameplayUtility.GetLifespanOfSpell(projectile), projectile.Ability.TimedDestruction));
+        TaskManager.CreateTask(TimedWaitDestroy(projectileObject, AbilityUtility.GetLifespanOfSpell(projectile), projectile.Ability.TimedDestruction));
     }
 
 
     //*********************************** Utility ***************************************/
 
-    IEnumerator WaitAndCall(GameObject spellObject, float waitTime, Action<GameObject> destroyMethod)
+    IEnumerator TimedWaitDestroy(GameObject spellObject, float waitTime, Action<GameObject> destroyMethod)
     {
         yield return new WaitForSeconds(waitTime);
         if (spellObject != null)

@@ -97,7 +97,7 @@ public class SpellCollision : MonoBehaviour
         }
 
 
-        spellData.Ability.InitAbilityEffectSequence(gameObject, Hit);
+        spellData.Ability.InitAbilityEffectSequence(PlayerManager.GetPlayerGameObject(gameObject.GetComponent<AbilityIdentifier>().ShotByName), gameObject, Hit);
 
     }
 

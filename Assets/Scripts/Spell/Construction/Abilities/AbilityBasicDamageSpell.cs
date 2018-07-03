@@ -10,12 +10,11 @@ public class AbilityCastSpell : AbilityProjectile {
         AbilityData = abilityData;
     }
 
-    
 
-    
-
-    public override void CastAbility(GameObject player, Vector3 spawnSpot, Vector3 aimTowards)
+    public override void InitAbilityEffectSequence(GameObject caster, GameObject spellObject, RaycastHit hit)
     {
-        Fire(AbilityData, spawnSpot, aimTowards);
+        base.InitAbilityEffectSequence(caster, spellObject, hit);
+
+        InterfaceToEffects.ProcessEffects(Caster, Hit.transform.gameObject, AbilityData);
     }
 }

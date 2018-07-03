@@ -221,6 +221,7 @@ class TaskManager : MonoBehaviour
         if (singleton == null)
         {
             GameObject go = new GameObject("TaskManager");
+            go.transform.parent = GameObject.Find("Managers").transform;
             singleton = go.AddComponent<TaskManager>();
         }
         return new TaskState(coroutine);

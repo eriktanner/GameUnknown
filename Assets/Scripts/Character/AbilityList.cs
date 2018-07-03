@@ -22,7 +22,7 @@ public class AbilityList : MonoBehaviour {
         addToSpellList("Fireball", 0);
         //addToSpellList("Pain", 1);
         //addToSpellList("Arcane Missile", 2);
-        //addToSpellList("Soul Void", 3);
+        addToSpellList("Soul Void", 3);
         //addToSpellList("Ice Wall", 4);
         //addToSpellList("Fear", 5);
     }
@@ -80,23 +80,12 @@ public class AbilityList : MonoBehaviour {
         if (index < 0 || index > 6)
             return;
 
-        bool spellAlreadyExists = false;
-        for (int i = 0; i < abilityList.Length; i++)
-        {
-            if (abilityList[i] != null && abilityName.Equals(abilityList[i].AbilityName))
-            {
-                spellAlreadyExists = true;
-            }
+        try{
+            abilityList[index] = AbilityDictionary.GetAbilityDataFromAbilityName(abilityName);
+        } catch {
+            Debug.Log("AbilityList - addToSpellList: abilityData Does Not Exist");
         }
 
-        if (!spellAlreadyExists)
-        {
-            try {
-                abilityList[index] = AbilityDictionary.GetAbilityDataFromAbilityName(abilityName);
-            } catch {
-                Debug.Log("AbilityList - addToSpellList: abilityData Does Not Exist");
-            }
-        }
     }
 
 

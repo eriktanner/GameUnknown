@@ -66,16 +66,19 @@ public class PlayerManager : MonoBehaviour {
     }
 
 
+    //TODO - effeciency
     public static GameObject GetPlayerGameObject(string id)
     {
         return GameObject.Find("Managers/PlayerManager/" + id);
     }
 
 
-    public static PhotonPlayer GetPhotonPlayerFromGameObject(GameObject hitPlayer)
+    public static PhotonPlayer GetPhotonPlayerFromGameObject(GameObject playerObject)
     {
-        if (playerToPhotonPlayer.ContainsKey(hitPlayer))
-            return playerToPhotonPlayer[hitPlayer];
+        if (playerObject == null)
+            Debug.Log("playerObj null");
+        if (playerToPhotonPlayer.ContainsKey(playerObject))
+            return playerToPhotonPlayer[playerObject];
         return null;
     }
 }

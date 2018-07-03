@@ -19,6 +19,7 @@ interface IHaveCollisionParticles
 }
 
 interface IBasicSpell : IProjectile, ICast, IHaveCollisionParticles { }
+interface IBasicAOE : IBasicSpell, IAOE, IInstantCollision { }
 
 interface IWait
 {

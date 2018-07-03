@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Collections;
 
 
 /*Finds players within a certain radius and in line of sight*/
-public static class GameplayUtility {
+public static class AbilityUtility {
 
 
     /*Finds players within a certain radius and in line of sight*/
@@ -72,6 +74,12 @@ public static class GameplayUtility {
         }
 
         return lifespan;
+    }
+
+    public static IEnumerator WaitAndCall(float waitTime, Action postWaitMethod)
+    {
+        yield return new WaitForSeconds(waitTime);
+        postWaitMethod();
     }
 
 }
