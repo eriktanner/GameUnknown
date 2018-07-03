@@ -23,35 +23,4 @@ public abstract class Ability : Photon.MonoBehaviour {
         Caster = caster;
     }
 
-
-
-    /*Override for different destruction methods
-     Note: Always called, even if spell does not hit*/
-    public virtual void TimedDestruction(GameObject spellObject)
-    {
-        Destroy(spellObject);
-    }
-
-    
-    
-    
-
-
-
-    public virtual void DirectHit(GameObject spellObject, GameObject target, int shotBy)
-    {
-        if (target.tag == "Player")
-        {
-            if (((IDamage) AbilityData) == null)
-                return;
-
-            Damage damage = new Damage(AbilityData, target, shotBy);
-            damage.ApplyDamage();
-        }
-
-        Destroy(spellObject, 2.0f);
-    }
-
-
-
 }

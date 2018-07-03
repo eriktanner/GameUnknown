@@ -26,6 +26,12 @@ interface IWait
     float WaitTime { get; }
 }
 
+interface ITick
+{
+    float NumTicks { get; }
+    float TimeBetweenTicks { get; }
+}
+
 interface ICast
 {
     float CastTime { get; }
@@ -47,16 +53,14 @@ interface IHeal
     float Heal { get; }
 }
 
-interface IDOT
+interface IDOT : ITick
 {
     float TotalDOT { get; }
-    float DOTTicks { get; }
 }
 
-interface IHOT
+interface IHOT : ITick
 {
     float TotalHOT { get; }
-    float HOTTicks { get; }
 }
 
 interface IAOE

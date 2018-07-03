@@ -41,36 +41,30 @@ public class NetworkAbilities : Photon.MonoBehaviour {
 
     #region Projectiles
 
-    public void NetworkRpcDestroySpellOnCollision(string spellName, int shotBy)
+    public void NetworkRpcDestroySpellOnCollision(string spellName)
     {
-        photonView.RPC("RpcDestroySpellOnCollision", PhotonTargets.All, spellName, shotBy);
+        photonView.RPC("RpcDestroySpellOnCollision", PhotonTargets.All, spellName);
     }
 
 
     [PunRPC] /*Destorys spell, and creates collision particle over the network*/
-    void RpcDestroySpellOnCollision(string spellName, int shotBy)
+    void RpcDestroySpellOnCollision(string spellName)
     {
-
-        AbilityData abilityData = SpellManager.GetSpellStatsFromName(spellName);
         GameObject spellInWorldToDestroy = SpellManager.GetObjectFromSpellName(spellName);
         if (spellInWorldToDestroy == null)
         {
             Debug.Log("SpellInWorldToDestroyNotFound: " + spellName);
             return;
         }
-
-        AbilityData spell = AbilityDictionary.GetAbilityDataFromAbilityName(spellName);
-        spell.Ability.TimedDestruction(spellInWorldToDestroy);  
+        
+        Destroy(spellInWorldToDestroy);  
     }
 
     [PunRPC]
     void RpcFireSpell(string spellName, Quaternion rotationToTarget, Vector3 castSpawn, string shotByname, int shotBy)
     {
         AbilityData spell = SpellManager.GetSpellStatsFromName(spellName);
-
         GameObject spellObject = SpellCreation.CreateSpellInWorld(spell, castSpawn, rotationToTarget, shotByname, shotBy);
-
-        ((AbilityProjectile) spell.Ability).DestroyProjectileByTime(spellObject);
     }
 
 

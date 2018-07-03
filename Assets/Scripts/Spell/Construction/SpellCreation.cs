@@ -22,6 +22,8 @@ public static class SpellCreation {
         spellObject.layer = 10;
         spellObject.transform.parent = SpellManager.SpellManagerTransform;
 
+        ((AbilityProjectile) spell.Ability).DestroyProjectileByTime(spellObject);
+
         return spellObject;
     }
 
@@ -40,14 +42,14 @@ public static class SpellCreation {
 
         if (abilityData as IHaveCollisionParticles == null)
         {
-            Debug.Log("SpellCreation(CreateCollisionParticles): spellIdentifer is null");
+            Debug.Log("SpellCreation(CreateCollisionParticles): IHaveCollisionParticles is null");
             return null;
         }
         
         GameObject collisionParticles = GameObject.Instantiate(((IHaveCollisionParticles) abilityData).CollisionParticles, position, Quaternion.identity);
 
         collisionParticles.transform.parent = SpellManager.SpellManagerTransform;
-        GameObject.Destroy(collisionParticles, ((IHaveCollisionParticles)abilityData).CollisionParticleLifespan);
+        GameObject.Destroy(collisionParticles, ((IHaveCollisionParticles) abilityData).CollisionParticleLifespan);
 
         return collisionParticles;
     }

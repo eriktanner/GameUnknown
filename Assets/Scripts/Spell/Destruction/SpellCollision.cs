@@ -83,7 +83,6 @@ public class SpellCollision : MonoBehaviour
     /*Plays destroy sequence of a spell collision*/
     void OnSpellHit(RaycastHit Hit)
     {
-
         if (hasAlreadyHit)
             return;
 
@@ -91,14 +90,9 @@ public class SpellCollision : MonoBehaviour
         PhotonView HitPhotonView = hitTransform.gameObject.GetPhotonView();
         
         if (HitPhotonView != null && HitPhotonView.viewID != ShotBy)
-        {
             hasAlreadyHit = true;
-            spellData.Ability.DirectHit(gameObject, hitTransform.gameObject, ShotBy);
-        }
-
-
+        
         spellData.Ability.InitAbilityEffectSequence(PlayerManager.GetPlayerGameObject(gameObject.GetComponent<AbilityIdentifier>().ShotByName), gameObject, Hit);
-
     }
 
 

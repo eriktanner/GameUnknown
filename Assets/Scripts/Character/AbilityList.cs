@@ -21,7 +21,7 @@ public class AbilityList : MonoBehaviour {
     {
         addToSpellList("Fireball", 0);
         //addToSpellList("Pain", 1);
-        //addToSpellList("Arcane Missile", 2);
+        addToSpellList("Arcane Missile", 2);
         addToSpellList("Soul Void", 3);
         //addToSpellList("Ice Wall", 4);
         //addToSpellList("Fear", 5);

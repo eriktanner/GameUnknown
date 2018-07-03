@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -42,10 +42,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 683, y: 492}
+  m_MinSize: {x: 681, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 74
+  controlID: 51
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -89,8 +89,8 @@ MonoBehaviour:
     y: 0
     width: 305
     height: 669
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -143,7 +143,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -206,10 +206,10 @@ MonoBehaviour:
     y: 0
     width: 1643
     height: 947
-  m_MinSize: {x: 406, y: 492}
+  m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 75
+  controlID: 52
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -230,8 +230,8 @@ MonoBehaviour:
     y: 0
     width: 1643
     height: 669
-  m_MinSize: {x: 406, y: 221}
-  m_MaxSize: {x: 8006, y: 4021}
+  m_MinSize: {x: 404, y: 221}
+  m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
   controlID: 53
 --- !u!114 &11
@@ -312,9 +312,9 @@ MonoBehaviour:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 240}
-    m_SelectedIDs: e6240000
-    m_LastClickedID: 9446
-    m_ExpandedIDs: 00000000500d00006a110000ee12000040150000ca170000f6170000821a00007c1b00009e1b00001a1c0000241d0000fa2000008e23000050260000c82900004c2d0000602e000024300000fe3100007e330000463400003435000066390000863c0000dc3c00005840000016430000aa440000e2460000a24c0000a64c00006a4d00006c4d0000184e0000e250000018530000f0590000f05c0000ce5e0000d6810000d8810000da810000dc810000de810000e0810000e2810000e4810000e6810000e8810000
+    m_SelectedIDs: 20250000
+    m_LastClickedID: 9504
+    m_ExpandedIDs: 00000000500d00006a110000ee12000040150000ca170000f6170000821a00007c1b00009e1b00001a1c0000241d0000fa2000008e23000050260000c82900004c2d0000602e000024300000fe3100007e330000463400003435000066390000863c0000dc3c00005840000016430000aa440000e2460000a24c0000a64c00006a4d00006c4d0000184e0000e250000018530000f0590000f05c0000ce5e0000d6810000d8810000da810000dc810000de810000e0810000e2810000e4810000e6810000e881000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -367,8 +367,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 5e210000
-    m_LastClickedInstanceID: 8542
+    m_SelectedInstanceIDs: 50310000
+    m_LastClickedInstanceID: 12624
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 
     m_RenameOverlay:
@@ -683,19 +683,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts/Game
+    - Assets/Resources/SpellPrefabs
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Scripts/Game
+  - Assets/Resources/SpellPrefabs
   m_LastFoldersGridSize: 96
   m_LastProjectPath: D:\Users\Public\Documents\Unity Projects\Fantasia
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 987.7326}
-    m_SelectedIDs: a23e0000
-    m_LastClickedID: 16034
+    scrollPos: {x: 0, y: 884}
+    m_SelectedIDs: a64c0000
+    m_LastClickedID: 19622
     m_ExpandedIDs: 00000000500d00006a110000ee12000040150000ca170000f6170000821a00007c1b00009e1b00001a1c0000241d0000fa2000008e23000050260000c82900004c2d0000602e000024300000fe3100007e330000463400003435000066390000863c0000dc3c00005840000016430000aa440000e2460000a24c0000a64c00006a4d00006c4d0000184e0000e250000018530000f0590000f05c0000ce5e0000d6810000d8810000da810000dc810000de810000e0810000e2810000e4810000e6810000e881000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -751,7 +751,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000bc0a0000ec0c0000c6d10300f20f0000303500005e120000de400000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -840,7 +840,7 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 780b0000
+    m_SelectedIDs: 50310000
     m_LastClickedID: 0
     m_ExpandedIDs: e0fbffff00000000
     m_RenameOverlay:

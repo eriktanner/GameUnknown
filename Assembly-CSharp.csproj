@@ -245,9 +245,11 @@
      <Compile Include="Assets\Scripts\Network\NetworkPlayerSetup.cs" />
      <Compile Include="Assets\Scripts\Network\PhotonNetworkManager.cs" />
      <Compile Include="Assets\Scripts\Network\PlayerNameInputField.cs" />
-     <Compile Include="Assets\Scripts\Spell\Construction\Abilities\AbilityAOE.cs" />
-     <Compile Include="Assets\Scripts\Spell\Construction\Abilities\AbilityBasicDamageSpell.cs" />
+     <Compile Include="Assets\Scripts\Spell\Construction\Abilities\AbilityBasicAOE.cs" />
+     <Compile Include="Assets\Scripts\Spell\Construction\Abilities\AbilityBasicSpell.cs" />
+     <Compile Include="Assets\Scripts\Spell\Construction\Abilities\AbilityPlayerAOE.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\AbilityData\AbilityData.cs" />
+     <Compile Include="Assets\Scripts\Spell\Construction\AbilityData\ArcaneMissileData.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\AbilityData\FireballData.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\AbilityData\SoulVoidData.cs" />
      <Compile Include="Assets\Scripts\Spell\Construction\AbilityDictionary.cs" />

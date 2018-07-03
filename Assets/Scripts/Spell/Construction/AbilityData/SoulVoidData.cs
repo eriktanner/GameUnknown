@@ -3,7 +3,7 @@
 public class SoulVoidData : AbilityData, IBasicAOE, IDamage, IWait, IInstantCollision, IStun
 {
     public override string AbilityName { get { return "Soul Void"; } }
-    public override Ability Ability { get { return new AbilityAOE(this); } }
+    public override Ability Ability { get { return new AbilityBasicAOE(this); } }
     public override GameObject Prefab { get { return Resources.Load("SpellPrefabs/Empty Spell") as GameObject; } }
     public override Texture2D Icon { get; protected set; }
     public override float Cost { get { return 50; } }

@@ -16,7 +16,7 @@ public abstract class AbilityProjectile : Ability {
         base.InitAbilityEffectSequence(caster, spellObject, hit);
         Hit = hit;
         NetworkAbilities.Instance.NetworkCreateCollisionParticles(spellObject.name, hit.point);
-        NetworkAbilities.Instance.NetworkRpcDestroySpellOnCollision(spellObject.name, spellObject.GetComponent<AbilityIdentifier>().ShotByID);
+        NetworkAbilities.Instance.NetworkRpcDestroySpellOnCollision(spellObject.name);
     }
 
 
@@ -26,11 +26,11 @@ public abstract class AbilityProjectile : Ability {
         Quaternion rotationToTarget = Quaternion.LookRotation(aimToFromFirePosition);
 
 
-        NetworkFireSpell(abilityData, castSpawn, rotationToTarget);
+        NetworkFire(abilityData, castSpawn, rotationToTarget);
     }
 
 
-    void NetworkFireSpell(AbilityData abilityData, Vector3 castSpawn, Quaternion rotationToTarget)
+    void NetworkFire(AbilityData abilityData, Vector3 castSpawn, Quaternion rotationToTarget)
     {
         if (abilityData.AbilityName == null)
         {
@@ -54,9 +54,13 @@ public abstract class AbilityProjectile : Ability {
 
         AbilityData projectile = AbilityDictionary.GetAbilityDataFromSpellObject(projectileObject);
 
-        TaskManager.CreateTask(TimedWaitDestroy(projectileObject, AbilityUtility.GetLifespanOfSpell(projectile), projectile.Ability.TimedDestruction));
+        TaskManager.CreateTask(TimedWaitDestroy(projectileObject, AbilityUtility.GetLifespanOfSpell(projectile), TimedDestruction));
     }
 
+    public virtual void TimedDestruction(GameObject spellObject)
+    {
+        Destroy(spellObject);
+    }
 
     //*********************************** Utility ***************************************/
 
