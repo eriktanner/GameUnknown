@@ -7,7 +7,7 @@ using System;
  control over their input, replaced with fear input*/
 public class FearEffect : SpellEffect {
 
-    public override System.Type SpellType { get { return Type.GetType(typeof(Fear).Name); } }
+    //public override System.Type SpellType { get { return Type.GetType(typeof(Fear).Name); } }
 
     const float FEAR_STEP_TIME = 1.0f;
     const float FEAR_PAUSE_TIME = .5f;

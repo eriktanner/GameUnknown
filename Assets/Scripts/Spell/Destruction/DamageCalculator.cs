@@ -5,15 +5,21 @@ using UnityEngine;
 /*This class handles calculation of damage randomization and critical damage of spells*/
 public class DamageCalculator : Photon.MonoBehaviour {
 
-    SpellStats spell;
+    AbilityData spell;
     public float DamageToDo { get; set; }
     public bool IsCriticalDamage { get; set; }
 
+    float baseDamage;
+
 
     /*TODO Make a Damage Controller that takes isntances of damage so that we dont keep reinstatiating it*/
-    public DamageCalculator(SpellStats spell)
+    public DamageCalculator(AbilityData spell)
     {
+        if (((IDamage)spell) == null)
+            return;
+        baseDamage = ((IDamage)spell).Damage;
         this.spell = spell;
+
         CalculateDamage();
     }
 
@@ -35,20 +41,16 @@ public class DamageCalculator : Photon.MonoBehaviour {
 
     float NormalDamageCalculation()
     {
-        float originalDamage = spell.damage;
-
-        float lowerBound = .8f * originalDamage;
-        float upperBound = 1.1f * originalDamage;
+        float lowerBound = .8f * baseDamage;
+        float upperBound = 1.1f * baseDamage;
 
         return Random.Range(lowerBound, upperBound);
     }
 
     float CrticalDamageCalculation()
     {
-        float originalDamage = spell.damage;
-
-        float lowerBound = 1.3f * originalDamage;
-        float upperBound = 1.6f * originalDamage;
+        float lowerBound = 1.3f * baseDamage;
+        float upperBound = 1.6f * baseDamage;
 
         return Random.Range(lowerBound, upperBound);
     }

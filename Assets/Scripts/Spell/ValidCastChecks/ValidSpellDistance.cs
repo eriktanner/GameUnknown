@@ -18,7 +18,7 @@ public static class ValidSpellDistance {
     {
         float distance = (hitPosition - origin).magnitude;
 
-        if (SpellDictionary.GetSpellFromSpellName(spellName).IsValidDistanceChecked)
+        if (AbilityDictionary.GetAbilityDataFromAbilityName(spellName) as ICheckForDistance != null)
         {
             return validRange(spellName, distance, rayDidMakeContact);
         }
@@ -28,12 +28,9 @@ public static class ValidSpellDistance {
 
     static bool validRange(string spellName, float distance, bool rayDidMakeContact)
     {
-        SpellStats spell = SpellManager.GetSpellStatsFromName(spellName);
-        if (spell == null)
-        {
-            Debug.Log("SpellDictionary.GetSpellFromSpellName(spellName(validRange): is null");
-        }
-        bool isInRange = distance < spell.maxRange;
+        AbilityData spell = SpellManager.GetSpellStatsFromName(spellName);
+
+        bool isInRange = distance < spell.MaxRange;
         if (!isInRange || !rayDidMakeContact)
         {
             DisplayOutOfRangeMessage();

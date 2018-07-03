@@ -6,7 +6,7 @@ using System;
  seconds after it is lands. It damages and stuns players within radius*/
 public class SoulVoidEffect : SpellEffect {
 
-    public override System.Type SpellType { get { return Type.GetType(typeof(SoulVoid).Name); } }
+    //public override System.Type SpellType { get { return Type.GetType(typeof(SoulVoid).Name); } }
 
 
     float STUN_SECONDS = 2.5f;
@@ -25,7 +25,7 @@ public class SoulVoidEffect : SpellEffect {
     {
         //animator = playerMovement.animator;
         PlayerHit = playerHit;
-        SpellIdentifier spellIdentifier = particles.GetComponent<SpellIdentifier>();
+        AbilityIdentifier spellIdentifier = particles.GetComponent<AbilityIdentifier>();
 
         if (spellIdentifier)
         {
@@ -33,7 +33,7 @@ public class SoulVoidEffect : SpellEffect {
         }
 
         playerMovement = playerHit.GetComponent<vThirdPersonInput>();
-        spellDamage = SpellManager.GetSpellStatsFromName("Soul Void").damage;
+        spellDamage = ((IDamage) SpellManager.GetSpellStatsFromName("Soul Void")).Damage;
         playerCastSpell = playerHit.GetComponent<CastSpell>();
         damageApplier = NetworkDamageApplier.Instance;
     }

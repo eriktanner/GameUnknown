@@ -18,8 +18,9 @@ public class DestroyPain {
         if (particleObject == null)
             return;
 
-        Spell spell = SpellDictionary.GetSpellFromSpellObject(particleObject);
+        //Ability spell = AbilityDictionary.GetAbilityFromSpellObject(particleObject);
 
+        /*
 
         if (spell == null)
         {
@@ -28,7 +29,9 @@ public class DestroyPain {
             return;
         }
         
-        GameObject collisionParticles = GameObject.Instantiate(spell.SpellStats.collisionParticle, particleObject.transform.position, Quaternion.identity);
-        GameObject.Destroy(collisionParticles, 1.5f);
+    */
+
+        //GameObject collisionParticles = GameObject.Instantiate(spell.AbilityData.CollisionParticle, particleObject.transform.position, Quaternion.identity);
+        //GameObject.Destroy(collisionParticles, 1.5f);
     }
 }

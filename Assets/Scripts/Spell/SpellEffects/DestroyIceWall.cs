@@ -13,7 +13,7 @@ public class DestroyIceWall {
 
     public DestroyIceWall(GameObject particlesIn)
     {
-        player = PlayerManager.GetPlayerGameObject(particlesIn.GetComponent<SpellIdentifier>().ShotByName);
+        player = PlayerManager.GetPlayerGameObject(particlesIn.GetComponent<AbilityIdentifier>().ShotByName);
         particles = particlesIn;
     }
 

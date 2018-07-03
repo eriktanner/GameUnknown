@@ -9,7 +9,7 @@ public class SpellManager : MonoBehaviour
     public static List<GameObject> spawnablePrefabs = new List<GameObject>();
     public static Transform SpellManagerTransform { get; private set; }
 
-    public List<SpellStats> spellList = new List<SpellStats>();
+    public List<AbilityData> spellList = new List<AbilityData>();
     public static int ProjectileCount { get; set; }
 
     void Start()
@@ -27,10 +27,11 @@ public class SpellManager : MonoBehaviour
     }
 
 
-    public static SpellStats GetSpellStatsFromName(string spellName)
+    public static AbilityData GetSpellStatsFromName(string spellName)
     {
         spellName = GetOriginalSpellName(spellName);
-        return (SpellStats) Resources.Load("SpellStats/" + spellName, typeof(SpellStats)); //We are going to need to make a dictionary for this for performance
+        //return (AbilityData) Resources.Load("SpellStats/" + spellName, typeof(AbilityData)); //We are going to need to make a dictionary for this for performance
+        return AbilityDictionary.GetAbilityDataFromAbilityName(spellName);
     }
 
     public static string GetOriginalSpellName(string spellName)

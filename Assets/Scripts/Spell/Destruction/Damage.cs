@@ -6,7 +6,7 @@ using UnityEngine;
 public class Damage {
 
 
-    SpellStats Spell;
+    AbilityData Spell;
     GameObject PlayerHit;
     int ShotBy;
 
@@ -15,7 +15,7 @@ public class Damage {
     NetworkDamageApplier damageApplier;
 
 
-    public Damage(SpellStats spell, GameObject playerHit, int shotBy)
+    public Damage(AbilityData spell, GameObject playerHit, int shotBy)
     {
         Spell = spell;
         PlayerHit = playerHit;

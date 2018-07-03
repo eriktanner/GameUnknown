@@ -4,18 +4,23 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 /*UI for player healthbars. Handles both upper elft health bar and floating health bars*/
-public class HealthBar : Photon.MonoBehaviour {
+public class HealthBar : Photon.MonoBehaviour, IHaveHealth {
 
     public Slider healthBarSlider;  //reference for slider
 
-    float totalHealth = 1000;
-    float currentHealth;
+    public float MaxHealth { get { return 1000.0f; } set { MaxHealth = value; } }
+    public float CurrentHealth { get { return currentHealth; } set { currentHealth = value; } }
+    float currentHealth { get; set; }
+
     float HealthRegenerationWaitTime = 5.0f;
     float regenerationRate = 0.015f;
 
     private Coroutine regenerateHealthRoutine;
 
     GameObject localPlayer;
+
+
+    
 
     void Start()
     {
@@ -25,9 +30,9 @@ public class HealthBar : Photon.MonoBehaviour {
             healthBarSlider = GameObject.Find("Canvas/HealthBar").GetComponent<Slider>();
         }
 
-        healthBarSlider.maxValue = totalHealth;
-        healthBarSlider.value = totalHealth;
-        currentHealth = totalHealth;
+        healthBarSlider.maxValue = MaxHealth;
+        healthBarSlider.value = MaxHealth;
+        currentHealth = MaxHealth;
         localPlayer = PlayerManager.LocalPlayer;
     }
 
@@ -65,6 +70,10 @@ public class HealthBar : Photon.MonoBehaviour {
     {
         currentHealth = newHealth;
         healthBarSlider.value = currentHealth;
+
+        if (currentHealth > MaxHealth)
+            currentHealth = MaxHealth;
+
         regenerateHealth();
         
     }
@@ -94,10 +103,10 @@ public class HealthBar : Photon.MonoBehaviour {
     private IEnumerator waitAndRegenerateHealth()
     {
         yield return new WaitForSeconds(HealthRegenerationWaitTime);
-        float progress = currentHealth / totalHealth;
+        float progress = currentHealth / MaxHealth;
         while (progress <= 1.0f)
         {
-            currentHealth = Mathf.Lerp(0, totalHealth, progress);
+            currentHealth = Mathf.Lerp(0, MaxHealth, progress);
             healthBarSlider.value = currentHealth;
 
             progress += regenerationRate * Time.deltaTime;

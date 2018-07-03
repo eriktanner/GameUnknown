@@ -2,15 +2,14 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent((typeof(ManaBar)))]
-[RequireComponent((typeof(SpellList)))]
+[RequireComponent((typeof(AbilityList)))]
 public class CastSpell : Photon.MonoBehaviour
 {  
     public ManaBar ManaBar;
-    public SpellList SpellList;
+    public AbilityList SpellList;
     public Transform castSpawn;
     
 
-    NetworkAbilities networkAbilities;
     Coroutine CastRoutine;
     CastBar CastBar;
     Camera PlayerCam;
@@ -24,7 +23,6 @@ public class CastSpell : Photon.MonoBehaviour
     {
         PlayerCam = Camera.main;
         CastBar = CastBar.Instance;
-        networkAbilities = NetworkAbilities.Instance;
     }
 
     void Update()
@@ -39,54 +37,54 @@ public class CastSpell : Photon.MonoBehaviour
         {
             if (!SpellList.isOnCooldown(0))
             {
-                FireSpell(SpellList.GetSpellAtIndex(0));
+                FireSpell(SpellList.GetAbilityAtIndex(0));
             }
         }
         if (Input.GetButtonDown("Spell2"))
         {
             if (!SpellList.isOnCooldown(1))
-                FireSpell(SpellList.GetSpellAtIndex(1));
+                FireSpell(SpellList.GetAbilityAtIndex(1));
         }
         if (Input.GetButtonDown("Spell3"))
         {
             if (!SpellList.isOnCooldown(2))
             {
-                FireSpell(SpellList.GetSpellAtIndex(2));
+                FireSpell(SpellList.GetAbilityAtIndex(2));
             }
         }
         if (Input.GetButtonDown("Spell4"))
         {
             if (!SpellList.isOnCooldown(3))
             {
-                FireSpell(SpellList.GetSpellAtIndex(3));
+                FireSpell(SpellList.GetAbilityAtIndex(3));
             }
         }
         if (Input.GetButtonDown("Spell5"))
         {
             if (!SpellList.isOnCooldown(4))
-                FireSpell(SpellList.GetSpellAtIndex(4));
+                FireSpell(SpellList.GetAbilityAtIndex(4));
         }
         if (Input.GetButtonDown("Spell6"))
         {
             if (!SpellList.isOnCooldown(5))
-                FireSpell(SpellList.GetSpellAtIndex(5));
+                FireSpell(SpellList.GetAbilityAtIndex(5));
         }
         DoCancelCast = Input.GetKey(GameKeybindings.CancelCastInput);
     }
     
 
-    void FireSpell(Spell spell)
+    void FireSpell(AbilityData abilityData)
     {
-        if (!spell.SpellStats || SpellLock)
+        if (SpellLock)
             return;
         
-        if (spell.SpellStats.prefab == null)
+        if (abilityData.Prefab == null)
         {
             Debug.LogWarning("Spell  Prefab is null");
             return;
         }
-
-        CastRoutine = StartCoroutine(CastAndFire(spell));
+        
+        CastRoutine = StartCoroutine(CastAndFire(abilityData));
     }
 
     void CancelCast()
@@ -105,33 +103,36 @@ public class CastSpell : Photon.MonoBehaviour
 
     
 
-    private IEnumerator CastAndFire(Spell spell)
+    private IEnumerator CastAndFire(AbilityData abilityData)
     {
         SpellLock = true;
-        if (spell.SpellStats.castTime > 0)
-            CastBar.CastSpellUI(spell.SpellStats.castTime);
-        yield return new WaitForSeconds(spell.SpellStats.castTime);
+
+        ICast castAbilityData = (ICast) abilityData;
+        if (castAbilityData != null)
+            CastBar.CastSpellUI(castAbilityData.CastTime);
+
+        yield return new WaitForSeconds(castAbilityData.CastTime);
 
         RaycastHit camHit;
         bool camFoundHit;
         Vector3 hitPoint;
-        hitPoint = GetHitmarkerPointInWorld(spell.SpellStats.maxRange, out camHit, out camFoundHit);
+        hitPoint = GetHitmarkerPointInWorld(abilityData.MaxRange, out camHit, out camFoundHit);
 
 
-        if (IsValidCast(spell, camHit, camFoundHit))
+        if (IsValidCast(abilityData, camHit, camFoundHit))
         {
-            ManaBar.burnMana(spell.SpellStats.manaCost);
-            SpellList.TriggerCooldown(spell);
-            networkAbilities.Fire(spell, castSpawn.position, hitPoint);
+            ManaBar.burnMana(abilityData.Cost);
+            SpellList.TriggerCooldown(abilityData);
+            abilityData.Ability.CastAbility(gameObject, castSpawn.position, hitPoint);
         }
         
         SpellLock = false;
     }
 
-    bool IsValidCast(Spell spell, RaycastHit camHit, bool camFoundHit)
+    bool IsValidCast(AbilityData abilityData, RaycastHit camHit, bool camFoundHit)
     {
-        bool didHitValidLayer = ValidSpellLayer.SpellHitValidLayerBySpell(spell.SpellStats.name, camHit);
-        bool isWithinRangeOfSpell = ValidSpellDistance.SpellIsInRange(spell.SpellStats.name, transform.position, camHit.point, camFoundHit);
+        bool didHitValidLayer = ValidSpellLayer.SpellHitValidLayerBySpell(abilityData.AbilityName, camHit);
+        bool isWithinRangeOfSpell = ValidSpellDistance.SpellIsInRange(abilityData.AbilityName, transform.position, camHit.point, camFoundHit);
         return didHitValidLayer && isWithinRangeOfSpell;
     }
 

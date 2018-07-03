@@ -73,12 +73,12 @@ public class PlayerCameraController : MonoBehaviour {
 
 
 
-    public Vector3 GetHitmarkerPointInWorld(SpellStats spell, out RaycastHit camHit, out bool camFoundHit)
+    public Vector3 GetHitmarkerPointInWorld(AbilityData spell, out RaycastHit camHit, out bool camFoundHit)
     {
         Ray camRay = PlayerCam.ViewportPointToRay(Vector3.one * 0.5f);
 
         LayerMask ignorePlayerMask = ~(1 << 8);
-        float rangeToUse = spell.maxRange + 3.0f;
+        float rangeToUse = spell.MaxRange + 3.0f;
 
         Vector3 hitPoint;
 

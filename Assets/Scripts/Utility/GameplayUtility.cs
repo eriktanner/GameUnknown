@@ -56,6 +56,22 @@ public static class GameplayUtility {
     }
 
 
+    public static float GetLifespanOfSpell(AbilityData spell)
+    {
+        if (spell as IProjectile == null)
+            return 0;
 
+        float lifespan = 0;
+
+        if (spell as ICheckForDistance != null) //Arbitrarily large
+            lifespan = 10;
+        else
+        {
+            float timeTakesToTravelMaxDistance = spell.MaxRange / ((IProjectile)spell).ProjectileSpeed;
+            lifespan = timeTakesToTravelMaxDistance;
+        }
+
+        return lifespan;
+    }
 
 }

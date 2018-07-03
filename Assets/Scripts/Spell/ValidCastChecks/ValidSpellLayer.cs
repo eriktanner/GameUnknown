@@ -15,7 +15,7 @@ public static class ValidSpellLayer {
     /*Certain spells are going to require certain layers to be hit before particles are instatiated*/
     public static bool SpellHitValidLayerBySpell(string spellName, RaycastHit Hit)
     {
-        if (SpellDictionary.GetSpellFromSpellName(spellName).IsValidLayerCheckedGround)
+        if (AbilityDictionary.GetAbilityDataFromAbilityName(spellName) as ICheckForGround != null)
         {
             return validLayerGround(Hit);
         }

@@ -13,7 +13,7 @@ public class SpellCreator : EditorWindow {
         spellWindow.Show();
     }
 
-    SpellStats tempSpell = null;
+    AbilityData tempSpell = null;
     SpellManager spellManager = null;
 
     void OnGUI()
@@ -23,37 +23,38 @@ public class SpellCreator : EditorWindow {
             spellManager = GameObject.Find("Managers/SpellManager").GetComponent<SpellManager>();
         }
 
-        if (tempSpell)
+        if (tempSpell != null)
         {
-            tempSpell.spellName = EditorGUILayout.TextField("Spell Name", tempSpell.spellName);
-            tempSpell.name = tempSpell.spellName;
-            tempSpell.prefab = (GameObject) EditorGUILayout.ObjectField("Spell Prefab", tempSpell.prefab, typeof(GameObject), false);          
-            tempSpell.collisionParticle = (GameObject) EditorGUILayout.ObjectField("Collision Effect", tempSpell.collisionParticle, typeof(GameObject), false);
-            tempSpell.icon = (Texture2D) EditorGUILayout.ObjectField("Spell Icon", tempSpell.icon, typeof(Texture2D), false);
-            tempSpell.cooldown = EditorGUILayout.FloatField("Cooldown", tempSpell.cooldown);
-            tempSpell.damage = EditorGUILayout.FloatField("Damage", tempSpell.damage);
-            tempSpell.manaCost = EditorGUILayout.FloatField("Mana Cost", tempSpell.manaCost);
-            tempSpell.maxRange = EditorGUILayout.FloatField("Max Range", tempSpell.maxRange);
-            tempSpell.projectileRadius = EditorGUILayout.FloatField("Projectile Radius", tempSpell.projectileRadius);
-            tempSpell.projectileSpeed = EditorGUILayout.FloatField("Projectile Speed", tempSpell.projectileSpeed);
-            tempSpell.castTime = EditorGUILayout.FloatField("Cast Time", tempSpell.castTime);
-
+            /*
+            tempSpell.abilityName = EditorGUILayout.TextField("Spell Name", tempSpell.AbilityName);
+            tempSpell.name = tempSpell.AbilityName;
+            tempSpell.prefab = (GameObject) EditorGUILayout.ObjectField("Spell Prefab", tempSpell.Prefab, typeof(GameObject), false);          
+            tempSpell.collisionParticle = (GameObject) EditorGUILayout.ObjectField("Collision Effect", tempSpell.CollisionParticle, typeof(GameObject), false);
+            tempSpell.icon = (Texture2D) EditorGUILayout.ObjectField("Spell Icon", tempSpell.Icon, typeof(Texture2D), false);
+            tempSpell.cooldown = EditorGUILayout.FloatField("Cooldown", tempSpell.Cooldown);
+            tempSpell.damage = EditorGUILayout.FloatField("Damage", tempSpell.Damage);
+            tempSpell.manaCost = EditorGUILayout.FloatField("Mana Cost", tempSpell.ManaCost);
+            tempSpell.maxRange = EditorGUILayout.FloatField("Max Range", tempSpell.MaxRange);
+            tempSpell.projectileRadius = EditorGUILayout.FloatField("Projectile Radius", tempSpell.ProjectileRadius);
+            tempSpell.projectileSpeed = EditorGUILayout.FloatField("Projectile Speed", tempSpell.ProjectileSpeed);
+            tempSpell.castTime = EditorGUILayout.FloatField("Cast Time", tempSpell.CastTime);
+            */
         }
 
         EditorGUILayout.Space();
 
         if (tempSpell == null)
         {
-            if (GUILayout.Button("Create Spell"))
-                tempSpell = CreateInstance<SpellStats>();
+            //if (GUILayout.Button("Create Spell"))
+                //tempSpell = CreateInstance<AbilityData>();
         } else
         {
             if (GUILayout.Button("Create Scriptable Object"))
             {
-                AssetDatabase.CreateAsset(tempSpell, "Assets/Resources/SpellStats/" + tempSpell.spellName + ".asset");
+                //AssetDatabase.CreateAsset(tempSpell, "Assets/Resources/SpellStats/" + tempSpell.AbilityName + ".asset");
                 AssetDatabase.SaveAssets();
                 spellManager.spellList.Add(tempSpell);
-                Selection.activeObject = tempSpell;
+                //Selection.activeObject = tempSpell;
                 tempSpell = null;
             }
 
@@ -66,16 +67,16 @@ public class SpellCreator : EditorWindow {
 
     void Reset()
     {
-        if (!tempSpell)
-            return;
-
-        tempSpell.spellName = "";
+        //if (!tempSpell)
+        //    return;
+        /*
+        tempSpell.abilityName = "";
         tempSpell.prefab = null;
         tempSpell.collisionParticle = null;
         tempSpell.icon = null;
         tempSpell.damage = 0.0f;
         tempSpell.projectileSpeed = 0.0f;
-
+        */
     }
 
 }

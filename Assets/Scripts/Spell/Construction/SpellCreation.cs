@@ -5,21 +5,21 @@ public static class SpellCreation {
 
 
     /*Creates the spell in world and gives it movement*/
-    public static GameObject CreateSpellInWorld(SpellStats spell, Vector3 position, Quaternion rotation, string shotByName, int shotBy)
+    public static GameObject CreateSpellInWorld(AbilityData spell, Vector3 position, Quaternion rotation, string shotByName, int shotBy)
     {
-        GameObject spellObject = GameObject.Instantiate(spell.prefab, position, rotation);
+        GameObject spellObject = GameObject.Instantiate(spell.Prefab, position, rotation);
 
         //Components
         spellObject.AddComponent<SpellMovement>();
-        System.Type SpellType = SpellDictionary.GetTypeFromSpellName(spell.name);
-        spellObject.AddComponent(SpellType);
+        //System.Type SpellType = AbilityDictionary.GetTypeFromAbilityName(spell.AbilityName);
+        //spellObject.AddComponent(SpellType);
         if (PhotonNetwork.isMasterClient)
-            SpellCollision.AddSpellCollision(spellObject, spell.projectileRadius);
+            SpellCollision.AddSpellCollision(spellObject, ((IProjectile) spell).ProjectileRadius);
 
 
         //Identify
-        SpellIdentifier.AddSpellIdentifier(spellObject, spell.name, shotByName, shotBy);
-        AssignUniqueSpellName(spell.name, spellObject);
+        AbilityIdentifier.AddSpellIdentifier(spellObject, spell.AbilityName, shotByName, shotBy);
+        AssignUniqueSpellName(spell.AbilityName, spellObject);
         spellObject.tag = "Spell";
         spellObject.layer = 10;
         spellObject.transform.parent = SpellManager.SpellManagerTransform;
@@ -36,7 +36,7 @@ public static class SpellCreation {
 
 
 
-    public static GameObject CreateCollisionParticlesInWorld(string spellName, Vector3 position, SpellStats spellStats, SpellIdentifier spellIdentifierOfOriginalSpell)
+    public static GameObject CreateCollisionParticlesInWorld(string spellName, Vector3 position, AbilityData spellStats, AbilityIdentifier spellIdentifierOfOriginalSpell)
     {
         if (spellIdentifierOfOriginalSpell == null)
         {
@@ -44,13 +44,13 @@ public static class SpellCreation {
             return null;
         }
 
-        string spellNameToTransfer = spellIdentifierOfOriginalSpell.SpellName;
+        string spellNameToTransfer = spellIdentifierOfOriginalSpell.AbilityName;
         int shotByToTransfer = spellIdentifierOfOriginalSpell.ShotByID;
         string shotByNameToTransfer = spellIdentifierOfOriginalSpell.ShotByName;
 
-        GameObject collisionParticles = GameObject.Instantiate(spellStats.collisionParticle, position, Quaternion.identity);
-        collisionParticles.AddComponent(SpellDictionary.GetTypeFromSpellName(SpellManager.GetOriginalSpellName(spellName)));
-        SpellIdentifier.AddSpellIdentifier(collisionParticles, spellNameToTransfer, shotByNameToTransfer, shotByToTransfer);
+        GameObject collisionParticles = GameObject.Instantiate(spellStats.CollisionParticle, position, Quaternion.identity);
+        //collisionParticles.AddComponent(AbilityDictionary.GetTypeFromAbilityName(SpellManager.GetOriginalSpellName(spellName)));
+        AbilityIdentifier.AddSpellIdentifier(collisionParticles, spellNameToTransfer, shotByNameToTransfer, shotByToTransfer);
 
         collisionParticles.transform.parent = SpellManager.SpellManagerTransform;
 

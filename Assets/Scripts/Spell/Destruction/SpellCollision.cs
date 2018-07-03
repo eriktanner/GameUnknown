@@ -6,7 +6,7 @@
 Uses short sphere cast for non-instant spells, and a long ray cast for instant spells*/
 public class SpellCollision : MonoBehaviour
 {
-    Spell spell;
+    AbilityData spellData;
     SpellManager spellManager;
     SpellDestruction spellDestruction;
 
@@ -17,14 +17,12 @@ public class SpellCollision : MonoBehaviour
 
     void Start()
     {
-        spell = SpellDictionary.GetSpellFromSpellObject(gameObject);
+        spellData = AbilityDictionary.GetAbilityDataFromAbilityName(gameObject.name);
         spellManager = SpellManager.Instance;
         spellDestruction = SpellDestruction.Instance;
-        ShotBy = gameObject.GetComponent<SpellIdentifier>().ShotByID;
-
-
-        isInstantCollisionChecked = spell.IsInstantCollision;
-        if (isInstantCollisionChecked)
+        ShotBy = gameObject.GetComponent<AbilityIdentifier>().ShotByID;
+       
+        if (spellData as IInstantCollision != null)
         {
             instantCollisionHitCheck();
         }
@@ -42,13 +40,17 @@ public class SpellCollision : MonoBehaviour
     /*Faster spells require longer sphere casts*/
     void SetDistanceOfSpehereCast()
     {
-        distanceOfSphereCast = spell.SpellStats.projectileSpeed * .1f;
+        if (spellData as IProjectile == null)
+            return;
 
-        if (spell.SpellStats.projectileSpeed > 50)
+        float projectileSpeed = ((IProjectile) spellData).ProjectileSpeed;
+        distanceOfSphereCast = projectileSpeed * .1f;
+
+        if (projectileSpeed > 50)
             distanceOfSphereCast *= 2.0f;
-        else if (spell.SpellStats.projectileSpeed > 40)
+        else if (projectileSpeed > 40)
             distanceOfSphereCast *= 1.5f;
-        else if (spell.SpellStats.projectileSpeed > 30)
+        else if (projectileSpeed > 30)
             distanceOfSphereCast *= 1.2f;
     }
 
@@ -91,10 +93,12 @@ public class SpellCollision : MonoBehaviour
         if (HitPhotonView != null && HitPhotonView.viewID != ShotBy)
         {
             hasAlreadyHit = true;
-            spell.DirectHit(ShotBy, hitTransform.gameObject);
+            spellData.Ability.DirectHit(gameObject, hitTransform.gameObject, ShotBy);
         }
 
-        spellDestruction.NetworkRpcDestroySpellOnCollision(gameObject.name, Hit.point, ShotBy);
+
+        spellData.Ability.InitAbilityEffectSequence(gameObject, hitTransform.gameObject, ShotBy);
+
     }
 
 
@@ -106,7 +110,7 @@ public class SpellCollision : MonoBehaviour
         Vector3 direction = transform.forward;
         RaycastHit Hit;
 
-        if (Physics.Raycast(origin, direction, out Hit, spell.SpellStats.maxRange))
+        if (Physics.Raycast(origin, direction, out Hit, spellData.MaxRange))
         {
             OnSpellHit(Hit);
         }

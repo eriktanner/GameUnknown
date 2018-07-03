@@ -3,11 +3,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /*Handles UI for user controlled manabar*/
-public class ManaBar : Photon.MonoBehaviour {
+public class ManaBar : Photon.MonoBehaviour, IHaveMana {
 
     public Slider manaBarSlider = null;  //reference for slider
 
-    float currentMana, totalMana = 1000;
+    public float MaxMana { get { return 1000.0f; } set { MaxMana = value; } }
+    public float CurrentMana { get { return currentMana; } set { currentMana = value; } }
+    float currentMana { get; set; }
+
     float manaRegenerationWaitTime = 3.0f;
     float regenerationRate = 0.15f;
 
@@ -22,9 +25,9 @@ public class ManaBar : Photon.MonoBehaviour {
             return;
         }
 
-        manaBarSlider.maxValue = totalMana;
-        manaBarSlider.value = totalMana;
-        currentMana = totalMana;
+        manaBarSlider.maxValue = MaxMana;
+        manaBarSlider.value = MaxMana;
+        currentMana = MaxMana;
     }
     
     public void burnMana(float manaCost)
@@ -39,8 +42,8 @@ public class ManaBar : Photon.MonoBehaviour {
     public void AddMana(float mana)
     {
         currentMana += mana;
-        if (currentMana > 1000)
-            currentMana = 1000;
+        if (currentMana > MaxMana)
+            currentMana = MaxMana;
         manaBarSlider.value = currentMana;
     }
 
@@ -56,10 +59,10 @@ public class ManaBar : Photon.MonoBehaviour {
     private IEnumerator waitAndRegenerateMana()
     {
         yield return new WaitForSeconds(manaRegenerationWaitTime);
-        float progress = currentMana/totalMana;
+        float progress = currentMana/MaxMana;
         while (progress <= 1.0f)
         {
-            currentMana = Mathf.Lerp(0, totalMana, progress);
+            currentMana = Mathf.Lerp(0, MaxMana, progress);
             manaBarSlider.value = currentMana;
             
             progress += regenerationRate * Time.deltaTime;
@@ -67,19 +70,5 @@ public class ManaBar : Photon.MonoBehaviour {
         }
     }
 
-    public float CurrentMana
-    {
-        get { return currentMana; }
-    }
-
-    public float TotalMana
-    {
-        get { return totalMana; }
-    }
-
-    public void SetTotalMana(float newTotalMana)
-    {
-        totalMana = newTotalMana;
-    }
 
 }
