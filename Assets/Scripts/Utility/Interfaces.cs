@@ -1,4 +1,6 @@
-﻿interface IHaveHealth
+﻿using UnityEngine;
+
+interface IHaveHealth
 {
     float CurrentHealth { get; set; }
     float MaxHealth { get; set; }
@@ -10,9 +12,13 @@ interface IHaveMana
     float MaxMana { get; }
 }
 
-interface IInstantCollision { }
-interface ICheckForGround { }
-interface ICheckForDistance { }
+interface IHaveCollisionParticles
+{
+    GameObject CollisionParticles { get; }
+    float CollisionParticleLifespan { get; }
+}
+
+interface IBasicSpell : IProjectile, ICast, IHaveCollisionParticles { }
 
 interface IWait
 {
@@ -61,3 +67,7 @@ interface IStun
 {
     float StunTime { get; }
 }
+
+interface IInstantCollision { }
+interface ICheckForGround { }
+interface ICheckForDistance { }

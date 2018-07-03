@@ -2,12 +2,13 @@
 using System;
 using System.Collections;
 
-public class AbilityProjectile : Ability {
+public abstract class AbilityProjectile : Ability {
 
 
-    public override void InitAbilityEffectSequence(GameObject spellObject, GameObject target, int shotBy)
+    public override void InitAbilityEffectSequence(GameObject spellObject, RaycastHit Hit)
     {
-        NetworkAbilities.Instance.NetworkRpcDestroySpellOnCollision(spellObject.name, target.transform.position, shotBy);
+        NetworkAbilities.Instance.NetworkCreateCollisionParticles(spellObject.name, Hit.point);
+        NetworkAbilities.Instance.NetworkRpcDestroySpellOnCollision(spellObject.name, spellObject.GetComponent<AbilityIdentifier>().ShotByID);
     }
 
 
@@ -44,20 +45,20 @@ public class AbilityProjectile : Ability {
         AbilityData spell = AbilityDictionary.GetAbilityDataFromSpellObject(particleObject);
 
         if (spell as IWait != null)
-            TaskManager.CreateTask(WaitAndCall(particleObject, ((IWait)spell).WaitTime, spell.Ability.AreaOfEffect));
+            TaskManager.CreateTask(WaitAndCall(particleObject, ((IWait) spell).WaitTime, spell.Ability.AreaOfEffect));
         else
             spell.Ability.AreaOfEffect(particleObject);
     }
 
     /*Destroys a casted spell by its lifespan*/
-    public void DestroySpellByTime(GameObject spellObject)
+    public void DestroyProjectileByTime(GameObject projectileObject)
     {
-        if (spellObject == null)
+        if (projectileObject == null)
             return;
 
-        AbilityData spell = AbilityDictionary.GetAbilityDataFromSpellObject(spellObject);
+        AbilityData projectile = AbilityDictionary.GetAbilityDataFromSpellObject(projectileObject);
 
-        TaskManager.CreateTask(WaitAndCall(spellObject, GameplayUtility.GetLifespanOfSpell(spell), spell.Ability.TimedDestruction));
+        TaskManager.CreateTask(WaitAndCall(projectileObject, GameplayUtility.GetLifespanOfSpell(projectile), projectile.Ability.TimedDestruction));
     }
 
 

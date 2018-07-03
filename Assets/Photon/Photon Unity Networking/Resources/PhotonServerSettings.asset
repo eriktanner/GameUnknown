@@ -44,4 +44,5 @@ MonoBehaviour:
   - RpcSetCursorToVisibleOnKickFromMatch
   - ServerKeepProjectileCountInSync
   - SetClientProjectileCountToServerCount
+  - RpcCreateCollisionParticles
   DisableAutoOpenWizard: 1

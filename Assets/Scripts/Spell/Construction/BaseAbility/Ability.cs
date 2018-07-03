@@ -13,7 +13,7 @@ public abstract class Ability : Photon.MonoBehaviour {
 
     }
 
-    public virtual void InitAbilityEffectSequence(GameObject spellObject, GameObject target, int shotBy)
+    public virtual void InitAbilityEffectSequence(GameObject spellObject, RaycastHit Hit)
     {
 
     }

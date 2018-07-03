@@ -11,8 +11,6 @@ public static class SpellCreation {
 
         //Components
         spellObject.AddComponent<SpellMovement>();
-        //System.Type SpellType = AbilityDictionary.GetTypeFromAbilityName(spell.AbilityName);
-        //spellObject.AddComponent(SpellType);
         if (PhotonNetwork.isMasterClient)
             SpellCollision.AddSpellCollision(spellObject, ((IProjectile) spell).ProjectileRadius);
 
@@ -36,25 +34,24 @@ public static class SpellCreation {
 
 
 
-    public static GameObject CreateCollisionParticlesInWorld(string spellName, Vector3 position, AbilityData spellStats, AbilityIdentifier spellIdentifierOfOriginalSpell)
+    public static GameObject CreateCollisionParticlesInWorld(string abilityName, Vector3 position)
     {
-        if (spellIdentifierOfOriginalSpell == null)
+        AbilityData abilityData = AbilityDictionary.GetAbilityDataFromAbilityName(abilityName);
+
+        if (abilityData as IHaveCollisionParticles == null)
         {
             Debug.Log("SpellCreation(CreateCollisionParticles): spellIdentifer is null");
             return null;
         }
-
-        string spellNameToTransfer = spellIdentifierOfOriginalSpell.AbilityName;
-        int shotByToTransfer = spellIdentifierOfOriginalSpell.ShotByID;
-        string shotByNameToTransfer = spellIdentifierOfOriginalSpell.ShotByName;
-
-        GameObject collisionParticles = GameObject.Instantiate(spellStats.CollisionParticle, position, Quaternion.identity);
-        //collisionParticles.AddComponent(AbilityDictionary.GetTypeFromAbilityName(SpellManager.GetOriginalSpellName(spellName)));
-        AbilityIdentifier.AddSpellIdentifier(collisionParticles, spellNameToTransfer, shotByNameToTransfer, shotByToTransfer);
+        
+        GameObject collisionParticles = GameObject.Instantiate(((IHaveCollisionParticles) abilityData).CollisionParticles, position, Quaternion.identity);
 
         collisionParticles.transform.parent = SpellManager.SpellManagerTransform;
+        GameObject.Destroy(collisionParticles, ((IHaveCollisionParticles)abilityData).CollisionParticleLifespan);
 
         return collisionParticles;
     }
+
+    
 
 }
